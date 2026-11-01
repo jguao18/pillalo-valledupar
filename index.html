@@ -1,1071 +1,580 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Píllalo Valledupar | Directorio Visual Interactivo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Píllalo Valledupar — Vitrina Visual por Widgets (V3)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --bg-page: #F4F6F9;
-      --bg-card: #FFFFFF;
-      --text-main: #0F172A;
-      --text-muted: #64748B;
-      --emerald: #059669;
-      --emerald-dark: #064E3B;
-      --emerald-light: #D1FAE5;
-      --whatsapp: #25D366;
-      --whatsapp-dark: #128C7E;
-      --amber: #F59E0B;
-      --amber-light: #FEF3C7;
-      --coral: #E11D48;
-      --blue: #2563EB;
-      --purple: #7C3AED;
-      --border: #E2E8F0;
-      --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
-      --shadow-hover: 0 20px 40px -10px rgba(15, 23, 42, 0.14);
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-page);
-      color: var(--text-main);
-      line-height: 1.5;
-      padding-bottom: 90px;
-    }
-
-    .top-banner {
-      background: linear-gradient(90deg, #064E3B 0%, #047857 50%, #0F172A 100%);
-      color: #fff;
-      text-align: center;
-      padding: 9px 16px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .top-banner span.pill {
-      background: #F59E0B;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #EEF2F6;
       color: #0F172A;
-      font-weight: 800;
-      padding: 2px 10px;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      text-transform: uppercase;
-    }
-    .db-status-dot {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(255,255,255,0.14);
-      padding: 2px 9px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      color: #A7F3D0;
     }
 
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 24px;
+    .cat-3d-btn {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+      border: 1.5px solid #E2E8F0;
+      box-shadow: 0 8px 20px -6px rgba(15, 23, 42, 0.08), inset 0 2px 0 0 #FFFFFF;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .navbar-inner {
-      max-width: 1320px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
+    .cat-3d-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.14), inset 0 2px 0 0 #FFFFFF;
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-main);
-      cursor: pointer;
-    }
-    .brand-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #059669 0%, #10B981 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.45rem;
-      color: #fff;
-      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3);
-    }
-    .brand-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.45rem;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      line-height: 1;
-    }
-    .brand-title span { color: var(--emerald); }
-    .brand-sub {
-      font-size: 0.73rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      display: block;
-      margin-top: 2px;
+    .cat-3d-btn.active {
+      background: linear-gradient(180deg, #F8FAFC 0%, #E2E8F0 100%);
+      border: 2.5px solid #1E293B;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.18), inset 0 2px 0 0 #FFFFFF;
     }
 
-    .nav-tabs {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: #F1F5F9;
-      padding: 5px;
-      border-radius: 999px;
-      flex-wrap: wrap;
+    .ig-widget-gradient {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      box-shadow: 0 10px 25px -5px rgba(214, 36, 159, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .nav-tab {
-      border: none;
-      background: transparent;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    .ig-widget-gradient:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 15px 30px -5px rgba(214, 36, 159, 0.5);
     }
-    .nav-tab.active {
+
+    .wa-widget-green {
+      background: linear-gradient(160deg, #25D366 0%, #16A34A 100%);
+      box-shadow: 0 12px 28px -6px rgba(22, 163, 74, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .wa-widget-green:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 18px 34px -6px rgba(22, 163, 74, 0.55);
+    }
+
+    .tiktok-widget-black {
+      background: linear-gradient(145deg, #18181B 0%, #09090B 100%);
+      box-shadow: 0 10px 25px -5px rgba(9, 9, 11, 0.4);
+      transition: transform 0.2s ease;
+    }
+    .tiktok-widget-black:hover {
+      transform: translateY(-3px) scale(1.01);
+    }
+    .tiktok-neon-icon {
+      filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 2px 0px #FE2C55);
+    }
+
+    .gmaps-pattern {
+      background-color: #E8ECEF;
+      background-image: 
+        linear-gradient(32deg, transparent 46%, #FFFFFF 46%, #FFFFFF 54%, transparent 54%),
+        linear-gradient(-28deg, transparent 44%, #FFFFFF 44%, #FFFFFF 52%, transparent 52%),
+        linear-gradient(75deg, transparent 48%, #FDE047 48%, #FDE047 53%, transparent 53%),
+        radial-gradient(circle at 20% 75%, #BBF7D0 0%, #BBF7D0 22%, transparent 23%),
+        linear-gradient(#CBD5E1 1px, transparent 1px),
+        linear-gradient(90deg, #CBD5E1 1px, transparent 1px);
+      background-size: 180px 180px, 160px 160px, 240px 240px, 100% 100%, 26px 26px, 26px 26px;
+    }
+
+    .bento-white-card {
       background: #FFFFFF;
-      color: var(--text-main);
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 14px 35px -10px rgba(15, 23, 42, 0.08);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .nav-tab.new-biz-tab { color: #047857; }
-    .nav-tab.new-biz-tab.active {
-      background: #ECFDF5;
-      color: #065F46;
-      border: 1px solid #A7F3D0;
-    }
-    .nav-tab.analytics-tab { color: #4F46E5; }
-    .nav-tab.analytics-tab.active {
-      background: #EEF2FF;
-      color: #3730A3;
-      border: 1px solid #C7D2FE;
+    .bento-white-card:hover {
+      box-shadow: 0 22px 45px -12px rgba(15, 23, 42, 0.14);
     }
 
-    .btn-register {
-      background: linear-gradient(135deg, #059669 0%, #047857 100%);
-      color: #fff;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.28);
-      transition: transform 0.2s;
+    .fade-in { animation: fadeIn 0.28s ease-out forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .btn-register:hover { transform: translateY(-2px); }
-
-    .container { max-width: 1320px; margin: 0 auto; padding: 22px 20px; }
-
-    .ad-spotlight-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .ad-spotlight-card {
-      background: linear-gradient(135deg, #0F172A 0%, #064E3B 100%);
-      color: #FFFFFF;
-      border-radius: 20px;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      box-shadow: 0 10px 24px rgba(6, 78, 59, 0.16);
-      border: 1px solid rgba(52, 211, 153, 0.3);
-    }
-    .ad-spotlight-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: #F59E0B;
-      color: #0F172A;
-      font-size: 0.68rem;
-      font-weight: 900;
-      padding: 3px 10px;
-      border-radius: 999px;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-    }
-    .ad-spotlight-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: 3px;
-    }
-    .ad-spotlight-desc { font-size: 0.8rem; color: #D1FAE5; line-height: 1.35; }
-    .ad-spotlight-cta {
-      background: #25D366;
-      color: #FFFFFF;
-      text-decoration: none;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.82rem;
-      white-space: nowrap;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hero-box {
-      background: #FFFFFF;
-      border-radius: var(--radius-xl);
-      padding: 24px 24px 20px;
-      box-shadow: var(--shadow-card);
-      border: 1px solid var(--border);
-      margin-bottom: 22px;
-    }
-    .hero-header { text-align: center; max-width: 780px; margin: 0 auto 20px; }
-    .hero-header h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.55rem, 3vw, 2.25rem);
-      font-weight: 900;
-      color: var(--text-main);
-      letter-spacing: -0.5px;
-      margin-bottom: 6px;
-    }
-    .hero-header h1 span { color: var(--emerald); }
-    .hero-header p { color: var(--text-muted); font-size: 0.94rem; }
-
-    .category-dock {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    @media (max-width: 980px) { .category-dock { grid-template-columns: repeat(4, 1fr); } }
-    @media (max-width: 580px) { .category-dock { grid-template-columns: repeat(2, 1fr); } }
-    .cat-btn {
-      background: #F8FAFC;
-      border: 2px solid #E2E8F0;
-      border-radius: 18px;
-      padding: 12px 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .cat-btn:hover { border-color: #10B981; background: #ECFDF5; transform: translateY(-2px); }
-    .cat-btn.active {
-      background: #0F172A;
-      border-color: #0F172A;
-      color: #FFFFFF;
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
-    }
-    .cat-icon-3d { font-size: 1.85rem; line-height: 1; }
-    .cat-name { font-weight: 800; font-size: 0.81rem; text-align: center; }
-    .cat-count { font-size: 0.69rem; opacity: 0.75; font-weight: 600; }
-
-    .filter-bar {
-      display: grid;
-      grid-template-columns: 2fr 1.1fr 1.1fr 1.1fr;
-      gap: 10px;
-      background: #F8FAFC;
-      padding: 12px;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-    }
-    @media (max-width: 900px) { .filter-bar { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 540px) { .filter-bar { grid-template-columns: 1fr; } }
-    .search-input-wrap { position: relative; display: flex; align-items: center; }
-    .search-input-wrap span { position: absolute; left: 14px; font-size: 1.1rem; }
-    .search-input {
-      width: 100%;
-      padding: 11px 14px 11px 40px;
-      border-radius: 12px;
-      border: 1px solid #CBD5E1;
-      font-family: inherit;
-      font-size: 0.88rem;
-      font-weight: 600;
-      background: #fff;
-    }
-    .filter-select {
-      width: 100%;
-      padding: 11px 12px;
-      border-radius: 12px;
-      border: 1px solid #CBD5E1;
-      font-family: inherit;
-      font-size: 0.85rem;
-      font-weight: 700;
-      background: #fff;
-      color: var(--text-main);
-      cursor: pointer;
-    }
-
-    .solidarity-strip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      background: linear-gradient(90deg, #ECFDF5 0%, #FEF3C7 100%);
-      border: 1px solid #A7F3D0;
-      border-radius: 16px;
-      padding: 12px 18px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-    .solidarity-strip-left { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 700; color: #065F46; }
-    .solidarity-strip-right { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 700; color: #92400E; }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 22px;
-    }
-    @media (max-width: 420px) { .cards-grid { grid-template-columns: 1fr; } }
-
-    .bento-card {
-      background: var(--bg-card);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      position: relative;
-    }
-    .bento-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-
-    .card-cover { height: 152px; background-size: cover; background-position: center; position: relative; }
-    .card-cover::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(15,23,42,0.35) 0%, rgba(15,23,42,0.05) 50%, rgba(15,23,42,0.65) 100%);
-    }
-    .cover-badges {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      z-index: 2;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .badge-new {
-      background: #10B981;
-      color: #fff;
-      font-size: 0.71rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .badge-established {
-      background: #0F172A;
-      color: #F8FAFC;
-      font-size: 0.71rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
-    .cover-right-actions { display: flex; align-items: center; gap: 6px; }
-    .badge-rating {
-      background: rgba(255, 255, 255, 0.95);
-      color: #0F172A;
-      font-size: 0.78rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-    }
-    .btn-fav-heart {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.95);
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-
-    .floating-logo {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 3px solid #FFFFFF;
-      background: #fff;
-      position: absolute;
-      bottom: -26px;
-      left: 18px;
-      z-index: 3;
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .floating-logo img { width: 100%; height: 100%; object-fit: cover; }
-
-    .status-pill {
-      position: absolute;
-      bottom: 10px;
-      right: 12px;
-      z-index: 2;
-      background: rgba(15, 23, 42, 0.82);
-      color: #fff;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 0.71rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; }
-
-    .card-body { padding: 32px 18px 18px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
-    .biz-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-    .biz-name { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--text-main); line-height: 1.2; }
-    .verified-check { color: #059669; font-size: 0.95rem; }
-    .biz-cat-tag { font-size: 0.74rem; font-weight: 700; color: var(--emerald); background: #ECFDF5; padding: 3px 9px; border-radius: 8px; white-space: nowrap; }
-    .biz-tagline { font-size: 0.84rem; color: var(--text-muted); font-weight: 500; }
-
-    .price-range-widget {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-left: 4px solid var(--emerald);
-      border-radius: 12px;
-      padding: 9px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-    .price-range-label { font-size: 0.73rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-    .price-range-value { font-size: 0.88rem; font-weight: 800; color: var(--text-main); }
-
-    .maps-widget {
-      background: #F1F5F9;
-      border: 1px solid #CBD5E1;
-      border-radius: 14px;
-      padding: 9px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text-main);
-      cursor: pointer;
-    }
-    .maps-icon-box {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      flex-shrink: 0;
-      border: 1px solid #93C5FD;
-    }
-    .maps-info { flex: 1; min-width: 0; }
-    .maps-neighborhood { font-size: 0.73rem; font-weight: 800; color: #1D4ED8; text-transform: uppercase; }
-    .maps-address { font-size: 0.81rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .maps-go { font-size: 0.74rem; font-weight: 800; color: #2563EB; white-space: nowrap; }
-
-    .widgets-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px; }
-    .w-btn {
-      border: none;
-      border-radius: 13px;
-      padding: 10px 10px;
-      font-family: inherit;
-      font-weight: 800;
-      font-size: 0.79rem;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 2px;
-      text-decoration: none;
-    }
-    .w-btn-wa { background: #25D366; color: #FFFFFF; }
-    .w-btn-ig { background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%); color: #FFFFFF; }
-    .w-btn-tk { background: #0F172A; color: #FFFFFF; }
-    .w-btn-sub { font-size: 0.67rem; font-weight: 600; opacity: 0.92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
-
-    .card-footer-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 8px;
-      border-top: 1px dashed #E2E8F0;
-      margin-top: auto;
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .footer-btns-wrap { display: flex; align-items: center; gap: 6px; }
-    .btn-rate-card {
-      background: #FEF3C7;
-      color: #92400E;
-      border: 1px solid #FDE68A;
-      padding: 6px 10px;
-      border-radius: 9px;
-      font-weight: 800;
-      font-size: 0.74rem;
-      cursor: pointer;
-    }
-    .btn-open-profile {
-      background: #F1F5F9;
-      color: var(--text-main);
-      border: 1px solid #CBD5E1;
-      padding: 6px 11px;
-      border-radius: 9px;
-      font-weight: 800;
-      font-size: 0.75rem;
-      cursor: pointer;
-    }
-
-    .section-view { display: none; }
-    .section-view.active { display: block; }
-    .section-banner {
-      background: linear-gradient(135deg, #064E3B 0%, #0F172A 100%);
-      color: #fff;
-      border-radius: var(--radius-xl);
-      padding: 26px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .section-banner h2 { font-family: 'Outfit', sans-serif; font-size: 1.65rem; font-weight: 900; margin-bottom: 6px; }
-    .section-banner p { color: #CBD5E1; max-width: 680px; font-size: 0.92rem; }
-
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 22px; }
-    .kpi-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 20px; padding: 18px 20px; box-shadow: var(--shadow-card); }
-    .kpi-label { font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
-    .kpi-value { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 900; color: var(--text-main); line-height: 1.1; }
-    .kpi-sub { font-size: 0.76rem; color: var(--emerald); font-weight: 700; margin-top: 4px; }
-
-    .analytics-panel-box { background: #FFFFFF; border: 1px solid var(--border); border-radius: 22px; padding: 22px; box-shadow: var(--shadow-card); margin-bottom: 22px; overflow-x: auto; }
-    .analytics-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
-    .analytics-table th { background: #0F172A; color: #FFFFFF; text-align: left; padding: 11px 12px; font-weight: 800; font-size: 0.76rem; text-transform: uppercase; }
-    .analytics-table td { padding: 11px 12px; border-bottom: 1px solid #E2E8F0; vertical-align: middle; }
-    .low-click-badge { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; }
-    .good-click-badge { background: #DCFCE7; color: #166534; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; }
-    .btn-mini-action { border: none; padding: 6px 10px; border-radius: 8px; font-weight: 800; font-size: 0.74rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; }
-
-    .jobs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
-    .job-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 20px; box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 10px; }
-    .job-role { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 800; }
-    .job-company { font-size: 0.85rem; font-weight: 700; color: var(--emerald); }
-    .job-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-    .job-tag { background: #F1F5F9; padding: 4px 10px; border-radius: 8px; font-size: 0.76rem; font-weight: 700; }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-card {
-      background: #fff;
-      border-radius: 24px;
-      max-width: 680px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      padding: 24px;
-    }
-    .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: none;
-      background: #F1F5F9;
-      font-size: 1.1rem;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .rating-toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 300;
-      background: #0F172A;
-      color: #fff;
-      border-radius: 22px;
-      padding: 20px 22px;
-      width: 365px;
-      max-width: calc(100vw - 32px);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.45);
-      border: 2px solid #10B981;
-      display: none;
-    }
-    .rating-toast.show { display: block; }
-    .rating-toast-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .rating-toast-badge { background: #10B981; color: #0F172A; font-size: 0.7rem; font-weight: 900; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; }
-    .rating-stars-row { display: flex; gap: 8px; margin-top: 10px; justify-content: space-between; }
-    .star-btn { flex: 1; background: #1E293B; border: 1px solid #334155; color: #FBBF24; border-radius: 12px; padding: 10px 4px; font-size: 0.95rem; font-weight: 800; cursor: pointer; }
-    .star-btn:hover { background: #F59E0B; color: #0F172A; }
-    .quick-tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-    .quick-tag-chip { background: #1E293B; color: #CBD5E1; border: 1px solid #334155; padding: 4px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
-    .quick-tag-chip.active { background: #059669; color: #fff; border-color: #34D399; }
-
-    .ig-story-card {
-      max-width: 340px;
-      margin: 0 auto;
-      background: linear-gradient(160deg, #064E3B 0%, #0F172A 100%);
-      color: #fff;
-      border-radius: 28px;
-      padding: 32px 24px;
-      text-align: center;
-      border: 4px solid #10B981;
-    }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
-    @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
-    .form-group { display: flex; flex-direction: column; gap: 4px; }
-    .form-group.full { grid-column: 1 / -1; }
-    .form-group label { font-size: 0.78rem; font-weight: 800; color: var(--text-main); }
-    .form-group input, .form-group select { padding: 10px 12px; border-radius: 10px; border: 1px solid #CBD5E1; font-family: inherit; font-size: 0.86rem; }
   </style>
 </head>
-<body>
+<body class="pb-16 antialiased">
 
-  <div class="top-banner">
-    <span class="pill">🚀 Proyecto Píllalo Valledupar</span>
-    <span>Visibilidad justa para el emprendedor que apenas comienza y contacto directo en 1 toque.</span>
-    <span class="db-status-dot" id="dbStatusBadge">🟢 Conectado a Base de Datos Supabase</span>
-  </div>
-
-  <header class="navbar">
-    <div class="navbar-inner">
-      <div class="brand" onclick="switchTab('directorio')">
-        <div class="brand-logo">📍</div>
+  <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div onclick="switchTab('tab-explore')" class="flex items-center space-x-2.5 cursor-pointer group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white font-extrabold text-xl shadow-md group-hover:scale-105 transition">
+          P
+        </div>
         <div>
-          <div class="brand-title">Píllalo<span>.</span></div>
-          <span class="brand-sub">Vitrina Visual & Directorio • Valledupar</span>
+          <div class="flex items-center space-x-1.5">
+            <h1 class="text-xl font-black tracking-tight text-slate-900">Píllalo</h1>
+            <span class="bg-emerald-100 text-emerald-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Valledupar</span>
+          </div>
+          <p class="text-xs text-slate-500 font-medium hidden sm:block">Directorio visual de emprendimientos y servicios independientes</p>
         </div>
       </div>
 
-      <nav class="nav-tabs">
-        <button class="nav-tab active" data-tab="directorio" onclick="switchTab('directorio')">
-          🧭 Explorar (<span id="countAllTab">9</span>)
+      <div class="hidden md:flex items-center space-x-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 text-xs font-bold">
+        <button id="nav-explore" onclick="switchTab('tab-explore')" class="px-3.5 py-2 rounded-xl bg-slate-900 text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-grip"></i>
+          <span>Explorar Directorio</span>
         </button>
-        <button class="nav-tab new-biz-tab" data-tab="nuevos" onclick="switchTab('nuevos')">
-          🌱 Emprendimientos Nuevos
+        <button id="nav-nuevos" onclick="switchTab('tab-nuevos')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-seedling text-emerald-600"></i>
+          <span>Emprendimientos Nuevos</span>
         </button>
-        <button class="nav-tab" data-tab="vacantes" onclick="switchTab('vacantes')">
-          💼 Vacantes
+        <button id="nav-jobs" onclick="switchTab('tab-jobs')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-briefcase text-blue-600"></i>
+          <span>Vacantes</span>
         </button>
-        <button class="nav-tab analytics-tab" data-tab="analitica" onclick="switchTab('analitica')">
-          📊 Analítica & Ads
+        <button id="nav-certificate" onclick="switchTab('tab-certificate')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-certificate text-amber-500"></i>
+          <span>Certificado IG</span>
         </button>
-        <button class="nav-tab" data-tab="certificado" onclick="switchTab('certificado')">
-          🎓 Certificado IG
+        <button id="nav-analytics" onclick="switchTab('tab-analytics')" class="hidden px-3.5 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-chart-line text-indigo-600"></i>
+          <span>Panel Dueños (Analítica & Ads)</span>
         </button>
-      </nav>
+      </div>
 
-      <button class="btn-register" onclick="openRegisterModal()">
-        ➕ Registrar Negocio (Gratis)
-      </button>
+      <div class="flex items-center space-x-2">
+        <button onclick="switchTab('tab-certificate')" class="md:hidden px-3 py-2 bg-amber-50 text-amber-800 border border-amber-200 rounded-xl text-xs font-bold">
+          <i class="fa-solid fa-certificate"></i>
+        </button>
+        <button onclick="switchTab('tab-register')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold shadow-sm transition flex items-center space-x-1.5 cursor-pointer">
+          <i class="fa-solid fa-plus"></i>
+          <span>Registrar Negocio</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="md:hidden flex items-center justify-around border-t border-slate-100 bg-white px-2 py-2 text-xs font-bold">
+      <button onclick="switchTab('tab-explore')" class="text-emerald-700 flex items-center gap-1"><i class="fa-solid fa-grip"></i> Directorio</button>
+      <button onclick="switchTab('tab-nuevos')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-seedling text-emerald-600"></i> Nuevos</button>
+      <button onclick="switchTab('tab-jobs')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-briefcase text-blue-600"></i> Vacantes</button>
+      <button onclick="switchTab('tab-certificate')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-award text-amber-500"></i> Insignia</button>
     </div>
   </header>
 
-  <main class="container">
-    <section id="view-directorio" class="section-view active">
-      <div class="ad-spotlight-bar" id="adSpotlightContainer"></div>
+  <main class="max-w-6xl mx-auto px-4 pt-6">
 
-      <div class="hero-box">
-        <div class="hero-header">
-          <h1>¿Qué necesitas encontrar hoy en <span>Valledupar</span>?</h1>
-          <p>Sin importar cómo se llame el negocio, encuéntralo en su categoría real, revisa su rango de precios, mira el mapa y escríbele directo.</p>
-        </div>
+    <section id="tab-explore" class="space-y-6 fade-in">
+      <div id="adSpotlightBanner" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
 
-        <div class="category-dock">
-          <button class="cat-btn active" onclick="filterCategory('todos', this)">
-            <span class="cat-icon-3d">✨</span>
-            <span class="cat-name">Todos</span>
-            <span class="cat-count">Catálogo Completo</span>
-          </button>
-          <button class="cat-btn" onclick="filterCategory('comida', this)">
-            <span class="cat-icon-3d">🍔</span>
-            <span class="cat-name">Comida</span>
-            <span class="cat-count">Restaurantes y Fritos</span>
-          </button>
-          <button class="cat-btn" onclick="filterCategory('ropa', this)">
-            <span class="cat-icon-3d">👖</span>
-            <span class="cat-name">Jeans & Ropa</span>
-            <span class="cat-count">Dama, Hombre y Niñas</span>
-          </button>
-          <button class="cat-btn" onclick="filterCategory('perfumes', this)">
-            <span class="cat-icon-3d">💎</span>
-            <span class="cat-name">Perfumes</span>
-            <span class="cat-count">Árabes y Lociones</span>
-          </button>
-          <button class="cat-btn" onclick="filterCategory('servicios', this)">
-            <span class="cat-icon-3d">❄️</span>
-            <span class="cat-name">Aires y Técnicos</span>
-            <span class="cat-count">Limpieza y Arreglos</span>
-          </button>
-          <button class="cat-btn" onclick="filterCategory('belleza', this)">
-            <span class="cat-icon-3d">💅</span>
-            <span class="cat-name">Belleza & Uñas</span>
-            <span class="cat-count">Manicura y Estética</span>
-          </button>
-          <button class="cat-btn" onclick="filterCategory('favoritos', this)">
-            <span class="cat-icon-3d">❤️</span>
-            <span class="cat-name">Mis Guardados</span>
-            <span class="cat-count" id="favCountLabel">0 guardados</span>
-          </button>
-        </div>
-
-        <div class="filter-bar">
-          <div class="search-input-wrap">
-            <span>🔍</span>
-            <input type="text" id="searchInput" class="search-input" placeholder="Ej: empanadas, jeans, técnico de aires, perfumes árabes, uñas..." oninput="applyFilters()" />
-          </div>
-
-          <select id="budgetFilter" class="filter-select" onchange="applyFilters()">
-            <option value="todos">💰 Cualquier Presupuesto</option>
-            <option value="economico">🟢 Económico (Desde $3.000 - $35.000)</option>
-            <option value="medio">🟡 Rango Medio ($35.000 - $90.000)</option>
-            <option value="premium">🟣 Especializado (+$90.000)</option>
-          </select>
-
-          <select id="barrioFilter" class="filter-select" onchange="applyFilters()">
-            <option value="todos">📍 Todos los Barrios (Valledupar)</option>
-            <option value="Los Cortijos">📍 Los Cortijos</option>
-            <option value="Novalito">📍 Novalito</option>
-            <option value="San Joaquín">📍 San Joaquín</option>
-            <option value="Fundadores">📍 Fundadores / A Domicilio</option>
-            <option value="Centro">📍 Centro</option>
-            <option value="Las Flores">📍 Las Flores</option>
-            <option value="Los Músicos">📍 Los Músicos</option>
-            <option value="San Vicente">📍 San Vicente</option>
-          </select>
-
-          <select id="stageFilter" class="filter-select" onchange="applyFilters()">
-            <option value="todos">⚡ Algoritmo Solidario (Todos)</option>
-            <option value="nuevo">🌱 Nuevos Emprendimientos (Impulso)</option>
-            <option value="consolidado">🏛️ Con Trayectoria</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="solidarity-strip">
-        <div class="solidarity-strip-left">
-          <span>🤝</span>
-          <span><b>Algoritmo Solidario Activo:</b> Los emprendimientos recién creados y los que han recibido menos clics aparecen primero para darles arranque.</span>
-        </div>
-        <div class="solidarity-strip-right">
-          <span>⭐ Al tocar WhatsApp o Instagram podrás calificar de 1 a 5 estrellas</span>
-        </div>
-      </div>
-
-      <div id="directoryGrid" class="cards-grid"></div>
-    </section>
-
-    <section id="view-nuevos" class="section-view">
-      <div class="section-banner">
-        <div>
-          <span style="background:#10B981; color:#0F172A; font-weight:900; font-size:0.75rem; padding:4px 12px; border-radius:999px; text-transform:uppercase;">🌱 Visibilidad para el que está comenzando</span>
-          <h2 style="margin-top:10px;">Emprendimientos Nuevos que Puedes Apoyar a Crecer</h2>
-          <p>Aquí aparecen los negocios pequeños y trabajadores independientes que llevan pocos días en la plataforma o que aún han recibido pocos clics.</p>
-        </div>
-        <button class="btn-register" onclick="openRegisterModal()">➕ Inscribir mi Emprendimiento</button>
-      </div>
-      <div id="newBusinessesGrid" class="cards-grid"></div>
-    </section>
-
-    <section id="view-vacantes" class="section-view">
-      <div class="section-banner">
-        <div>
-          <span style="background:#38BDF8; color:#0F172A; font-weight:900; font-size:0.75rem; padding:4px 12px; border-radius:999px; text-transform:uppercase;">💼 Empleo Local Directo</span>
-          <h2 style="margin-top:10px;">Vacantes Disponibles en Valledupar</h2>
-          <p>Oportunidades de trabajo publicadas por emprendimientos, restaurantes y empresas locales con contacto directo por WhatsApp.</p>
-        </div>
-      </div>
-      <div class="jobs-grid" id="vacantesGrid"></div>
-    </section>
-
-    <section id="view-analitica" class="section-view">
-      <div class="section-banner" style="background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);">
-        <div>
-          <span style="background:#818CF8; color:#0F172A; font-weight:900; font-size:0.75rem; padding:4px 12px; border-radius:999px; text-transform:uppercase;">📊 Centro de Control y Métricas en Vivo</span>
-          <h2 style="margin-top:10px;">Analítica de Visitas, Clics, Valoraciones 5★ y Publicidad</h2>
-          <p>Revisa cuántas personas entran, a qué empresas han tocado y a cuáles no (para impulsarlas), consulta las calificaciones de 1 a 5 estrellas y envía reportes por WhatsApp a cada dueño.</p>
-        </div>
-        <button class="btn-register" style="background:linear-gradient(135deg,#F59E0B,#D97706);" onclick="openAdModal()">
-          📢 Crear Banner Publicitario / Impulso
+      <div class="flex items-center justify-start sm:justify-center gap-3 overflow-x-auto py-2 px-1" id="categoryDock">
+        <button onclick="setCategory('all', this)" class="cat-3d-btn active px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">✨</span>
+          <span class="text-sm font-extrabold text-slate-900">Todos</span>
+        </button>
+        <button onclick="setCategory('comida', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">🍔</span>
+          <span class="text-sm font-extrabold text-slate-900">Comida</span>
+        </button>
+        <button onclick="setCategory('ropa', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">👖</span>
+          <span class="text-sm font-extrabold text-slate-900">Jeans & Ropa</span>
+        </button>
+        <button onclick="setCategory('perfumes', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">💎</span>
+          <span class="text-sm font-extrabold text-slate-900">Perfumes</span>
+        </button>
+        <button onclick="setCategory('aires', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">❄️</span>
+          <span class="text-sm font-extrabold text-slate-900">Aires Acondicionados</span>
+        </button>
+        <button onclick="setCategory('belleza', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">💅</span>
+          <span class="text-sm font-extrabold text-slate-900">Belleza & Uñas</span>
         </button>
       </div>
 
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label">👀 Visitas Totales a la Página</div>
-          <div class="kpi-value" id="kpiTotalViews">0</div>
-          <div class="kpi-sub">🟢 Contando tu sesión actual en vivo</div>
+      <div class="bg-white/80 backdrop-blur-md rounded-3xl p-4 sm:p-5 border border-slate-200/90 shadow-xs space-y-4">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400 text-base"></i>
+          <input type="text" id="searchInput" oninput="filterBusinesses()" 
+            placeholder="Busca en Valledupar: ropa de niñas, jeans, perfumes, arreglo de aire, uñas, arepas..." 
+            class="w-full pl-11 pr-24 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+          <button onclick="resetAllFilters()" class="absolute right-2.5 top-2 bottom-2 px-3 bg-slate-200/70 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition cursor-pointer">
+            Ver Todos
+          </button>
         </div>
-        <div class="kpi-card">
-          <div class="kpi-label">👆 Clics Totales a Negocios</div>
-          <div class="kpi-value" id="kpiTotalClicks">0</div>
-          <div class="kpi-sub" id="kpiWhatsappBreakdown">WhatsApp, Instagram, TikTok y Maps</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">⭐ Valoraciones Recibidas (1-5★)</div>
-          <div class="kpi-value" id="kpiTotalRatings">0</div>
-          <div class="kpi-sub" id="kpiAvgStars">Promedio General: 5.0 ★</div>
-        </div>
-        <div class="kpi-card" style="border-color:#FCD34D; background:#FFFBEB;">
-          <div class="kpi-label" style="color:#92400E;">🚨 Negocios con Pocos Clics (&lt;5)</div>
-          <div class="kpi-value" id="kpiLowClickCount" style="color:#B45309;">0</div>
-          <div class="kpi-sub" style="color:#92400E;">Priorizados por el Algoritmo Solidario</div>
+
+        <div class="flex flex-wrap items-center justify-center gap-2.5 text-xs">
+          <div class="flex items-center bg-white border border-slate-200 rounded-xl px-3.5 py-2 shadow-2xs">
+            <span class="mr-1.5 text-sm">💰</span>
+            <span class="font-bold text-slate-600 mr-1.5">Presupuesto:</span>
+            <select id="priceFilter" onchange="filterBusinesses()" class="font-extrabold text-slate-900 bg-transparent focus:outline-none cursor-pointer">
+              <option value="all">Cualquier valor</option>
+              <option value="low">Económico (Hasta $45.000)</option>
+              <option value="mid">Medio ($45.000 – $100.000)</option>
+              <option value="high">Especializado ($100.000+)</option>
+            </select>
+          </div>
+
+          <div class="flex items-center bg-white border border-slate-200 rounded-xl px-3.5 py-2 shadow-2xs">
+            <span class="mr-1.5 text-sm">📍</span>
+            <span class="font-bold text-slate-600 mr-1.5">Barrios de Valledupar:</span>
+            <select id="neighborhoodFilter" onchange="filterBusinesses()" class="font-extrabold text-slate-900 bg-transparent focus:outline-none cursor-pointer">
+              <option value="all">Toda la ciudad</option>
+              <option value="Doce de Octubre">Doce de Octubre</option>
+              <option value="Novalito">Novalito</option>
+              <option value="San Joaquín">San Joaquín</option>
+              <option value="Los Cortijos">Los Cortijos</option>
+              <option value="La Nevada">La Nevada / Domicilio</option>
+            </select>
+          </div>
+
+          <button id="btn-age-new" onclick="setAgeFilter('nuevo')" class="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer">
+            <span class="text-sm">🌱</span>
+            <span>Nuevos Emprendimientos</span>
+          </button>
+
+          <button id="btn-age-established" onclick="setAgeFilter('trayectoria')" class="px-3.5 py-2 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer">
+            <span class="text-sm">🏛️</span>
+            <span>Con Trayectoria</span>
+          </button>
         </div>
       </div>
 
-      <div class="analytics-panel-box" style="background:#FFFBEB; border-color:#FDE68A;">
-        <h3 style="font-family:'Outfit',sans-serif; font-size:1.2rem; color:#92400E; margin-bottom:6px;">
-          🚨 Radar Solidario: ¿A qué negocios casi NO han tocado todavía?
-        </h3>
-        <p style="font-size:0.84rem; color:#78350F; margin-bottom:14px;">
-          Estos emprendimientos tienen menos de 5 clics. Con un toque puedes ponerlos en el <b>Banner Publicitario Superior</b> gratis para que toda Valledupar los vea hoy:
-        </p>
-        <div id="lowClickAlertList" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:12px;"></div>
+      <div id="businessList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+    <section id="tab-company-profile" class="hidden fade-in space-y-6">
+      <div id="companyProfileContainer"></div>
+    </section>
+
+    <section id="tab-nuevos" class="hidden fade-in space-y-5">
+      <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <span class="bg-emerald-400/20 text-emerald-200 border border-emerald-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+            🌱 Visibilidad y Arranque Solidario
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">Emprendimientos Nuevos que Puedes Apoyar a Crecer</h2>
+          <p class="text-emerald-50 text-sm mt-1 max-w-2xl">
+            Aquí impulsamos a los emprendimientos y trabajadores independientes que acaban de comenzar en Valledupar o que han tenido pocos clics. ¡Conócelos y apóyalos!
+          </p>
+        </div>
+        <button onclick="switchTab('tab-register')" class="px-5 py-3 bg-white text-slate-900 hover:bg-emerald-50 rounded-2xl text-xs font-black shadow-md whitespace-nowrap cursor-pointer">
+          <i class="fa-solid fa-plus text-emerald-600 mr-1"></i> Sumar mi Emprendimiento
+        </button>
+      </div>
+      <div id="nuevosGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+    <section id="tab-jobs" class="hidden fade-in space-y-5">
+      <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md">
+        <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+          💼 Oportunidades Laborales
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Vacantes en Emprendimientos de Valledupar</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-xl">Conecta con negocios locales que están creciendo y buscando apoyo o talento.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="bento-white-card rounded-3xl p-6 space-y-3">
+          <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full">Tiempo Completo / Medio Tiempo</span>
+          <h3 class="text-lg font-black text-slate-900">Asesora de Ventas y Atención por WhatsApp</h3>
+          <p class="text-xs font-bold text-slate-600">📍 Oasis Denim Valle · Barrio Doce de Octubre</p>
+          <p class="text-xs text-slate-500 leading-relaxed">Atención de clientes en punto físico y respuesta de chats de WhatsApp e Instagram.</p>
+          <div class="flex gap-2 pt-2">
+            <a href="https://wa.me/573009876543?text=Hola%20Oasis%20Denim,%20vi%20la%20vacante%20en%20Píllalo" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center">
+              <i class="fa-brands fa-whatsapp mr-1"></i> Postular por WhatsApp
+            </a>
+            <button onclick="openCompanyProfile(1)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">Ver Perfil</button>
+          </div>
+        </div>
+
+        <div class="bento-white-card rounded-3xl p-6 space-y-3">
+          <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-3 py-1 rounded-full">Pago por Servicio / Turnos</span>
+          <h3 class="text-lg font-black text-slate-900">Auxiliar Técnico de Aires Acondicionados</h3>
+          <p class="text-xs font-bold text-slate-600">📍 TecniAires FríoValle · Servicio a Domicilio</p>
+          <p class="text-xs text-slate-500 leading-relaxed">Apoyo en mantenimiento preventivo y limpieza de aires mini-split en Valledupar.</p>
+          <div class="flex gap-2 pt-2">
+            <a href="https://wa.me/573001234567?text=Hola%20FríoValle,%20me%20interesa%20la%20vacante" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center">
+              <i class="fa-brands fa-whatsapp mr-1"></i> Postular por WhatsApp
+            </a>
+            <button onclick="openCompanyProfile(3)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">Ver Perfil</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-certificate" class="hidden fade-in">
+      <div class="bento-white-card rounded-3xl p-6 sm:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div class="space-y-4">
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full uppercase">🎓 Certificado Oficial de Registro</span>
+            <h2 class="text-2xl font-black text-slate-900">Generador de Insignia para Historias</h2>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Al registrarse, cada emprendimiento descarga su imagen oficial lista para publicar en Instagram Stories y estados de WhatsApp: <em>"¡También nos puedes encontrar en Píllalo Valledupar!"</em>.
+            </p>
+            <div class="space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Nombre del Emprendimiento</label>
+                <input type="text" id="certBrandName" value="Oasis Denim Valle" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-semibold">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Rango del Producto Principal</label>
+                <input type="text" id="certCategory" value="👖 Rango en Jeans: $50.000 – $85.000 COP" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-semibold">
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Dirección / Barrio</label>
+                  <input type="text" id="certLocation" value="Cra 15 #13B-24 · Doce de Octubre" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Instagram / TikTok</label>
+                  <input type="text" id="certIg" value="@oasis_denimvalle" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold">
+                </div>
+              </div>
+              <button onclick="alert('¡Certificado descargado listo para subir a tus historias!')" class="w-full py-3 wa-widget-green text-white rounded-xl text-xs font-extrabold cursor-pointer">
+                <i class="fa-solid fa-download mr-1.5"></i> Descargar Imagen para Historias
+              </button>
+            </div>
+          </div>
+
+          <div class="flex justify-center">
+            <div class="w-72 bg-gradient-to-b from-slate-900 via-emerald-950 to-slate-950 text-white rounded-[32px] p-6 shadow-2xl border-4 border-white flex flex-col justify-between min-h-[460px] text-center">
+              <div class="flex items-center justify-between">
+                <span class="bg-white/10 px-3 py-1 rounded-full text-[11px] font-bold text-emerald-300">● Píllalo Valledupar</span>
+                <span class="bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full">VERIFICADO</span>
+              </div>
+              <div class="my-auto space-y-3 py-4">
+                <div class="w-20 h-20 rounded-full bg-white text-slate-900 mx-auto flex items-center justify-center text-2xl font-black shadow-lg" id="cardInitial">OD</div>
+                <p class="text-[10px] uppercase tracking-widest text-emerald-400 font-extrabold">Negocio Oficialmente Registrado</p>
+                <h3 id="cardTitle" class="text-xl font-black text-white">Oasis Denim Valle</h3>
+                <p id="cardDesc" class="text-xs bg-white/10 py-1 px-2.5 rounded-full text-emerald-200 font-bold inline-block">👖 Rango en Jeans: $50.000 – $85.000 COP</p>
+                <div class="pt-2 text-xs text-slate-300 space-y-1 font-semibold">
+                  <p id="cardLoc">📍 Cra 15 #13B-24 · Doce de Octubre</p>
+                  <p id="cardInsta">📸 @oasis_denimvalle</p>
+                </div>
+              </div>
+              <div class="bg-white/10 rounded-2xl p-3 border border-white/15">
+                <p class="text-[10px] text-slate-300">Búscanos y contáctanos directo en:</p>
+                <p class="text-xs font-black text-emerald-300">jguao18.github.io/pillalo-valledupar</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-register" class="hidden fade-in">
+      <div class="bento-white-card rounded-3xl p-6 sm:p-8 max-w-2xl mx-auto space-y-5">
+        <div class="text-center space-y-1.5">
+          <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full">
+            🎁 15 a 30 Días Gratis de Prueba · Luego desde $3.000 COP/mes
+          </span>
+          <h2 class="text-2xl font-black text-slate-900">Registra tu Emprendimiento o Servicio</h2>
+          <p class="text-xs text-slate-500">Tendrás tu propio tablero visual con mapa de ubicación, WhatsApp, Instagram, TikTok y rango de precios.</p>
+        </div>
+
+        <form onsubmit="submitNewBusiness(event)" class="space-y-4 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Nombre del Emprendimiento o Persona *</label>
+              <input type="text" id="regName" required placeholder="Ej: Oasis Denim / Técnico José" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Categoría Principal *</label>
+              <select id="regCategory" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+                <option value="ropa">👖 Jeans & Ropa (Damas, Niñas, Niños)</option>
+                <option value="comida">🍔 Comida (Arepas, Empanadas, Postres)</option>
+                <option value="perfumes">💎 Perfumes & Lociones</option>
+                <option value="aires">❄️ Aires Acondicionados & Servicios Técnicos</option>
+                <option value="belleza">💅 Belleza, Uñas & Maquillaje</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-emerald-700 mb-1">Producto/Servicio Principal y su Rango (Mín - Máx) *</label>
+              <input type="text" id="regRange" required placeholder="Ej: Rango en Jeans: $50.000 – $85.000 COP" class="w-full px-3.5 py-2.5 bg-emerald-50/50 border border-emerald-300 rounded-xl font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Dirección y Barrio en Valledupar *</label>
+              <input type="text" id="regAddress" required placeholder="Ej: Cra 15 #13B-24 · Doce de Octubre" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">WhatsApp / Teléfono *</label>
+              <input type="tel" id="regPhone" required placeholder="300 987 6543" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Instagram (@)</label>
+              <input type="text" id="regIg" placeholder="@tunegocio" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">TikTok (@)</label>
+              <input type="text" id="regTk" placeholder="@tunegocio.vup" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Horario de Atención</label>
+              <input type="text" id="regSchedule" placeholder="Ej: Abierto hoy · 8:00 AM - 7:00 PM" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Correo Electrónico (Opcional)</label>
+              <input type="email" id="regEmail" placeholder="contacto@tunegocio.co" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 wa-widget-green text-white rounded-xl font-extrabold text-sm cursor-pointer">
+            Crear mi Perfil Visual y Obtener Certificado
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section id="tab-analytics" class="hidden fade-in space-y-6">
+      <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase">
+            🔐 Modo Privado Dueños (Oculto al Público)
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">Analítica de Visitas, Clics, 5 Estrellas y Publicidad</h2>
+          <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl">
+            Solo tú y tu novia con su clave pueden ver quién entra, cuántos clics lleva cada negocio, impulsar en el banner a los que tienen pocos clics y enviar reportes de cobro por WhatsApp.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="openNewBannerModal()" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-black cursor-pointer">
+            📢 Publicar Banner / Publicidad
+          </button>
+          <button onclick="lockOwnerMode()" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-bold cursor-pointer">
+            🔒 Cerrar Modo Dueño
+          </button>
+        </div>
       </div>
 
-      <div class="analytics-panel-box">
-        <h3 style="font-family:'Outfit',sans-serif; font-size:1.25rem; margin-bottom:12px;">📈 Rendimiento Detallado por Negocio</h3>
-        <table class="analytics-table">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bento-white-card rounded-3xl p-5">
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase">👀 Visitas a la Página</p>
+          <p class="text-3xl font-black text-slate-900 mt-1" id="kpiViews">315</p>
+          <p class="text-xs font-bold text-emerald-600 mt-1">🟢 Conectado a Supabase</p>
+        </div>
+        <div class="bento-white-card rounded-3xl p-5">
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase">👆 Clics Totales a Negocios</p>
+          <p class="text-3xl font-black text-slate-900 mt-1" id="kpiClicks">0</p>
+          <p class="text-xs font-bold text-emerald-600 mt-1" id="kpiWaSub">WhatsApp, IG, TikTok y Maps</p>
+        </div>
+        <div class="bento-white-card rounded-3xl p-5">
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase">⭐ Valoraciones (1 a 5★)</p>
+          <p class="text-3xl font-black text-slate-900 mt-1" id="kpiVotes">0</p>
+          <p class="text-xs font-bold text-amber-600 mt-1" id="kpiStarsAvg">Promedio General: 5.0 ★</p>
+        </div>
+        <div class="bento-white-card rounded-3xl p-5 bg-amber-50/60 border-amber-200">
+          <p class="text-[11px] font-extrabold text-amber-800 uppercase">🚨 Con Pocos Clics (&lt;5)</p>
+          <p class="text-3xl font-black text-amber-700 mt-1" id="kpiLowClicks">0</p>
+          <p class="text-xs font-bold text-amber-800 mt-1">Priorizados para impulsar</p>
+        </div>
+      </div>
+
+      <div class="bento-white-card rounded-3xl p-6 border-2 border-amber-200 bg-amber-50/40 space-y-3">
+        <h3 class="text-base sm:text-lg font-black text-amber-950">🚨 Radar Solidario: ¿A qué negocios casi NO han tocado todavía?</h3>
+        <p class="text-xs text-amber-900">Con un solo clic en <b>"🚀 Destacar en Banner"</b> subes ese emprendimiento a la parte superior de la página para ayudarlo a vender:</p>
+        <div id="lowClicksContainer" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+      </div>
+
+      <div class="bento-white-card rounded-3xl p-6 overflow-x-auto space-y-3">
+        <h3 class="text-base sm:text-lg font-black text-slate-900">📈 Métricas por Empresa + Botón para Enviar Reporte al Dueño</h3>
+        <table class="w-full text-left border-collapse text-xs">
           <thead>
-            <tr>
-              <th>Negocio / Emprendimiento</th>
-              <th>Estado</th>
-              <th>👀 Vistas</th>
-              <th>🟢 WhatsApp</th>
-              <th>📸 Instagram</th>
-              <th>🎵 TikTok</th>
-              <th>🗺️ Maps</th>
-              <th>👆 Total Clics</th>
-              <th>⭐ Calificación</th>
-              <th>Acciones para el Dueño</th>
+            <tr class="bg-slate-900 text-white">
+              <th class="p-3 rounded-tl-xl">Emprendimiento</th>
+              <th class="p-3">👀 Vistas</th>
+              <th class="p-3">🟢 WhatsApp</th>
+              <th class="p-3">📸 Instagram</th>
+              <th class="p-3">🎵 TikTok</th>
+              <th class="p-3">🗺️ Maps</th>
+              <th class="p-3">👆 Total Clics</th>
+              <th class="p-3">⭐ Calificación</th>
+              <th class="p-3 rounded-tr-xl">Acciones Dueños</th>
             </tr>
           </thead>
-          <tbody id="analyticsTableBody"></tbody>
+          <tbody id="analyticsRows" class="divide-y divide-slate-200"></tbody>
         </table>
       </div>
-
-      <div class="analytics-panel-box">
-        <h3 style="font-family:'Outfit',sans-serif; font-size:1.2rem; margin-bottom:12px;">⭐ Últimas Valoraciones de Clientes (1 a 5 Estrellas)</h3>
-        <div id="recentRatingsList" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;"></div>
-      </div>
     </section>
 
-    <section id="view-certificado" class="section-view">
-      <div style="max-width:780px; margin:0 auto; text-align:center; padding:12px;">
-        <h2 style="font-family:'Outfit',sans-serif; font-size:1.8rem; font-weight:900; margin-bottom:8px;">🎓 Sello Oficial para Historias de Instagram y WhatsApp</h2>
-        <div class="ig-story-card">
-          <div style="background:#10B981; color:#0F172A; font-weight:900; font-size:0.74rem; padding:4px 12px; border-radius:999px; display:inline-block; margin-bottom:14px;">✔ COMERCIO VERIFICADO</div>
-          <div style="font-size:3rem; margin-bottom:8px;">🥟</div>
-          <h3 style="font-family:'Outfit',sans-serif; font-size:1.45rem; font-weight:900;">El Rincón de Doña Mechis</h3>
-          <p style="color:#A7F3D0; font-size:0.85rem; font-weight:700; margin-bottom:18px;">Categoría: Comida & Desayunos • Valledupar</p>
-          <div style="background:rgba(255,255,255,0.1); border-radius:16px; padding:14px; font-size:0.84rem; margin-bottom:18px;">
-            ¡Encuéntranos en <b>Píllalo Valledupar</b>! Mira nuestro horario, ubicación en Google Maps, precios y escríbenos directo al WhatsApp.
-          </div>
-          <div style="font-weight:900; font-size:1.05rem; color:#FBBF24;">📍 jguao18.github.io/pillalo-valledupar</div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <div id="profileModal" class="modal-overlay" onclick="if(event.target===this) closeProfileModal()">
-    <div class="modal-card" id="profileModalContent"></div>
+  <footer class="max-w-6xl mx-auto px-4 mt-14 pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+    <div>
+      <span class="font-extrabold text-slate-700">Píllalo Valledupar</span> · Directorio Visual Interactivo de Emprendimientos y Servicios
+    </div>
+    <div>
+      <button id="ownerLockBtn" onclick="openOwnerPinModal()" class="px-3 py-1.5 rounded-full bg-slate-200/80 hover:bg-slate-300 text-slate-700 font-bold transition cursor-pointer">
+        🔒 Acceso Dueños
+      </button>
+    </div>
+  </footer>
+
+  <div id="ratingToast" class="fixed bottom-5 right-5 z-50 hidden w-80 sm:w-96 bg-slate-900 text-white rounded-3xl p-5 shadow-2xl border-2 border-emerald-400">
+    <div class="flex items-center justify-between mb-1.5">
+      <span class="bg-emerald-400 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">⭐ Valoración Rápida en 1 Toque</span>
+      <button onclick="closeRatingToast()" class="text-slate-400 hover:text-white font-black text-sm cursor-pointer">✕</button>
+    </div>
+    <p id="ratingBizTitle" class="text-sm font-black text-white">¿Qué tal te pareció este negocio?</p>
+    <p id="ratingBizSub" class="text-[11px] text-slate-300 mt-0.5">Tocaste su canal de contacto. Califica de 1 a 5 estrellas:</p>
+    <div class="grid grid-cols-5 gap-2 mt-3">
+      <button onclick="submitStarRating(1)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">1 ⭐</button>
+      <button onclick="submitStarRating(2)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">2 ⭐</button>
+      <button onclick="submitStarRating(3)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">3 ⭐</button>
+      <button onclick="submitStarRating(4)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">4 ⭐</button>
+      <button onclick="submitStarRating(5)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">5 ⭐</button>
+    </div>
   </div>
 
-  <div id="registerModal" class="modal-overlay" onclick="if(event.target===this) closeRegisterModal()">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeRegisterModal()">✕</button>
-      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:999px;">🚀 15 A 30 DÍAS GRATIS DE PRUEBA</span>
-      <h2 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:900; margin-top:8px;">Registra tu Emprendimiento o Servicio</h2>
-      <form onsubmit="submitNewBusiness(event)">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Nombre del Negocio o Profesional *</label>
-            <input type="text" id="regName" required placeholder="Ej: Delicias Donde Mary" />
-          </div>
-          <div class="form-group">
-            <label>Categoría Principal *</label>
-            <select id="regCat" required>
-              <option value="comida">🍔 Comida / Restaurante / Fritos</option>
-              <option value="ropa">👖 Jeans, Ropa Dama / Hombre / Niñas</option>
-              <option value="perfumes">💎 Perfumes & Lociones</option>
-              <option value="servicios">❄️ Aires Acondicionados / Técnico</option>
-              <option value="belleza">💅 Belleza, Uñas & Estética</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Tipo de Negocio *</label>
-            <select id="regStage">
-              <option value="nuevo">🌱 Nuevo Emprendimiento / Independiente</option>
-              <option value="consolidado">🏛️ Empresa Constituida / Con Trayectoria</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Barrio en Valledupar *</label>
-            <input type="text" id="regBarrio" required placeholder="Ej: Los Cortijos, San Joaquín, A domicilio" />
-          </div>
-          <div class="form-group full">
-            <label>Producto/Servicio Principal y su Rango de Precio (Mínimo a Máximo) *</label>
-            <input type="text" id="regPriceRange" required placeholder="Ej: 👖 Rango en Jeans: $50.000 a $85.000 COP" />
-          </div>
-          <div class="form-group">
-            <label>Dirección Exacta *</label>
-            <input type="text" id="regAddress" required placeholder="Ej: Cra 15 # 14-20 Local 2" />
-          </div>
-          <div class="form-group">
-            <label>Horario de Atención *</label>
-            <input type="text" id="regHours" required placeholder="Ej: Lun a Sáb: 8:00 AM - 7:00 PM" />
-          </div>
-          <div class="form-group">
-            <label>Número de WhatsApp *</label>
-            <input type="text" id="regWhatsapp" required placeholder="Ej: 3001234567" />
-          </div>
-          <div class="form-group">
-            <label>Usuario de Instagram</label>
-            <input type="text" id="regIg" placeholder="Ej: @miemprendimiento" />
-          </div>
-          <div class="form-group">
-            <label>Usuario de TikTok (Opcional)</label>
-            <input type="text" id="regTk" placeholder="Ej: @miemprendimiento.vup" />
-          </div>
-          <div class="form-group">
-            <label>Correo Electrónico (Opcional)</label>
-            <input type="email" id="regEmail" placeholder="contacto@negocio.com" />
-          </div>
+  <div id="ownerPinModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
+      <div class="text-3xl">🔐</div>
+      <h3 class="text-lg font-black text-slate-900">Acceso Privado Dueños</h3>
+      <p class="text-xs text-slate-500">Ingresa tu clave para ver la Analítica y administrar los Banners Publicitarios (Clave: <b>2026</b>).</p>
+      <form onsubmit="checkOwnerPin(event)" class="space-y-3">
+        <input type="password" id="ownerPinInput" placeholder="Clave secreta" required class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-center font-black text-base">
+        <div class="flex gap-2">
+          <button type="button" onclick="closeOwnerPinModal()" class="flex-1 py-2.5 bg-slate-100 text-slate-700 rounded-xl text-xs font-bold cursor-pointer">Cancelar</button>
+          <button type="submit" class="flex-1 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-extrabold cursor-pointer">Entrar</button>
         </div>
-        <button type="submit" class="btn-register" style="width:100%; justify-content:center; margin-top:18px; padding:13px;">
-          ✅ Publicar Ahora en la Base de Datos
-        </button>
       </form>
     </div>
   </div>
 
-  <div id="adModal" class="modal-overlay" onclick="if(event.target===this) closeAdModal()">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeAdModal()">✕</button>
-      <span style="background:#FEF3C7; color:#92400E; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:999px;">📢 ESPACIO PUBLICITARIO / IMPULSO</span>
-      <h2 style="font-family:'Outfit',sans-serif; font-size:1.45rem; font-weight:900; margin-top:8px;">Publicar Banner Destacado en la Parte Superior</h2>
-      <form onsubmit="submitNewAdBanner(event)">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Nombre del Negocio o Anunciante *</label>
-            <input type="text" id="adAnunciante" required placeholder="Ej: El Rincón de Doña Mechis" />
-          </div>
-          <div class="form-group">
-            <label>Tipo de Espacio *</label>
-            <select id="adTipo">
-              <option value="🌱 EMPRENDIMIENTO IMPULSADO HOY">🌱 Impulso Solidario Gratis (Pocos Clics)</option>
-              <option value="💎 PATROCINADOR DESTACADO">💎 Publicidad Pagada (Empresa)</option>
-            </select>
-          </div>
-          <div class="form-group full">
-            <label>Título Llamativo del Banner *</label>
-            <input type="text" id="adTitulo" required placeholder="Ej: 🥟 ¡Prueba las mejores empanadas en peto de Los Cortijos!" />
-          </div>
-          <div class="form-group full">
-            <label>Descripción Corta *</label>
-            <input type="text" id="adDesc" required placeholder="Ej: Desayunos caseros desde $2.500 COP." />
-          </div>
-          <div class="form-group">
-            <label>WhatsApp de Contacto *</label>
-            <input type="text" id="adWhatsapp" required placeholder="Ej: 573001112233" />
-          </div>
-          <div class="form-group">
-            <label>Texto del Botón *</label>
-            <input type="text" id="adBoton" value="Escribir al WhatsApp" required />
-          </div>
+  <div id="newBannerModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl text-xs">
+      <div class="flex justify-between items-center">
+        <span class="bg-amber-100 text-amber-900 font-black px-3 py-1 rounded-full">📢 Nuevo Banner Superior</span>
+        <button onclick="closeNewBannerModal()" class="text-slate-400 hover:text-slate-700 font-black text-base cursor-pointer">✕</button>
+      </div>
+      <h3 class="text-lg font-black text-slate-900">Destacar Emprendimiento o Patrocinador</h3>
+      <form onsubmit="saveCustomBanner(event)" class="space-y-3">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Tipo de Etiqueta</label>
+          <select id="bannerBadgeInput" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-bold">
+            <option value="🌱 EMPRENDIMIENTO IMPULSADO HOY">🌱 Impulso Solidario Gratis</option>
+            <option value="💎 PUBLICIDAD DESTACADA">💎 Publicidad Pagada</option>
+          </select>
         </div>
-        <button type="submit" class="btn-register" style="width:100%; justify-content:center; margin-top:18px; padding:13px;">
-          🚀 Activar Banner en el Directorio
-        </button>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Nombre del Negocio *</label>
+          <input type="text" id="bannerBizInput" required placeholder="Ej: Luxury Arepas & Antojos" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Título del Anuncio *</label>
+          <input type="text" id="bannerTitleInput" required placeholder="Ej: 🍔 ¡Arepas rellenas al carbón desde $10.000!" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Descripción Corta *</label>
+          <input type="text" id="bannerDescInput" required placeholder="Ej: En Los Cortijos. Pide directo a nuestro WhatsApp." class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">WhatsApp (con 57) *</label>
+          <input type="text" id="bannerWaInput" required placeholder="573208889900" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+        </div>
+        <button type="submit" class="w-full py-3 wa-widget-green text-white rounded-xl font-extrabold cursor-pointer">Publicar en la Parte Superior</button>
       </form>
-    </div>
-  </div>
-
-  <div id="ratingToast" class="rating-toast">
-    <div class="rating-toast-header">
-      <span class="rating-toast-badge">⭐ Valoración en 1 Toque (1 a 5 Estrellas)</span>
-      <button onclick="closeRatingToast()" style="background:none; border:none; color:#94A3B8; cursor:pointer; font-weight:800;">✕</button>
-    </div>
-    <div style="font-weight:800; font-size:0.95rem; margin-bottom:2px;" id="ratingBizName">¿Qué tal te pareció este negocio?</div>
-    <div style="font-size:0.78rem; color:#CBD5E1;" id="ratingChannelText">Elige una etiqueta y toca de 1 a 5 estrellas:</div>
-    <div class="quick-tags-row" id="quickTagsRow">
-      <button type="button" class="quick-tag-chip active" onclick="selectRatingTag('Excelente atención', this)">🙌 Excelente atención</button>
-      <button type="button" class="quick-tag-chip" onclick="selectRatingTag('Muy buen precio', this)">💰 Muy buen precio</button>
-      <button type="button" class="quick-tag-chip" onclick="selectRatingTag('Rápido y cumplido', this)">⚡ Rápido y cumplido</button>
-    </div>
-    <div class="rating-stars-row">
-      <button class="star-btn" onclick="submitQuickRating(1)">1 ⭐</button>
-      <button class="star-btn" onclick="submitQuickRating(2)">2 ⭐</button>
-      <button class="star-btn" onclick="submitQuickRating(3)">3 ⭐</button>
-      <button class="star-btn" onclick="submitQuickRating(4)">4 ⭐</button>
-      <button class="star-btn" onclick="submitQuickRating(5)">5 ⭐</button>
     </div>
   </div>
 
@@ -1074,192 +583,323 @@
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVoY21taHhra2RuY3JzanR1amhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0OTgwNTUsImV4cCI6MjEwOTA3NDA1NX0.e97tZSN_LKraz9FZsB4oAUKkjxgdWN9NkMzXvnHElh0";
     const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-    let businesses = [];
-    let adBanners = [];
-    let vacantesList = [];
-    let recentRatings = [];
-    let activeCategory = 'todos';
-    let lastContactedBizId = null;
-    let selectedOpinionTag = 'Excelente atención';
-    let favoriteIds = JSON.parse(localStorage.getItem('pillalo_favs') || '[]');
-    let pageViewsCount = parseInt(localStorage.getItem('pillalo_views') || '312', 10) + 1;
-    localStorage.setItem('pillalo_views', pageViewsCount);
+    const OWNER_PIN = "2026";
+    let isOwnerUnlocked = sessionStorage.getItem('pillalo_owner_ok') === 'true';
+    let lastContactedId = null;
+    let totalPageViews = parseInt(localStorage.getItem('pillalo_v3_views') || '315', 10) + 1;
+    localStorage.setItem('pillalo_v3_views', totalPageViews);
 
-    async function syncFromSupabase() {
-      if (!supabaseClient) return;
-      try {
-        const { data: empData } = await supabaseClient.from('emprendimientos').select('*').eq('activo', true).order('id', { ascending: true });
-        if (empData && empData.length > 0) {
-          businesses = empData.map(row => ({
-            id: row.id,
-            name: row.nombre,
-            category: row.categoria,
-            categoryLabel: row.subcategoria || 'Emprendimiento Local',
-            stage: row.es_nuevo ? 'nuevo' : 'consolidado',
-            clicksReceived: row.total_clics_recibidos || 0,
-            vistasPerfil: row.vistas_perfil || 0,
-            clicsWhatsapp: row.clics_whatsapp || 0,
-            clicsInstagram: row.clics_instagram || 0,
-            clicsTiktok: row.clics_tiktok || 0,
-            clicsMaps: row.clics_maps || 0,
-            clicsLlamada: row.clics_llamada || 0,
-            rating: parseFloat(row.calificacion_promedio || 5.0),
-            votes: row.total_valoraciones || 1,
-            budget: row.categoria_presupuesto || 'economico',
-            mainPriceRange: row.etiqueta_rango_precio,
-            barrio: row.barrio,
-            address: row.direccion,
-            hours: row.horario_texto,
-            tagline: row.eslogan || '',
-            description: row.descripcion || '',
-            cover: row.foto_portada_url || 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80',
-            logo: row.logo_url || 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=240&q=80',
-            whatsapp: row.whatsapp,
-            phone: row.telefono_llamada || '+' + row.whatsapp,
-            instagram: row.instagram_usuario || '@emprendimiento',
-            tiktok: row.tiktok_usuario || '@emprendimiento',
-            email: row.correo_electronico || ''
-          }));
-        }
-        const { data: adsData } = await supabaseClient.from('espacios_publicitarios').select('*').eq('activo', true).order('id', { ascending: false }).limit(2);
-        if (adsData) adBanners = adsData;
-        const { data: valData } = await supabaseClient.from('valoraciones_rapidas').select('*').order('id', { ascending: false }).limit(8);
-        if (valData) recentRatings = valData;
-        const { data: vacData } = await supabaseClient.from('vacantes').select('*').eq('activa', true).order('id', { ascending: false });
-        if (vacData) vacantesList = vacData;
+    let businesses = [
+      {
+        id: 1,
+        name: "Oasis Denim Valle",
+        logoTitle: "Oasis",
+        logoSub: "Denim Valle",
+        category: "ropa",
+        ageType: "trayectoria",
+        badgeText: "🏛️ Negocio Verificado",
+        badgeStyle: "bg-slate-100 text-slate-700 border-slate-200",
+        mainRangeIcon: "👖",
+        mainRangeText: "Rango en Jeans y Ropa: $50.000 – $85.000 COP",
+        priceLevel: "mid",
+        shortBio: "La mejor moda denim en Valledupar para dama, niñas y niños. Horma perfecta y envíos rápidos.",
+        address: "Cra 15 #13B-24 · Doce de Octubre",
+        neighborhood: "Doce de Octubre",
+        phoneDisplay: "300 987 6543",
+        whatsapp: "573009876543",
+        instagram: "@oasis_denimvalle",
+        tiktok: "@oasisdenim.vup",
+        email: "ventas@oasisdenim.co",
+        schedule: "Abierto hoy · 9:00 AM - 8:00 PM",
+        coverImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=400&q=80",
+        rating: 4.9,
+        votes: 14,
+        views: 42,
+        waClicks: 18,
+        igClicks: 6,
+        tkClicks: 3,
+        mapClicks: 4,
+        totalClicks: 31
+      },
+      {
+        id: 2,
+        name: "Distriperfumes Royale",
+        logoTitle: "Royale",
+        logoSub: "Perfumería",
+        category: "perfumes",
+        ageType: "nuevo",
+        badgeText: "🌱 Nuevo Emprendimiento",
+        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        mainRangeIcon: "💎",
+        mainRangeText: "Rango en Perfumes: $45.000 – $190.000 COP",
+        priceLevel: "mid",
+        shortBio: "Perfumería árabe importada, lociones de alta fijación y presentaciones personales para regalo.",
+        address: "Calle 9A #19-40 · Barrio Novalito",
+        neighborhood: "Novalito",
+        phoneDisplay: "315 444 3322",
+        whatsapp: "573154443322",
+        instagram: "@distriperfumes_vup",
+        tiktok: "@perfumesroyale.vup",
+        email: "contacto@distriperfumes.co",
+        schedule: "Abierto hoy · 9:30 AM - 7:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=400&q=80",
+        rating: 5.0,
+        votes: 7,
+        views: 19,
+        waClicks: 3,
+        igClicks: 1,
+        tkClicks: 0,
+        mapClicks: 0,
+        totalClicks: 4
+      },
+      {
+        id: 3,
+        name: "TecniAires FríoValle",
+        logoTitle: "FríoValle",
+        logoSub: "Técnicos A/C",
+        category: "aires",
+        ageType: "trayectoria",
+        badgeText: "🏛️ Servicio Verificado",
+        badgeStyle: "bg-slate-100 text-slate-700 border-slate-200",
+        mainRangeIcon: "❄️",
+        mainRangeText: "Rango Mantenimiento: $60.000 – $110.000 COP",
+        priceLevel: "mid",
+        shortBio: "Mantenimiento preventivo a presión, recarga de gas y arreglo de aires acondicionados a domicilio.",
+        address: "Calle 14 #18-20 · La Nevada (y a Domicilio)",
+        neighborhood: "La Nevada",
+        phoneDisplay: "300 123 4567",
+        whatsapp: "573001234567",
+        instagram: "@friovalle_aires",
+        tiktok: "@tecniaires.valle",
+        email: "soporte@friovalle.co",
+        schedule: "Disponible hoy · 7:30 AM - 6:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=400&q=80",
+        rating: 4.9,
+        votes: 11,
+        views: 34,
+        waClicks: 12,
+        igClicks: 3,
+        tkClicks: 1,
+        mapClicks: 2,
+        totalClicks: 18
+      },
+      {
+        id: 4,
+        name: "Studio Glow Uñas & Spa",
+        logoTitle: "Glow",
+        logoSub: "Nails & Beauty",
+        category: "belleza",
+        ageType: "nuevo",
+        badgeText: "🌱 Nuevo Emprendimiento",
+        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        mainRangeIcon: "💅",
+        mainRangeText: "Rango en Uñas y Cejas: $25.000 – $65.000 COP",
+        priceLevel: "low",
+        shortBio: "Uñas acrílicas, polygel, semipermanente y diseño de cejas. Atendemos en punto físico y a domicilio.",
+        address: "Cra 19 #16-12 · Barrio San Joaquín",
+        neighborhood: "San Joaquín",
+        phoneDisplay: "310 555 6677",
+        whatsapp: "573105556677",
+        instagram: "@glownails_valledupar",
+        tiktok: "@glownails.vup",
+        email: "citas@studioglow.co",
+        schedule: "Abierto hoy · 8:00 AM - 7:00 PM",
+        coverImage: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=400&q=80",
+        rating: 5.0,
+        votes: 5,
+        views: 11,
+        waClicks: 2,
+        igClicks: 0,
+        tkClicks: 0,
+        mapClicks: 0,
+        totalClicks: 2
+      },
+      {
+        id: 5,
+        name: "Luxury Arepas & Antojos",
+        logoTitle: "Luxury",
+        logoSub: "Arepas al Carbón",
+        category: "comida",
+        ageType: "nuevo",
+        badgeText: "🌱 Nuevo Emprendimiento",
+        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        mainRangeIcon: "🍔",
+        mainRangeText: "Rango Arepas Rellenas: $10.000 – $24.000 COP",
+        priceLevel: "low",
+        shortBio: "Nos llamamos Luxury pero vendemos las arepas rellenas asadas al carbón y empanadas más ricas del sector.",
+        address: "Av. Simón Bolívar Calle 21 · Los Cortijos",
+        neighborhood: "Los Cortijos",
+        phoneDisplay: "320 888 9900",
+        whatsapp: "573208889900",
+        instagram: "@luxuryarepas_valle",
+        tiktok: "@luxuryarepas.vup",
+        email: "pedidos@luxuryarepas.co",
+        schedule: "Abierto hoy · 4:30 PM - 11:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80",
+        rating: 5.0,
+        votes: 6,
+        views: 14,
+        waClicks: 2,
+        igClicks: 1,
+        tkClicks: 0,
+        mapClicks: 0,
+        totalClicks: 3
+      }
+    ];
 
-        await supabaseClient.from('registro_clics').insert([{ nombre_negocio: 'PORTAL PÍLLALO VALLEDUPAR', canal: 'Visita Pagina' }]);
-        document.getElementById('dbStatusBadge').innerHTML = '🟢 En Vivo: Supabase Conectado (' + businesses.length + ' negocios)';
-        refreshAllViews();
-      } catch (e) { console.warn(e); }
-    }
+    let bannersList = [
+      {
+        badge: "🌱 EMPRENDIMIENTO IMPULSADO HOY",
+        title: "🍔 Luxury Arepas & Antojos: ¡Arepas al carbón desde $10.000!",
+        desc: "Nuevo emprendimiento en Los Cortijos. ¡Apóyalos pidiendo directo a su WhatsApp!",
+        bizName: "Luxury Arepas & Antojos",
+        whatsapp: "573208889900"
+      },
+      {
+        badge: "🌱 EMPRENDIMIENTO IMPULSADO HOY",
+        title: "💅 Studio Glow Uñas & Spa en San Joaquín",
+        desc: "Uñas acrílicas, polygel y cejas desde $25.000 COP. Agenda tu cita por WhatsApp.",
+        bizName: "Studio Glow Uñas & Spa",
+        whatsapp: "573105556677"
+      }
+    ];
 
-    function sortSolidarity(list) {
-      return [...list].sort((a, b) => {
-        if (a.stage === 'nuevo' && b.stage !== 'nuevo') return -1;
-        if (a.stage !== 'nuevo' && b.stage === 'nuevo') return 1;
-        return a.clicksReceived - b.clicksReceived;
-      });
-    }
+    let currentCategory = 'all';
+    let currentAgeFilter = 'all';
 
-    function renderAdBanners() {
-      const container = document.getElementById('adSpotlightContainer');
+    function renderSpotlightBanners() {
+      const container = document.getElementById('adSpotlightBanner');
       if (!container) return;
-      container.innerHTML = adBanners.map(ad => `
-        <div class="ad-spotlight-card">
-          <div>
-            <span class="ad-spotlight-badge">${ad.etiqueta_badge || '🌟 DESTACADO'}</span>
-            <div class="ad-spotlight-title">${ad.titulo_campana}</div>
-            <div class="ad-spotlight-desc">${ad.descripcion_corta || ''}</div>
+      container.innerHTML = bannersList.slice(0, 2).map(b => `
+        <div class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-3xl p-4 sm:p-5 shadow-md border border-emerald-500/30 flex items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">${b.badge}</span>
+            <h3 class="text-sm sm:text-base font-black text-white leading-snug pt-0.5">${b.title}</h3>
+            <p class="text-xs text-emerald-100/90">${b.desc}</p>
           </div>
-          <a class="ad-spotlight-cta" href="https://wa.me/${ad.whatsapp_destino}?text=Hola%20${encodeURIComponent(ad.anunciante)},%20vi%20tu%20anuncio%20en%20P%C3%ADllalo%20Valledupar" target="_blank">
-            🟢 ${ad.texto_boton || 'WhatsApp'}
+          <a href="https://wa.me/${b.whatsapp}?text=Hola%20${encodeURIComponent(b.bizName)},%20vi%20su%20destacado%20en%20Píllalo%20Valledupar"
+             target="_blank"
+             class="px-4 py-2.5 wa-widget-green text-white rounded-2xl text-xs font-extrabold whitespace-nowrap flex items-center gap-1.5">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span>Escribir</span>
           </a>
         </div>
       `).join('');
     }
 
-    function renderVacantes() {
-      const grid = document.getElementById('vacantesGrid');
-      if (!grid) return;
-      grid.innerHTML = vacantesList.map(v => {
-        const tags = (v.requisitos_etiquetas || '').split(',').filter(Boolean);
-        return `
-          <div class="job-card">
-            <div class="job-company">🏢 ${v.empresa_nombre}</div>
-            <div class="job-role">${v.cargo_titulo}</div>
-            <div class="job-tags">
-              <span class="job-tag">📍 ${v.barrio_ubicacion}</span>
-              <span class="job-tag">⏰ ${v.modalidad_horario}</span>
-              <span class="job-tag" style="background:#DCFCE7; color:#166534;">💰 ${v.salario_ofrecido}</span>
-              ${tags.map(t => `<span class="job-tag">✔ ${t.trim()}</span>`).join('')}
-            </div>
-            <a class="w-btn w-btn-wa" style="margin-top:8px; align-items:center;" href="https://wa.me/${v.whatsapp_postulacion}" target="_blank">
-              🟢 Postularme por WhatsApp Directo
-            </a>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function toggleFavorite(bizId, event) {
-      if (event) event.stopPropagation();
-      const idx = favoriteIds.indexOf(bizId);
-      if (idx >= 0) favoriteIds.splice(idx, 1); else favoriteIds.push(bizId);
-      localStorage.setItem('pillalo_favs', JSON.stringify(favoriteIds));
-      document.getElementById('favCountLabel').textContent = `${favoriteIds.length} guardados`;
-      applyFilters();
-    }
-
-    function shareBusinessWhatsApp(bizId, event) {
-      if (event) event.stopPropagation();
-      const b = businesses.find(x => x.id === bizId);
-      if (!b) return;
-      const text = `¡Mira este negocio en *Píllalo Valledupar*! 📍\n\n*${b.name}* (${b.categoryLabel})\n${b.mainPriceRange}\n📍 ${b.address} (${b.barrio})\n🟢 WhatsApp: https://wa.me/${b.whatsapp}`;
-      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-    }
-
-    function createCardHTML(b) {
-      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.address + ', Valledupar, Cesar')}`;
-      const waUrl = `https://wa.me/${b.whatsapp}?text=${encodeURIComponent('¡Hola ' + b.name + '! Los vi en Píllalo Valledupar.')}`;
-      const igHandle = (b.instagram || '').replace('@', '');
-      const tkHandle = (b.tiktok || '').replace('@', '');
-      const isFav = favoriteIds.includes(b.id);
-
+    function createBusinessCardHTML(biz) {
       return `
-        <article class="bento-card">
-          <div class="card-cover" style="background-image: url('${b.cover}');">
-            <div class="cover-badges">
-              ${b.stage === 'nuevo' ? `<span class="badge-new">🌱 Nuevo Emprendimiento • Impulso</span>` : `<span class="badge-established">🏛️ Con Trayectoria</span>`}
-              <div class="cover-right-actions">
-                <span class="badge-rating" onclick="openRatingToastFor(${b.id}, 'Calificación Directa')">
-                  ⭐ ${b.rating.toFixed(1)} <small style="opacity:0.65;">(${b.votes})</small>
-                </span>
-                <button class="btn-fav-heart" onclick="toggleFavorite(${b.id}, event)">${isFav ? '❤️' : '🤍'}</button>
+        <article class="bento-white-card rounded-[28px] p-4 sm:p-5 flex flex-col justify-between">
+          <div>
+            <div onclick="openCompanyProfile(${biz.id})" class="h-40 sm:h-44 w-full rounded-2xl overflow-hidden relative cursor-pointer group">
+              <img src="${biz.coverImage}" alt="${biz.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/15"></div>
+              <span onclick="event.stopPropagation(); triggerRatingToast(${biz.id}, 'Calificación Directa')" title="Toca para calificar de 1 a 5 estrellas" class="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-slate-900 text-[11px] font-extrabold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+                <span class="text-amber-500">⭐</span> ${biz.rating.toFixed(1)} <span class="text-slate-400">(${biz.votes})</span>
+              </span>
+              <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-xs text-slate-900 text-[11px] font-extrabold px-3 py-1 rounded-full shadow-sm">
+                Clic para abrir Perfil Completo →
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3.5 px-1 pt-2 pb-4 relative">
+              <div onclick="openCompanyProfile(${biz.id})" class="-mt-11 w-20 h-20 rounded-full bg-white shadow-lg border-4 border-white flex flex-col items-center justify-center flex-shrink-0 cursor-pointer hover:scale-105 transition z-10">
+                <span class="text-sm font-black text-slate-900 leading-none text-center px-1">${biz.logoTitle}</span>
+                <span class="text-[9px] font-bold text-slate-500 mt-0.5 text-center px-1">${biz.logoSub}</span>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center justify-between gap-1">
+                  <h3 onclick="openCompanyProfile(${biz.id})" class="text-lg sm:text-xl font-black text-slate-900 hover:text-emerald-600 cursor-pointer truncate">
+                    ${biz.name}
+                  </h3>
+                  <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${biz.badgeStyle}">
+                    ${biz.badgeText}
+                  </span>
+                </div>
+                <p class="text-xs sm:text-sm font-extrabold text-slate-800 mt-1 flex items-center gap-1.5">
+                  <span>${biz.mainRangeIcon}</span>
+                  <span>${biz.mainRangeText}</span>
+                </p>
               </div>
             </div>
-            <div class="floating-logo"><img src="${b.logo}" alt="${b.name}" /></div>
-            <div class="status-pill"><span class="status-dot"></span> ${b.hours}</div>
-          </div>
-          <div class="card-body">
-            <div>
-              <div class="biz-title-row">
-                <h3 class="biz-name">${b.name} <span class="verified-check">✔</span></h3>
-                <span class="biz-cat-tag">${b.categoryLabel}</span>
-              </div>
-              <p class="biz-tagline">${b.tagline}</p>
-            </div>
-            <div class="price-range-widget">
-              <div>
-                <div class="price-range-label">Rango Producto / Servicio Principal</div>
-                <div class="price-range-value">${b.mainPriceRange}</div>
-              </div>
-            </div>
-            <a class="maps-widget" href="${mapsUrl}" target="_blank" onclick="handleChannelClick(${b.id}, 'Maps')">
-              <div class="maps-icon-box">📍</div>
-              <div class="maps-info">
-                <div class="maps-neighborhood">Barrio ${b.barrio} • Valledupar</div>
-                <div class="maps-address">${b.address}</div>
-              </div>
-              <span class="maps-go">Ver Mapa ↗</span>
-            </a>
-            <div class="widgets-grid">
-              <a class="w-btn w-btn-wa" href="${waUrl}" target="_blank" onclick="handleChannelClick(${b.id}, 'WhatsApp')">
-                <span>🟢 WhatsApp</span><span class="w-btn-sub">Escribir Ahora</span>
+
+            <div class="grid grid-cols-12 gap-2.5 items-stretch">
+              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(biz.address + ' Valledupar')}" 
+                 target="_blank"
+                 onclick="recordClick(${biz.id}, 'Maps')"
+                 class="col-span-12 sm:col-span-5 rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between bg-slate-50 hover:border-slate-400 transition group">
+                <div class="h-32 gmaps-pattern relative flex items-center justify-center overflow-hidden">
+                  <img src="${biz.storeThumb}" class="w-4/5 h-4/5 object-cover rounded-xl shadow-md border-2 border-white opacity-90 group-hover:scale-105 transition">
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-9 h-9 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg border-2 border-white -mt-3 animate-bounce">
+                      <i class="fa-solid fa-location-dot text-base"></i>
+                    </div>
+                  </div>
+                  <span class="absolute bottom-1.5 left-2 bg-white/95 px-1.5 py-0.5 rounded text-[10px] font-black text-slate-700 shadow-2xs">
+                    <span class="text-blue-600">G</span><span class="text-red-500">o</span><span class="text-amber-500">o</span><span class="text-blue-600">g</span><span class="text-emerald-600">l</span><span class="text-red-500">e</span> Maps
+                  </span>
+                </div>
+                <div class="p-2.5 bg-white text-center border-t border-slate-100">
+                  <p class="text-[11px] font-extrabold text-slate-900 truncate">${biz.address}</p>
+                </div>
               </a>
-              <a class="w-btn w-btn-ig" href="https://instagram.com/${igHandle}" target="_blank" onclick="handleChannelClick(${b.id}, 'Instagram')">
-                <span>📸 Instagram</span><span class="w-btn-sub">${b.instagram}</span>
+
+              <a href="https://wa.me/${biz.whatsapp}?text=Hola%20${encodeURIComponent(biz.name)},%20los%20encontré%20en%20Píllalo%20Valledupar" 
+                 target="_blank"
+                 onclick="recordClick(${biz.id}, 'WhatsApp')"
+                 class="col-span-6 sm:col-span-4 wa-widget-green rounded-2xl p-3 text-white flex flex-col items-center justify-between text-center min-h-[155px]">
+                <span class="text-[10px] font-extrabold uppercase tracking-wider bg-black/15 px-2 py-0.5 rounded-full">Chat Directo</span>
+                <i class="fa-brands fa-whatsapp text-5xl my-auto drop-shadow-xs"></i>
+                <div>
+                  <p class="text-xs font-black tracking-tight">${biz.phoneDisplay}</p>
+                  <p class="text-[10px] font-bold text-emerald-100">Toca para escribir</p>
+                </div>
               </a>
-              <a class="w-btn w-btn-tk" href="https://tiktok.com/@${tkHandle}" target="_blank" onclick="handleChannelClick(${b.id}, 'TikTok')">
-                <span>🎵 TikTok</span><span class="w-btn-sub">${b.tiktok}</span>
-              </a>
+
+              <div class="col-span-6 sm:col-span-3 flex flex-col gap-2.5">
+                <a href="https://instagram.com/${(biz.instagram || '').replace('@','')}" target="_blank"
+                   onclick="recordClick(${biz.id}, 'Instagram')"
+                   class="flex-1 ig-widget-gradient rounded-2xl p-2.5 text-white flex flex-col items-center justify-center text-center min-h-[72px]">
+                  <i class="fa-brands fa-instagram text-3xl"></i>
+                  <span class="text-[10px] font-extrabold mt-1 truncate w-full px-1">${biz.instagram}</span>
+                </a>
+
+                <a href="https://tiktok.com/@${(biz.tiktok || '').replace('@','')}" target="_blank"
+                   onclick="recordClick(${biz.id}, 'TikTok')"
+                   class="flex-1 tiktok-widget-black rounded-2xl p-2.5 text-white flex flex-col items-center justify-center text-center min-h-[72px]">
+                  <i class="fa-brands fa-tiktok text-2xl tiktok-neon-icon"></i>
+                  <span class="text-[10px] font-extrabold mt-1 truncate w-full px-1 text-slate-200">${biz.tiktok}</span>
+                </a>
+              </div>
             </div>
-            <div class="card-footer-actions">
-              <span>📞 ${b.phone} • 👆 <b>${b.clicksReceived}</b> clics</span>
-              <div class="footer-btns-wrap">
-                <button class="btn-rate-card" onclick="openRatingToastFor(${b.id}, 'Botón Calificar')">⭐ Calificar</button>
-                <button class="btn-open-profile" onclick="shareBusinessWhatsApp(${b.id}, event)">📲</button>
-                <button class="btn-open-profile" onclick="openProfileModal(${b.id})">Ver Ficha +</button>
+
+            <div class="mt-3 pt-2.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div class="flex items-center gap-1.5 font-bold text-slate-700">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>${biz.schedule}</span>
+              </div>
+
+              <div class="flex items-center gap-1.5">
+                <button onclick="triggerRatingToast(${biz.id}, 'Botón Estrellas')" class="px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 font-extrabold flex items-center gap-1 transition cursor-pointer">
+                  <span>⭐ Calificar</span>
+                </button>
+                <a href="tel:+${biz.whatsapp}" onclick="recordClick(${biz.id}, 'Llamada')" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold flex items-center gap-1 transition">
+                  <i class="fa-solid fa-phone text-emerald-600 text-[11px]"></i>
+                  <span>Llamar</span>
+                </a>
+                <a href="mailto:${biz.email}" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold flex items-center gap-1 transition">
+                  <i class="fa-regular fa-envelope text-blue-600 text-[11px]"></i>
+                  <span>Correo</span>
+                </a>
+                <button onclick="openCompanyProfile(${biz.id})" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold transition cursor-pointer">
+                  Ver Perfil →
+                </button>
               </div>
             </div>
           </div>
@@ -1267,278 +907,540 @@
       `;
     }
 
-    function applyFilters() {
-      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-      const budget = document.getElementById('budgetFilter').value;
-      const barrio = document.getElementById('barrioFilter').value;
-      const stage = document.getElementById('stageFilter').value;
+    function renderBusinesses(items) {
+      const container = document.getElementById('businessList');
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full bento-white-card rounded-3xl p-10 text-center space-y-3">
+            <span class="text-4xl">🔍</span>
+            <h3 class="text-lg font-black text-slate-900">No encontramos establecimientos con ese filtro</h3>
+            <p class="text-xs text-slate-500">Prueba cambiando el barrio, el presupuesto o presionando "Ver Todos".</p>
+            <button onclick="resetAllFilters()" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-extrabold cursor-pointer">Mostrar Todos</button>
+          </div>
+        `;
+        return;
+      }
+      container.innerHTML = items.map(createBusinessCardHTML).join('');
+    }
 
-      const filtered = sortSolidarity(businesses).filter(b => {
-        if (activeCategory === 'favoritos') { if (!favoriteIds.includes(b.id)) return false; }
-        else if (activeCategory !== 'todos' && b.category !== activeCategory) return false;
-        if (budget !== 'todos' && b.budget !== budget) return false;
-        if (barrio !== 'todos' && b.barrio !== barrio) return false;
-        if (stage !== 'todos' && b.stage !== stage) return false;
-        if (q) {
-          const hay = `${b.name} ${b.categoryLabel} ${b.tagline} ${b.mainPriceRange} ${b.barrio} ${b.description}`.toLowerCase();
-          if (!hay.includes(q)) return false;
-        }
-        return true;
+    function renderNuevosSection() {
+      const nuevosItems = businesses.filter(b => b.ageType === 'nuevo');
+      const container = document.getElementById('nuevosGrid');
+      if (container) container.innerHTML = nuevosItems.map(createBusinessCardHTML).join('');
+    }
+
+    function openCompanyProfile(id) {
+      const biz = businesses.find(b => b.id === id);
+      if (!biz) return;
+      biz.views = (biz.views || 0) + 1;
+
+      const html = `
+        <div class="flex items-center justify-between mb-3">
+          <button onclick="switchTab('tab-explore')" class="px-4 py-2 bg-white hover:bg-slate-100 border border-slate-200 rounded-2xl text-xs font-extrabold text-slate-800 shadow-2xs flex items-center gap-2 transition cursor-pointer">
+            <i class="fa-solid fa-arrow-left text-emerald-600"></i>
+            <span>Volver al Directorio</span>
+          </button>
+          <button onclick="triggerRatingToast(${biz.id}, 'Perfil Completo')" class="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-2xl text-xs font-black cursor-pointer">
+            ⭐ ${biz.rating.toFixed(1)} (${biz.votes} opiniones) · Calificar este negocio
+          </button>
+        </div>
+
+        <div class="relative rounded-[32px] overflow-hidden shadow-xl border-4 border-white min-h-[300px] sm:min-h-[340px] flex flex-col items-center justify-center text-center p-6">
+          <img src="${biz.coverImage}" alt="${biz.name}" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/65 to-slate-950/85"></div>
+
+          <div class="relative z-10 flex flex-col items-center max-w-2xl mx-auto space-y-3">
+            <div class="relative flex items-center justify-center">
+              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white shadow-2xl border-4 border-white flex flex-col items-center justify-center">
+                <span class="text-lg font-black text-slate-900 leading-none">${biz.logoTitle}</span>
+                <span class="text-[10px] font-bold text-slate-500 mt-1">${biz.logoSub}</span>
+              </div>
+              <span class="hidden sm:inline-flex items-center gap-1.5 ml-4 px-4 py-1.5 rounded-full bg-emerald-600 text-white text-xs font-extrabold shadow-lg">
+                ${biz.badgeText}
+              </span>
+            </div>
+
+            <div class="flex items-center justify-center gap-2 pt-1">
+              <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">${biz.name}</h1>
+              <span class="w-7 h-7 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs shadow-md">
+                <i class="fa-solid fa-check"></i>
+              </span>
+            </div>
+
+            <p class="text-sm sm:text-base text-slate-100 font-medium max-w-xl">${biz.shortBio}</p>
+
+            <div class="pt-1">
+              <span class="inline-flex items-center gap-2 bg-white text-slate-900 px-5 py-2.5 rounded-full text-xs sm:text-sm font-black shadow-lg">
+                <span class="text-lg">${biz.mainRangeIcon}</span>
+                <span>${biz.mainRangeText}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 pt-2 items-stretch">
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(biz.address + ' Valledupar')}" 
+             target="_blank"
+             onclick="recordClick(${biz.id}, 'Maps')"
+             class="md:col-span-5 bento-white-card rounded-[28px] p-3.5 flex flex-col justify-between group cursor-pointer">
+            <div class="h-52 sm:h-60 rounded-2xl gmaps-pattern relative overflow-hidden flex items-center justify-center border border-slate-200">
+              <span class="absolute top-5 left-6 bg-white/85 px-2 py-0.5 rounded text-[10px] font-bold text-slate-600 rotate-[-12deg]">Valledupar</span>
+              <span class="absolute bottom-8 right-6 bg-white/85 px-2 py-0.5 rounded text-[10px] font-bold text-slate-600">${biz.neighborhood}</span>
+
+              <div class="relative z-10 flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl border-3 border-white group-hover:scale-110 transition">
+                  <i class="fa-solid fa-location-dot text-2xl"></i>
+                </div>
+                <span class="mt-1 bg-white px-3 py-1 rounded-full text-xs font-black text-slate-900 shadow-md border border-slate-200">${biz.name}</span>
+              </div>
+
+              <div class="absolute bottom-2.5 left-3 bg-white/95 px-2 py-0.5 rounded-md shadow-xs text-xs font-black">
+                <span class="text-blue-600">G</span><span class="text-red-500">o</span><span class="text-amber-500">o</span><span class="text-blue-600">g</span><span class="text-emerald-600">l</span><span class="text-red-500">e</span>
+              </div>
+            </div>
+
+            <div class="pt-3 px-2 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-extrabold text-slate-400 uppercase">Google Maps · Ubicación</p>
+                <p class="text-sm sm:text-base font-black text-slate-900 mt-0.5">${biz.address}</p>
+              </div>
+              <span class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-diamond-turn-right text-lg"></i>
+              </span>
+            </div>
+          </a>
+
+          <a href="https://wa.me/${biz.whatsapp}?text=Hola%20${encodeURIComponent(biz.name)},%20vi%20su%20perfil%20en%20Píllalo%20Valledupar" 
+             target="_blank"
+             onclick="recordClick(${biz.id}, 'WhatsApp')"
+             class="md:col-span-3 wa-widget-green rounded-[28px] p-6 text-white flex flex-col items-center justify-between text-center min-h-[260px]">
+            <span class="bg-black/15 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider">WhatsApp Oficial</span>
+            <div class="my-auto py-4">
+              <i class="fa-brands fa-whatsapp text-7xl drop-shadow-md"></i>
+            </div>
+            <div>
+              <p class="text-base sm:text-lg font-black">+57 ${biz.phoneDisplay}</p>
+              <p class="text-xs font-bold text-emerald-100 mt-0.5">Toca aquí para Chatear</p>
+            </div>
+          </a>
+
+          <div class="md:col-span-4 flex flex-col justify-between gap-4">
+            <div class="grid grid-cols-2 gap-4 flex-1">
+              <a href="https://instagram.com/${(biz.instagram || '').replace('@','')}" target="_blank"
+                 onclick="recordClick(${biz.id}, 'Instagram')"
+                 class="ig-widget-gradient rounded-[26px] p-4 text-white flex flex-col items-center justify-center text-center min-h-[140px]">
+                <i class="fa-brands fa-instagram text-5xl mb-2"></i>
+                <span class="text-xs font-extrabold truncate w-full">${biz.instagram}</span>
+              </a>
+
+              <a href="https://tiktok.com/@${(biz.tiktok || '').replace('@','')}" target="_blank"
+                 onclick="recordClick(${biz.id}, 'TikTok')"
+                 class="tiktok-widget-black rounded-[26px] p-4 text-white flex flex-col items-center justify-center text-center min-h-[140px]">
+                <i class="fa-brands fa-tiktok text-4xl tiktok-neon-icon mb-2"></i>
+                <span class="text-xs font-extrabold truncate w-full text-slate-200">${biz.tiktok}</span>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-12 gap-3">
+              <div class="col-span-8 bento-white-card rounded-[24px] p-4 flex flex-col justify-center">
+                <div class="flex items-center gap-1.5 text-xs font-extrabold text-slate-800">
+                  <i class="fa-regular fa-calendar-check text-emerald-600"></i>
+                  <span>Horario de Atención</span>
+                </div>
+                <div class="flex items-center gap-2 mt-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                  <span class="text-xs font-extrabold text-slate-900">${biz.schedule}</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-1 truncate">✉️ ${biz.email}</p>
+              </div>
+
+              <div class="col-span-4 flex flex-col gap-2">
+                <a href="tel:+${biz.whatsapp}" onclick="recordClick(${biz.id}, 'Llamada')" class="flex-1 bento-white-card rounded-2xl p-2 flex flex-col items-center justify-center text-slate-900 hover:bg-slate-50 transition">
+                  <i class="fa-solid fa-phone text-lg text-emerald-600"></i>
+                  <span class="text-[11px] font-black mt-0.5">Llamar</span>
+                </a>
+                <a href="mailto:${biz.email}" class="flex-1 bento-white-card rounded-2xl p-2 flex flex-col items-center justify-center text-slate-900 hover:bg-slate-50 transition">
+                  <i class="fa-regular fa-envelope text-lg text-blue-600"></i>
+                  <span class="text-[11px] font-black mt-0.5">Correo</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('companyProfileContainer').innerHTML = html;
+      ['tab-explore', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-register', 'tab-analytics'].forEach(t => {
+        const el = document.getElementById(t);
+        if (el) el.classList.add('hidden');
+      });
+      document.getElementById('tab-company-profile').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterBusinesses() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const price = document.getElementById('priceFilter').value;
+      const neighborhood = document.getElementById('neighborhoodFilter').value;
+
+      const filtered = businesses.filter(item => {
+        const matchesCat = (currentCategory === 'all' || item.category === currentCategory);
+        const matchesPrice = (price === 'all' || item.priceLevel === price);
+        const matchesNeighborhood = (neighborhood === 'all' || item.neighborhood === neighborhood);
+        const matchesAge = (currentAgeFilter === 'all' || item.ageType === currentAgeFilter);
+        const matchesSearch = !search ||
+          item.name.toLowerCase().includes(search) ||
+          item.shortBio.toLowerCase().includes(search) ||
+          item.mainRangeText.toLowerCase().includes(search) ||
+          item.address.toLowerCase().includes(search);
+
+        return matchesCat && matchesPrice && matchesNeighborhood && matchesAge && matchesSearch;
       });
 
-      const grid = document.getElementById('directoryGrid');
-      grid.innerHTML = filtered.map(createCardHTML).join('');
+      renderBusinesses(filtered);
     }
 
-    function filterCategory(cat, btnEl) {
-      activeCategory = cat;
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    function setCategory(cat, btnEl) {
+      currentCategory = cat;
+      document.querySelectorAll('#categoryDock .cat-3d-btn').forEach(b => b.classList.remove('active'));
       if (btnEl) btnEl.classList.add('active');
-      applyFilters();
+      filterBusinesses();
     }
 
-    function renderNewBusinessesSection() {
-      const newOnes = sortSolidarity(businesses.filter(b => b.stage === 'nuevo'));
-      document.getElementById('newBusinessesGrid').innerHTML = newOnes.map(createCardHTML).join('');
+    function setAgeFilter(age) {
+      currentAgeFilter = (currentAgeFilter === age) ? 'all' : age;
+      const btnNew = document.getElementById('btn-age-new');
+      const btnEst = document.getElementById('btn-age-established');
+
+      btnNew.className = currentAgeFilter === 'nuevo'
+        ? "px-3.5 py-2 rounded-xl bg-emerald-600 text-white font-extrabold shadow-xs flex items-center gap-1.5 transition cursor-pointer"
+        : "px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer";
+
+      btnEst.className = currentAgeFilter === 'trayectoria'
+        ? "px-3.5 py-2 rounded-xl bg-slate-900 text-white font-extrabold shadow-xs flex items-center gap-1.5 transition cursor-pointer"
+        : "px-3.5 py-2 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer";
+
+      filterBusinesses();
     }
 
-    function renderAnalyticsDashboard() {
-      const totalClicks = businesses.reduce((acc, b) => acc + (b.clicksReceived || 0), 0);
-      const totalWa = businesses.reduce((acc, b) => acc + (b.clicsWhatsapp || 0), 0);
-      const totalVotes = businesses.reduce((acc, b) => acc + (b.votes || 0), 0);
-      const avgStars = businesses.length ? (businesses.reduce((acc, b) => acc + b.rating, 0) / businesses.length).toFixed(2) : '5.00';
-      const lowClickBiz = businesses.filter(b => (b.clicksReceived || 0) < 5);
-
-      document.getElementById('kpiTotalViews').textContent = pageViewsCount;
-      document.getElementById('kpiTotalClicks').textContent = totalClicks;
-      document.getElementById('kpiWhatsappBreakdown').textContent = `🟢 ${totalWa} clics directos a WhatsApp`;
-      document.getElementById('kpiTotalRatings').textContent = totalVotes;
-      document.getElementById('kpiAvgStars').textContent = `Promedio Global: ${avgStars} ★ de 5.0`;
-      document.getElementById('kpiLowClickCount').textContent = lowClickBiz.length;
-
-      const alertContainer = document.getElementById('lowClickAlertList');
-      alertContainer.innerHTML = lowClickBiz.map(b => `
-        <div style="background:#FFFFFF; border:1px solid #FCD34D; border-radius:14px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
-          <div>
-            <div style="font-weight:800; font-size:0.9rem;">${b.name}</div>
-            <div style="font-size:0.76rem; color:#B45309; font-weight:700;">⚠️ Solo lleva ${b.clicksReceived} clics • Barrio ${b.barrio}</div>
-          </div>
-          <button class="btn-mini-action" style="background:#059669; color:#fff;" onclick="boostBusinessToBanner(${b.id})">🚀 Destacar Hoy</button>
-        </div>
-      `).join('');
-
-      const tbody = document.getElementById('analyticsTableBody');
-      tbody.innerHTML = [...businesses].sort((a, b) => b.clicksReceived - a.clicksReceived).map(b => {
-        const reportMsg = `¡Hola *${b.name}*! 👋 Te escribimos de *Píllalo Valledupar* 📍.\n\nReporte de visibilidad:\n👀 *Vistas:* ${b.vistasPerfil}\n🟢 *Clics a WhatsApp:* ${b.clicsWhatsapp}\n👆 *Total interacciones:* ${b.clicksReceived}\n⭐ *Calificación:* ${b.rating.toFixed(1)} / 5.0 (${b.votes} opiniones)`;
-        const reportWaUrl = `https://wa.me/${b.whatsapp}?text=${encodeURIComponent(reportMsg)}`;
-        return `
-          <tr>
-            <td><div style="font-weight:800;">${b.name}</div><div style="font-size:0.74rem; color:#64748B;">${b.categoryLabel} • ${b.barrio}</div></td>
-            <td>${b.clicksReceived < 5 ? `<span class="low-click-badge">⚡ Impulsando (${b.clicksReceived})</span>` : `<span class="good-click-badge">🟢 Activo</span>`}</td>
-            <td><b>${b.vistasPerfil}</b></td>
-            <td style="color:#059669; font-weight:800;">${b.clicsWhatsapp}</td>
-            <td>${b.clicsInstagram}</td>
-            <td>${b.clicsTiktok}</td>
-            <td>${b.clicsMaps}</td>
-            <td><b>${b.clicksReceived}</b></td>
-            <td><b>⭐ ${b.rating.toFixed(1)}</b> (${b.votes})</td>
-            <td>
-              <a class="btn-mini-action" style="background:#DCFCE7; color:#166534;" href="${reportWaUrl}" target="_blank">📲 Enviar Reporte</a>
-              <button class="btn-mini-action" style="background:#FEF3C7; color:#92400E;" onclick="boostBusinessToBanner(${b.id})">📢 Banner</button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      const ratingsContainer = document.getElementById('recentRatingsList');
-      ratingsContainer.innerHTML = recentRatings.map(r => `
-        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:14px; padding:12px 14px;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-weight:800; font-size:0.88rem;">${r.nombre_negocio}</span>
-            <span style="background:#FEF3C7; color:#92400E; font-weight:900; font-size:0.76rem; padding:2px 8px; border-radius:999px;">${'⭐'.repeat(r.estrellas || 5)}</span>
-          </div>
-          <div style="font-size:0.78rem; color:var(--emerald); font-weight:700;">💬 "${r.etiqueta_opinion || 'Excelente atención'}"</div>
-        </div>
-      `).join('');
+    function resetAllFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('priceFilter').value = 'all';
+      document.getElementById('neighborhoodFilter').value = 'all';
+      currentCategory = 'all';
+      currentAgeFilter = 'all';
+      document.querySelectorAll('#categoryDock .cat-3d-btn').forEach((b, idx) => {
+        if (idx === 0) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+      setAgeFilter('all');
     }
 
-    async function boostBusinessToBanner(bizId) {
-      const b = businesses.find(x => x.id === bizId);
-      if (!b) return;
-      const newAd = {
-        etiqueta_badge: "🌱 EMPRENDIMIENTO IMPULSADO HOY",
-        titulo_campana: `🚀 ¡Apoya a ${b.name} en ${b.barrio}!`,
-        anunciante: b.name,
-        descripcion_corta: `${b.tagline}. ${b.mainPriceRange}.`,
-        texto_boton: "Escribir por WhatsApp",
-        whatsapp_destino: b.whatsapp,
-        clics_anuncio: 1
+    function switchTab(tabId) {
+      if (tabId === 'tab-analytics' && !isOwnerUnlocked) {
+        openOwnerPinModal();
+        return;
+      }
+      ['tab-explore', 'tab-company-profile', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-register', 'tab-analytics'].forEach(t => {
+        const el = document.getElementById(t);
+        if (el) el.classList.add('hidden');
+      });
+      document.getElementById(tabId).classList.remove('hidden');
+
+      const navMap = {
+        'tab-explore': 'nav-explore',
+        'tab-nuevos': 'nav-nuevos',
+        'tab-jobs': 'nav-jobs',
+        'tab-certificate': 'nav-certificate',
+        'tab-analytics': 'nav-analytics'
       };
-      adBanners.unshift(newAd);
-      adBanners = adBanners.slice(0, 2);
-      renderAdBanners();
-      if (supabaseClient) await supabaseClient.from('espacios_publicitarios').insert([newAd]);
-      switchTab('directorio');
+      Object.entries(navMap).forEach(([key, id]) => {
+        const b = document.getElementById(id);
+        if (!b) return;
+        if (key === 'tab-analytics') {
+          b.className = (isOwnerUnlocked ? "" : "hidden ") + "px-3.5 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer";
+        } else {
+          b.className = "px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer";
+        }
+      });
+      const activeBtn = document.getElementById(navMap[tabId]);
+      if (activeBtn) {
+        activeBtn.className = "px-3.5 py-2 rounded-xl bg-slate-900 text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer";
+      }
+      if (tabId === 'tab-analytics') renderOwnerAnalytics();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    async function handleChannelClick(bizId, channelName) {
-      const b = businesses.find(x => x.id === bizId);
-      if (!b) return;
-      b.clicksReceived = (b.clicksReceived || 0) + 1;
-      if (channelName === 'WhatsApp') b.clicsWhatsapp = (b.clicsWhatsapp || 0) + 1;
-      if (channelName === 'Instagram') b.clicsInstagram = (b.clicsInstagram || 0) + 1;
-      if (channelName === 'TikTok') b.clicsTiktok = (b.clicsTiktok || 0) + 1;
-      if (channelName === 'Maps') b.clicsMaps = (b.clicsMaps || 0) + 1;
-      openRatingToastFor(bizId, channelName);
-      refreshAllViews();
+    function updateCertPreview() {
+      const name = document.getElementById('certBrandName').value || 'Tu Empresa';
+      const cat = document.getElementById('certCategory').value || 'Rango';
+      const loc = document.getElementById('certLocation').value || 'Valledupar';
+      const ig = document.getElementById('certIg').value || '@tu_negocio';
+
+      document.getElementById('cardTitle').innerText = name;
+      document.getElementById('cardDesc').innerText = cat;
+      document.getElementById('cardLoc').innerText = '📍 ' + loc;
+      document.getElementById('cardInsta').innerText = '📸 ' + ig;
+      document.getElementById('cardInitial').innerText = name.substring(0, 2).toUpperCase();
+    }
+
+    async function recordClick(bizId, channel) {
+      const biz = businesses.find(b => b.id === bizId);
+      if (!biz) return;
+      biz.totalClicks = (biz.totalClicks || 0) + 1;
+      if (channel === 'WhatsApp') biz.waClicks = (biz.waClicks || 0) + 1;
+      if (channel === 'Instagram') biz.igClicks = (biz.igClicks || 0) + 1;
+      if (channel === 'TikTok') biz.tkClicks = (biz.tkClicks || 0) + 1;
+      if (channel === 'Maps') biz.mapClicks = (biz.mapClicks || 0) + 1;
+      triggerRatingToast(bizId, channel);
       if (supabaseClient) {
-        await supabaseClient.from('registro_clics').insert([{ emprendimiento_id: b.id, nombre_negocio: b.name, canal: channelName }]);
-        await supabaseClient.from('emprendimientos').update({
-          total_clics_recibidos: b.clicksReceived,
-          clics_whatsapp: b.clicsWhatsapp,
-          clics_instagram: b.clicsInstagram,
-          clics_tiktok: b.clicsTiktok,
-          clics_maps: b.clicsMaps
-        }).eq('id', b.id);
+        try {
+          await supabaseClient.from('registro_clics').insert([{ emprendimiento_id: biz.id, nombre_negocio: biz.name, canal: channel }]);
+        } catch (e) {}
       }
     }
 
-    function openRatingToastFor(bizId, channelName) {
-      const b = businesses.find(x => x.id === bizId);
-      if (!b) return;
-      lastContactedBizId = bizId;
-      document.getElementById('ratingBizName').textContent = `¿Qué tal te pareció ${b.name}?`;
-      document.getElementById('ratingChannelText').textContent = `Canal: ${channelName} • Califica de 1 a 5 estrellas:`;
-      document.getElementById('ratingToast').classList.add('show');
+    function triggerRatingToast(bizId, channel) {
+      const biz = businesses.find(b => b.id === bizId);
+      if (!biz) return;
+      lastContactedId = bizId;
+      document.getElementById('ratingBizTitle').innerText = `¿Qué tal te pareció ${biz.name}?`;
+      document.getElementById('ratingBizSub').innerText = `Canal: ${channel} · Califica de 1 a 5 estrellas:`;
+      document.getElementById('ratingToast').classList.remove('hidden');
     }
 
-    function selectRatingTag(tagText, btnEl) {
-      selectedOpinionTag = tagText;
-      document.querySelectorAll('#quickTagsRow .quick-tag-chip').forEach(btn => btn.classList.remove('active'));
-      if (btnEl) btnEl.classList.add('active');
-    }
+    function closeRatingToast() { document.getElementById('ratingToast').classList.add('hidden'); }
 
-    function closeRatingToast() { document.getElementById('ratingToast').classList.remove('show'); }
-
-    async function submitQuickRating(stars) {
-      const b = businesses.find(x => x.id === lastContactedBizId);
-      if (b) {
-        const totalPoints = b.rating * b.votes + stars;
-        b.votes += 1;
-        b.rating = totalPoints / b.votes;
-        const newRatingObj = { emprendimiento_id: b.id, nombre_negocio: b.name, canal_tocado: 'Valoración Cliente', estrellas: stars, etiqueta_opinion: selectedOpinionTag };
-        recentRatings.unshift(newRatingObj);
-        refreshAllViews();
+    async function submitStarRating(stars) {
+      const biz = businesses.find(b => b.id === lastContactedId);
+      if (biz) {
+        const sum = biz.rating * biz.votes + stars;
+        biz.votes += 1;
+        biz.rating = sum / biz.votes;
+        filterBusinesses();
+        renderNuevosSection();
         if (supabaseClient) {
-          await supabaseClient.from('valoraciones_rapidas').insert([newRatingObj]);
-          await supabaseClient.from('emprendimientos').update({ calificacion_promedio: b.rating.toFixed(2), total_valoraciones: b.votes }).eq('id', b.id);
+          try {
+            await supabaseClient.from('valoraciones_rapidas').insert([{ emprendimiento_id: biz.id, nombre_negocio: biz.name, canal_tocado: 'Calificación Directa', estrellas: stars }]);
+          } catch (e) {}
         }
       }
       closeRatingToast();
-    }
-
-    async function openProfileModal(bizId) {
-      const b = businesses.find(x => x.id === bizId);
-      if (!b) return;
-      b.vistasPerfil = (b.vistasPerfil || 0) + 1;
-      refreshAllViews();
-      if (supabaseClient) supabaseClient.from('emprendimientos').update({ vistas_perfil: b.vistasPerfil }).eq('id', b.id);
-      const waUrl = `https://wa.me/${b.whatsapp}`;
-      document.getElementById('profileModalContent').innerHTML = `
-        <button class="modal-close" onclick="closeProfileModal()">✕</button>
-        <h2 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:900;">${b.name} ✔</h2>
-        <p style="color:#475569; margin:10px 0;">${b.description}</p>
-        <div class="price-range-widget" style="margin-bottom:12px;"><div class="price-range-value">${b.mainPriceRange}</div></div>
-        <a class="w-btn w-btn-wa" style="padding:14px; align-items:center;" href="${waUrl}" target="_blank">🟢 Contactar por WhatsApp (${b.phone})</a>
-      `;
-      document.getElementById('profileModal').classList.add('open');
-    }
-    function closeProfileModal() { document.getElementById('profileModal').classList.remove('open'); }
-    function openRegisterModal() { document.getElementById('registerModal').classList.add('open'); }
-    function closeRegisterModal() { document.getElementById('registerModal').classList.remove('open'); }
-    function openAdModal() { document.getElementById('adModal').classList.add('open'); }
-    function closeAdModal() { document.getElementById('adModal').classList.remove('open'); }
-
-    async function submitNewAdBanner(e) {
-      e.preventDefault();
-      const newAd = {
-        etiqueta_badge: document.getElementById('adTipo').value,
-        titulo_campana: document.getElementById('adTitulo').value,
-        anunciante: document.getElementById('adAnunciante').value,
-        descripcion_corta: document.getElementById('adDesc').value,
-        texto_boton: document.getElementById('adBoton').value,
-        whatsapp_destino: document.getElementById('adWhatsapp').value.replace(/\D/g, ''),
-        clics_anuncio: 1
-      };
-      adBanners.unshift(newAd);
-      adBanners = adBanners.slice(0, 2);
-      renderAdBanners();
-      if (supabaseClient) await supabaseClient.from('espacios_publicitarios').insert([newAd]);
-      closeAdModal();
-      switchTab('directorio');
+      alert(`⭐ ¡Gracias! Tu calificación de ${stars} estrellas fue guardada.`);
     }
 
     async function submitNewBusiness(e) {
       e.preventDefault();
-      const name = document.getElementById('regName').value;
-      const category = document.getElementById('regCat').value;
-      const stage = document.getElementById('regStage').value;
-      const barrio = document.getElementById('regBarrio').value;
-      const mainPriceRange = document.getElementById('regPriceRange').value;
-      const address = document.getElementById('regAddress').value;
-      const hours = document.getElementById('regHours').value;
-      const whatsappRaw = document.getElementById('regWhatsapp').value.replace(/\D/g, '');
-      const whatsapp = whatsappRaw.startsWith('57') ? whatsappRaw : '57' + whatsappRaw;
-      const instagram = document.getElementById('regIg').value || '@emprendimiento_vup';
-      const tiktok = document.getElementById('regTk').value || '@emprendimiento_vup';
-      const email = document.getElementById('regEmail').value || '';
+      const name = document.getElementById('regName').value.trim();
+      const category = document.getElementById('regCategory').value;
+      const mainRangeText = document.getElementById('regRange').value.trim();
+      const address = document.getElementById('regAddress').value.trim();
+      const phoneDisplay = document.getElementById('regPhone').value.trim();
+      const whatsapp = '57' + phoneDisplay.replace(/\D/g, '').replace(/^57/, '');
+      const instagram = document.getElementById('regIg').value.trim() || '@emprendimiento_vup';
+      const tiktok = document.getElementById('regTk').value.trim() || '@emprendimiento.vup';
+      const schedule = document.getElementById('regSchedule').value.trim() || 'Abierto hoy · 8:00 AM - 7:00 PM';
+      const email = document.getElementById('regEmail').value.trim() || 'contacto@negocio.co';
+
+      const iconMap = { ropa: '👖', comida: '🍔', perfumes: '💎', aires: '❄️', belleza: '💅' };
+      const words = name.split(' ');
+      const newBiz = {
+        id: Date.now(),
+        name,
+        logoTitle: words[0] || 'Local',
+        logoSub: words.slice(1, 3).join(' ') || 'Valledupar',
+        category,
+        ageType: 'nuevo',
+        badgeText: '🌱 Nuevo Emprendimiento',
+        badgeStyle: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+        mainRangeIcon: iconMap[category] || '✨',
+        mainRangeText,
+        priceLevel: 'low',
+        shortBio: 'Emprendimiento local registrado en Píllalo Valledupar.',
+        address,
+        neighborhood: 'Valledupar',
+        phoneDisplay,
+        whatsapp,
+        instagram,
+        tiktok,
+        email,
+        schedule,
+        coverImage: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1000&q=80',
+        storeThumb: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=400&q=80',
+        rating: 5.0,
+        votes: 1,
+        views: 1,
+        waClicks: 0,
+        igClicks: 0,
+        tkClicks: 0,
+        mapClicks: 0,
+        totalClicks: 0
+      };
+
+      businesses.unshift(newBiz);
+      filterBusinesses();
+      renderNuevosSection();
+
+      document.getElementById('certBrandName').value = name;
+      document.getElementById('certCategory').value = `${newBiz.mainRangeIcon} ${mainRangeText}`;
+      document.getElementById('certLocation').value = address;
+      document.getElementById('certIg').value = instagram;
+      updateCertPreview();
 
       if (supabaseClient) {
-        await supabaseClient.from('emprendimientos').insert([{
-          nombre: name,
-          tipo_registro: stage === 'nuevo' ? 'Emprendimiento' : 'Consolidado',
-          categoria: category,
-          subcategoria: stage === 'nuevo' ? 'Nuevo Emprendimiento' : 'Comercio Local',
-          eslogan: 'Nuevo emprendimiento registrado en Píllalo Valledupar',
-          descripcion: 'Emprendimiento local verificado en Píllalo Valledupar.',
-          etiqueta_rango_precio: mainPriceRange,
-          categoria_presupuesto: 'economico',
-          barrio,
-          direccion: address,
-          horario_texto: hours,
-          whatsapp,
-          telefono_llamada: '+' + whatsapp,
-          instagram_usuario: instagram,
-          tiktok_usuario: tiktok,
-          correo_electronico: email,
-          es_nuevo: stage === 'nuevo'
-        }]);
-        await syncFromSupabase();
+        try {
+          await supabaseClient.from('emprendimientos').insert([{
+            nombre: name,
+            tipo_registro: 'Emprendimiento',
+            categoria: category,
+            subcategoria: newBiz.logoSub,
+            eslogan: newBiz.shortBio,
+            descripcion: newBiz.shortBio,
+            etiqueta_rango_precio: mainRangeText,
+            barrio: address,
+            direccion: address,
+            horario_texto: schedule,
+            whatsapp,
+            telefono_llamada: phoneDisplay,
+            instagram_usuario: instagram,
+            tiktok_usuario: tiktok,
+            correo_electronico: email,
+            es_nuevo: true
+          }]);
+        } catch (err) {}
       }
-      closeRegisterModal();
-      switchTab('directorio');
+
+      alert('¡Negocio registrado con éxito! Ahora descarga tu certificado.');
+      switchTab('tab-certificate');
     }
 
-    function switchTab(tabName) {
-      document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabName));
-      document.querySelectorAll('.section-view').forEach(sec => sec.classList.remove('active'));
-      const target = document.getElementById('view-' + tabName);
-      if (target) target.classList.add('active');
-      if (tabName === 'analitica') renderAnalyticsDashboard();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function syncOwnerUI() {
+      const navAnalytics = document.getElementById('nav-analytics');
+      const lockBtn = document.getElementById('ownerLockBtn');
+      if (isOwnerUnlocked) {
+        navAnalytics.classList.remove('hidden');
+        lockBtn.innerHTML = '🔓 Panel Dueños Activo (Ir a Analítica)';
+        lockBtn.className = 'px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-900 font-extrabold transition cursor-pointer';
+      } else {
+        navAnalytics.classList.add('hidden');
+        lockBtn.innerHTML = '🔒 Acceso Dueños';
+        lockBtn.className = 'px-3 py-1.5 rounded-full bg-slate-200/80 hover:bg-slate-300 text-slate-700 font-bold transition cursor-pointer';
+      }
     }
 
-    function refreshAllViews() {
-      document.getElementById('countAllTab').textContent = businesses.length;
-      document.getElementById('favCountLabel').textContent = `${favoriteIds.length} guardados`;
-      renderAdBanners();
-      applyFilters();
-      renderNewBusinessesSection();
-      renderVacantes();
-      renderAnalyticsDashboard();
+    function openOwnerPinModal() {
+      if (isOwnerUnlocked) { switchTab('tab-analytics'); return; }
+      document.getElementById('ownerPinInput').value = '';
+      document.getElementById('ownerPinModal').classList.remove('hidden');
+      document.getElementById('ownerPinModal').classList.add('flex');
+    }
+    function closeOwnerPinModal() {
+      document.getElementById('ownerPinModal').classList.add('hidden');
+      document.getElementById('ownerPinModal').classList.remove('flex');
+    }
+    function checkOwnerPin(e) {
+      e.preventDefault();
+      if (document.getElementById('ownerPinInput').value.trim() === OWNER_PIN) {
+        isOwnerUnlocked = true;
+        sessionStorage.setItem('pillalo_owner_ok', 'true');
+        syncOwnerUI();
+        closeOwnerPinModal();
+        switchTab('tab-analytics');
+      } else { alert('Clave incorrecta.'); }
+    }
+    function lockOwnerMode() {
+      isOwnerUnlocked = false;
+      sessionStorage.removeItem('pillalo_owner_ok');
+      syncOwnerUI();
+      switchTab('tab-explore');
     }
 
-    syncFromSupabase();
+    function renderOwnerAnalytics() {
+      const totalClicks = businesses.reduce((a, b) => a + (b.totalClicks || 0), 0);
+      const totalWa = businesses.reduce((a, b) => a + (b.waClicks || 0), 0);
+      const totalVotes = businesses.reduce((a, b) => a + (b.votes || 0), 0);
+      const lowOnes = businesses.filter(b => (b.totalClicks || 0) < 5);
+
+      document.getElementById('kpiViews').innerText = totalPageViews;
+      document.getElementById('kpiClicks').innerText = totalClicks;
+      document.getElementById('kpiWaSub').innerText = `🟢 ${totalWa} clics directos a WhatsApp`;
+      document.getElementById('kpiVotes').innerText = totalVotes;
+      document.getElementById('kpiLowClicks').innerText = lowOnes.length;
+
+      document.getElementById('lowClicksContainer').innerHTML = lowOnes.map(b => `
+        <div class="bg-white rounded-2xl p-4 border border-amber-300 flex items-center justify-between gap-2">
+          <div>
+            <p class="font-black text-slate-900 text-xs">${b.name}</p>
+            <p class="text-[11px] font-bold text-amber-700">⚠️ Solo lleva ${b.totalClicks} clics</p>
+          </div>
+          <button onclick="boostToTopBanner(${b.id})" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[11px] font-extrabold whitespace-nowrap cursor-pointer">
+            🚀 Destacar en Banner
+          </button>
+        </div>
+      `).join('');
+
+      document.getElementById('analyticsRows').innerHTML = businesses.map(b => {
+        const msg = `¡Hola *${b.name}*! 👋 Te escribimos de *Píllalo Valledupar*.\n\nReporte de visibilidad:\n👀 *Vistas:* ${b.views}\n🟢 *Clics a WhatsApp:* ${b.waClicks}\n📸 *Clics a Instagram:* ${b.igClicks}\n👆 *Total:* ${b.totalClicks}\n⭐ *Calificación:* ${b.rating.toFixed(1)}/5.0 (${b.votes} opiniones)`;
+        return `
+          <tr class="hover:bg-slate-50">
+            <td class="p-3 font-black text-slate-900">${b.name}</td>
+            <td class="p-3 font-bold">${b.views}</td>
+            <td class="p-3 font-black text-emerald-600">${b.waClicks}</td>
+            <td class="p-3">${b.igClicks}</td>
+            <td class="p-3">${b.tkClicks}</td>
+            <td class="p-3">${b.mapClicks}</td>
+            <td class="p-3 font-black">${b.totalClicks}</td>
+            <td class="p-3 font-bold">⭐ ${b.rating.toFixed(1)} (${b.votes})</td>
+            <td class="p-3 flex flex-wrap gap-1.5">
+              <a href="https://wa.me/${b.whatsapp}?text=${encodeURIComponent(msg)}" target="_blank" class="px-2.5 py-1 bg-emerald-100 text-emerald-900 rounded-lg font-extrabold">📲 Enviar Reporte</a>
+              <button onclick="boostToTopBanner(${b.id})" class="px-2.5 py-1 bg-amber-100 text-amber-900 rounded-lg font-extrabold cursor-pointer">📢 Banner</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function boostToTopBanner(bizId) {
+      const b = businesses.find(x => x.id === bizId);
+      if (!b) return;
+      bannersList.unshift({
+        badge: "🌱 EMPRENDIMIENTO IMPULSADO HOY",
+        title: `${b.mainRangeIcon} ${b.name}: ${b.mainRangeText}`,
+        desc: `${b.address}. ¡Escríbeles directo por WhatsApp!`,
+        bizName: b.name,
+        whatsapp: b.whatsapp
+      });
+      renderSpotlightBanners();
+      switchTab('tab-explore');
+      alert(`🚀 ¡Listo! "${b.name}" ya está en el Banner Superior.`);
+    }
+
+    function openNewBannerModal() {
+      document.getElementById('newBannerModal').classList.remove('hidden');
+      document.getElementById('newBannerModal').classList.add('flex');
+    }
+    function closeNewBannerModal() {
+      document.getElementById('newBannerModal').classList.add('hidden');
+      document.getElementById('newBannerModal').classList.remove('flex');
+    }
+    function saveCustomBanner(e) {
+      e.preventDefault();
+      bannersList.unshift({
+        badge: document.getElementById('bannerBadgeInput').value,
+        title: document.getElementById('bannerTitleInput').value,
+        desc: document.getElementById('bannerDescInput').value,
+        bizName: document.getElementById('bannerBizInput').value,
+        whatsapp: document.getElementById('bannerWaInput').value.replace(/\D/g, '')
+      });
+      renderSpotlightBanners();
+      closeNewBannerModal();
+      switchTab('tab-explore');
+    }
+
+    syncOwnerUI();
+    renderSpotlightBanners();
+    renderBusinesses(businesses);
+    renderNuevosSection();
   </script>
 </body>
 </html>
