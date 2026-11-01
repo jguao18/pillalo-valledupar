@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Píllalo Valledupar | Directorio Visual Interactivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg-page: #F4F6F9;
+      --bg-card: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --emerald: #059669;
+      --emerald-dark: #064E3B;
+      --emerald-light: #D1FAE5;
+      --whatsapp: #25D366;
+      --whatsapp-dark: #128C7E;
+      --amber: #F59E0B;
+      --amber-light: #FEF3C7;
+      --coral: #E11D48;
+      --blue: #2563EB;
+      --purple: #7C3AED;
+      --border: #E2E8F0;
+      --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+      --shadow-hover: 0 20px 40px -10px rgba(15, 23, 42, 0.14);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 90px;
+    }
+
+    .top-banner {
+      background: linear-gradient(90deg, #064E3B 0%, #047857 50%, #0F172A 100%);
+      color: #fff;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .top-banner span.pill {
+      background: #F59E0B;
+      color: #0F172A;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+    }
+    .db-status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.14);
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      color: #A7F3D0;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+    }
+    .navbar-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3);
+    }
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .brand-title span { color: var(--emerald); }
+    .brand-sub {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #F1F5F9;
+      padding: 5px;
+      border-radius: 999px;
+      flex-wrap: wrap;
+    }
+    .nav-tab {
+      border: none;
+      background: transparent;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .nav-tab.active {
+      background: #FFFFFF;
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+    .nav-tab.new-biz-tab { color: #047857; }
+    .nav-tab.new-biz-tab.active {
+      background: #ECFDF5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
+    }
+    .nav-tab.analytics-tab { color: #4F46E5; }
+    .nav-tab.analytics-tab.active {
+      background: #EEF2FF;
+      color: #3730A3;
+      border: 1px solid #C7D2FE;
+    }
+
+    .btn-register {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.28);
+      transition: transform 0.2s;
+    }
+    .btn-register:hover { transform: translateY(-2px); }
+
+    .container { max-width: 1320px; margin: 0 auto; padding: 22px 20px; }
+
+    .ad-spotlight-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .ad-spotlight-card {
+      background: linear-gradient(135deg, #0F172A 0%, #064E3B 100%);
+      color: #FFFFFF;
+      border-radius: 20px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: 0 10px 24px rgba(6, 78, 59, 0.16);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+    .ad-spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #F59E0B;
+      color: #0F172A;
+      font-size: 0.68rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .ad-spotlight-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+    .ad-spotlight-desc { font-size: 0.8rem; color: #D1FAE5; line-height: 1.35; }
+    .ad-spotlight-cta {
+      background: #25D366;
+      color: #FFFFFF;
+      text-decoration: none;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.82rem;
+      white-space: nowrap;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-box {
+      background: #FFFFFF;
+      border-radius: var(--radius-xl);
+      padding: 24px 24px 20px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border);
+      margin-bottom: 22px;
+    }
+    .hero-header { text-align: center; max-width: 780px; margin: 0 auto 20px; }
+    .hero-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+      font-weight: 900;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .hero-header h1 span { color: var(--emerald); }
+    .hero-header p { color: var(--text-muted); font-size: 0.94rem; }
+
+    .category-dock {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 980px) { .category-dock { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 580px) { .category-dock { grid-template-columns: repeat(2, 1fr); } }
+    .cat-btn {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cat-btn:hover { border-color: #10B981; background: #ECFDF5; transform: translateY(-2px); }
+    .cat-btn.active {
+      background: #0F172A;
+      border-color: #0F172A;
+      color: #FFFFFF;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+    }
+    .cat-icon-3d { font-size: 1.85rem; line-height: 1; }
+    .cat-name { font-weight: 800; font-size: 0.81rem; text-align: center; }
+    .cat-count { font-size: 0.69rem; opacity: 0.75; font-weight: 600; }
+
+    .filter-bar {
+      display: grid;
+      grid-template-columns: 2fr 1.1fr 1.1fr 1.1fr;
+      gap: 10px;
+      background: #F8FAFC;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 900px) { .filter-bar { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 540px) { .filter-bar { grid-template-columns: 1fr; } }
+    .search-input-wrap { position: relative; display: flex; align-items: center; }
+    .search-input-wrap span { position: absolute; left: 14px; font-size: 1.1rem; }
+    .search-input {
+      width: 100%;
+      padding: 11px 14px 11px 40px;
+      border-radius: 12px;
+      border: 1px solid #CBD5E1;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      background: #fff;
+    }
+    .filter-select {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border: 1px solid #CBD5E1;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: #fff;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .solidarity-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: linear-gradient(90deg, #ECFDF5 0%, #FEF3C7 100%);
+      border: 1px solid #A7F3D0;
+      border-radius: 16px;
+      padding: 12px 18px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .solidarity-strip-left { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 700; color: #065F46; }
+    .solidarity-strip-right { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 700; color: #92400E; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 22px;
+    }
+    @media (max-width: 420px) { .cards-grid { grid-template-columns: 1fr; } }
+
+    .bento-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      position: relative;
+    }
+    .bento-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+    .card-cover { height: 152px; background-size: cover; background-position: center; position: relative; }
+    .card-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15,23,42,0.35) 0%, rgba(15,23,42,0.05) 50%, rgba(15,23,42,0.65) 100%);
+    }
+    .cover-badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .badge-new {
+      background: #10B981;
+      color: #fff;
+      font-size: 0.71rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .badge-established {
+      background: #0F172A;
+      color: #F8FAFC;
+      font-size: 0.71rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .cover-right-actions { display: flex; align-items: center; gap: 6px; }
+    .badge-rating {
+      background: rgba(255, 255, 255, 0.95);
+      color: #0F172A;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .btn-fav-heart {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .floating-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid #FFFFFF;
+      background: #fff;
+      position: absolute;
+      bottom: -26px;
+      left: 18px;
+      z-index: 3;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .floating-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .status-pill {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      z-index: 2;
+      background: rgba(15, 23, 42, 0.82);
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.71rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; }
+
+    .card-body { padding: 32px 18px 18px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+    .biz-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .biz-name { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--text-main); line-height: 1.2; }
+    .verified-check { color: #059669; font-size: 0.95rem; }
+    .biz-cat-tag { font-size: 0.74rem; font-weight: 700; color: var(--emerald); background: #ECFDF5; padding: 3px 9px; border-radius: 8px; white-space: nowrap; }
+    .biz-tagline { font-size: 0.84rem; color: var(--text-muted); font-weight: 500; }
+
+    .price-range-widget {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 4px solid var(--emerald);
+      border-radius: 12px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .price-range-label { font-size: 0.73rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+    .price-range-value { font-size: 0.88rem; font-weight: 800; color: var(--text-main); }
+
+    .maps-widget {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      border-radius: 14px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+    .maps-icon-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      border: 1px solid #93C5FD;
+    }
+    .maps-info { flex: 1; min-width: 0; }
+    .maps-neighborhood { font-size: 0.73rem; font-weight: 800; color: #1D4ED8; text-transform: uppercase; }
+    .maps-address { font-size: 0.81rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .maps-go { font-size: 0.74rem; font-weight: 800; color: #2563EB; white-space: nowrap; }
+
+    .widgets-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px; }
+    .w-btn {
+      border: none;
+      border-radius: 13px;
+      padding: 10px 10px;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 0.79rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2px;
+      text-decoration: none;
+    }
+    .w-btn-wa { background: #25D366; color: #FFFFFF; }
+    .w-btn-ig { background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%); color: #FFFFFF; }
+    .w-btn-tk { background: #0F172A; color: #FFFFFF; }
+    .w-btn-sub { font-size: 0.67rem; font-weight: 600; opacity: 0.92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+
+    .card-footer-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 8px;
+      border-top: 1px dashed #E2E8F0;
+      margin-top: auto;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .footer-btns-wrap { display: flex; align-items: center; gap: 6px; }
+    .btn-rate-card {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+      padding: 6px 10px;
+      border-radius: 9px;
+      font-weight: 800;
+      font-size: 0.74rem;
+      cursor: pointer;
+    }
+    .btn-open-profile {
+      background: #F1F5F9;
+      color: var(--text-main);
+      border: 1px solid #CBD5E1;
+      padding: 6px 11px;
+      border-radius: 9px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .section-view { display: none; }
+    .section-view.active { display: block; }
+    .section-banner {
+      background: linear-gradient(135deg, #064E3B 0%, #0F172A 100%);
+      color: #fff;
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .section-banner h2 { font-family: 'Outfit', sans-serif; font-size: 1.65rem; font-weight: 900; margin-bottom: 6px; }
+    .section-banner p { color: #CBD5E1; max-width: 680px; font-size: 0.92rem; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 22px; }
+    .kpi-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 20px; padding: 18px 20px; box-shadow: var(--shadow-card); }
+    .kpi-label { font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+    .kpi-value { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 900; color: var(--text-main); line-height: 1.1; }
+    .kpi-sub { font-size: 0.76rem; color: var(--emerald); font-weight: 700; margin-top: 4px; }
+
+    .analytics-panel-box { background: #FFFFFF; border: 1px solid var(--border); border-radius: 22px; padding: 22px; box-shadow: var(--shadow-card); margin-bottom: 22px; overflow-x: auto; }
+    .analytics-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .analytics-table th { background: #0F172A; color: #FFFFFF; text-align: left; padding: 11px 12px; font-weight: 800; font-size: 0.76rem; text-transform: uppercase; }
+    .analytics-table td { padding: 11px 12px; border-bottom: 1px solid #E2E8F0; vertical-align: middle; }
+    .low-click-badge { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; }
+    .good-click-badge { background: #DCFCE7; color: #166534; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; }
+    .btn-mini-action { border: none; padding: 6px 10px; border-radius: 8px; font-weight: 800; font-size: 0.74rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; }
+
+    .jobs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
+    .job-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 20px; box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 10px; }
+    .job-role { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 800; }
+    .job-company { font-size: 0.85rem; font-weight: 700; color: var(--emerald); }
+    .job-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .job-tag { background: #F1F5F9; padding: 4px 10px; border-radius: 8px; font-size: 0.76rem; font-weight: 700; }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #fff;
+      border-radius: 24px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      padding: 24px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: #F1F5F9;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .rating-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      background: #0F172A;
+      color: #fff;
+      border-radius: 22px;
+      padding: 20px 22px;
+      width: 365px;
+      max-width: calc(100vw - 32px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+      border: 2px solid #10B981;
+      display: none;
+    }
+    .rating-toast.show { display: block; }
+    .rating-toast-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .rating-toast-badge { background: #10B981; color: #0F172A; font-size: 0.7rem; font-weight: 900; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; }
+    .rating-stars-row { display: flex; gap: 8px; margin-top: 10px; justify-content: space-between; }
+    .star-btn { flex: 1; background: #1E293B; border: 1px solid #334155; color: #FBBF24; border-radius: 12px; padding: 10px 4px; font-size: 0.95rem; font-weight: 800; cursor: pointer; }
+    .star-btn:hover { background: #F59E0B; color: #0F172A; }
+    .quick-tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .quick-tag-chip { background: #1E293B; color: #CBD5E1; border: 1px solid #334155; padding: 4px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
+    .quick-tag-chip.active { background: #059669; color: #fff; border-color: #34D399; }
+
+    .ig-story-card {
+      max-width: 340px;
+      margin: 0 auto;
+      background: linear-gradient(160deg, #064E3B 0%, #0F172A 100%);
+      color: #fff;
+      border-radius: 28px;
+      padding: 32px 24px;
+      text-align: center;
+      border: 4px solid #10B981;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: 0.78rem; font-weight: 800; color: var(--text-main); }
+    .form-group input, .form-group select { padding: 10px 12px; border-radius: 10px; border: 1px solid #CBD5E1; font-family: inherit; font-size: 0.86rem; }
+  </style>
+</head>
+<body>
+
+  <div class="top-banner">
+    <span class="pill">🚀 Proyecto Píllalo Valledupar</span>
+    <span>Visibilidad justa para el emprendedor que apenas comienza y contacto directo en 1 toque.</span>
+    <span class="db-status-dot" id="dbStatusBadge">🟢 Conectado a Base de Datos Supabase</span>
+  </div>
+
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand" onclick="switchTab('directorio')">
+        <div class="brand-logo">📍</div>
+        <div>
+          <div class="brand-title">Píllalo<span>.</span></div>
+          <span class="brand-sub">Vitrina Visual & Directorio • Valledupar</span>
+        </div>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="directorio" onclick="switchTab('directorio')">
+          🧭 Explorar (<span id="countAllTab">9</span>)
+        </button>
+        <button class="nav-tab new-biz-tab" data-tab="nuevos" onclick="switchTab('nuevos')">
+          🌱 Emprendimientos Nuevos
+        </button>
+        <button class="nav-tab" data-tab="vacantes" onclick="switchTab('vacantes')">
+          💼 Vacantes
+        </button>
+        <button class="nav-tab analytics-tab" data-tab="analitica" onclick="switchTab('analitica')">
+          📊 Analítica & Ads
+        </button>
+        <button class="nav-tab" data-tab="certificado" onclick="switchTab('certificado')">
+          🎓 Certificado IG
+        </button>
+      </nav>
+
+      <button class="btn-register" onclick="openRegisterModal()">
+        ➕ Registrar Negocio (Gratis)
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="view-directorio" class="section-view active">
+      <div class="ad-spotlight-bar" id="adSpotlightContainer"></div>
+
+      <div class="hero-box">
+        <div class="hero-header">
+          <h1>¿Qué necesitas encontrar hoy en <span>Valledupar</span>?</h1>
+          <p>Sin importar cómo se llame el negocio, encuéntralo en su categoría real, revisa su rango de precios, mira el mapa y escríbele directo.</p>
+        </div>
+
+        <div class="category-dock">
+          <button class="cat-btn active" onclick="filterCategory('todos', this)">
+            <span class="cat-icon-3d">✨</span>
+            <span class="cat-name">Todos</span>
+            <span class="cat-count">Catálogo Completo</span>
+          </button>
+          <button class="cat-btn" onclick="filterCategory('comida', this)">
+            <span class="cat-icon-3d">🍔</span>
+            <span class="cat-name">Comida</span>
+            <span class="cat-count">Restaurantes y Fritos</span>
+          </button>
+          <button class="cat-btn" onclick="filterCategory('ropa', this)">
+            <span class="cat-icon-3d">👖</span>
+            <span class="cat-name">Jeans & Ropa</span>
+            <span class="cat-count">Dama, Hombre y Niñas</span>
+          </button>
+          <button class="cat-btn" onclick="filterCategory('perfumes', this)">
+            <span class="cat-icon-3d">💎</span>
+            <span class="cat-name">Perfumes</span>
+            <span class="cat-count">Árabes y Lociones</span>
+          </button>
+          <button class="cat-btn" onclick="filterCategory('servicios', this)">
+            <span class="cat-icon-3d">❄️</span>
+            <span class="cat-name">Aires y Técnicos</span>
+            <span class="cat-count">Limpieza y Arreglos</span>
+          </button>
+          <button class="cat-btn" onclick="filterCategory('belleza', this)">
+            <span class="cat-icon-3d">💅</span>
+            <span class="cat-name">Belleza & Uñas</span>
+            <span class="cat-count">Manicura y Estética</span>
+          </button>
+          <button class="cat-btn" onclick="filterCategory('favoritos', this)">
+            <span class="cat-icon-3d">❤️</span>
+            <span class="cat-name">Mis Guardados</span>
+            <span class="cat-count" id="favCountLabel">0 guardados</span>
+          </button>
+        </div>
+
+        <div class="filter-bar">
+          <div class="search-input-wrap">
+            <span>🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Ej: empanadas, jeans, técnico de aires, perfumes árabes, uñas..." oninput="applyFilters()" />
+          </div>
+
+          <select id="budgetFilter" class="filter-select" onchange="applyFilters()">
+            <option value="todos">💰 Cualquier Presupuesto</option>
+            <option value="economico">🟢 Económico (Desde $3.000 - $35.000)</option>
+            <option value="medio">🟡 Rango Medio ($35.000 - $90.000)</option>
+            <option value="premium">🟣 Especializado (+$90.000)</option>
+          </select>
+
+          <select id="barrioFilter" class="filter-select" onchange="applyFilters()">
+            <option value="todos">📍 Todos los Barrios (Valledupar)</option>
+            <option value="Los Cortijos">📍 Los Cortijos</option>
+            <option value="Novalito">📍 Novalito</option>
+            <option value="San Joaquín">📍 San Joaquín</option>
+            <option value="Fundadores">📍 Fundadores / A Domicilio</option>
+            <option value="Centro">📍 Centro</option>
+            <option value="Las Flores">📍 Las Flores</option>
+            <option value="Los Músicos">📍 Los Músicos</option>
+            <option value="San Vicente">📍 San Vicente</option>
+          </select>
+
+          <select id="stageFilter" class="filter-select" onchange="applyFilters()">
+            <option value="todos">⚡ Algoritmo Solidario (Todos)</option>
+            <option value="nuevo">🌱 Nuevos Emprendimientos (Impulso)</option>
+            <option value="consolidado">🏛️ Con Trayectoria</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="solidarity-strip">
+        <div class="solidarity-strip-left">
+          <span>🤝</span>
+          <span><b>Algoritmo Solidario Activo:</b> Los emprendimientos recién creados y los que han recibido menos clics aparecen primero para darles arranque.</span>
+        </div>
+        <div class="solidarity-strip-right">
+          <span>⭐ Al tocar WhatsApp o Instagram podrás calificar de 1 a 5 estrellas</span>
+        </div>
+      </div>
+
+      <div id="directoryGrid" class="cards-grid"></div>
+    </section>
+
+    <section id="view-nuevos" class="section-view">
+      <div class="section-banner">
+        <div>
+          <span style="background:#10B981; color:#0F172A; font-weight:900; font-size:0.75rem; padding:4px 12px; border-radius:999px; text-transform:uppercase;">🌱 Visibilidad para el que está comenzando</span>
+          <h2 style="margin-top:10px;">Emprendimientos Nuevos que Puedes Apoyar a Crecer</h2>
+          <p>Aquí aparecen los negocios pequeños y trabajadores independientes que llevan pocos días en la plataforma o que aún han recibido pocos clics.</p>
+        </div>
+        <button class="btn-register" onclick="openRegisterModal()">➕ Inscribir mi Emprendimiento</button>
+      </div>
+      <div id="newBusinessesGrid" class="cards-grid"></div>
+    </section>
+
+    <section id="view-vacantes" class="section-view">
+      <div class="section-banner">
+        <div>
+          <span style="background:#38BDF8; color:#0F172A; font-weight:900; font-size:0.75rem; padding:4px 12px; border-radius:999px; text-transform:uppercase;">💼 Empleo Local Directo</span>
+          <h2 style="margin-top:10px;">Vacantes Disponibles en Valledupar</h2>
+          <p>Oportunidades de trabajo publicadas por emprendimientos, restaurantes y empresas locales con contacto directo por WhatsApp.</p>
+        </div>
+      </div>
+      <div class="jobs-grid" id="vacantesGrid"></div>
+    </section>
+
+    <section id="view-analitica" class="section-view">
+      <div class="section-banner" style="background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);">
+        <div>
+          <span style="background:#818CF8; color:#0F172A; font-weight:900; font-size:0.75rem; padding:4px 12px; border-radius:999px; text-transform:uppercase;">📊 Centro de Control y Métricas en Vivo</span>
+          <h2 style="margin-top:10px;">Analítica de Visitas, Clics, Valoraciones 5★ y Publicidad</h2>
+          <p>Revisa cuántas personas entran, a qué empresas han tocado y a cuáles no (para impulsarlas), consulta las calificaciones de 1 a 5 estrellas y envía reportes por WhatsApp a cada dueño.</p>
+        </div>
+        <button class="btn-register" style="background:linear-gradient(135deg,#F59E0B,#D97706);" onclick="openAdModal()">
+          📢 Crear Banner Publicitario / Impulso
+        </button>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">👀 Visitas Totales a la Página</div>
+          <div class="kpi-value" id="kpiTotalViews">0</div>
+          <div class="kpi-sub">🟢 Contando tu sesión actual en vivo</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">👆 Clics Totales a Negocios</div>
+          <div class="kpi-value" id="kpiTotalClicks">0</div>
+          <div class="kpi-sub" id="kpiWhatsappBreakdown">WhatsApp, Instagram, TikTok y Maps</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">⭐ Valoraciones Recibidas (1-5★)</div>
+          <div class="kpi-value" id="kpiTotalRatings">0</div>
+          <div class="kpi-sub" id="kpiAvgStars">Promedio General: 5.0 ★</div>
+        </div>
+        <div class="kpi-card" style="border-color:#FCD34D; background:#FFFBEB;">
+          <div class="kpi-label" style="color:#92400E;">🚨 Negocios con Pocos Clics (&lt;5)</div>
+          <div class="kpi-value" id="kpiLowClickCount" style="color:#B45309;">0</div>
+          <div class="kpi-sub" style="color:#92400E;">Priorizados por el Algoritmo Solidario</div>
+        </div>
+      </div>
+
+      <div class="analytics-panel-box" style="background:#FFFBEB; border-color:#FDE68A;">
+        <h3 style="font-family:'Outfit',sans-serif; font-size:1.2rem; color:#92400E; margin-bottom:6px;">
+          🚨 Radar Solidario: ¿A qué negocios casi NO han tocado todavía?
+        </h3>
+        <p style="font-size:0.84rem; color:#78350F; margin-bottom:14px;">
+          Estos emprendimientos tienen menos de 5 clics. Con un toque puedes ponerlos en el <b>Banner Publicitario Superior</b> gratis para que toda Valledupar los vea hoy:
+        </p>
+        <div id="lowClickAlertList" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:12px;"></div>
+      </div>
+
+      <div class="analytics-panel-box">
+        <h3 style="font-family:'Outfit',sans-serif; font-size:1.25rem; margin-bottom:12px;">📈 Rendimiento Detallado por Negocio</h3>
+        <table class="analytics-table">
+          <thead>
+            <tr>
+              <th>Negocio / Emprendimiento</th>
+              <th>Estado</th>
+              <th>👀 Vistas</th>
+              <th>🟢 WhatsApp</th>
+              <th>📸 Instagram</th>
+              <th>🎵 TikTok</th>
+              <th>🗺️ Maps</th>
+              <th>👆 Total Clics</th>
+              <th>⭐ Calificación</th>
+              <th>Acciones para el Dueño</th>
+            </tr>
+          </thead>
+          <tbody id="analyticsTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="analytics-panel-box">
+        <h3 style="font-family:'Outfit',sans-serif; font-size:1.2rem; margin-bottom:12px;">⭐ Últimas Valoraciones de Clientes (1 a 5 Estrellas)</h3>
+        <div id="recentRatingsList" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;"></div>
+      </div>
+    </section>
+
+    <section id="view-certificado" class="section-view">
+      <div style="max-width:780px; margin:0 auto; text-align:center; padding:12px;">
+        <h2 style="font-family:'Outfit',sans-serif; font-size:1.8rem; font-weight:900; margin-bottom:8px;">🎓 Sello Oficial para Historias de Instagram y WhatsApp</h2>
+        <div class="ig-story-card">
+          <div style="background:#10B981; color:#0F172A; font-weight:900; font-size:0.74rem; padding:4px 12px; border-radius:999px; display:inline-block; margin-bottom:14px;">✔ COMERCIO VERIFICADO</div>
+          <div style="font-size:3rem; margin-bottom:8px;">🥟</div>
+          <h3 style="font-family:'Outfit',sans-serif; font-size:1.45rem; font-weight:900;">El Rincón de Doña Mechis</h3>
+          <p style="color:#A7F3D0; font-size:0.85rem; font-weight:700; margin-bottom:18px;">Categoría: Comida & Desayunos • Valledupar</p>
+          <div style="background:rgba(255,255,255,0.1); border-radius:16px; padding:14px; font-size:0.84rem; margin-bottom:18px;">
+            ¡Encuéntranos en <b>Píllalo Valledupar</b>! Mira nuestro horario, ubicación en Google Maps, precios y escríbenos directo al WhatsApp.
+          </div>
+          <div style="font-weight:900; font-size:1.05rem; color:#FBBF24;">📍 jguao18.github.io/pillalo-valledupar</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="profileModal" class="modal-overlay" onclick="if(event.target===this) closeProfileModal()">
+    <div class="modal-card" id="profileModalContent"></div>
+  </div>
+
+  <div id="registerModal" class="modal-overlay" onclick="if(event.target===this) closeRegisterModal()">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeRegisterModal()">✕</button>
+      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:999px;">🚀 15 A 30 DÍAS GRATIS DE PRUEBA</span>
+      <h2 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:900; margin-top:8px;">Registra tu Emprendimiento o Servicio</h2>
+      <form onsubmit="submitNewBusiness(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nombre del Negocio o Profesional *</label>
+            <input type="text" id="regName" required placeholder="Ej: Delicias Donde Mary" />
+          </div>
+          <div class="form-group">
+            <label>Categoría Principal *</label>
+            <select id="regCat" required>
+              <option value="comida">🍔 Comida / Restaurante / Fritos</option>
+              <option value="ropa">👖 Jeans, Ropa Dama / Hombre / Niñas</option>
+              <option value="perfumes">💎 Perfumes & Lociones</option>
+              <option value="servicios">❄️ Aires Acondicionados / Técnico</option>
+              <option value="belleza">💅 Belleza, Uñas & Estética</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tipo de Negocio *</label>
+            <select id="regStage">
+              <option value="nuevo">🌱 Nuevo Emprendimiento / Independiente</option>
+              <option value="consolidado">🏛️ Empresa Constituida / Con Trayectoria</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Barrio en Valledupar *</label>
+            <input type="text" id="regBarrio" required placeholder="Ej: Los Cortijos, San Joaquín, A domicilio" />
+          </div>
+          <div class="form-group full">
+            <label>Producto/Servicio Principal y su Rango de Precio (Mínimo a Máximo) *</label>
+            <input type="text" id="regPriceRange" required placeholder="Ej: 👖 Rango en Jeans: $50.000 a $85.000 COP" />
+          </div>
+          <div class="form-group">
+            <label>Dirección Exacta *</label>
+            <input type="text" id="regAddress" required placeholder="Ej: Cra 15 # 14-20 Local 2" />
+          </div>
+          <div class="form-group">
+            <label>Horario de Atención *</label>
+            <input type="text" id="regHours" required placeholder="Ej: Lun a Sáb: 8:00 AM - 7:00 PM" />
+          </div>
+          <div class="form-group">
+            <label>Número de WhatsApp *</label>
+            <input type="text" id="regWhatsapp" required placeholder="Ej: 3001234567" />
+          </div>
+          <div class="form-group">
+            <label>Usuario de Instagram</label>
+            <input type="text" id="regIg" placeholder="Ej: @miemprendimiento" />
+          </div>
+          <div class="form-group">
+            <label>Usuario de TikTok (Opcional)</label>
+            <input type="text" id="regTk" placeholder="Ej: @miemprendimiento.vup" />
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico (Opcional)</label>
+            <input type="email" id="regEmail" placeholder="contacto@negocio.com" />
+          </div>
+        </div>
+        <button type="submit" class="btn-register" style="width:100%; justify-content:center; margin-top:18px; padding:13px;">
+          ✅ Publicar Ahora en la Base de Datos
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="adModal" class="modal-overlay" onclick="if(event.target===this) closeAdModal()">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeAdModal()">✕</button>
+      <span style="background:#FEF3C7; color:#92400E; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:999px;">📢 ESPACIO PUBLICITARIO / IMPULSO</span>
+      <h2 style="font-family:'Outfit',sans-serif; font-size:1.45rem; font-weight:900; margin-top:8px;">Publicar Banner Destacado en la Parte Superior</h2>
+      <form onsubmit="submitNewAdBanner(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nombre del Negocio o Anunciante *</label>
+            <input type="text" id="adAnunciante" required placeholder="Ej: El Rincón de Doña Mechis" />
+          </div>
+          <div class="form-group">
+            <label>Tipo de Espacio *</label>
+            <select id="adTipo">
+              <option value="🌱 EMPRENDIMIENTO IMPULSADO HOY">🌱 Impulso Solidario Gratis (Pocos Clics)</option>
+              <option value="💎 PATROCINADOR DESTACADO">💎 Publicidad Pagada (Empresa)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Título Llamativo del Banner *</label>
+            <input type="text" id="adTitulo" required placeholder="Ej: 🥟 ¡Prueba las mejores empanadas en peto de Los Cortijos!" />
+          </div>
+          <div class="form-group full">
+            <label>Descripción Corta *</label>
+            <input type="text" id="adDesc" required placeholder="Ej: Desayunos caseros desde $2.500 COP." />
+          </div>
+          <div class="form-group">
+            <label>WhatsApp de Contacto *</label>
+            <input type="text" id="adWhatsapp" required placeholder="Ej: 573001112233" />
+          </div>
+          <div class="form-group">
+            <label>Texto del Botón *</label>
+            <input type="text" id="adBoton" value="Escribir al WhatsApp" required />
+          </div>
+        </div>
+        <button type="submit" class="btn-register" style="width:100%; justify-content:center; margin-top:18px; padding:13px;">
+          🚀 Activar Banner en el Directorio
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="ratingToast" class="rating-toast">
+    <div class="rating-toast-header">
+      <span class="rating-toast-badge">⭐ Valoración en 1 Toque (1 a 5 Estrellas)</span>
+      <button onclick="closeRatingToast()" style="background:none; border:none; color:#94A3B8; cursor:pointer; font-weight:800;">✕</button>
+    </div>
+    <div style="font-weight:800; font-size:0.95rem; margin-bottom:2px;" id="ratingBizName">¿Qué tal te pareció este negocio?</div>
+    <div style="font-size:0.78rem; color:#CBD5E1;" id="ratingChannelText">Elige una etiqueta y toca de 1 a 5 estrellas:</div>
+    <div class="quick-tags-row" id="quickTagsRow">
+      <button type="button" class="quick-tag-chip active" onclick="selectRatingTag('Excelente atención', this)">🙌 Excelente atención</button>
+      <button type="button" class="quick-tag-chip" onclick="selectRatingTag('Muy buen precio', this)">💰 Muy buen precio</button>
+      <button type="button" class="quick-tag-chip" onclick="selectRatingTag('Rápido y cumplido', this)">⚡ Rápido y cumplido</button>
+    </div>
+    <div class="rating-stars-row">
+      <button class="star-btn" onclick="submitQuickRating(1)">1 ⭐</button>
+      <button class="star-btn" onclick="submitQuickRating(2)">2 ⭐</button>
+      <button class="star-btn" onclick="submitQuickRating(3)">3 ⭐</button>
+      <button class="star-btn" onclick="submitQuickRating(4)">4 ⭐</button>
+      <button class="star-btn" onclick="submitQuickRating(5)">5 ⭐</button>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://ehcmmhxkkdncrsjtujhf.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVoY21taHhra2RuY3JzanR1amhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0OTgwNTUsImV4cCI6MjEwOTA3NDA1NX0.e97tZSN_LKraz9FZsB4oAUKkjxgdWN9NkMzXvnHElh0";
+    const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    let businesses = [];
+    let adBanners = [];
+    let vacantesList = [];
+    let recentRatings = [];
+    let activeCategory = 'todos';
+    let lastContactedBizId = null;
+    let selectedOpinionTag = 'Excelente atención';
+    let favoriteIds = JSON.parse(localStorage.getItem('pillalo_favs') || '[]');
+    let pageViewsCount = parseInt(localStorage.getItem('pillalo_views') || '312', 10) + 1;
+    localStorage.setItem('pillalo_views', pageViewsCount);
+
+    async function syncFromSupabase() {
+      if (!supabaseClient) return;
+      try {
+        const { data: empData } = await supabaseClient.from('emprendimientos').select('*').eq('activo', true).order('id', { ascending: true });
+        if (empData && empData.length > 0) {
+          businesses = empData.map(row => ({
+            id: row.id,
+            name: row.nombre,
+            category: row.categoria,
+            categoryLabel: row.subcategoria || 'Emprendimiento Local',
+            stage: row.es_nuevo ? 'nuevo' : 'consolidado',
+            clicksReceived: row.total_clics_recibidos || 0,
+            vistasPerfil: row.vistas_perfil || 0,
+            clicsWhatsapp: row.clics_whatsapp || 0,
+            clicsInstagram: row.clics_instagram || 0,
+            clicsTiktok: row.clics_tiktok || 0,
+            clicsMaps: row.clics_maps || 0,
+            clicsLlamada: row.clics_llamada || 0,
+            rating: parseFloat(row.calificacion_promedio || 5.0),
+            votes: row.total_valoraciones || 1,
+            budget: row.categoria_presupuesto || 'economico',
+            mainPriceRange: row.etiqueta_rango_precio,
+            barrio: row.barrio,
+            address: row.direccion,
+            hours: row.horario_texto,
+            tagline: row.eslogan || '',
+            description: row.descripcion || '',
+            cover: row.foto_portada_url || 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80',
+            logo: row.logo_url || 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=240&q=80',
+            whatsapp: row.whatsapp,
+            phone: row.telefono_llamada || '+' + row.whatsapp,
+            instagram: row.instagram_usuario || '@emprendimiento',
+            tiktok: row.tiktok_usuario || '@emprendimiento',
+            email: row.correo_electronico || ''
+          }));
+        }
+        const { data: adsData } = await supabaseClient.from('espacios_publicitarios').select('*').eq('activo', true).order('id', { ascending: false }).limit(2);
+        if (adsData) adBanners = adsData;
+        const { data: valData } = await supabaseClient.from('valoraciones_rapidas').select('*').order('id', { ascending: false }).limit(8);
+        if (valData) recentRatings = valData;
+        const { data: vacData } = await supabaseClient.from('vacantes').select('*').eq('activa', true).order('id', { ascending: false });
+        if (vacData) vacantesList = vacData;
+
+        await supabaseClient.from('registro_clics').insert([{ nombre_negocio: 'PORTAL PÍLLALO VALLEDUPAR', canal: 'Visita Pagina' }]);
+        document.getElementById('dbStatusBadge').innerHTML = '🟢 En Vivo: Supabase Conectado (' + businesses.length + ' negocios)';
+        refreshAllViews();
+      } catch (e) { console.warn(e); }
+    }
+
+    function sortSolidarity(list) {
+      return [...list].sort((a, b) => {
+        if (a.stage === 'nuevo' && b.stage !== 'nuevo') return -1;
+        if (a.stage !== 'nuevo' && b.stage === 'nuevo') return 1;
+        return a.clicksReceived - b.clicksReceived;
+      });
+    }
+
+    function renderAdBanners() {
+      const container = document.getElementById('adSpotlightContainer');
+      if (!container) return;
+      container.innerHTML = adBanners.map(ad => `
+        <div class="ad-spotlight-card">
+          <div>
+            <span class="ad-spotlight-badge">${ad.etiqueta_badge || '🌟 DESTACADO'}</span>
+            <div class="ad-spotlight-title">${ad.titulo_campana}</div>
+            <div class="ad-spotlight-desc">${ad.descripcion_corta || ''}</div>
+          </div>
+          <a class="ad-spotlight-cta" href="https://wa.me/${ad.whatsapp_destino}?text=Hola%20${encodeURIComponent(ad.anunciante)},%20vi%20tu%20anuncio%20en%20P%C3%ADllalo%20Valledupar" target="_blank">
+            🟢 ${ad.texto_boton || 'WhatsApp'}
+          </a>
+        </div>
+      `).join('');
+    }
+
+    function renderVacantes() {
+      const grid = document.getElementById('vacantesGrid');
+      if (!grid) return;
+      grid.innerHTML = vacantesList.map(v => {
+        const tags = (v.requisitos_etiquetas || '').split(',').filter(Boolean);
+        return `
+          <div class="job-card">
+            <div class="job-company">🏢 ${v.empresa_nombre}</div>
+            <div class="job-role">${v.cargo_titulo}</div>
+            <div class="job-tags">
+              <span class="job-tag">📍 ${v.barrio_ubicacion}</span>
+              <span class="job-tag">⏰ ${v.modalidad_horario}</span>
+              <span class="job-tag" style="background:#DCFCE7; color:#166534;">💰 ${v.salario_ofrecido}</span>
+              ${tags.map(t => `<span class="job-tag">✔ ${t.trim()}</span>`).join('')}
+            </div>
+            <a class="w-btn w-btn-wa" style="margin-top:8px; align-items:center;" href="https://wa.me/${v.whatsapp_postulacion}" target="_blank">
+              🟢 Postularme por WhatsApp Directo
+            </a>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleFavorite(bizId, event) {
+      if (event) event.stopPropagation();
+      const idx = favoriteIds.indexOf(bizId);
+      if (idx >= 0) favoriteIds.splice(idx, 1); else favoriteIds.push(bizId);
+      localStorage.setItem('pillalo_favs', JSON.stringify(favoriteIds));
+      document.getElementById('favCountLabel').textContent = `${favoriteIds.length} guardados`;
+      applyFilters();
+    }
+
+    function shareBusinessWhatsApp(bizId, event) {
+      if (event) event.stopPropagation();
+      const b = businesses.find(x => x.id === bizId);
+      if (!b) return;
+      const text = `¡Mira este negocio en *Píllalo Valledupar*! 📍\n\n*${b.name}* (${b.categoryLabel})\n${b.mainPriceRange}\n📍 ${b.address} (${b.barrio})\n🟢 WhatsApp: https://wa.me/${b.whatsapp}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function createCardHTML(b) {
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.address + ', Valledupar, Cesar')}`;
+      const waUrl = `https://wa.me/${b.whatsapp}?text=${encodeURIComponent('¡Hola ' + b.name + '! Los vi en Píllalo Valledupar.')}`;
+      const igHandle = (b.instagram || '').replace('@', '');
+      const tkHandle = (b.tiktok || '').replace('@', '');
+      const isFav = favoriteIds.includes(b.id);
+
+      return `
+        <article class="bento-card">
+          <div class="card-cover" style="background-image: url('${b.cover}');">
+            <div class="cover-badges">
+              ${b.stage === 'nuevo' ? `<span class="badge-new">🌱 Nuevo Emprendimiento • Impulso</span>` : `<span class="badge-established">🏛️ Con Trayectoria</span>`}
+              <div class="cover-right-actions">
+                <span class="badge-rating" onclick="openRatingToastFor(${b.id}, 'Calificación Directa')">
+                  ⭐ ${b.rating.toFixed(1)} <small style="opacity:0.65;">(${b.votes})</small>
+                </span>
+                <button class="btn-fav-heart" onclick="toggleFavorite(${b.id}, event)">${isFav ? '❤️' : '🤍'}</button>
+              </div>
+            </div>
+            <div class="floating-logo"><img src="${b.logo}" alt="${b.name}" /></div>
+            <div class="status-pill"><span class="status-dot"></span> ${b.hours}</div>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="biz-title-row">
+                <h3 class="biz-name">${b.name} <span class="verified-check">✔</span></h3>
+                <span class="biz-cat-tag">${b.categoryLabel}</span>
+              </div>
+              <p class="biz-tagline">${b.tagline}</p>
+            </div>
+            <div class="price-range-widget">
+              <div>
+                <div class="price-range-label">Rango Producto / Servicio Principal</div>
+                <div class="price-range-value">${b.mainPriceRange}</div>
+              </div>
+            </div>
+            <a class="maps-widget" href="${mapsUrl}" target="_blank" onclick="handleChannelClick(${b.id}, 'Maps')">
+              <div class="maps-icon-box">📍</div>
+              <div class="maps-info">
+                <div class="maps-neighborhood">Barrio ${b.barrio} • Valledupar</div>
+                <div class="maps-address">${b.address}</div>
+              </div>
+              <span class="maps-go">Ver Mapa ↗</span>
+            </a>
+            <div class="widgets-grid">
+              <a class="w-btn w-btn-wa" href="${waUrl}" target="_blank" onclick="handleChannelClick(${b.id}, 'WhatsApp')">
+                <span>🟢 WhatsApp</span><span class="w-btn-sub">Escribir Ahora</span>
+              </a>
+              <a class="w-btn w-btn-ig" href="https://instagram.com/${igHandle}" target="_blank" onclick="handleChannelClick(${b.id}, 'Instagram')">
+                <span>📸 Instagram</span><span class="w-btn-sub">${b.instagram}</span>
+              </a>
+              <a class="w-btn w-btn-tk" href="https://tiktok.com/@${tkHandle}" target="_blank" onclick="handleChannelClick(${b.id}, 'TikTok')">
+                <span>🎵 TikTok</span><span class="w-btn-sub">${b.tiktok}</span>
+              </a>
+            </div>
+            <div class="card-footer-actions">
+              <span>📞 ${b.phone} • 👆 <b>${b.clicksReceived}</b> clics</span>
+              <div class="footer-btns-wrap">
+                <button class="btn-rate-card" onclick="openRatingToastFor(${b.id}, 'Botón Calificar')">⭐ Calificar</button>
+                <button class="btn-open-profile" onclick="shareBusinessWhatsApp(${b.id}, event)">📲</button>
+                <button class="btn-open-profile" onclick="openProfileModal(${b.id})">Ver Ficha +</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function applyFilters() {
+      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const budget = document.getElementById('budgetFilter').value;
+      const barrio = document.getElementById('barrioFilter').value;
+      const stage = document.getElementById('stageFilter').value;
+
+      const filtered = sortSolidarity(businesses).filter(b => {
+        if (activeCategory === 'favoritos') { if (!favoriteIds.includes(b.id)) return false; }
+        else if (activeCategory !== 'todos' && b.category !== activeCategory) return false;
+        if (budget !== 'todos' && b.budget !== budget) return false;
+        if (barrio !== 'todos' && b.barrio !== barrio) return false;
+        if (stage !== 'todos' && b.stage !== stage) return false;
+        if (q) {
+          const hay = `${b.name} ${b.categoryLabel} ${b.tagline} ${b.mainPriceRange} ${b.barrio} ${b.description}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      const grid = document.getElementById('directoryGrid');
+      grid.innerHTML = filtered.map(createCardHTML).join('');
+    }
+
+    function filterCategory(cat, btnEl) {
+      activeCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      applyFilters();
+    }
+
+    function renderNewBusinessesSection() {
+      const newOnes = sortSolidarity(businesses.filter(b => b.stage === 'nuevo'));
+      document.getElementById('newBusinessesGrid').innerHTML = newOnes.map(createCardHTML).join('');
+    }
+
+    function renderAnalyticsDashboard() {
+      const totalClicks = businesses.reduce((acc, b) => acc + (b.clicksReceived || 0), 0);
+      const totalWa = businesses.reduce((acc, b) => acc + (b.clicsWhatsapp || 0), 0);
+      const totalVotes = businesses.reduce((acc, b) => acc + (b.votes || 0), 0);
+      const avgStars = businesses.length ? (businesses.reduce((acc, b) => acc + b.rating, 0) / businesses.length).toFixed(2) : '5.00';
+      const lowClickBiz = businesses.filter(b => (b.clicksReceived || 0) < 5);
+
+      document.getElementById('kpiTotalViews').textContent = pageViewsCount;
+      document.getElementById('kpiTotalClicks').textContent = totalClicks;
+      document.getElementById('kpiWhatsappBreakdown').textContent = `🟢 ${totalWa} clics directos a WhatsApp`;
+      document.getElementById('kpiTotalRatings').textContent = totalVotes;
+      document.getElementById('kpiAvgStars').textContent = `Promedio Global: ${avgStars} ★ de 5.0`;
+      document.getElementById('kpiLowClickCount').textContent = lowClickBiz.length;
+
+      const alertContainer = document.getElementById('lowClickAlertList');
+      alertContainer.innerHTML = lowClickBiz.map(b => `
+        <div style="background:#FFFFFF; border:1px solid #FCD34D; border-radius:14px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+          <div>
+            <div style="font-weight:800; font-size:0.9rem;">${b.name}</div>
+            <div style="font-size:0.76rem; color:#B45309; font-weight:700;">⚠️ Solo lleva ${b.clicksReceived} clics • Barrio ${b.barrio}</div>
+          </div>
+          <button class="btn-mini-action" style="background:#059669; color:#fff;" onclick="boostBusinessToBanner(${b.id})">🚀 Destacar Hoy</button>
+        </div>
+      `).join('');
+
+      const tbody = document.getElementById('analyticsTableBody');
+      tbody.innerHTML = [...businesses].sort((a, b) => b.clicksReceived - a.clicksReceived).map(b => {
+        const reportMsg = `¡Hola *${b.name}*! 👋 Te escribimos de *Píllalo Valledupar* 📍.\n\nReporte de visibilidad:\n👀 *Vistas:* ${b.vistasPerfil}\n🟢 *Clics a WhatsApp:* ${b.clicsWhatsapp}\n👆 *Total interacciones:* ${b.clicksReceived}\n⭐ *Calificación:* ${b.rating.toFixed(1)} / 5.0 (${b.votes} opiniones)`;
+        const reportWaUrl = `https://wa.me/${b.whatsapp}?text=${encodeURIComponent(reportMsg)}`;
+        return `
+          <tr>
+            <td><div style="font-weight:800;">${b.name}</div><div style="font-size:0.74rem; color:#64748B;">${b.categoryLabel} • ${b.barrio}</div></td>
+            <td>${b.clicksReceived < 5 ? `<span class="low-click-badge">⚡ Impulsando (${b.clicksReceived})</span>` : `<span class="good-click-badge">🟢 Activo</span>`}</td>
+            <td><b>${b.vistasPerfil}</b></td>
+            <td style="color:#059669; font-weight:800;">${b.clicsWhatsapp}</td>
+            <td>${b.clicsInstagram}</td>
+            <td>${b.clicsTiktok}</td>
+            <td>${b.clicsMaps}</td>
+            <td><b>${b.clicksReceived}</b></td>
+            <td><b>⭐ ${b.rating.toFixed(1)}</b> (${b.votes})</td>
+            <td>
+              <a class="btn-mini-action" style="background:#DCFCE7; color:#166534;" href="${reportWaUrl}" target="_blank">📲 Enviar Reporte</a>
+              <button class="btn-mini-action" style="background:#FEF3C7; color:#92400E;" onclick="boostBusinessToBanner(${b.id})">📢 Banner</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      const ratingsContainer = document.getElementById('recentRatingsList');
+      ratingsContainer.innerHTML = recentRatings.map(r => `
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:14px; padding:12px 14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-weight:800; font-size:0.88rem;">${r.nombre_negocio}</span>
+            <span style="background:#FEF3C7; color:#92400E; font-weight:900; font-size:0.76rem; padding:2px 8px; border-radius:999px;">${'⭐'.repeat(r.estrellas || 5)}</span>
+          </div>
+          <div style="font-size:0.78rem; color:var(--emerald); font-weight:700;">💬 "${r.etiqueta_opinion || 'Excelente atención'}"</div>
+        </div>
+      `).join('');
+    }
+
+    async function boostBusinessToBanner(bizId) {
+      const b = businesses.find(x => x.id === bizId);
+      if (!b) return;
+      const newAd = {
+        etiqueta_badge: "🌱 EMPRENDIMIENTO IMPULSADO HOY",
+        titulo_campana: `🚀 ¡Apoya a ${b.name} en ${b.barrio}!`,
+        anunciante: b.name,
+        descripcion_corta: `${b.tagline}. ${b.mainPriceRange}.`,
+        texto_boton: "Escribir por WhatsApp",
+        whatsapp_destino: b.whatsapp,
+        clics_anuncio: 1
+      };
+      adBanners.unshift(newAd);
+      adBanners = adBanners.slice(0, 2);
+      renderAdBanners();
+      if (supabaseClient) await supabaseClient.from('espacios_publicitarios').insert([newAd]);
+      switchTab('directorio');
+    }
+
+    async function handleChannelClick(bizId, channelName) {
+      const b = businesses.find(x => x.id === bizId);
+      if (!b) return;
+      b.clicksReceived = (b.clicksReceived || 0) + 1;
+      if (channelName === 'WhatsApp') b.clicsWhatsapp = (b.clicsWhatsapp || 0) + 1;
+      if (channelName === 'Instagram') b.clicsInstagram = (b.clicsInstagram || 0) + 1;
+      if (channelName === 'TikTok') b.clicsTiktok = (b.clicsTiktok || 0) + 1;
+      if (channelName === 'Maps') b.clicsMaps = (b.clicsMaps || 0) + 1;
+      openRatingToastFor(bizId, channelName);
+      refreshAllViews();
+      if (supabaseClient) {
+        await supabaseClient.from('registro_clics').insert([{ emprendimiento_id: b.id, nombre_negocio: b.name, canal: channelName }]);
+        await supabaseClient.from('emprendimientos').update({
+          total_clics_recibidos: b.clicksReceived,
+          clics_whatsapp: b.clicsWhatsapp,
+          clics_instagram: b.clicsInstagram,
+          clics_tiktok: b.clicsTiktok,
+          clics_maps: b.clicsMaps
+        }).eq('id', b.id);
+      }
+    }
+
+    function openRatingToastFor(bizId, channelName) {
+      const b = businesses.find(x => x.id === bizId);
+      if (!b) return;
+      lastContactedBizId = bizId;
+      document.getElementById('ratingBizName').textContent = `¿Qué tal te pareció ${b.name}?`;
+      document.getElementById('ratingChannelText').textContent = `Canal: ${channelName} • Califica de 1 a 5 estrellas:`;
+      document.getElementById('ratingToast').classList.add('show');
+    }
+
+    function selectRatingTag(tagText, btnEl) {
+      selectedOpinionTag = tagText;
+      document.querySelectorAll('#quickTagsRow .quick-tag-chip').forEach(btn => btn.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+    }
+
+    function closeRatingToast() { document.getElementById('ratingToast').classList.remove('show'); }
+
+    async function submitQuickRating(stars) {
+      const b = businesses.find(x => x.id === lastContactedBizId);
+      if (b) {
+        const totalPoints = b.rating * b.votes + stars;
+        b.votes += 1;
+        b.rating = totalPoints / b.votes;
+        const newRatingObj = { emprendimiento_id: b.id, nombre_negocio: b.name, canal_tocado: 'Valoración Cliente', estrellas: stars, etiqueta_opinion: selectedOpinionTag };
+        recentRatings.unshift(newRatingObj);
+        refreshAllViews();
+        if (supabaseClient) {
+          await supabaseClient.from('valoraciones_rapidas').insert([newRatingObj]);
+          await supabaseClient.from('emprendimientos').update({ calificacion_promedio: b.rating.toFixed(2), total_valoraciones: b.votes }).eq('id', b.id);
+        }
+      }
+      closeRatingToast();
+    }
+
+    async function openProfileModal(bizId) {
+      const b = businesses.find(x => x.id === bizId);
+      if (!b) return;
+      b.vistasPerfil = (b.vistasPerfil || 0) + 1;
+      refreshAllViews();
+      if (supabaseClient) supabaseClient.from('emprendimientos').update({ vistas_perfil: b.vistasPerfil }).eq('id', b.id);
+      const waUrl = `https://wa.me/${b.whatsapp}`;
+      document.getElementById('profileModalContent').innerHTML = `
+        <button class="modal-close" onclick="closeProfileModal()">✕</button>
+        <h2 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:900;">${b.name} ✔</h2>
+        <p style="color:#475569; margin:10px 0;">${b.description}</p>
+        <div class="price-range-widget" style="margin-bottom:12px;"><div class="price-range-value">${b.mainPriceRange}</div></div>
+        <a class="w-btn w-btn-wa" style="padding:14px; align-items:center;" href="${waUrl}" target="_blank">🟢 Contactar por WhatsApp (${b.phone})</a>
+      `;
+      document.getElementById('profileModal').classList.add('open');
+    }
+    function closeProfileModal() { document.getElementById('profileModal').classList.remove('open'); }
+    function openRegisterModal() { document.getElementById('registerModal').classList.add('open'); }
+    function closeRegisterModal() { document.getElementById('registerModal').classList.remove('open'); }
+    function openAdModal() { document.getElementById('adModal').classList.add('open'); }
+    function closeAdModal() { document.getElementById('adModal').classList.remove('open'); }
+
+    async function submitNewAdBanner(e) {
+      e.preventDefault();
+      const newAd = {
+        etiqueta_badge: document.getElementById('adTipo').value,
+        titulo_campana: document.getElementById('adTitulo').value,
+        anunciante: document.getElementById('adAnunciante').value,
+        descripcion_corta: document.getElementById('adDesc').value,
+        texto_boton: document.getElementById('adBoton').value,
+        whatsapp_destino: document.getElementById('adWhatsapp').value.replace(/\D/g, ''),
+        clics_anuncio: 1
+      };
+      adBanners.unshift(newAd);
+      adBanners = adBanners.slice(0, 2);
+      renderAdBanners();
+      if (supabaseClient) await supabaseClient.from('espacios_publicitarios').insert([newAd]);
+      closeAdModal();
+      switchTab('directorio');
+    }
+
+    async function submitNewBusiness(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value;
+      const category = document.getElementById('regCat').value;
+      const stage = document.getElementById('regStage').value;
+      const barrio = document.getElementById('regBarrio').value;
+      const mainPriceRange = document.getElementById('regPriceRange').value;
+      const address = document.getElementById('regAddress').value;
+      const hours = document.getElementById('regHours').value;
+      const whatsappRaw = document.getElementById('regWhatsapp').value.replace(/\D/g, '');
+      const whatsapp = whatsappRaw.startsWith('57') ? whatsappRaw : '57' + whatsappRaw;
+      const instagram = document.getElementById('regIg').value || '@emprendimiento_vup';
+      const tiktok = document.getElementById('regTk').value || '@emprendimiento_vup';
+      const email = document.getElementById('regEmail').value || '';
+
+      if (supabaseClient) {
+        await supabaseClient.from('emprendimientos').insert([{
+          nombre: name,
+          tipo_registro: stage === 'nuevo' ? 'Emprendimiento' : 'Consolidado',
+          categoria: category,
+          subcategoria: stage === 'nuevo' ? 'Nuevo Emprendimiento' : 'Comercio Local',
+          eslogan: 'Nuevo emprendimiento registrado en Píllalo Valledupar',
+          descripcion: 'Emprendimiento local verificado en Píllalo Valledupar.',
+          etiqueta_rango_precio: mainPriceRange,
+          categoria_presupuesto: 'economico',
+          barrio,
+          direccion: address,
+          horario_texto: hours,
+          whatsapp,
+          telefono_llamada: '+' + whatsapp,
+          instagram_usuario: instagram,
+          tiktok_usuario: tiktok,
+          correo_electronico: email,
+          es_nuevo: stage === 'nuevo'
+        }]);
+        await syncFromSupabase();
+      }
+      closeRegisterModal();
+      switchTab('directorio');
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabName));
+      document.querySelectorAll('.section-view').forEach(sec => sec.classList.remove('active'));
+      const target = document.getElementById('view-' + tabName);
+      if (target) target.classList.add('active');
+      if (tabName === 'analitica') renderAnalyticsDashboard();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function refreshAllViews() {
+      document.getElementById('countAllTab').textContent = businesses.length;
+      document.getElementById('favCountLabel').textContent = `${favoriteIds.length} guardados`;
+      renderAdBanners();
+      applyFilters();
+      renderNewBusinessesSection();
+      renderVacantes();
+      renderAnalyticsDashboard();
+    }
+
+    syncFromSupabase();
+  </script>
+</body>
+</html>
