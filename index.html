@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Píllalo Valledupar — Vitrina Visual por Widgets (V3)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./tailwind.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -142,16 +142,16 @@
   <!-- BARRA SUPERIOR (BASADA EN VERSION_1_V3_ORIGINAL_NOVIA.html)           -->
   <!-- ===================================================================== -->
   <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-xs">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <div class="max-w-6xl mx-auto px-2.5 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-1 sm:gap-3">
       
       <!-- Logo Oficial: Cara de Píllalo + Nombre (Optimizado para móvil: Valledupar abajo para liberar espacio) -->
-      <div onclick="openWelcomeLanding(); window.Pillalo?.speak('welcome');" class="flex items-center space-x-2 sm:space-x-2.5 cursor-pointer group flex-shrink-0">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-amber-50/95 border-2 border-emerald-500/40 shadow-xs group-hover:scale-105 transition flex items-center justify-center p-1 overflow-hidden flex-shrink-0" aria-hidden="true">
+      <div onclick="openWelcomeLanding(); window.Pillalo?.speak('welcome');" class="flex items-center space-x-1.5 sm:space-x-2.5 cursor-pointer group flex-shrink-0">
+        <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-amber-50/95 border-2 border-emerald-500/40 shadow-xs group-hover:scale-105 transition flex items-center justify-center p-1 overflow-hidden flex-shrink-0" aria-hidden="true">
           <img src="./pillalo/assets/pillalo-face-logo.png" alt="Píllalo" class="w-full h-full object-contain object-center">
         </div>
-        <div class="leading-tight">
-          <h1 class="text-lg sm:text-xl font-black tracking-tight text-slate-900 leading-none">Píllalo</h1>
-          <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-[#00AA9D] block mt-0.5">Valledupar</span>
+        <div class="leading-tight hidden min-[350px]:block">
+          <h1 class="text-base sm:text-xl font-black tracking-tight text-slate-900 leading-none">Píllalo</h1>
+          <span class="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-[#00AA9D] block mt-0.5">Valledupar</span>
         </div>
       </div>
 
@@ -170,23 +170,27 @@
           <span>Vacantes</span>
         </button>
         <!-- Panel Dueños (Secreto bajo PIN 2026) -->
-        </div>
+        <button id="nav-analytics" onclick="switchTab('tab-analytics')" class="hidden px-3 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-chart-line text-indigo-600"></i>
+          <span>Panel Dueños</span>
+        </button>
+      </div>
 
       <!-- Right Buttons: Acceso Dueño de Negocio + Registrar Negocio (Garantiza visibilidad en móvil) -->
-      <div class="flex items-center space-x-1.5 sm:space-x-2 flex-shrink-0">
-        <button onclick="openWelcomeLanding()" class="px-2 sm:px-3 py-2 bg-[#FDF1E1] hover:bg-white text-[#01483B] border border-[#01483B]/20 rounded-xl text-xs font-black transition flex items-center gap-1 cursor-pointer shadow-2xs" title="Conoce qué es Píllalo Valledupar">
+      <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+        <button onclick="openWelcomeLanding()" class="px-2 py-1.5 sm:px-3 sm:py-2 bg-[#FDF1E1] hover:bg-white text-[#01483B] border border-[#01483B]/20 rounded-xl text-xs font-black transition flex items-center gap-1 cursor-pointer shadow-2xs" title="Conoce qué es Píllalo Valledupar">
           <span class="text-sm">🐾</span>
           <span class="hidden sm:inline">¿Qué es?</span>
         </button>
-        <a id="btnTopHelpUpdate" data-pillalo-official-wa="true" data-pillalo-msg="Hola, quiero actualizar mi perfil en Píllalo: [nombre del negocio]" href="#" target="_blank" data-pillalo-direct="true" class="px-2.5 sm:px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer" title="¿Quieres cambiar algo de tu perfil? Escríbenos">
-          <i class="fa-brands fa-whatsapp text-emerald-600"></i>
-          <span class="hidden sm:inline">¿Quieres cambiar algo de tu perfil? Escríbenos</span>
-          <span class="sm:hidden font-black text-[11px]">Actualizar Perfil</span>
-        </a>
-        <button onclick="switchTab('tab-register')" class="px-3 sm:px-4 py-2 bg-[#01483B] hover:bg-[#00AA9D] text-white rounded-xl text-xs font-black shadow-sm transition flex items-center space-x-1.5 cursor-pointer flex-shrink-0">
-          <i class="fa-solid fa-plus text-xs"></i>
+        <button id="btnTopEnterProfile" onclick="handleEnterProfileClick()" class="px-2 py-1.5 sm:px-3 sm:py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer" title="Entrar a mi perfil de negocio para ver estadísticas y editar datos">
+          <i class="fa-solid fa-store text-[#01483B] text-xs"></i>
+          <span class="hidden sm:inline">Entrar a mi perfil</span>
+          <span class="sm:hidden font-black text-[10px]">Mi Perfil</span>
+        </button>
+        <button onclick="switchTab('tab-register')" class="px-2.5 sm:px-4 py-1.5 sm:py-2 bg-[#01483B] hover:bg-[#00AA9D] text-white rounded-xl text-xs font-black shadow-sm transition flex items-center gap-1 cursor-pointer flex-shrink-0">
+          <i class="fa-solid fa-plus text-[11px] sm:text-xs"></i>
           <span class="hidden sm:inline">Registrar Negocio</span>
-          <span class="sm:hidden font-extrabold">Registrar</span>
+          <span class="sm:hidden font-black text-[11px]">Registrar</span>
         </button>
       </div>
 
@@ -197,9 +201,7 @@
       <button id="mob-nav-explore" onclick="switchTab('tab-explore')" class="px-2.5 py-1 rounded-xl text-[#01483B] bg-[#FDAB01]/25 border border-[#FDAB01]/40 font-black flex items-center gap-1 transition shadow-2xs"><i class="fa-solid fa-grip"></i> Directorio</button>
       <button id="mob-nav-nuevos" onclick="switchTab('tab-nuevos')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 flex items-center gap-1 transition"><i class="fa-solid fa-bolt text-emerald-600"></i> Recién Llegados</button>
       <button id="mob-nav-jobs" onclick="switchTab('tab-jobs')" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 flex items-center gap-1 transition"><i class="fa-solid fa-briefcase text-blue-600"></i> Vacantes</button>
-      <a id="mob-nav-help-update" data-pillalo-official-wa="true" data-pillalo-msg="Hola, quiero actualizar mi perfil en Píllalo: [nombre del negocio]" href="#" target="_blank" data-pillalo-direct="true" class="px-2 py-1 rounded-lg text-slate-600 hover:text-slate-900 font-semibold flex items-center gap-1 transition" title="¿Quieres cambiar algo de tu perfil? Escríbenos">
-        <i class="fa-brands fa-whatsapp text-emerald-600"></i> Actualizar
-      </a>
+      <button id="mob-nav-my-biz" onclick="handleEnterProfileClick()" class="px-2 py-1 rounded-lg text-slate-600 hover:text-slate-900 font-semibold flex items-center gap-1 transition"><i class="fa-solid fa-store text-amber-600"></i> Mi Perfil</button>
     </nav>
   </header>
 
@@ -3213,35 +3215,49 @@
       `;
 
       if (expBanners.length) {
-        const impulsoPool = expBanners.filter(b => b.type === 'impulso_solidario');
-        const otherPool = expBanners.filter(b => b.type !== 'impulso_solidario');
+        // Seleccionar hasta 4 banners garantizando que todos sean de negocios totalmente distintos
+        const selectedBanners = [];
+        const usedBizKeys = new Set();
+        const total = expBanners.length;
 
-        let selectedBanners = [];
+        for (let i = 0; i < total && selectedBanners.length < 4; i++) {
+          const idx = (currentBannerRotationOffset + i) % total;
+          const b = expBanners[idx];
+          if (!b) continue;
 
-        if (impulsoPool.length >= MIN_BANNERS_IMPULSO) {
-          // Garantizar siempre al menos MIN_BANNERS_IMPULSO (2) de Impulso solidario en el carrusel
-          const impIdx1 = currentBannerRotationOffset % impulsoPool.length;
-          const impIdx2 = (currentBannerRotationOffset + 1) % impulsoPool.length;
-          const imp1 = impulsoPool[impIdx1];
-          const imp2 = impulsoPool[impIdx2];
+          // Clave única del negocio: bizId, o si es publicidad externa bizName/title
+          const bizKey = (b.bizId !== undefined && b.bizId !== null)
+            ? 'biz_' + b.bizId
+            : 'pub_' + (b.bizName || b.title || b.id);
 
-          // Los otros 2 espacios se rotan del resto (publicidad externa u otros de impulso)
-          const remPool = otherPool.length ? otherPool : impulsoPool;
-          const remIdx1 = currentBannerRotationOffset % remPool.length;
-          const remIdx2 = (currentBannerRotationOffset + 1) % remPool.length;
-          const rem1 = remPool[remIdx1];
-          const rem2 = remPool[(remIdx2 === remIdx1 && remPool.length > 1) ? (remIdx1 + 1) % remPool.length : remIdx2];
-
-          // Distribuir equitativamente: 1 de impulso arriba y 1 de impulso abajo
-          selectedBanners = [imp1, rem1, imp2, rem2];
-        } else {
-          // Fallback seguro si la lista tiene menos de 2 de impulso
-          selectedBanners = expBanners.slice(0, 4);
+          if (!usedBizKeys.has(bizKey)) {
+            usedBizKeys.add(bizKey);
+            selectedBanners.push(b);
+          }
         }
+
+        // Si hay muy pocos negocios únicos en total (< 4), completar sin repetir el mismo banner consecutivamente
+        if (selectedBanners.length < 4 && total > selectedBanners.length) {
+          for (let i = 0; i < total && selectedBanners.length < 4; i++) {
+            const idx = (currentBannerRotationOffset + i) % total;
+            const b = expBanners[idx];
+            if (b && !selectedBanners.includes(b)) {
+              selectedBanners.push(b);
+            }
+          }
+        }
+
+        const topBanners = selectedBanners.slice(0, 2);
+        const bottomBanners = selectedBanners.slice(2, 4);
 
         if (topContainer) {
-          topContainer.innerHTML = [selectedBanners[0], selectedBanners[1]].filter(Boolean).map(renderBannerCard).join('');
+          topContainer.innerHTML = topBanners.map(renderBannerCard).join('');
         }
+        if (bottomContainer) {
+          bottomContainer.innerHTML = bottomBanners.map(renderBannerCard).join('');
+          bottomContainer.style.display = bottomBanners.length ? '' : 'none';
+        }
+      }
         if (bottomContainer) {
           bottomContainer.innerHTML = [selectedBanners[2], selectedBanners[3]].filter(Boolean).map(renderBannerCard).join('');
         }
