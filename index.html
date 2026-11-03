@@ -17,6 +17,7 @@
       color: #0F172A;
     }
 
+    /* Tactile 3D Category Buttons (Airbnb / Apple style from mockup) */
     .cat-3d-btn {
       background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
       border: 1.5px solid #E2E8F0;
@@ -33,6 +34,7 @@
       box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.18), inset 0 2px 0 0 #FFFFFF;
     }
 
+    /* Official Instagram Gradient Widget */
     .ig-widget-gradient {
       background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
       box-shadow: 0 10px 25px -5px rgba(214, 36, 159, 0.35);
@@ -43,6 +45,7 @@
       box-shadow: 0 15px 30px -5px rgba(214, 36, 159, 0.5);
     }
 
+    /* Official WhatsApp Green Widget */
     .wa-widget-green {
       background: linear-gradient(160deg, #25D366 0%, #16A34A 100%);
       box-shadow: 0 12px 28px -6px rgba(22, 163, 74, 0.4);
@@ -53,6 +56,7 @@
       box-shadow: 0 18px 34px -6px rgba(22, 163, 74, 0.55);
     }
 
+    /* Official TikTok Obsidian Widget with Neon Note Effect */
     .tiktok-widget-black {
       background: linear-gradient(145deg, #18181B 0%, #09090B 100%);
       box-shadow: 0 10px 25px -5px rgba(9, 9, 11, 0.4);
@@ -65,6 +69,7 @@
       filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 2px 0px #FE2C55);
     }
 
+    /* Stylized Google Maps Street Pattern */
     .gmaps-pattern {
       background-color: #E8ECEF;
       background-image: 
@@ -77,6 +82,7 @@
       background-size: 180px 180px, 160px 160px, 240px 240px, 100% 100%, 26px 26px, 26px 26px;
     }
 
+    /* Card Soft Elevation */
     .bento-white-card {
       background: #FFFFFF;
       border: 1px solid rgba(226, 232, 240, 0.9);
@@ -84,20 +90,44 @@
       transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .bento-white-card:hover {
-      box-shadow: 0 22px 45px -12px rgba(15, 23, 42, 0.14);
+      transform: translateY(-3px);
+      box-shadow: 0 22px 45px -12px rgba(15, 23, 42, 0.16);
     }
 
-    .fade-in { animation: fadeIn 0.28s ease-out forwards; }
+    /* Sticker / Die-cut Effect for QR Badge */
+    .sticker-diecut {
+      box-shadow: 0 24px 50px -12px rgba(15, 23, 42, 0.35), 0 0 0 6px #FFFFFF, 0 0 0 8px #10B981;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.28s ease-out forwards;
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #printableStickerArea, #printableStickerArea * { visibility: visible; }
+      #printableStickerArea {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   </style>
 </head>
 <body class="pb-16 antialiased">
 
+  <!-- ===================================================================== -->
+  <!-- BARRA SUPERIOR (BASADA EN VERSION_1_V3_ORIGINAL_NOVIA.html)           -->
+  <!-- ===================================================================== -->
   <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-xs">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      
+      <!-- Logo -->
       <div onclick="switchTab('tab-explore')" class="flex items-center space-x-2.5 cursor-pointer group">
         <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white font-extrabold text-xl shadow-md group-hover:scale-105 transition">
           P
@@ -107,96 +137,129 @@
             <h1 class="text-xl font-black tracking-tight text-slate-900">Píllalo</h1>
             <span class="bg-emerald-100 text-emerald-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Valledupar</span>
           </div>
-          <p class="text-xs text-slate-500 font-medium hidden sm:block">Directorio visual de emprendimientos y servicios independientes</p>
+          <p class="text-xs text-slate-500 font-medium hidden sm:block">Directorio visual de negocios, comercios y servicios independientes</p>
         </div>
       </div>
 
+      <!-- Navigation Pills (Center) -->
       <div class="hidden md:flex items-center space-x-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 text-xs font-bold">
         <button id="nav-explore" onclick="switchTab('tab-explore')" class="px-3.5 py-2 rounded-xl bg-slate-900 text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-grip"></i>
           <span>Explorar Directorio</span>
         </button>
         <button id="nav-nuevos" onclick="switchTab('tab-nuevos')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
-          <i class="fa-solid fa-seedling text-emerald-600"></i>
-          <span>Emprendimientos Nuevos</span>
+          <i class="fa-solid fa-bolt text-emerald-600"></i>
+          <span>Recién Llegados</span>
         </button>
         <button id="nav-jobs" onclick="switchTab('tab-jobs')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-briefcase text-blue-600"></i>
           <span>Vacantes</span>
         </button>
         <button id="nav-certificate" onclick="switchTab('tab-certificate')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
-          <i class="fa-solid fa-certificate text-amber-500"></i>
-          <span>Certificado IG</span>
+          <i class="fa-solid fa-qrcode text-amber-500"></i>
+          <span>Sticker & QR</span>
         </button>
+        <!-- Pestaña Privada de Analítica & Ads (Oculta al público; solo visible al desbloquear Modo Dueño) -->
         <button id="nav-analytics" onclick="switchTab('tab-analytics')" class="hidden px-3.5 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-chart-line text-indigo-600"></i>
           <span>Panel Dueños (Analítica & Ads)</span>
         </button>
       </div>
 
+      <!-- Right Buttons -->
       <div class="flex items-center space-x-2">
         <button onclick="switchTab('tab-certificate')" class="md:hidden px-3 py-2 bg-amber-50 text-amber-800 border border-amber-200 rounded-xl text-xs font-bold">
-          <i class="fa-solid fa-certificate"></i>
+          <i class="fa-solid fa-qrcode"></i>
         </button>
         <button onclick="switchTab('tab-register')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold shadow-sm transition flex items-center space-x-1.5 cursor-pointer">
           <i class="fa-solid fa-plus"></i>
           <span>Registrar Negocio</span>
         </button>
       </div>
+
     </div>
 
+    <!-- Mobile Sub-Nav -->
     <div class="md:hidden flex items-center justify-around border-t border-slate-100 bg-white px-2 py-2 text-xs font-bold">
       <button onclick="switchTab('tab-explore')" class="text-emerald-700 flex items-center gap-1"><i class="fa-solid fa-grip"></i> Directorio</button>
-      <button onclick="switchTab('tab-nuevos')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-seedling text-emerald-600"></i> Nuevos</button>
+      <button onclick="switchTab('tab-nuevos')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-bolt text-emerald-600"></i> Recién Llegados</button>
       <button onclick="switchTab('tab-jobs')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-briefcase text-blue-600"></i> Vacantes</button>
-      <button onclick="switchTab('tab-certificate')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-award text-amber-500"></i> Insignia</button>
+      <button onclick="switchTab('tab-certificate')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-qrcode text-amber-500"></i> Sticker QR</button>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto px-4 pt-6">
 
+    <!-- ===================================================================== -->
+    <!-- TAB 1: EXPLORAR DIRECTORIO (BANNER GRANDE + 9 CATEGORÍAS + COMPACTAS) -->
+    <!-- ===================================================================== -->
     <section id="tab-explore" class="space-y-6 fade-in">
-      <div id="adSpotlightBanner" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
 
-      <div class="flex items-center justify-start sm:justify-center gap-3 overflow-x-auto py-2 px-1" id="categoryDock">
-        <button onclick="setCategory('all', this)" class="cat-3d-btn active px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+      <!-- BANNER PUBLICITARIO SUPERIOR MÁS GRANDE Y LLAMATIVO (CONTROLADO POR LOS DUEÑOS) -->
+      <div id="adSpotlightBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+
+      <!-- 1. TACTILE 3D CATEGORY DOCK (9 CATEGORÍAS + TODOS) -->
+      <div class="flex items-center justify-start gap-2.5 overflow-x-auto py-2.5 px-1" id="categoryDock">
+        <button onclick="setCategory('all', this)" class="cat-3d-btn active px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <span class="text-2xl">✨</span>
-          <span class="text-sm font-extrabold text-slate-900">Todos</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Todos</span>
         </button>
-        <button onclick="setCategory('comida', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+        <button onclick="setCategory('comida', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <span class="text-2xl">🍔</span>
-          <span class="text-sm font-extrabold text-slate-900">Comida</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Comida</span>
         </button>
-        <button onclick="setCategory('ropa', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+        <button onclick="setCategory('ropa', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <span class="text-2xl">👖</span>
-          <span class="text-sm font-extrabold text-slate-900">Jeans & Ropa</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Jeans & Ropa</span>
         </button>
-        <button onclick="setCategory('perfumes', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+        <button onclick="setCategory('calzado', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">👟</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Calzado</span>
+        </button>
+        <button onclick="setCategory('accesorios', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">👜</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Accesorios</span>
+        </button>
+        <button onclick="setCategory('perfumes', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <span class="text-2xl">💎</span>
-          <span class="text-sm font-extrabold text-slate-900">Perfumes</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Perfumes</span>
         </button>
-        <button onclick="setCategory('aires', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
-          <span class="text-2xl">❄️</span>
-          <span class="text-sm font-extrabold text-slate-900">Aires Acondicionados</span>
+        <button onclick="setCategory('belleza', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">💄</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Belleza</span>
         </button>
-        <button onclick="setCategory('belleza', this)" class="cat-3d-btn px-5 py-3 rounded-2xl flex items-center gap-2.5 whitespace-nowrap cursor-pointer">
+        <button onclick="setCategory('serv_belleza', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <span class="text-2xl">💅</span>
-          <span class="text-sm font-extrabold text-slate-900">Belleza & Uñas</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Servicios de Belleza</span>
+        </button>
+        <button onclick="setCategory('tecnicos', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">🛠️</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Servicios Técnicos & Mantenimiento</span>
+        </button>
+        <button onclick="setCategory('profesionales', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">👨‍💼</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Profesionales Independientes</span>
         </button>
       </div>
 
+      <!-- 2. BUSCADOR CON LUPA + PÍLDORAS DE FILTRO (PRESUPUESTO, BARRIOS, RECIÉN LLEGADOS, CON TRAYECTORIA) -->
       <div class="bg-white/80 backdrop-blur-md rounded-3xl p-4 sm:p-5 border border-slate-200/90 shadow-xs space-y-4">
+        
+        <!-- Search Input -->
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400 text-base"></i>
           <input type="text" id="searchInput" oninput="filterBusinesses()" 
-            placeholder="Busca en Valledupar: ropa de niñas, jeans, perfumes, arreglo de aire, uñas, arepas..." 
+            placeholder="Busca en Valledupar: restaurantes, calzado, cadenas, bolsos, maquillaje, uñas, técnicos de aire, profesionales..." 
             class="w-full pl-11 pr-24 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
           <button onclick="resetAllFilters()" class="absolute right-2.5 top-2 bottom-2 px-3 bg-slate-200/70 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition cursor-pointer">
             Ver Todos
           </button>
         </div>
 
+        <!-- 4 Filter Pills -->
         <div class="flex flex-wrap items-center justify-center gap-2.5 text-xs">
+          
+          <!-- Filtro 1: Presupuesto -->
           <div class="flex items-center bg-white border border-slate-200 rounded-xl px-3.5 py-2 shadow-2xs">
             <span class="mr-1.5 text-sm">💰</span>
             <span class="font-bold text-slate-600 mr-1.5">Presupuesto:</span>
@@ -208,6 +271,7 @@
             </select>
           </div>
 
+          <!-- Filtro 2: Barrios de Valledupar -->
           <div class="flex items-center bg-white border border-slate-200 rounded-xl px-3.5 py-2 shadow-2xs">
             <span class="mr-1.5 text-sm">📍</span>
             <span class="font-bold text-slate-600 mr-1.5">Barrios de Valledupar:</span>
@@ -218,55 +282,76 @@
               <option value="San Joaquín">San Joaquín</option>
               <option value="Los Cortijos">Los Cortijos</option>
               <option value="La Nevada">La Nevada / Domicilio</option>
+              <option value="Fundadores">Fundadores</option>
+              <option value="Las Flores">Las Flores</option>
+              <option value="Centro">Centro</option>
             </select>
           </div>
 
+          <!-- Filtro 3: Recién Llegados -->
           <button id="btn-age-new" onclick="setAgeFilter('nuevo')" class="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer">
-            <span class="text-sm">🌱</span>
-            <span>Nuevos Emprendimientos</span>
+            <span class="text-sm">🆕</span>
+            <span>Recién Llegados</span>
           </button>
 
+          <!-- Filtro 4: Con Trayectoria -->
           <button id="btn-age-established" onclick="setAgeFilter('trayectoria')" class="px-3.5 py-2 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer">
             <span class="text-sm">🏛️</span>
             <span>Con Trayectoria</span>
           </button>
+
         </div>
       </div>
 
-      <div id="businessList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+      <!-- 3. GRILLA COMPACTA DE NEGOCIOS (3 POR FILA PARA VER MUCHOS MÁS Y ENTRAR AL PERFIL) -->
+      <div id="businessList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Injected via JS -->
+      </div>
+
     </section>
 
+    <!-- ===================================================================== -->
+    <!-- TAB 2: VISTA PERFIL COMPLETO DE LA EMPRESA (CON TODOS LOS WIDGETS)    -->
+    <!-- ===================================================================== -->
     <section id="tab-company-profile" class="hidden fade-in space-y-6">
       <div id="companyProfileContainer"></div>
     </section>
 
+    <!-- ===================================================================== -->
+    <!-- TAB 3: RECIÉN LLEGADOS (ROTACIÓN SEMANAL DE REGISTRADOS ESTA SEMANA)  -->
+    <!-- ===================================================================== -->
     <section id="tab-nuevos" class="hidden fade-in space-y-5">
       <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <span class="bg-emerald-400/20 text-emerald-200 border border-emerald-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-            🌱 Visibilidad y Arranque Solidario
+            🆕 Rotación Semanal Automática
           </span>
-          <h2 class="text-2xl sm:text-3xl font-black mt-2">Emprendimientos Nuevos que Puedes Apoyar a Crecer</h2>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">Recién Llegados a Píllalo Esta Semana</h2>
           <p class="text-emerald-50 text-sm mt-1 max-w-2xl">
-            Aquí impulsamos a los emprendimientos y trabajadores independientes que acaban de comenzar en Valledupar o que han tenido pocos clics. ¡Conócelos y apóyalos!
+            Esta ventana cambia semanalmente: los restaurantes, negocios y servicios que se registran durante la semana aparecen aquí de primeros. ¡Toca cualquiera para abrir su perfil completo!
           </p>
         </div>
         <button onclick="switchTab('tab-register')" class="px-5 py-3 bg-white text-slate-900 hover:bg-emerald-50 rounded-2xl text-xs font-black shadow-md whitespace-nowrap cursor-pointer">
-          <i class="fa-solid fa-plus text-emerald-600 mr-1"></i> Sumar mi Emprendimiento
+          <i class="fa-solid fa-plus text-emerald-600 mr-1"></i> Sumar mi Negocio esta Semana
         </button>
       </div>
-      <div id="nuevosGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+      <div id="nuevosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
     </section>
 
+    <!-- ===================================================================== -->
+    <!-- TAB 4: VACANTES Y EMPLEO LOCAL                                        -->
+    <!-- ===================================================================== -->
     <section id="tab-jobs" class="hidden fade-in space-y-5">
       <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md">
         <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
           💼 Oportunidades Laborales
         </span>
-        <h2 class="text-2xl sm:text-3xl font-black mt-2">Vacantes en Emprendimientos de Valledupar</h2>
-        <p class="text-slate-300 text-sm mt-1 max-w-xl">Conecta con negocios locales que están creciendo y buscando apoyo o talento.</p>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Vacantes en Negocios de Valledupar</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-xl">
+          Conecta con establecimientos y comercios locales que están buscando apoyo o talento.
+        </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div id="jobsGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div class="bento-white-card rounded-3xl p-6 space-y-3">
           <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full">Tiempo Completo / Medio Tiempo</span>
           <h3 class="text-lg font-black text-slate-900">Asesora de Ventas y Atención por WhatsApp</h3>
@@ -276,7 +361,9 @@
             <a href="https://wa.me/573009876543?text=Hola%20Oasis%20Denim,%20vi%20la%20vacante%20en%20Píllalo" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center">
               <i class="fa-brands fa-whatsapp mr-1"></i> Postular por WhatsApp
             </a>
-            <button onclick="openCompanyProfile(1)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">Ver Perfil</button>
+            <button onclick="openCompanyProfile(1)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">
+              Ver Perfil
+            </button>
           </div>
         </div>
 
@@ -289,104 +376,189 @@
             <a href="https://wa.me/573001234567?text=Hola%20FríoValle,%20me%20interesa%20la%20vacante" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center">
               <i class="fa-brands fa-whatsapp mr-1"></i> Postular por WhatsApp
             </a>
-            <button onclick="openCompanyProfile(3)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">Ver Perfil</button>
+            <button onclick="openCompanyProfile(3)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">
+              Ver Perfil
+            </button>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ===================================================================== -->
+    <!-- TAB 5: STICKER / CERTIFICADO LLAMATIVO CON CÓDIGO QR DIRECTO AL PERFIL-->
+    <!-- ===================================================================== -->
     <section id="tab-certificate" class="hidden fade-in">
       <div class="bento-white-card rounded-3xl p-6 sm:p-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div class="space-y-4">
-            <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full uppercase">🎓 Certificado Oficial de Registro</span>
-            <h2 class="text-2xl font-black text-slate-900">Generador de Insignia para Historias</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Columna Izquierda: Configuración del Sticker QR -->
+          <div class="lg:col-span-6 space-y-4">
+            <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase">
+              📲 Sticker Oficial para Mesas, Mostrador y Redes
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Sticker y Código QR Directo al Perfil del Negocio</h2>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Al registrarse, cada emprendimiento descarga su imagen oficial lista para publicar en Instagram Stories y estados de WhatsApp: <em>"¡También nos puedes encontrar en Píllalo Valledupar!"</em>.
+              Cada restaurante o negocio recibe su <b>Sticker Oficial de Píllalo con Código QR único</b>. Cuando un cliente llega al local y escanea el QR con su celular, <b>se abre enseguida el Perfil Completo de ese negocio</b> con su WhatsApp, Instagram, TikTok, mapa y estrellas.
             </p>
-            <div class="space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+
+            <div class="space-y-3 bg-slate-50 p-5 rounded-3xl border border-slate-200">
               <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1">Nombre del Emprendimiento</label>
-                <input type="text" id="certBrandName" value="Oasis Denim Valle" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-semibold">
+                <label class="block text-xs font-extrabold text-emerald-800 mb-1">1. Selecciona un Negocio Registrado para generar su QR:</label>
+                <select id="certBizSelect" onchange="selectBizForSticker()" class="w-full px-3.5 py-2.5 bg-white border-2 border-emerald-500 rounded-xl text-sm font-black text-slate-900 cursor-pointer">
+                  <!-- Llenado automático con los negocios -->
+                </select>
               </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1">Rango del Producto Principal</label>
-                <input type="text" id="certCategory" value="👖 Rango en Jeans: $50.000 – $85.000 COP" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-semibold">
-              </div>
-              <div class="grid grid-cols-2 gap-2">
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div>
-                  <label class="block text-xs font-bold text-slate-700 mb-1">Dirección / Barrio</label>
-                  <input type="text" id="certLocation" value="Cra 15 #13B-24 · Doce de Octubre" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold">
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Nombre en el Sticker</label>
+                  <input type="text" id="certBrandName" value="Luxury Arepas & Antojos" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold">
                 </div>
                 <div>
-                  <label class="block text-xs font-bold text-slate-700 mb-1">Instagram / TikTok</label>
-                  <input type="text" id="certIg" value="@oasis_denimvalle" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold">
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Especialidad / Categoría</label>
+                  <input type="text" id="certCategory" value="🍔 Comida & Restaurantes" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold">
                 </div>
               </div>
-              <button onclick="alert('¡Certificado descargado listo para subir a tus historias!')" class="w-full py-3 wa-widget-green text-white rounded-xl text-xs font-extrabold cursor-pointer">
-                <i class="fa-solid fa-download mr-1.5"></i> Descargar Imagen para Historias
-              </button>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Ubicación / Barrio</label>
+                  <input type="text" id="certLocation" value="Los Cortijos · Valledupar" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Usuario Instagram / TikTok</label>
+                  <input type="text" id="certIg" value="@luxuryarepas_valle" oninput="updateCertPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold">
+                </div>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-2.5 pt-2">
+                <button onclick="window.print()" class="flex-1 py-3 wa-widget-green text-white rounded-xl text-xs font-extrabold cursor-pointer flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-print"></i>
+                  <span>Imprimir / Guardar Sticker PDF</span>
+                </button>
+                <button onclick="simulateQrScan()" class="flex-1 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-extrabold cursor-pointer flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-mobile-screen-button text-amber-400"></i>
+                  <span>Probar Escaneo QR (Abrir Perfil)</span>
+                </button>
+              </div>
             </div>
           </div>
 
-          <div class="flex justify-center">
-            <div class="w-72 bg-gradient-to-b from-slate-900 via-emerald-950 to-slate-950 text-white rounded-[32px] p-6 shadow-2xl border-4 border-white flex flex-col justify-between min-h-[460px] text-center">
-              <div class="flex items-center justify-between">
-                <span class="bg-white/10 px-3 py-1 rounded-full text-[11px] font-bold text-emerald-300">● Píllalo Valledupar</span>
-                <span class="bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full">VERIFICADO</span>
-              </div>
-              <div class="my-auto space-y-3 py-4">
-                <div class="w-20 h-20 rounded-full bg-white text-slate-900 mx-auto flex items-center justify-center text-2xl font-black shadow-lg" id="cardInitial">OD</div>
-                <p class="text-[10px] uppercase tracking-widest text-emerald-400 font-extrabold">Negocio Oficialmente Registrado</p>
-                <h3 id="cardTitle" class="text-xl font-black text-white">Oasis Denim Valle</h3>
-                <p id="cardDesc" class="text-xs bg-white/10 py-1 px-2.5 rounded-full text-emerald-200 font-bold inline-block">👖 Rango en Jeans: $50.000 – $85.000 COP</p>
-                <div class="pt-2 text-xs text-slate-300 space-y-1 font-semibold">
-                  <p id="cardLoc">📍 Cra 15 #13B-24 · Doce de Octubre</p>
-                  <p id="cardInsta">📸 @oasis_denimvalle</p>
+          <!-- Columna Derecha: Diseño Visual del Sticker / Hablador con QR -->
+          <div class="lg:col-span-6 flex justify-center py-4">
+            <div id="printableStickerArea" class="w-80 sm:w-96 bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900 text-white rounded-[40px] p-6 sticker-diecut relative overflow-hidden text-center space-y-4">
+              
+              <!-- Círculos decorativos de fondo -->
+              <div class="absolute -top-12 -right-12 w-36 h-36 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-amber-400/20 rounded-full blur-2xl pointer-events-none"></div>
+
+              <!-- Encabezado del Sticker -->
+              <div class="flex items-center justify-between border-b border-white/15 pb-3">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 font-black text-base flex items-center justify-center shadow-md">P</div>
+                  <div class="text-left">
+                    <p class="text-xs font-black tracking-tight leading-none text-white">PÍLLALO VALLEDUPAR</p>
+                    <p class="text-[10px] font-bold text-emerald-300">Comercio Oficial Verificado</p>
+                  </div>
                 </div>
+                <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-xs">
+                  ★ OFICIAL
+                </span>
               </div>
-              <div class="bg-white/10 rounded-2xl p-3 border border-white/15">
-                <p class="text-[10px] text-slate-300">Búscanos y contáctanos directo en:</p>
-                <p class="text-xs font-black text-emerald-300">jguao18.github.io/pillalo-valledupar</p>
+
+              <!-- Nombre y Logo del Restaurante / Negocio -->
+              <div class="space-y-1.5 pt-1">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white text-slate-900 font-black text-xl shadow-xl border-4 border-emerald-400" id="cardInitial">
+                  LA
+                </div>
+                <h3 id="cardTitle" class="text-2xl font-black text-white tracking-tight leading-tight">Luxury Arepas & Antojos</h3>
+                <p id="cardDesc" class="text-xs bg-emerald-500/20 border border-emerald-400/30 py-1 px-3 rounded-full text-emerald-200 font-extrabold inline-block">
+                  🍔 Comida & Restaurantes
+                </p>
               </div>
+
+              <!-- Caja Blanca Central con el Código QR Escaneable -->
+              <div class="bg-white text-slate-900 rounded-3xl p-4 shadow-2xl mx-auto max-w-[230px] space-y-2 border-4 border-amber-400">
+                <p class="text-[10px] font-black uppercase tracking-wider text-emerald-700">📱 ¡ESCANÉAME CON TU CELULAR!</p>
+                <div class="flex justify-center">
+                  <img id="stickerQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fjguao18.github.io%2Fpillalo-valledupar%2F%3Fnegocio%3D5" alt="Código QR del Negocio" class="w-36 h-36 rounded-xl">
+                </div>
+                <p class="text-[11px] font-extrabold text-slate-800 leading-tight">
+                  Mira nuestro WhatsApp, Redes, Ubicación y Califícanos con ⭐
+                </p>
+              </div>
+
+              <!-- Iconos de lo que encuentran al escanear -->
+              <div class="flex items-center justify-center gap-3 pt-1">
+                <span class="px-2.5 py-1 rounded-xl bg-emerald-600/30 border border-emerald-400/30 text-[11px] font-bold flex items-center gap-1">
+                  <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp
+                </span>
+                <span class="px-2.5 py-1 rounded-xl bg-pink-600/30 border border-pink-400/30 text-[11px] font-bold flex items-center gap-1">
+                  <i class="fa-brands fa-instagram text-pink-400"></i> Instagram
+                </span>
+                <span class="px-2.5 py-1 rounded-xl bg-white/10 border border-white/20 text-[11px] font-bold flex items-center gap-1">
+                  <i class="fa-solid fa-location-dot text-red-400"></i> Mapa
+                </span>
+              </div>
+
+              <!-- Pie del Sticker -->
+              <div class="pt-1 text-[11px] text-slate-300 font-semibold flex items-center justify-between border-t border-white/15">
+                <span id="cardLoc">📍 Los Cortijos · Valledupar</span>
+                <span id="cardInsta" class="text-emerald-300 font-bold">📸 @luxuryarepas_valle</span>
+              </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
+    <!-- ===================================================================== -->
+    <!-- TAB 6: REGISTRAR NEGOCIO O SERVICIO (CON DESCRIPCIÓN Y 9 CATEGORÍAS)  -->
+    <!-- ===================================================================== -->
     <section id="tab-register" class="hidden fade-in">
       <div class="bento-white-card rounded-3xl p-6 sm:p-8 max-w-2xl mx-auto space-y-5">
         <div class="text-center space-y-1.5">
           <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full">
-            🎁 15 a 30 Días Gratis de Prueba · Luego desde $3.000 COP/mes
+            💳 Planes Parejos para Todos: 1 Mes $5.000 · 3 Meses $12.000 · 6 Meses $21.000 · 1 Año $36.000
           </span>
-          <h2 class="text-2xl font-black text-slate-900">Registra tu Emprendimiento o Servicio</h2>
-          <p class="text-xs text-slate-500">Tendrás tu propio tablero visual con mapa de ubicación, WhatsApp, Instagram, TikTok y rango de precios.</p>
+          <h2 class="text-2xl font-black text-slate-900">Registra tu Negocio, Comercio o Servicio</h2>
+          <p class="text-xs text-slate-500">Aparecerás esta semana en <b>Recién Llegados</b> y tendrás tu propio perfil completo con código QR para tu local.</p>
         </div>
 
         <form onsubmit="submitNewBusiness(event)" class="space-y-4 text-xs">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block font-bold text-slate-700 mb-1">Nombre del Emprendimiento o Persona *</label>
+              <label class="block font-bold text-slate-700 mb-1">Nombre del Negocio o Profesional *</label>
               <input type="text" id="regName" required placeholder="Ej: Oasis Denim / Técnico José" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
             </div>
             <div>
               <label class="block font-bold text-slate-700 mb-1">Categoría Principal *</label>
               <select id="regCategory" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+                <option value="comida">🍔 Comida & Restaurantes</option>
                 <option value="ropa">👖 Jeans & Ropa (Damas, Niñas, Niños)</option>
-                <option value="comida">🍔 Comida (Arepas, Empanadas, Postres)</option>
+                <option value="calzado">👟 Calzado (Zapatos, Tenis, Sandalias)</option>
+                <option value="accesorios">👜 Accesorios (Cadenas, Bolsos, Relojes)</option>
                 <option value="perfumes">💎 Perfumes & Lociones</option>
-                <option value="aires">❄️ Aires Acondicionados & Servicios Técnicos</option>
-                <option value="belleza">💅 Belleza, Uñas & Maquillaje</option>
+                <option value="belleza">💄 Belleza (Maquillaje y Productos)</option>
+                <option value="serv_belleza">💅 Servicios de Belleza (Uñas, Cejas, Barbería)</option>
+                <option value="tecnicos">🛠️ Servicios Técnicos & Mantenimiento (Aires, Arreglos)</option>
+                <option value="profesionales">👨‍💼 Profesionales Independientes</option>
               </select>
             </div>
           </div>
 
+          <!-- Pequeña Descripción del Negocio (Visible al entrar al Perfil Completo) -->
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Pequeña Descripción del Negocio o Servicio (Se verá dentro de tu Perfil) *</label>
+            <textarea id="regBio" rows="2" required placeholder="Ej: Especialistas en arepas rellenas al carbón, patacones y jugos naturales con atención en mesa y pedidos por WhatsApp." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold"></textarea>
+          </div>
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block font-bold text-emerald-700 mb-1">Producto/Servicio Principal y su Rango (Mín - Máx) *</label>
-              <input type="text" id="regRange" required placeholder="Ej: Rango en Jeans: $50.000 – $85.000 COP" class="w-full px-3.5 py-2.5 bg-emerald-50/50 border border-emerald-300 rounded-xl font-semibold">
+              <label class="block font-bold text-emerald-700 mb-1">Rango de Precios del Producto/Servicio Principal *</label>
+              <input type="text" id="regRange" required placeholder="Ej: Rango en Platos: $12.000 – $28.000 COP" class="w-full px-3.5 py-2.5 bg-emerald-50/50 border border-emerald-300 rounded-xl font-semibold">
             </div>
             <div>
               <label class="block font-bold text-slate-700 mb-1">Dirección y Barrio en Valledupar *</label>
@@ -412,7 +584,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block font-bold text-slate-700 mb-1">Horario de Atención</label>
-              <input type="text" id="regSchedule" placeholder="Ej: Abierto hoy · 8:00 AM - 7:00 PM" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+              <input type="text" id="regSchedule" placeholder="Ej: Abierto · 8:00 AM - 7:00 PM" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
             </div>
             <div>
               <label class="block font-bold text-slate-700 mb-1">Correo Electrónico (Opcional)</label>
@@ -421,12 +593,15 @@
           </div>
 
           <button type="submit" class="w-full py-3.5 wa-widget-green text-white rounded-xl font-extrabold text-sm cursor-pointer">
-            Crear mi Perfil Visual y Obtener Certificado
+            Crear mi Perfil Completo y Generar mi Sticker con QR
           </button>
         </form>
       </div>
     </section>
 
+    <!-- ===================================================================== -->
+    <!-- TAB 7: PANEL PRIVADO DE DUEÑOS (ANALÍTICA, CLICS, 5★ Y PUBLICIDAD)    -->
+    <!-- ===================================================================== -->
     <section id="tab-analytics" class="hidden fade-in space-y-6">
       <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
@@ -435,7 +610,7 @@
           </span>
           <h2 class="text-2xl sm:text-3xl font-black mt-2">Analítica de Visitas, Clics, 5 Estrellas y Publicidad</h2>
           <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl">
-            Solo tú y tu novia con su clave pueden ver quién entra, cuántos clics lleva cada negocio, impulsar en el banner a los que tienen pocos clics y enviar reportes de cobro por WhatsApp.
+            Solo tú y tu novia con su clave pueden ver quién entra, cuántos clics lleva cada negocio, impulsar en el Banner Grande a los que tienen pocos clics y enviar reportes por WhatsApp.
           </p>
         </div>
         <div class="flex flex-wrap gap-2">
@@ -448,6 +623,7 @@
         </div>
       </div>
 
+      <!-- 4 KPIs -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         <div class="bento-white-card rounded-3xl p-5">
           <p class="text-[11px] font-extrabold text-slate-400 uppercase">👀 Visitas a la Página</p>
@@ -455,7 +631,7 @@
           <p class="text-xs font-bold text-emerald-600 mt-1">🟢 Conectado a Supabase</p>
         </div>
         <div class="bento-white-card rounded-3xl p-5">
-          <p class="text-[11px] font-extrabold text-slate-400 uppercase">👆 Clics Totales a Negocios</p>
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase">👆 Clics Totales en Perfiles</p>
           <p class="text-3xl font-black text-slate-900 mt-1" id="kpiClicks">0</p>
           <p class="text-xs font-bold text-emerald-600 mt-1" id="kpiWaSub">WhatsApp, IG, TikTok y Maps</p>
         </div>
@@ -467,23 +643,25 @@
         <div class="bento-white-card rounded-3xl p-5 bg-amber-50/60 border-amber-200">
           <p class="text-[11px] font-extrabold text-amber-800 uppercase">🚨 Con Pocos Clics (&lt;5)</p>
           <p class="text-3xl font-black text-amber-700 mt-1" id="kpiLowClicks">0</p>
-          <p class="text-xs font-bold text-amber-800 mt-1">Priorizados para impulsar</p>
+          <p class="text-xs font-bold text-amber-800 mt-1">Listos para subir al Banner</p>
         </div>
       </div>
 
+      <!-- RADAR DE NEGOCIOS CON POCOS CLICS -->
       <div class="bento-white-card rounded-3xl p-6 border-2 border-amber-200 bg-amber-50/40 space-y-3">
-        <h3 class="text-base sm:text-lg font-black text-amber-950">🚨 Radar Solidario: ¿A qué negocios casi NO han tocado todavía?</h3>
-        <p class="text-xs text-amber-900">Con un solo clic en <b>"🚀 Destacar en Banner"</b> subes ese emprendimiento a la parte superior de la página para ayudarlo a vender:</p>
+        <h3 class="text-base sm:text-lg font-black text-amber-950">🚨 Radar de Impulso: ¿A qué negocios casi NO han tocado todavía?</h3>
+        <p class="text-xs text-amber-900">Con un solo clic en <b>"🚀 Destacar en Banner Grande"</b> subes ese negocio a la parte superior de la página para ayudarlo a recibir visitas:</p>
         <div id="lowClicksContainer" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
       </div>
 
+      <!-- TABLA DE MÉTRICAS POR NEGOCIO -->
       <div class="bento-white-card rounded-3xl p-6 overflow-x-auto space-y-3">
-        <h3 class="text-base sm:text-lg font-black text-slate-900">📈 Métricas por Empresa + Botón para Enviar Reporte al Dueño</h3>
+        <h3 class="text-base sm:text-lg font-black text-slate-900">📈 Métricas por Negocio + Botón para Enviar Reporte al Dueño</h3>
         <table class="w-full text-left border-collapse text-xs">
           <thead>
             <tr class="bg-slate-900 text-white">
-              <th class="p-3 rounded-tl-xl">Emprendimiento</th>
-              <th class="p-3">👀 Vistas</th>
+              <th class="p-3 rounded-tl-xl">Negocio / Servicio</th>
+              <th class="p-3">👀 Aperturas Perfil</th>
               <th class="p-3">🟢 WhatsApp</th>
               <th class="p-3">📸 Instagram</th>
               <th class="p-3">🎵 TikTok</th>
@@ -500,9 +678,10 @@
 
   </main>
 
+  <!-- PIE DE PÁGINA CON CANDADO DISCRETO PARA DUEÑOS -->
   <footer class="max-w-6xl mx-auto px-4 mt-14 pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
     <div>
-      <span class="font-extrabold text-slate-700">Píllalo Valledupar</span> · Directorio Visual Interactivo de Emprendimientos y Servicios
+      <span class="font-extrabold text-slate-700">Píllalo Valledupar</span> · Directorio Visual Interactivo de Negocios y Servicios
     </div>
     <div>
       <button id="ownerLockBtn" onclick="openOwnerPinModal()" class="px-3 py-1.5 rounded-full bg-slate-200/80 hover:bg-slate-300 text-slate-700 font-bold transition cursor-pointer">
@@ -511,6 +690,9 @@
     </div>
   </footer>
 
+  <!-- ===================================================================== -->
+  <!-- NOTIFICACIÓN FLOTANTE DE VALORACIÓN DE 1 A 5 ESTRELLAS POST-CONTACTO  -->
+  <!-- ===================================================================== -->
   <div id="ratingToast" class="fixed bottom-5 right-5 z-50 hidden w-80 sm:w-96 bg-slate-900 text-white rounded-3xl p-5 shadow-2xl border-2 border-emerald-400">
     <div class="flex items-center justify-between mb-1.5">
       <span class="bg-emerald-400 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">⭐ Valoración Rápida en 1 Toque</span>
@@ -527,6 +709,7 @@
     </div>
   </div>
 
+  <!-- MODAL DE CLAVE SECRETA PARA DUEÑOS -->
   <div id="ownerPinModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
       <div class="text-3xl">🔐</div>
@@ -542,43 +725,43 @@
     </div>
   </div>
 
+  <!-- MODAL PARA CREAR / CAMBIAR BANNER PUBLICITARIO (SOLO DUEÑOS) -->
   <div id="newBannerModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl text-xs">
       <div class="flex justify-between items-center">
         <span class="bg-amber-100 text-amber-900 font-black px-3 py-1 rounded-full">📢 Nuevo Banner Superior</span>
         <button onclick="closeNewBannerModal()" class="text-slate-400 hover:text-slate-700 font-black text-base cursor-pointer">✕</button>
       </div>
-      <h3 class="text-lg font-black text-slate-900">Destacar Emprendimiento o Patrocinador</h3>
+      <h3 class="text-lg font-black text-slate-900">Destacar Negocio en el Banner Grande</h3>
       <form onsubmit="saveCustomBanner(event)" class="space-y-3">
         <div>
           <label class="block font-bold text-slate-700 mb-1">Tipo de Etiqueta</label>
           <select id="bannerBadgeInput" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-bold">
-            <option value="🌱 EMPRENDIMIENTO IMPULSADO HOY">🌱 Impulso Solidario Gratis</option>
-            <option value="💎 PUBLICIDAD DESTACADA">💎 Publicidad Pagada</option>
+            <option value="🚀 DESTACADO DE LA SEMANA">🚀 Impulso por Pocos Clics</option>
+            <option value="💎 PUBLICIDAD VIP DESTACADA">💎 Publicidad VIP Pagada</option>
           </select>
         </div>
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Nombre del Negocio *</label>
-          <input type="text" id="bannerBizInput" required placeholder="Ej: Luxury Arepas & Antojos" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+          <label class="block font-bold text-slate-700 mb-1">Seleccionar Negocio del Directorio</label>
+          <select id="bannerBizSelect" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-bold"></select>
         </div>
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Título del Anuncio *</label>
-          <input type="text" id="bannerTitleInput" required placeholder="Ej: 🍔 ¡Arepas rellenas al carbón desde $10.000!" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+          <label class="block font-bold text-slate-700 mb-1">Título Llamativo del Anuncio *</label>
+          <input type="text" id="bannerTitleInput" required placeholder="Ej: 🍔 ¡Las mejores arepas rellenas al carbón en Los Cortijos!" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
         </div>
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Descripción Corta *</label>
-          <input type="text" id="bannerDescInput" required placeholder="Ej: En Los Cortijos. Pide directo a nuestro WhatsApp." class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+          <label class="block font-bold text-slate-700 mb-1">Subtítulo / Invitación *</label>
+          <input type="text" id="bannerDescInput" required placeholder="Ej: Abierto de 4:30 PM a 11:30 PM. Toca para ver nuestro perfil completo." class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
         </div>
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">WhatsApp (con 57) *</label>
-          <input type="text" id="bannerWaInput" required placeholder="573208889900" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
-        </div>
-        <button type="submit" class="w-full py-3 wa-widget-green text-white rounded-xl font-extrabold cursor-pointer">Publicar en la Parte Superior</button>
+        <button type="submit" class="w-full py-3 wa-widget-green text-white rounded-xl font-extrabold cursor-pointer">Publicar en el Banner Grande</button>
       </form>
     </div>
   </div>
 
   <script>
+    // =========================================================================
+    // CONEXIÓN EN VIVO A SUPABASE (PROYECTO: Pillalo_Valledupar)
+    // =========================================================================
     const SUPABASE_URL = "https://ehcmmhxkkdncrsjtujhf.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVoY21taHhra2RuY3JzanR1amhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0OTgwNTUsImV4cCI6MjEwOTA3NDA1NX0.e97tZSN_LKraz9FZsB4oAUKkjxgdWN9NkMzXvnHElh0";
     const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
@@ -589,6 +772,21 @@
     let totalPageViews = parseInt(localStorage.getItem('pillalo_v3_views') || '315', 10) + 1;
     localStorage.setItem('pillalo_v3_views', totalPageViews);
 
+    const categoryLabels = {
+      comida: "🍔 Comida & Restaurantes",
+      ropa: "👖 Jeans & Ropa",
+      calzado: "👟 Calzado",
+      accesorios: "👜 Accesorios & Bolsos",
+      perfumes: "💎 Perfumes & Lociones",
+      belleza: "💄 Belleza & Maquillaje",
+      serv_belleza: "💅 Servicios de Belleza",
+      tecnicos: "🛠️ Servicios Técnicos & Mantenimiento",
+      profesionales: "👨‍💼 Profesionales Independientes"
+    };
+
+    // =========================================================================
+    // BASE DE DATOS INICIAL CON LAS 9 CATEGORÍAS Y ROTACIÓN SEMANAL
+    // =========================================================================
     let businesses = [
       {
         id: 1,
@@ -597,12 +795,15 @@
         logoSub: "Denim Valle",
         category: "ropa",
         ageType: "trayectoria",
-        badgeText: "🏛️ Negocio Verificado",
+        registeredThisWeek: false,
+        registeredDaysAgo: 18,
+        verified: true,
+        badgeText: "🏛️ Verificado",
         badgeStyle: "bg-slate-100 text-slate-700 border-slate-200",
         mainRangeIcon: "👖",
         mainRangeText: "Rango en Jeans y Ropa: $50.000 – $85.000 COP",
         priceLevel: "mid",
-        shortBio: "La mejor moda denim en Valledupar para dama, niñas y niños. Horma perfecta y envíos rápidos.",
+        shortBio: "Tienda especializada en moda denim en Valledupar para dama, caballero, niñas y niños. Jeans levanta cola, conjuntos y básicos con horma perfecta.",
         address: "Cra 15 #13B-24 · Doce de Octubre",
         neighborhood: "Doce de Octubre",
         phoneDisplay: "300 987 6543",
@@ -610,7 +811,7 @@
         instagram: "@oasis_denimvalle",
         tiktok: "@oasisdenim.vup",
         email: "ventas@oasisdenim.co",
-        schedule: "Abierto hoy · 9:00 AM - 8:00 PM",
+        schedule: "Abierto · 9:00 AM - 8:00 PM",
         coverImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80",
         storeThumb: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=400&q=80",
         rating: 4.9,
@@ -623,18 +824,126 @@
         totalClicks: 31
       },
       {
+        id: 5,
+        name: "Luxury Arepas & Antojos",
+        logoTitle: "Luxury",
+        logoSub: "Arepas Carbón",
+        category: "comida",
+        ageType: "nuevo",
+        registeredThisWeek: true,
+        registeredDaysAgo: 1,
+        verified: true,
+        badgeText: "🆕 Recién Llegado",
+        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        mainRangeIcon: "🍔",
+        mainRangeText: "Rango Arepas Rellenas y Platos: $10.000 – $24.000 COP",
+        priceLevel: "low",
+        shortBio: "Restaurante nocturno de arepas rellenas asadas al carbón con queso costeño, carne desmechada, chicharrón, pollo y salsas de la casa.",
+        address: "Av. Simón Bolívar Calle 21 · Los Cortijos",
+        neighborhood: "Los Cortijos",
+        phoneDisplay: "320 888 9900",
+        whatsapp: "573208889900",
+        instagram: "@luxuryarepas_valle",
+        tiktok: "@luxuryarepas.vup",
+        email: "pedidos@luxuryarepas.co",
+        schedule: "Abierto · 4:30 PM - 11:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80",
+        rating: 5.0,
+        votes: 6,
+        views: 14,
+        waClicks: 2,
+        igClicks: 1,
+        tkClicks: 0,
+        mapClicks: 0,
+        totalClicks: 3
+      },
+      {
+        id: 6,
+        name: "Calzado Paso Firme VUP",
+        logoTitle: "PasoFirme",
+        logoSub: "Calzado & Tenis",
+        category: "calzado",
+        ageType: "nuevo",
+        registeredThisWeek: true,
+        registeredDaysAgo: 2,
+        verified: true,
+        badgeText: "🆕 Recién Llegado",
+        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        mainRangeIcon: "👟",
+        mainRangeText: "Rango en Calzado y Tenis: $55.000 – $140.000 COP",
+        priceLevel: "mid",
+        shortBio: "Tenis deportivos, sandalias para dama en cuero y calzado casual para toda la familia con tallas desde la 22 hasta la 43.",
+        address: "Calle 16B #9-45 · Centro",
+        neighborhood: "Centro",
+        phoneDisplay: "312 654 7890",
+        whatsapp: "573126547890",
+        instagram: "@pasofirme_calzadovup",
+        tiktok: "@pasofirme.vup",
+        email: "ventas@pasofirme.co",
+        schedule: "Abierto · 8:30 AM - 7:00 PM",
+        coverImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=400&q=80",
+        rating: 4.9,
+        votes: 8,
+        views: 19,
+        waClicks: 2,
+        igClicks: 1,
+        tkClicks: 0,
+        mapClicks: 0,
+        totalClicks: 3
+      },
+      {
+        id: 7,
+        name: "Aura Accesorios & Bolsos",
+        logoTitle: "Aura",
+        logoSub: "Bolsos & Joyas",
+        category: "accesorios",
+        ageType: "nuevo",
+        registeredThisWeek: true,
+        registeredDaysAgo: 3,
+        verified: true,
+        badgeText: "🆕 Recién Llegado",
+        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        mainRangeIcon: "👜",
+        mainRangeText: "Rango Cadenas y Bolsos: $18.000 – $95.000 COP",
+        priceLevel: "low",
+        shortBio: "Cadenas en acero y oro laminado, aretes, relojes, bolsos manos libres, carteras y gafas de sol para complementar tu outfit.",
+        address: "Cra 11 #14-18 · Barrio San Joaquín",
+        neighborhood: "San Joaquín",
+        phoneDisplay: "318 222 4455",
+        whatsapp: "573182224455",
+        instagram: "@aura_accesoriosvup",
+        tiktok: "@auraaccesorios.vup",
+        email: "hola@auraaccesorios.co",
+        schedule: "Abierto · 9:00 AM - 7:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=400&q=80",
+        rating: 5.0,
+        votes: 9,
+        views: 22,
+        waClicks: 3,
+        igClicks: 1,
+        tkClicks: 0,
+        mapClicks: 0,
+        totalClicks: 4
+      },
+      {
         id: 2,
         name: "Distriperfumes Royale",
         logoTitle: "Royale",
         logoSub: "Perfumería",
         category: "perfumes",
         ageType: "nuevo",
-        badgeText: "🌱 Nuevo Emprendimiento",
+        registeredThisWeek: true,
+        registeredDaysAgo: 4,
+        verified: true,
+        badgeText: "🆕 Recién Llegado",
         badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
         mainRangeIcon: "💎",
         mainRangeText: "Rango en Perfumes: $45.000 – $190.000 COP",
         priceLevel: "mid",
-        shortBio: "Perfumería árabe importada, lociones de alta fijación y presentaciones personales para regalo.",
+        shortBio: "Perfumería árabe original, extractos importados de alta fijación y presentaciones personales ideales para regalar.",
         address: "Calle 9A #19-40 · Barrio Novalito",
         neighborhood: "Novalito",
         phoneDisplay: "315 444 3322",
@@ -642,7 +951,7 @@
         instagram: "@distriperfumes_vup",
         tiktok: "@perfumesroyale.vup",
         email: "contacto@distriperfumes.co",
-        schedule: "Abierto hoy · 9:30 AM - 7:30 PM",
+        schedule: "Abierto · 9:30 AM - 7:30 PM",
         coverImage: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=80",
         storeThumb: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=400&q=80",
         rating: 5.0,
@@ -655,50 +964,56 @@
         totalClicks: 4
       },
       {
-        id: 3,
-        name: "TecniAires FríoValle",
-        logoTitle: "FríoValle",
-        logoSub: "Técnicos A/C",
-        category: "aires",
+        id: 8,
+        name: "Velvet Makeup & Skincare",
+        logoTitle: "Velvet",
+        logoSub: "Cosméticos",
+        category: "belleza",
         ageType: "trayectoria",
-        badgeText: "🏛️ Servicio Verificado",
+        registeredThisWeek: false,
+        registeredDaysAgo: 15,
+        verified: true,
+        badgeText: "🏛️ Verificado",
         badgeStyle: "bg-slate-100 text-slate-700 border-slate-200",
-        mainRangeIcon: "❄️",
-        mainRangeText: "Rango Mantenimiento: $60.000 – $110.000 COP",
-        priceLevel: "mid",
-        shortBio: "Mantenimiento preventivo a presión, recarga de gas y arreglo de aires acondicionados a domicilio.",
-        address: "Calle 14 #18-20 · La Nevada (y a Domicilio)",
-        neighborhood: "La Nevada",
-        phoneDisplay: "300 123 4567",
-        whatsapp: "573001234567",
-        instagram: "@friovalle_aires",
-        tiktok: "@tecniaires.valle",
-        email: "soporte@friovalle.co",
-        schedule: "Disponible hoy · 7:30 AM - 6:30 PM",
-        coverImage: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80",
-        storeThumb: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=400&q=80",
+        mainRangeIcon: "💄",
+        mainRangeText: "Rango Maquillaje y Skincare: $15.000 – $80.000 COP",
+        priceLevel: "low",
+        shortBio: "Tienda de maquillaje original, rubores, bases, labiales, brochas, cuidado facial coreano y tratamientos capilares.",
+        address: "Cra 12 #7C-30 · Las Flores",
+        neighborhood: "Las Flores",
+        phoneDisplay: "301 777 8899",
+        whatsapp: "573017778899",
+        instagram: "@velvetmakeup_vup",
+        tiktok: "@velvetmakeup.vup",
+        email: "ventas@velvetmakeup.co",
+        schedule: "Abierto · 9:00 AM - 7:00 PM",
+        coverImage: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80",
         rating: 4.9,
-        votes: 11,
-        views: 34,
-        waClicks: 12,
-        igClicks: 3,
-        tkClicks: 1,
-        mapClicks: 2,
-        totalClicks: 18
+        votes: 12,
+        views: 29,
+        waClicks: 9,
+        igClicks: 4,
+        tkClicks: 2,
+        mapClicks: 1,
+        totalClicks: 16
       },
       {
         id: 4,
-        name: "Studio Glow Uñas & Spa",
+        name: "Studio Glow Uñas & Cejas",
         logoTitle: "Glow",
-        logoSub: "Nails & Beauty",
-        category: "belleza",
+        logoSub: "Servicios Belleza",
+        category: "serv_belleza",
         ageType: "nuevo",
-        badgeText: "🌱 Nuevo Emprendimiento",
+        registeredThisWeek: true,
+        registeredDaysAgo: 2,
+        verified: true,
+        badgeText: "🆕 Recién Llegado",
         badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
         mainRangeIcon: "💅",
-        mainRangeText: "Rango en Uñas y Cejas: $25.000 – $65.000 COP",
+        mainRangeText: "Rango Servicio Uñas y Cejas: $25.000 – $65.000 COP",
         priceLevel: "low",
-        shortBio: "Uñas acrílicas, polygel, semipermanente y diseño de cejas. Atendemos en punto físico y a domicilio.",
+        shortBio: "Especialistas en servicios de belleza: uñas acrílicas, polygel, semipermanente, cepillado y diseño de cejas y pestañas.",
         address: "Cra 19 #16-12 · Barrio San Joaquín",
         neighborhood: "San Joaquín",
         phoneDisplay: "310 555 6677",
@@ -706,7 +1021,7 @@
         instagram: "@glownails_valledupar",
         tiktok: "@glownails.vup",
         email: "citas@studioglow.co",
-        schedule: "Abierto hoy · 8:00 AM - 7:00 PM",
+        schedule: "Abierto · 8:00 AM - 7:00 PM",
         coverImage: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80",
         storeThumb: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=400&q=80",
         rating: 5.0,
@@ -719,190 +1034,204 @@
         totalClicks: 2
       },
       {
-        id: 5,
-        name: "Luxury Arepas & Antojos",
-        logoTitle: "Luxury",
-        logoSub: "Arepas al Carbón",
-        category: "comida",
+        id: 3,
+        name: "TecniAires & Mantenimiento FríoValle",
+        logoTitle: "FríoValle",
+        logoSub: "Servicio Técnico",
+        category: "tecnicos",
+        ageType: "trayectoria",
+        registeredThisWeek: false,
+        registeredDaysAgo: 20,
+        verified: true,
+        badgeText: "🏛️ Verificado",
+        badgeStyle: "bg-slate-100 text-slate-700 border-slate-200",
+        mainRangeIcon: "🛠️",
+        mainRangeText: "Rango Mantenimiento y Arreglos: $60.000 – $110.000 COP",
+        priceLevel: "mid",
+        shortBio: "Servicio técnico y mantenimiento a domicilio de aires acondicionados, lavadoras, neveras e instalaciones eléctricas residenciales.",
+        address: "Calle 14 #18-20 · La Nevada (y a Domicilio)",
+        neighborhood: "La Nevada",
+        phoneDisplay: "300 123 4567",
+        whatsapp: "573001234567",
+        instagram: "@friovalle_aires",
+        tiktok: "@tecniaires.valle",
+        email: "soporte@friovalle.co",
+        schedule: "Abierto · 7:30 AM - 6:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=400&q=80",
+        rating: 4.9,
+        votes: 11,
+        views: 34,
+        waClicks: 12,
+        igClicks: 3,
+        tkClicks: 1,
+        mapClicks: 2,
+        totalClicks: 18
+      },
+      {
+        id: 9,
+        name: "Contaduría & Asesorías Cotes",
+        logoTitle: "Cotes",
+        logoSub: "Contador Público",
+        category: "profesionales",
         ageType: "nuevo",
-        badgeText: "🌱 Nuevo Emprendimiento",
+        registeredThisWeek: true,
+        registeredDaysAgo: 1,
+        verified: true,
+        badgeText: "🆕 Recién Llegado",
         badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
-        mainRangeIcon: "🍔",
-        mainRangeText: "Rango Arepas Rellenas: $10.000 – $24.000 COP",
-        priceLevel: "low",
-        shortBio: "Nos llamamos Luxury pero vendemos las arepas rellenas asadas al carbón y empanadas más ricas del sector.",
-        address: "Av. Simón Bolívar Calle 21 · Los Cortijos",
-        neighborhood: "Los Cortijos",
-        phoneDisplay: "320 888 9900",
-        whatsapp: "573208889900",
-        instagram: "@luxuryarepas_valle",
-        tiktok: "@luxuryarepas.vup",
-        email: "pedidos@luxuryarepas.co",
-        schedule: "Abierto hoy · 4:30 PM - 11:30 PM",
-        coverImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
-        storeThumb: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80",
+        mainRangeIcon: "👨‍💼",
+        mainRangeText: "Rango Asesorías y Trámites: $50.000 – $150.000 COP",
+        priceLevel: "mid",
+        shortBio: "Profesional independiente en contaduría pública, declaración de renta, Cámara de Comercio, DIAN y certificados de ingresos.",
+        address: "Calle 16 #12-10 · Centro (y Atención Virtual)",
+        neighborhood: "Centro",
+        phoneDisplay: "304 555 1234",
+        whatsapp: "573045551234",
+        instagram: "@asesoriascotes_vup",
+        tiktok: "@contadorcotes.vup",
+        email: "consultas@asesoriascotes.co",
+        schedule: "Abierto · 8:00 AM - 6:00 PM",
+        coverImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=400&q=80",
         rating: 5.0,
         votes: 6,
-        views: 14,
+        views: 15,
         waClicks: 2,
-        igClicks: 1,
+        igClicks: 0,
         tkClicks: 0,
         mapClicks: 0,
-        totalClicks: 3
+        totalClicks: 2
       }
     ];
 
     let bannersList = [
       {
-        badge: "🌱 EMPRENDIMIENTO IMPULSADO HOY",
-        title: "🍔 Luxury Arepas & Antojos: ¡Arepas al carbón desde $10.000!",
-        desc: "Nuevo emprendimiento en Los Cortijos. ¡Apóyalos pidiendo directo a su WhatsApp!",
+        bizId: 5,
+        badge: "🚀 DESTACADO DE LA SEMANA · RECIÉN LLEGADO",
+        title: "🍔 Luxury Arepas & Antojos: ¡Asadas al carbón en Los Cortijos!",
+        desc: "Toca aquí para abrir su perfil completo, ver su horario, ubicación y pedir por WhatsApp.",
         bizName: "Luxury Arepas & Antojos",
-        whatsapp: "573208889900"
+        schedule: "Abierto · 4:30 PM - 11:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+        logoTitle: "Luxury"
       },
       {
-        badge: "🌱 EMPRENDIMIENTO IMPULSADO HOY",
-        title: "💅 Studio Glow Uñas & Spa en San Joaquín",
-        desc: "Uñas acrílicas, polygel y cejas desde $25.000 COP. Agenda tu cita por WhatsApp.",
-        bizName: "Studio Glow Uñas & Spa",
-        whatsapp: "573105556677"
+        bizId: 4,
+        badge: "🚀 IMPULSO DE VISIBILIDAD · POCOS CLICS",
+        title: "💅 Studio Glow Uñas & Cejas en Barrio San Joaquín",
+        desc: "Especialistas en uñas acrílicas, polygel y diseño de cejas. Entra a su perfil completo para agendar.",
+        bizName: "Studio Glow Uñas & Cejas",
+        schedule: "Abierto · 8:00 AM - 7:00 PM",
+        coverImage: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80",
+        logoTitle: "Glow"
       }
     ];
 
     let currentCategory = 'all';
     let currentAgeFilter = 'all';
+    let currentStickerBizId = 5;
 
+    // =========================================================================
+    // 1. BANNER PUBLICITARIO SUPERIOR MÁS GRANDE Y LLAMATIVO
+    // =========================================================================
     function renderSpotlightBanners() {
       const container = document.getElementById('adSpotlightBanner');
       if (!container) return;
       container.innerHTML = bannersList.slice(0, 2).map(b => `
-        <div class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-3xl p-4 sm:p-5 shadow-md border border-emerald-500/30 flex items-center justify-between gap-4">
-          <div class="space-y-1">
-            <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">${b.badge}</span>
-            <h3 class="text-sm sm:text-base font-black text-white leading-snug pt-0.5">${b.title}</h3>
-            <p class="text-xs text-emerald-100/90">${b.desc}</p>
+        <div onclick="openCompanyProfile(${b.bizId || 5})" class="relative rounded-[30px] overflow-hidden shadow-xl border-2 border-emerald-400/50 min-h-[185px] sm:min-h-[210px] flex flex-col justify-between p-5 sm:p-6 cursor-pointer group">
+          <img src="${b.coverImage}" alt="${b.bizName}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-900/50"></div>
+
+          <div class="relative z-10 flex items-center justify-between gap-2">
+            <span class="bg-amber-400 text-slate-950 text-[10px] sm:text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+              ${b.badge}
+            </span>
+            <span class="bg-white/95 text-slate-900 text-[11px] font-extrabold px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>${b.schedule || 'Abierto hoy'}</span>
+            </span>
           </div>
-          <a href="https://wa.me/${b.whatsapp}?text=Hola%20${encodeURIComponent(b.bizName)},%20vi%20su%20destacado%20en%20Píllalo%20Valledupar"
-             target="_blank"
-             class="px-4 py-2.5 wa-widget-green text-white rounded-2xl text-xs font-extrabold whitespace-nowrap flex items-center gap-1.5">
-            <i class="fa-brands fa-whatsapp text-base"></i>
-            <span>Escribir</span>
-          </a>
+
+          <div class="relative z-10 flex items-end justify-between gap-4 pt-4">
+            <div class="space-y-1 max-w-md">
+              <h3 class="text-lg sm:text-xl font-black text-white leading-tight group-hover:text-emerald-300 transition">${b.title}</h3>
+              <p class="text-xs sm:text-sm text-slate-200 line-clamp-2">${b.desc}</p>
+            </div>
+            <div class="flex-shrink-0">
+              <span class="px-4 py-2.5 wa-widget-green text-white rounded-2xl text-xs font-extrabold whitespace-nowrap flex items-center gap-1.5 shadow-lg">
+                <span>Abrir Perfil</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </span>
+            </div>
+          </div>
         </div>
       `).join('');
     }
 
+    // =========================================================================
+    // 2. TARJETA COMPACTA EN EXPLORAR DIRECTORIO Y RECIÉN LLEGADOS
+    //    (SOLO PORTADA, LOGO, NOMBRE, VERIFICADO, VALORACIÓN, HORARIO ABIERTO Y CLIC PERFIL)
+    // =========================================================================
     function createBusinessCardHTML(biz) {
       return `
-        <article class="bento-white-card rounded-[28px] p-4 sm:p-5 flex flex-col justify-between">
+        <article onclick="openCompanyProfile(${biz.id})" class="bento-white-card rounded-[26px] p-3.5 flex flex-col justify-between cursor-pointer group">
+          
           <div>
-            <div onclick="openCompanyProfile(${biz.id})" class="h-40 sm:h-44 w-full rounded-2xl overflow-hidden relative cursor-pointer group">
+            <!-- 1. PORTADA DETRÁS + VALORACIÓN + CLIC PARA ABRIR COMPLETO -->
+            <div class="h-36 sm:h-40 w-full rounded-2xl overflow-hidden relative">
               <img src="${biz.coverImage}" alt="${biz.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/15"></div>
-              <span onclick="event.stopPropagation(); triggerRatingToast(${biz.id}, 'Calificación Directa')" title="Toca para calificar de 1 a 5 estrellas" class="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-slate-900 text-[11px] font-extrabold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20"></div>
+              
+              <!-- Valoración arriba a la izquierda -->
+              <span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-xs text-slate-900 text-[11px] font-extrabold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
                 <span class="text-amber-500">⭐</span> ${biz.rating.toFixed(1)} <span class="text-slate-400">(${biz.votes})</span>
               </span>
-              <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-xs text-slate-900 text-[11px] font-extrabold px-3 py-1 rounded-full shadow-sm">
-                Clic para abrir Perfil Completo →
+
+              <!-- Aviso Clic para abrir completo arriba a la derecha -->
+              <span class="absolute top-2.5 right-2.5 bg-slate-900/90 backdrop-blur-xs text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-sm group-hover:bg-emerald-600 transition">
+                Clic para abrir completo →
               </span>
             </div>
 
-            <div class="flex items-start gap-3.5 px-1 pt-2 pb-4 relative">
-              <div onclick="openCompanyProfile(${biz.id})" class="-mt-11 w-20 h-20 rounded-full bg-white shadow-lg border-4 border-white flex flex-col items-center justify-center flex-shrink-0 cursor-pointer hover:scale-105 transition z-10">
-                <span class="text-sm font-black text-slate-900 leading-none text-center px-1">${biz.logoTitle}</span>
-                <span class="text-[9px] font-bold text-slate-500 mt-0.5 text-center px-1">${biz.logoSub}</span>
+            <!-- 2. LOGO CIRCULAR + NOMBRE DEL RESTAURANTE/NEGOCIO + VERIFICADO -->
+            <div class="flex items-center gap-3 px-1 pt-2 pb-3 relative">
+              <!-- Logo Circular Blanco Sobrepuesto -->
+              <div class="-mt-9 w-16 h-16 rounded-full bg-white shadow-lg border-4 border-white flex flex-col items-center justify-center flex-shrink-0 z-10">
+                <span class="text-xs font-black text-slate-900 leading-none text-center px-1">${biz.logoTitle}</span>
+                <span class="text-[8px] font-bold text-slate-500 mt-0.5 text-center px-1">${biz.logoSub}</span>
               </div>
 
+              <!-- Nombre + Sello Verificado + Categoría -->
               <div class="flex-1 min-w-0">
-                <div class="flex flex-wrap items-center justify-between gap-1">
-                  <h3 onclick="openCompanyProfile(${biz.id})" class="text-lg sm:text-xl font-black text-slate-900 hover:text-emerald-600 cursor-pointer truncate">
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-base font-black text-slate-900 group-hover:text-emerald-600 transition truncate">
                     ${biz.name}
                   </h3>
-                  <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${biz.badgeStyle}">
-                    ${biz.badgeText}
-                  </span>
+                  ${biz.verified ? `
+                    <span class="w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] flex-shrink-0 shadow-2xs" title="Negocio Verificado">
+                      <i class="fa-solid fa-check"></i>
+                    </span>
+                  ` : ''}
                 </div>
-                <p class="text-xs sm:text-sm font-extrabold text-slate-800 mt-1 flex items-center gap-1.5">
-                  <span>${biz.mainRangeIcon}</span>
-                  <span>${biz.mainRangeText}</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-12 gap-2.5 items-stretch">
-              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(biz.address + ' Valledupar')}" 
-                 target="_blank"
-                 onclick="recordClick(${biz.id}, 'Maps')"
-                 class="col-span-12 sm:col-span-5 rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between bg-slate-50 hover:border-slate-400 transition group">
-                <div class="h-32 gmaps-pattern relative flex items-center justify-center overflow-hidden">
-                  <img src="${biz.storeThumb}" class="w-4/5 h-4/5 object-cover rounded-xl shadow-md border-2 border-white opacity-90 group-hover:scale-105 transition">
-                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div class="w-9 h-9 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg border-2 border-white -mt-3 animate-bounce">
-                      <i class="fa-solid fa-location-dot text-base"></i>
-                    </div>
-                  </div>
-                  <span class="absolute bottom-1.5 left-2 bg-white/95 px-1.5 py-0.5 rounded text-[10px] font-black text-slate-700 shadow-2xs">
-                    <span class="text-blue-600">G</span><span class="text-red-500">o</span><span class="text-amber-500">o</span><span class="text-blue-600">g</span><span class="text-emerald-600">l</span><span class="text-red-500">e</span> Maps
-                  </span>
+                <div class="flex items-center gap-1.5 mt-0.5">
+                  <span class="text-[11px] font-bold text-slate-500 truncate">${categoryLabels[biz.category] || biz.category}</span>
                 </div>
-                <div class="p-2.5 bg-white text-center border-t border-slate-100">
-                  <p class="text-[11px] font-extrabold text-slate-900 truncate">${biz.address}</p>
-                </div>
-              </a>
-
-              <a href="https://wa.me/${biz.whatsapp}?text=Hola%20${encodeURIComponent(biz.name)},%20los%20encontré%20en%20Píllalo%20Valledupar" 
-                 target="_blank"
-                 onclick="recordClick(${biz.id}, 'WhatsApp')"
-                 class="col-span-6 sm:col-span-4 wa-widget-green rounded-2xl p-3 text-white flex flex-col items-center justify-between text-center min-h-[155px]">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider bg-black/15 px-2 py-0.5 rounded-full">Chat Directo</span>
-                <i class="fa-brands fa-whatsapp text-5xl my-auto drop-shadow-xs"></i>
-                <div>
-                  <p class="text-xs font-black tracking-tight">${biz.phoneDisplay}</p>
-                  <p class="text-[10px] font-bold text-emerald-100">Toca para escribir</p>
-                </div>
-              </a>
-
-              <div class="col-span-6 sm:col-span-3 flex flex-col gap-2.5">
-                <a href="https://instagram.com/${(biz.instagram || '').replace('@','')}" target="_blank"
-                   onclick="recordClick(${biz.id}, 'Instagram')"
-                   class="flex-1 ig-widget-gradient rounded-2xl p-2.5 text-white flex flex-col items-center justify-center text-center min-h-[72px]">
-                  <i class="fa-brands fa-instagram text-3xl"></i>
-                  <span class="text-[10px] font-extrabold mt-1 truncate w-full px-1">${biz.instagram}</span>
-                </a>
-
-                <a href="https://tiktok.com/@${(biz.tiktok || '').replace('@','')}" target="_blank"
-                   onclick="recordClick(${biz.id}, 'TikTok')"
-                   class="flex-1 tiktok-widget-black rounded-2xl p-2.5 text-white flex flex-col items-center justify-center text-center min-h-[72px]">
-                  <i class="fa-brands fa-tiktok text-2xl tiktok-neon-icon"></i>
-                  <span class="text-[10px] font-extrabold mt-1 truncate w-full px-1 text-slate-200">${biz.tiktok}</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="mt-3 pt-2.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
-              <div class="flex items-center gap-1.5 font-bold text-slate-700">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>${biz.schedule}</span>
-              </div>
-
-              <div class="flex items-center gap-1.5">
-                <button onclick="triggerRatingToast(${biz.id}, 'Botón Estrellas')" class="px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 font-extrabold flex items-center gap-1 transition cursor-pointer">
-                  <span>⭐ Calificar</span>
-                </button>
-                <a href="tel:+${biz.whatsapp}" onclick="recordClick(${biz.id}, 'Llamada')" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold flex items-center gap-1 transition">
-                  <i class="fa-solid fa-phone text-emerald-600 text-[11px]"></i>
-                  <span>Llamar</span>
-                </a>
-                <a href="mailto:${biz.email}" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold flex items-center gap-1 transition">
-                  <i class="fa-regular fa-envelope text-blue-600 text-[11px]"></i>
-                  <span>Correo</span>
-                </a>
-                <button onclick="openCompanyProfile(${biz.id})" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold transition cursor-pointer">
-                  Ver Perfil →
-                </button>
               </div>
             </div>
           </div>
+
+          <!-- 3. FILA INFERIOR: SOLO ESTADO ABIERTO / HORARIO + ENTRAR AL PERFIL -->
+          <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2 text-xs">
+            <div class="flex items-center gap-1.5 font-extrabold text-slate-700 truncate">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
+              <span class="truncate">${biz.schedule}</span>
+            </div>
+            <span class="px-2.5 py-1 rounded-xl bg-slate-100 group-hover:bg-slate-900 group-hover:text-white text-slate-800 text-[11px] font-extrabold whitespace-nowrap transition">
+              Ver Perfil →
+            </span>
+          </div>
+
         </article>
       `;
     }
@@ -913,8 +1242,8 @@
         container.innerHTML = `
           <div class="col-span-full bento-white-card rounded-3xl p-10 text-center space-y-3">
             <span class="text-4xl">🔍</span>
-            <h3 class="text-lg font-black text-slate-900">No encontramos establecimientos con ese filtro</h3>
-            <p class="text-xs text-slate-500">Prueba cambiando el barrio, el presupuesto o presionando "Ver Todos".</p>
+            <h3 class="text-lg font-black text-slate-900">No encontramos negocios con ese filtro</h3>
+            <p class="text-xs text-slate-500">Prueba cambiando la categoría, el barrio o presionando "Ver Todos".</p>
             <button onclick="resetAllFilters()" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-extrabold cursor-pointer">Mostrar Todos</button>
           </div>
         `;
@@ -923,52 +1252,81 @@
       container.innerHTML = items.map(createBusinessCardHTML).join('');
     }
 
+    // ROTACIÓN SEMANAL DE RECIÉN LLEGADOS (ORDENADOS POR LOS REGISTRADOS ESTA SEMANA)
     function renderNuevosSection() {
-      const nuevosItems = businesses.filter(b => b.ageType === 'nuevo');
+      const recienLlegados = businesses
+        .filter(b => b.registeredThisWeek || b.ageType === 'nuevo')
+        .sort((a, b) => (a.registeredDaysAgo || 1) - (b.registeredDaysAgo || 1));
       const container = document.getElementById('nuevosGrid');
-      if (container) container.innerHTML = nuevosItems.map(createBusinessCardHTML).join('');
+      if (container) {
+        container.innerHTML = recienLlegados.map(createBusinessCardHTML).join('');
+      }
     }
 
+    // =========================================================================
+    // 3. VISTA DE PERFIL COMPLETO DE LA EMPRESA (CON DESCRIPCIÓN, RANGO Y TODOS LOS WIDGETS)
+    // =========================================================================
     function openCompanyProfile(id) {
-      const biz = businesses.find(b => b.id === id);
+      const biz = businesses.find(b => b.id === Number(id));
       if (!biz) return;
       biz.views = (biz.views || 0) + 1;
 
+      if (supabaseClient) {
+        supabaseClient.from('emprendimientos').update({ vistas_perfil: biz.views }).eq('id', biz.id);
+      }
+
       const html = `
-        <div class="flex items-center justify-between mb-3">
+        <!-- Barra superior del Perfil -->
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
           <button onclick="switchTab('tab-explore')" class="px-4 py-2 bg-white hover:bg-slate-100 border border-slate-200 rounded-2xl text-xs font-extrabold text-slate-800 shadow-2xs flex items-center gap-2 transition cursor-pointer">
             <i class="fa-solid fa-arrow-left text-emerald-600"></i>
             <span>Volver al Directorio</span>
           </button>
-          <button onclick="triggerRatingToast(${biz.id}, 'Perfil Completo')" class="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-2xl text-xs font-black cursor-pointer">
-            ⭐ ${biz.rating.toFixed(1)} (${biz.votes} opiniones) · Calificar este negocio
-          </button>
+          <div class="flex items-center gap-2">
+            <button onclick="openStickerForBiz(${biz.id})" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl text-xs font-extrabold flex items-center gap-1.5 cursor-pointer">
+              <i class="fa-solid fa-qrcode text-amber-400"></i>
+              <span>Ver Sticker QR de este Negocio</span>
+            </button>
+            <button onclick="triggerRatingToast(${biz.id}, 'Perfil Completo')" class="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-2xl text-xs font-black cursor-pointer">
+              ⭐ ${biz.rating.toFixed(1)} (${biz.votes} opiniones) · Calificar
+            </button>
+          </div>
         </div>
 
-        <div class="relative rounded-[32px] overflow-hidden shadow-xl border-4 border-white min-h-[300px] sm:min-h-[340px] flex flex-col items-center justify-center text-center p-6">
+        <!-- 1. GRAN PORTADA SUPERIOR CON LOGO CENTRAL, DESCRIPCIÓN Y RANGO DE PRECIOS -->
+        <div class="relative rounded-[32px] overflow-hidden shadow-xl border-4 border-white min-h-[320px] sm:min-h-[360px] flex flex-col items-center justify-center text-center p-6">
           <img src="${biz.coverImage}" alt="${biz.name}" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/65 to-slate-950/85"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-slate-950/65 via-slate-950/75 to-slate-950/90"></div>
 
           <div class="relative z-10 flex flex-col items-center max-w-2xl mx-auto space-y-3">
+            <!-- Logo Circular Central + Píldora Verde -->
             <div class="relative flex items-center justify-center">
               <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white shadow-2xl border-4 border-white flex flex-col items-center justify-center">
                 <span class="text-lg font-black text-slate-900 leading-none">${biz.logoTitle}</span>
                 <span class="text-[10px] font-bold text-slate-500 mt-1">${biz.logoSub}</span>
               </div>
               <span class="hidden sm:inline-flex items-center gap-1.5 ml-4 px-4 py-1.5 rounded-full bg-emerald-600 text-white text-xs font-extrabold shadow-lg">
-                ${biz.badgeText}
+                ${categoryLabels[biz.category] || biz.badgeText}
               </span>
             </div>
 
+            <!-- Nombre + Sello Azul Verificado -->
             <div class="flex items-center justify-center gap-2 pt-1">
               <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">${biz.name}</h1>
-              <span class="w-7 h-7 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs shadow-md">
+              <span class="w-7 h-7 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs shadow-md" title="Verificado por Píllalo">
                 <i class="fa-solid fa-check"></i>
               </span>
             </div>
 
-            <p class="text-sm sm:text-base text-slate-100 font-medium max-w-xl">${biz.shortBio}</p>
+            <!-- Pequeña Descripción del Negocio -->
+            <div class="bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl px-4 py-3 max-w-xl">
+              <p class="text-xs font-extrabold uppercase tracking-wider text-emerald-300 mb-0.5">Sobre este negocio</p>
+              <p class="text-sm sm:text-base text-white font-medium leading-relaxed">
+                ${biz.shortBio}
+              </p>
+            </div>
 
+            <!-- Píldora Blanca Central del Rango de Precios -->
             <div class="pt-1">
               <span class="inline-flex items-center gap-2 bg-white text-slate-900 px-5 py-2.5 rounded-full text-xs sm:text-sm font-black shadow-lg">
                 <span class="text-lg">${biz.mainRangeIcon}</span>
@@ -978,7 +1336,10 @@
           </div>
         </div>
 
+        <!-- 2. TABLERO BENTO DE WIDGETS GRÁFICOS (MAPA + WHATSAPP + INSTAGRAM + TIKTOK + HORARIO + LLAMAR + CORREO) -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 pt-2 items-stretch">
+          
+          <!-- WIDGET 1 (5 cols): MAPA ESTILO GOOGLE MAPS CON PIN ROJO Y DIRECCIÓN -->
           <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(biz.address + ' Valledupar')}" 
              target="_blank"
              onclick="recordClick(${biz.id}, 'Maps')"
@@ -987,13 +1348,17 @@
               <span class="absolute top-5 left-6 bg-white/85 px-2 py-0.5 rounded text-[10px] font-bold text-slate-600 rotate-[-12deg]">Valledupar</span>
               <span class="absolute bottom-8 right-6 bg-white/85 px-2 py-0.5 rounded text-[10px] font-bold text-slate-600">${biz.neighborhood}</span>
 
+              <!-- Pin Rojo Central de Google Maps -->
               <div class="relative z-10 flex flex-col items-center">
                 <div class="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl border-3 border-white group-hover:scale-110 transition">
                   <i class="fa-solid fa-location-dot text-2xl"></i>
                 </div>
-                <span class="mt-1 bg-white px-3 py-1 rounded-full text-xs font-black text-slate-900 shadow-md border border-slate-200">${biz.name}</span>
+                <span class="mt-1 bg-white px-3 py-1 rounded-full text-xs font-black text-slate-900 shadow-md border border-slate-200">
+                  ${biz.name}
+                </span>
               </div>
 
+              <!-- Logo Google abajo a la izquierda -->
               <div class="absolute bottom-2.5 left-3 bg-white/95 px-2 py-0.5 rounded-md shadow-xs text-xs font-black">
                 <span class="text-blue-600">G</span><span class="text-red-500">o</span><span class="text-amber-500">o</span><span class="text-blue-600">g</span><span class="text-emerald-600">l</span><span class="text-red-500">e</span>
               </div>
@@ -1001,7 +1366,7 @@
 
             <div class="pt-3 px-2 flex items-center justify-between">
               <div>
-                <p class="text-xs font-extrabold text-slate-400 uppercase">Google Maps · Ubicación</p>
+                <p class="text-xs font-extrabold text-slate-400 uppercase">Google Maps · Dirección</p>
                 <p class="text-sm sm:text-base font-black text-slate-900 mt-0.5">${biz.address}</p>
               </div>
               <span class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
@@ -1010,11 +1375,14 @@
             </div>
           </a>
 
+          <!-- WIDGET 2 (3 cols): BLOQUE GIGANTE VERDE DE WHATSAPP -->
           <a href="https://wa.me/${biz.whatsapp}?text=Hola%20${encodeURIComponent(biz.name)},%20vi%20su%20perfil%20en%20Píllalo%20Valledupar" 
              target="_blank"
              onclick="recordClick(${biz.id}, 'WhatsApp')"
              class="md:col-span-3 wa-widget-green rounded-[28px] p-6 text-white flex flex-col items-center justify-between text-center min-h-[260px]">
-            <span class="bg-black/15 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider">WhatsApp Oficial</span>
+            <span class="bg-black/15 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider">
+              WhatsApp Oficial
+            </span>
             <div class="my-auto py-4">
               <i class="fa-brands fa-whatsapp text-7xl drop-shadow-md"></i>
             </div>
@@ -1024,8 +1392,13 @@
             </div>
           </a>
 
+          <!-- COLUMNA DERECHA (4 cols): INSTAGRAM + TIKTOK ARRIBA, HORARIO + LLAMADA/CORREO ABAJO -->
           <div class="md:col-span-4 flex flex-col justify-between gap-4">
+            
+            <!-- Fila Superior: Instagram & TikTok -->
             <div class="grid grid-cols-2 gap-4 flex-1">
+              
+              <!-- Widget Instagram -->
               <a href="https://instagram.com/${(biz.instagram || '').replace('@','')}" target="_blank"
                  onclick="recordClick(${biz.id}, 'Instagram')"
                  class="ig-widget-gradient rounded-[26px] p-4 text-white flex flex-col items-center justify-center text-center min-h-[140px]">
@@ -1033,15 +1406,20 @@
                 <span class="text-xs font-extrabold truncate w-full">${biz.instagram}</span>
               </a>
 
+              <!-- Widget TikTok -->
               <a href="https://tiktok.com/@${(biz.tiktok || '').replace('@','')}" target="_blank"
                  onclick="recordClick(${biz.id}, 'TikTok')"
                  class="tiktok-widget-black rounded-[26px] p-4 text-white flex flex-col items-center justify-center text-center min-h-[140px]">
                 <i class="fa-brands fa-tiktok text-4xl tiktok-neon-icon mb-2"></i>
                 <span class="text-xs font-extrabold truncate w-full text-slate-200">${biz.tiktok}</span>
               </a>
+
             </div>
 
+            <!-- Fila Inferior: Horario en Vivo + Llamar + Correo -->
             <div class="grid grid-cols-12 gap-3">
+              
+              <!-- Widget Horario en Vivo -->
               <div class="col-span-8 bento-white-card rounded-[24px] p-4 flex flex-col justify-center">
                 <div class="flex items-center gap-1.5 text-xs font-extrabold text-slate-800">
                   <i class="fa-regular fa-calendar-check text-emerald-600"></i>
@@ -1054,6 +1432,7 @@
                 <p class="text-[11px] text-slate-500 mt-1 truncate">✉️ ${biz.email}</p>
               </div>
 
+              <!-- Widget Llamar / Correo -->
               <div class="col-span-4 flex flex-col gap-2">
                 <a href="tel:+${biz.whatsapp}" onclick="recordClick(${biz.id}, 'Llamada')" class="flex-1 bento-white-card rounded-2xl p-2 flex flex-col items-center justify-center text-slate-900 hover:bg-slate-50 transition">
                   <i class="fa-solid fa-phone text-lg text-emerald-600"></i>
@@ -1064,8 +1443,11 @@
                   <span class="text-[11px] font-black mt-0.5">Correo</span>
                 </a>
               </div>
+
             </div>
+
           </div>
+
         </div>
       `;
 
@@ -1078,6 +1460,9 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // =========================================================================
+    // 4. FILTROS Y NAVEGACIÓN
+    // =========================================================================
     function filterBusinesses() {
       const search = document.getElementById('searchInput').value.toLowerCase();
       const price = document.getElementById('priceFilter').value;
@@ -1168,12 +1553,42 @@
         activeBtn.className = "px-3.5 py-2 rounded-xl bg-slate-900 text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer";
       }
       if (tabId === 'tab-analytics') renderOwnerAnalytics();
+      if (tabId === 'tab-certificate') populateStickerSelector();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // =========================================================================
+    // 5. STICKER Y CÓDIGO QR REAL DIRECTO AL PERFIL DEL NEGOCIO
+    // =========================================================================
+    function populateStickerSelector() {
+      const sel = document.getElementById('certBizSelect');
+      if (!sel) return;
+      sel.innerHTML = businesses.map(b => `<option value="${b.id}" ${b.id === currentStickerBizId ? 'selected' : ''}>${b.name} (${categoryLabels[b.category] || b.category})</option>`).join('');
+      selectBizForSticker();
+    }
+
+    function selectBizForSticker() {
+      const sel = document.getElementById('certBizSelect');
+      const id = sel ? Number(sel.value) : currentStickerBizId;
+      const biz = businesses.find(b => b.id === id) || businesses[0];
+      if (!biz) return;
+      currentStickerBizId = biz.id;
+
+      document.getElementById('certBrandName').value = biz.name;
+      document.getElementById('certCategory').value = categoryLabels[biz.category] || biz.mainRangeText;
+      document.getElementById('certLocation').value = biz.address;
+      document.getElementById('certIg').value = biz.instagram;
+      updateCertPreview();
+    }
+
+    function openStickerForBiz(bizId) {
+      currentStickerBizId = bizId;
+      switchTab('tab-certificate');
+    }
+
     function updateCertPreview() {
-      const name = document.getElementById('certBrandName').value || 'Tu Empresa';
-      const cat = document.getElementById('certCategory').value || 'Rango';
+      const name = document.getElementById('certBrandName').value || 'Tu Negocio';
+      const cat = document.getElementById('certCategory').value || 'Categoría';
       const loc = document.getElementById('certLocation').value || 'Valledupar';
       const ig = document.getElementById('certIg').value || '@tu_negocio';
 
@@ -1182,8 +1597,21 @@
       document.getElementById('cardLoc').innerText = '📍 ' + loc;
       document.getElementById('cardInsta').innerText = '📸 ' + ig;
       document.getElementById('cardInitial').innerText = name.substring(0, 2).toUpperCase();
+
+      const profileUrl = `https://jguao18.github.io/pillalo-valledupar/?negocio=${currentStickerBizId}`;
+      const qrImg = document.getElementById('stickerQrImg');
+      if (qrImg) {
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(profileUrl)}`;
+      }
     }
 
+    function simulateQrScan() {
+      openCompanyProfile(currentStickerBizId);
+    }
+
+    // =========================================================================
+    // 6. CLICS, VALORACIONES DE 1 A 5 ESTRELLAS Y ANALÍTICA EN SUPABASE
+    // =========================================================================
     async function recordClick(bizId, channel) {
       const biz = businesses.find(b => b.id === bizId);
       if (!biz) return;
@@ -1192,11 +1620,20 @@
       if (channel === 'Instagram') biz.igClicks = (biz.igClicks || 0) + 1;
       if (channel === 'TikTok') biz.tkClicks = (biz.tkClicks || 0) + 1;
       if (channel === 'Maps') biz.mapClicks = (biz.mapClicks || 0) + 1;
+
       triggerRatingToast(bizId, channel);
+
       if (supabaseClient) {
         try {
           await supabaseClient.from('registro_clics').insert([{ emprendimiento_id: biz.id, nombre_negocio: biz.name, canal: channel }]);
-        } catch (e) {}
+          await supabaseClient.from('emprendimientos').update({
+            total_clics_recibidos: biz.totalClicks,
+            clics_whatsapp: biz.waClicks,
+            clics_instagram: biz.igClicks,
+            clics_tiktok: biz.tkClicks,
+            clics_maps: biz.mapClicks
+          }).eq('id', biz.id);
+        } catch (e) { console.warn(e); }
       }
     }
 
@@ -1209,7 +1646,9 @@
       document.getElementById('ratingToast').classList.remove('hidden');
     }
 
-    function closeRatingToast() { document.getElementById('ratingToast').classList.add('hidden'); }
+    function closeRatingToast() {
+      document.getElementById('ratingToast').classList.add('hidden');
+    }
 
     async function submitStarRating(stars) {
       const biz = businesses.find(b => b.id === lastContactedId);
@@ -1219,30 +1658,45 @@
         biz.rating = sum / biz.votes;
         filterBusinesses();
         renderNuevosSection();
+
         if (supabaseClient) {
           try {
-            await supabaseClient.from('valoraciones_rapidas').insert([{ emprendimiento_id: biz.id, nombre_negocio: biz.name, canal_tocado: 'Calificación Directa', estrellas: stars }]);
-          } catch (e) {}
+            await supabaseClient.from('valoraciones_rapidas').insert([{
+              emprendimiento_id: biz.id,
+              nombre_negocio: biz.name,
+              canal_tocado: 'Calificación Directa',
+              estrellas: stars
+            }]);
+            await supabaseClient.from('emprendimientos').update({
+              calificacion_promedio: biz.rating.toFixed(2),
+              total_valoraciones: biz.votes
+            }).eq('id', biz.id);
+          } catch (e) { console.warn(e); }
         }
       }
       closeRatingToast();
       alert(`⭐ ¡Gracias! Tu calificación de ${stars} estrellas fue guardada.`);
     }
 
+    // REGISTRO DE NUEVO NEGOCIO CONECTADO A SUPABASE
     async function submitNewBusiness(e) {
       e.preventDefault();
       const name = document.getElementById('regName').value.trim();
       const category = document.getElementById('regCategory').value;
+      const shortBio = document.getElementById('regBio').value.trim();
       const mainRangeText = document.getElementById('regRange').value.trim();
       const address = document.getElementById('regAddress').value.trim();
       const phoneDisplay = document.getElementById('regPhone').value.trim();
       const whatsapp = '57' + phoneDisplay.replace(/\D/g, '').replace(/^57/, '');
-      const instagram = document.getElementById('regIg').value.trim() || '@emprendimiento_vup';
-      const tiktok = document.getElementById('regTk').value.trim() || '@emprendimiento.vup';
-      const schedule = document.getElementById('regSchedule').value.trim() || 'Abierto hoy · 8:00 AM - 7:00 PM';
+      const instagram = document.getElementById('regIg').value.trim() || '@negocio_vup';
+      const tiktok = document.getElementById('regTk').value.trim() || '@negocio.vup';
+      const schedule = document.getElementById('regSchedule').value.trim() || 'Abierto · 8:00 AM - 7:00 PM';
       const email = document.getElementById('regEmail').value.trim() || 'contacto@negocio.co';
 
-      const iconMap = { ropa: '👖', comida: '🍔', perfumes: '💎', aires: '❄️', belleza: '💅' };
+      const iconMap = {
+        comida: '🍔', ropa: '👖', calzado: '👟', accesorios: '👜',
+        perfumes: '💎', belleza: '💄', serv_belleza: '💅', tecnicos: '🛠️', profesionales: '👨‍💼'
+      };
       const words = name.split(' ');
       const newBiz = {
         id: Date.now(),
@@ -1251,12 +1705,15 @@
         logoSub: words.slice(1, 3).join(' ') || 'Valledupar',
         category,
         ageType: 'nuevo',
-        badgeText: '🌱 Nuevo Emprendimiento',
+        registeredThisWeek: true,
+        registeredDaysAgo: 0,
+        verified: true,
+        badgeText: '🆕 Recién Llegado',
         badgeStyle: 'bg-emerald-50 text-emerald-800 border-emerald-200',
         mainRangeIcon: iconMap[category] || '✨',
         mainRangeText,
         priceLevel: 'low',
-        shortBio: 'Emprendimiento local registrado en Píllalo Valledupar.',
+        shortBio,
         address,
         neighborhood: 'Valledupar',
         phoneDisplay,
@@ -1281,22 +1738,22 @@
       filterBusinesses();
       renderNuevosSection();
 
-      document.getElementById('certBrandName').value = name;
-      document.getElementById('certCategory').value = `${newBiz.mainRangeIcon} ${mainRangeText}`;
-      document.getElementById('certLocation').value = address;
-      document.getElementById('certIg').value = instagram;
-      updateCertPreview();
+      currentStickerBizId = newBiz.id;
 
       if (supabaseClient) {
         try {
           await supabaseClient.from('emprendimientos').insert([{
             nombre: name,
-            tipo_registro: 'Emprendimiento',
+            tipo_registro: 'Negocio',
             categoria: category,
             subcategoria: newBiz.logoSub,
-            eslogan: newBiz.shortBio,
-            descripcion: newBiz.shortBio,
+            eslogan: shortBio,
+            descripcion: shortBio,
+            foto_portada_url: newBiz.coverImage,
+            logo_url: newBiz.storeThumb,
+            icono_emoji: newBiz.mainRangeIcon,
             etiqueta_rango_precio: mainRangeText,
+            categoria_presupuesto: 'economico',
             barrio: address,
             direccion: address,
             horario_texto: schedule,
@@ -1307,13 +1764,16 @@
             correo_electronico: email,
             es_nuevo: true
           }]);
-        } catch (err) {}
+        } catch (err) { console.warn(err); }
       }
 
-      alert('¡Negocio registrado con éxito! Ahora descarga tu certificado.');
+      alert('¡Negocio registrado con éxito en Recién Llegados! Aquí tienes tu Sticker con Código QR directo a tu perfil.');
       switchTab('tab-certificate');
     }
 
+    // =========================================================================
+    // 7. PANEL PRIVADO DE DUEÑOS (ACCESO CON CLAVE SECRETA)
+    // =========================================================================
     function syncOwnerUI() {
       const navAnalytics = document.getElementById('nav-analytics');
       const lockBtn = document.getElementById('ownerLockBtn');
@@ -1329,25 +1789,34 @@
     }
 
     function openOwnerPinModal() {
-      if (isOwnerUnlocked) { switchTab('tab-analytics'); return; }
+      if (isOwnerUnlocked) {
+        switchTab('tab-analytics');
+        return;
+      }
       document.getElementById('ownerPinInput').value = '';
       document.getElementById('ownerPinModal').classList.remove('hidden');
       document.getElementById('ownerPinModal').classList.add('flex');
     }
+
     function closeOwnerPinModal() {
       document.getElementById('ownerPinModal').classList.add('hidden');
       document.getElementById('ownerPinModal').classList.remove('flex');
     }
+
     function checkOwnerPin(e) {
       e.preventDefault();
-      if (document.getElementById('ownerPinInput').value.trim() === OWNER_PIN) {
+      const val = document.getElementById('ownerPinInput').value.trim();
+      if (val === OWNER_PIN) {
         isOwnerUnlocked = true;
         sessionStorage.setItem('pillalo_owner_ok', 'true');
         syncOwnerUI();
         closeOwnerPinModal();
         switchTab('tab-analytics');
-      } else { alert('Clave incorrecta.'); }
+      } else {
+        alert('Clave incorrecta.');
+      }
     }
+
     function lockOwnerMode() {
       isOwnerUnlocked = false;
       sessionStorage.removeItem('pillalo_owner_ok');
@@ -1380,7 +1849,7 @@
       `).join('');
 
       document.getElementById('analyticsRows').innerHTML = businesses.map(b => {
-        const msg = `¡Hola *${b.name}*! 👋 Te escribimos de *Píllalo Valledupar*.\n\nReporte de visibilidad:\n👀 *Vistas:* ${b.views}\n🟢 *Clics a WhatsApp:* ${b.waClicks}\n📸 *Clics a Instagram:* ${b.igClicks}\n👆 *Total:* ${b.totalClicks}\n⭐ *Calificación:* ${b.rating.toFixed(1)}/5.0 (${b.votes} opiniones)`;
+        const msg = `¡Hola *${b.name}*! 👋 Te escribimos de *Píllalo Valledupar*.\n\nEste es el reporte de visibilidad de tu negocio:\n👀 *Aperturas de tu perfil:* ${b.views}\n🟢 *Clics a tu WhatsApp:* ${b.waClicks}\n📸 *Clics a Instagram:* ${b.igClicks}\n👆 *Total interacciones:* ${b.totalClicks}\n⭐ *Calificación:* ${b.rating.toFixed(1)}/5.0 (${b.votes} opiniones)`;
         return `
           <tr class="hover:bg-slate-50">
             <td class="p-3 font-black text-slate-900">${b.name}</td>
@@ -1404,18 +1873,25 @@
       const b = businesses.find(x => x.id === bizId);
       if (!b) return;
       bannersList.unshift({
-        badge: "🌱 EMPRENDIMIENTO IMPULSADO HOY",
+        bizId: b.id,
+        badge: "🚀 IMPULSO DE LA SEMANA · DESTACADO",
         title: `${b.mainRangeIcon} ${b.name}: ${b.mainRangeText}`,
-        desc: `${b.address}. ¡Escríbeles directo por WhatsApp!`,
+        desc: `${b.shortBio}`,
         bizName: b.name,
-        whatsapp: b.whatsapp
+        schedule: b.schedule,
+        coverImage: b.coverImage,
+        logoTitle: b.logoTitle
       });
       renderSpotlightBanners();
       switchTab('tab-explore');
-      alert(`🚀 ¡Listo! "${b.name}" ya está en el Banner Superior.`);
+      alert(`🚀 ¡Listo! "${b.name}" ya está en el Banner Superior Grande del Directorio.`);
     }
 
     function openNewBannerModal() {
+      const sel = document.getElementById('bannerBizSelect');
+      if (sel) {
+        sel.innerHTML = businesses.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+      }
       document.getElementById('newBannerModal').classList.remove('hidden');
       document.getElementById('newBannerModal').classList.add('flex');
     }
@@ -1425,22 +1901,44 @@
     }
     function saveCustomBanner(e) {
       e.preventDefault();
+      const bizId = Number(document.getElementById('bannerBizSelect').value);
+      const b = businesses.find(x => x.id === bizId) || businesses[0];
       bannersList.unshift({
+        bizId: b.id,
         badge: document.getElementById('bannerBadgeInput').value,
         title: document.getElementById('bannerTitleInput').value,
         desc: document.getElementById('bannerDescInput').value,
-        bizName: document.getElementById('bannerBizInput').value,
-        whatsapp: document.getElementById('bannerWaInput').value.replace(/\D/g, '')
+        bizName: b.name,
+        schedule: b.schedule,
+        coverImage: b.coverImage,
+        logoTitle: b.logoTitle
       });
       renderSpotlightBanners();
       closeNewBannerModal();
       switchTab('tab-explore');
     }
 
+    // =========================================================================
+    // 8. DETECTOR AUTOMÁTICO DE ESCANEO QR (?negocio=ID)
+    // =========================================================================
+    function checkUrlForQrRedirect() {
+      const params = new URLSearchParams(window.location.search);
+      const negocioId = params.get('negocio');
+      if (negocioId) {
+        const found = businesses.find(b => String(b.id) === String(negocioId));
+        if (found) {
+          openCompanyProfile(found.id);
+        }
+      }
+    }
+
+    // Inicializar
     syncOwnerUI();
     renderSpotlightBanners();
     renderBusinesses(businesses);
     renderNuevosSection();
+    populateStickerSelector();
+    checkUrlForQrRedirect();
   </script>
 </body>
 </html>
