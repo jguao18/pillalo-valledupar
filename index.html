@@ -318,7 +318,8 @@
             <a href="legal/politica-de-datos.html" target="_blank" class="hover:underline">Datos</a> ·
             <a href="legal/suscripciones-y-pagos.html" target="_blank" class="hover:underline">Planes</a> ·
             <a href="legal/como-ordenamos.html" target="_blank" class="hover:underline">Orden solidario</a> ·
-            <a href="javascript:void(0)" onclick="openPqrModal()" class="hover:underline text-emerald-800 font-black">PQR y contacto</a>
+            <a href="javascript:void(0)" onclick="openPqrModal()" class="hover:underline text-emerald-800 font-black">PQR y contacto</a> ·
+            <a href="javascript:void(0)" onclick="openOwnerPinModal()" class="hover:underline text-slate-500 font-bold">🔒 Admin</a>
           </div>
         </footer>
 
@@ -1900,7 +1901,12 @@
 
     <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] text-slate-400 pt-2 border-t border-slate-100">
       <p>© 2026 Píllalo Valledupar · Valledupar, Cesar, Colombia · Todos los derechos reservados.</p>
-      <p class="font-medium">Hecho con orgullo vallenato para el impulso del comercio local independiente 🐾</p>
+      <div class="flex items-center gap-3">
+        <p class="font-medium">Hecho con orgullo vallenato para el impulso del comercio local independiente 🐾</p>
+        <button id="ownerLockBtn" onclick="openOwnerPinModal()" class="px-3 py-1 rounded-full bg-slate-200/90 hover:bg-slate-300 text-slate-700 font-bold transition cursor-pointer text-[10px] flex items-center gap-1 shadow-2xs">
+          <span>🔒 Admin Píllalo</span>
+        </button>
+      </div>
     </div>
   </footer>
 
@@ -2539,6 +2545,12 @@
       <button type="button" onclick="closeOwnerLoginModal()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold cursor-pointer">
         Cancelar
       </button>
+
+      <div class="pt-2 border-t border-slate-100 text-center">
+        <button type="button" onclick="closeOwnerLoginModal(); openOwnerPinModal();" class="text-xs font-black text-indigo-700 hover:text-indigo-900 underline cursor-pointer">
+          🔐 ¿Eres Administrador de Píllalo? Ingresa aquí con tu PIN
+        </button>
+      </div>
     </div>
   </div>
 
