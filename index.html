@@ -142,34 +142,38 @@
       </div>
 
       <!-- Navigation Pills (Center) -->
-      <div class="hidden md:flex items-center space-x-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 text-xs font-bold">
-        <button id="nav-explore" onclick="switchTab('tab-explore')" class="px-3.5 py-2 rounded-xl bg-slate-900 text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer">
+      <div class="hidden md:flex items-center space-x-1 bg-slate-100 p-1 rounded-2xl border border-slate-200/80 text-xs font-bold">
+        <button id="nav-explore" onclick="switchTab('tab-explore')" class="px-3 py-2 rounded-xl bg-slate-900 text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-grip"></i>
           <span>Explorar Directorio</span>
         </button>
-        <button id="nav-nuevos" onclick="switchTab('tab-nuevos')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
+        <button id="nav-nuevos" onclick="switchTab('tab-nuevos')" class="px-3 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-bolt text-emerald-600"></i>
           <span>Recién Llegados</span>
         </button>
-        <button id="nav-jobs" onclick="switchTab('tab-jobs')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
+        <button id="nav-jobs" onclick="switchTab('tab-jobs')" class="px-3 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-briefcase text-blue-600"></i>
           <span>Vacantes</span>
         </button>
-        <button id="nav-certificate" onclick="switchTab('tab-certificate')" class="px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
+        <button id="nav-certificate" onclick="switchTab('tab-certificate')" class="px-3 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-qrcode text-amber-500"></i>
           <span>Sticker & QR</span>
         </button>
+        <button id="nav-my-biz" onclick="switchTab('tab-my-biz')" class="px-3 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-chart-pie text-teal-600"></i>
+          <span>Mi Negocio (Estadísticas)</span>
+        </button>
         <!-- Pestaña Privada de Analítica & Ads (Oculta al público; solo visible al desbloquear Modo Dueño) -->
-        <button id="nav-analytics" onclick="switchTab('tab-analytics')" class="hidden px-3.5 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer">
+        <button id="nav-analytics" onclick="switchTab('tab-analytics')" class="hidden px-3 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-chart-line text-indigo-600"></i>
-          <span>Panel Dueños (Analítica & Ads)</span>
+          <span>Panel Dueños</span>
         </button>
       </div>
 
       <!-- Right Buttons -->
       <div class="flex items-center space-x-2">
-        <button onclick="switchTab('tab-certificate')" class="md:hidden px-3 py-2 bg-amber-50 text-amber-800 border border-amber-200 rounded-xl text-xs font-bold">
-          <i class="fa-solid fa-qrcode"></i>
+        <button onclick="switchTab('tab-my-biz')" class="md:hidden px-3 py-2 bg-teal-50 text-teal-800 border border-teal-200 rounded-xl text-xs font-bold" title="Estadísticas de mi negocio">
+          <i class="fa-solid fa-chart-pie"></i>
         </button>
         <button onclick="switchTab('tab-register')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold shadow-sm transition flex items-center space-x-1.5 cursor-pointer">
           <i class="fa-solid fa-plus"></i>
@@ -180,25 +184,26 @@
     </div>
 
     <!-- Mobile Sub-Nav -->
-    <div class="md:hidden flex items-center justify-around border-t border-slate-100 bg-white px-2 py-2 text-xs font-bold">
+    <div class="md:hidden flex items-center justify-around border-t border-slate-100 bg-white px-2 py-2 text-[11px] font-bold">
       <button onclick="switchTab('tab-explore')" class="text-emerald-700 flex items-center gap-1"><i class="fa-solid fa-grip"></i> Directorio</button>
       <button onclick="switchTab('tab-nuevos')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-bolt text-emerald-600"></i> Recién Llegados</button>
       <button onclick="switchTab('tab-jobs')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-briefcase text-blue-600"></i> Vacantes</button>
-      <button onclick="switchTab('tab-certificate')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-qrcode text-amber-500"></i> Sticker QR</button>
+      <button onclick="switchTab('tab-certificate')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-qrcode text-amber-500"></i> QR</button>
+      <button onclick="switchTab('tab-my-biz')" class="text-slate-600 flex items-center gap-1"><i class="fa-solid fa-chart-pie text-teal-600"></i> Mi Negocio</button>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto px-4 pt-6">
 
     <!-- ===================================================================== -->
-    <!-- TAB 1: EXPLORAR DIRECTORIO (BANNER GRANDE + 9 CATEGORÍAS + COMPACTAS) -->
+    <!-- TAB 1: EXPLORAR DIRECTORIO (BANNER GRANDE + 10 CATEGORÍAS + COMPACTAS)-->
     <!-- ===================================================================== -->
     <section id="tab-explore" class="space-y-6 fade-in">
 
       <!-- BANNER PUBLICITARIO SUPERIOR MÁS GRANDE Y LLAMATIVO (CONTROLADO POR LOS DUEÑOS) -->
       <div id="adSpotlightBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
 
-      <!-- 1. TACTILE 3D CATEGORY DOCK (9 CATEGORÍAS + TODOS) -->
+      <!-- 1. TACTILE 3D CATEGORY DOCK (10 CATEGORÍAS INCLUYENDO MASCOTAS + TODOS) -->
       <div class="flex items-center justify-start gap-2.5 overflow-x-auto py-2.5 px-1" id="categoryDock">
         <button onclick="setCategory('all', this)" class="cat-3d-btn active px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <span class="text-2xl">✨</span>
@@ -232,6 +237,10 @@
           <span class="text-2xl">💅</span>
           <span class="text-xs sm:text-sm font-extrabold text-slate-900">Servicios de Belleza</span>
         </button>
+        <button onclick="setCategory('mascotas', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <span class="text-2xl">🐾</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">Mascotas</span>
+        </button>
         <button onclick="setCategory('tecnicos', this)" class="cat-3d-btn px-4 py-3 rounded-2xl flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <span class="text-2xl">🛠️</span>
           <span class="text-xs sm:text-sm font-extrabold text-slate-900">Servicios Técnicos & Mantenimiento</span>
@@ -242,25 +251,25 @@
         </button>
       </div>
 
-      <!-- 2. BUSCADOR CON LUPA + PÍLDORAS DE FILTRO (PRESUPUESTO, BARRIOS, RECIÉN LLEGADOS, CON TRAYECTORIA) -->
+      <!-- 2. BUSCADOR CON LUPA + FILTROS DE PRESUPUESTO Y TODOS LOS BARRIOS DE VALLEDUPAR -->
       <div class="bg-white/80 backdrop-blur-md rounded-3xl p-4 sm:p-5 border border-slate-200/90 shadow-xs space-y-4">
         
         <!-- Search Input -->
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400 text-base"></i>
           <input type="text" id="searchInput" oninput="filterBusinesses()" 
-            placeholder="Busca en Valledupar: restaurantes, calzado, cadenas, bolsos, maquillaje, uñas, técnicos de aire, profesionales..." 
+            placeholder="Busca en Valledupar: restaurantes, calzado, accesorios, mascotas, maquillaje, uñas, técnicos, profesionales..." 
             class="w-full pl-11 pr-24 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
           <button onclick="resetAllFilters()" class="absolute right-2.5 top-2 bottom-2 px-3 bg-slate-200/70 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition cursor-pointer">
             Ver Todos
           </button>
         </div>
 
-        <!-- 4 Filter Pills -->
-        <div class="flex flex-wrap items-center justify-center gap-2.5 text-xs">
+        <!-- Filtros Limpios: Presupuesto + Todos los Barrios de Valledupar (sin Recién Llegados ni Con Trayectoria aquí) -->
+        <div class="flex flex-wrap items-center justify-center gap-3 text-xs">
           
           <!-- Filtro 1: Presupuesto -->
-          <div class="flex items-center bg-white border border-slate-200 rounded-xl px-3.5 py-2 shadow-2xs">
+          <div class="flex items-center bg-white border border-slate-200 rounded-xl px-4 py-2.5 shadow-2xs">
             <span class="mr-1.5 text-sm">💰</span>
             <span class="font-bold text-slate-600 mr-1.5">Presupuesto:</span>
             <select id="priceFilter" onchange="filterBusinesses()" class="font-extrabold text-slate-900 bg-transparent focus:outline-none cursor-pointer">
@@ -271,39 +280,94 @@
             </select>
           </div>
 
-          <!-- Filtro 2: Barrios de Valledupar -->
-          <div class="flex items-center bg-white border border-slate-200 rounded-xl px-3.5 py-2 shadow-2xs">
+          <!-- Filtro 2: Todos los Barrios de Valledupar -->
+          <div class="flex items-center bg-white border border-slate-200 rounded-xl px-4 py-2.5 shadow-2xs">
             <span class="mr-1.5 text-sm">📍</span>
             <span class="font-bold text-slate-600 mr-1.5">Barrios de Valledupar:</span>
             <select id="neighborhoodFilter" onchange="filterBusinesses()" class="font-extrabold text-slate-900 bg-transparent focus:outline-none cursor-pointer">
-              <option value="all">Toda la ciudad</option>
-              <option value="Doce de Octubre">Doce de Octubre</option>
-              <option value="Novalito">Novalito</option>
-              <option value="San Joaquín">San Joaquín</option>
-              <option value="Los Cortijos">Los Cortijos</option>
-              <option value="La Nevada">La Nevada / Domicilio</option>
-              <option value="Fundadores">Fundadores</option>
-              <option value="Las Flores">Las Flores</option>
-              <option value="Centro">Centro</option>
+              <option value="all">Toda la ciudad (Todos los barrios)</option>
+              <optgroup label="Zona Norte y Noroccidente">
+                <option value="Novalito">Novalito</option>
+                <option value="San Vicente">San Vicente</option>
+                <option value="Los Cortijos">Los Cortijos</option>
+                <option value="Rosas del Ateneo">Rosas del Ateneo</option>
+                <option value="Pontevedra">Pontevedra</option>
+                <option value="San Carlos">San Carlos</option>
+                <option value="Villalba">Villalba</option>
+                <option value="Ciudad Jardín">Ciudad Jardín</option>
+                <option value="Santa Elena">Santa Elena</option>
+                <option value="Pasadena">Pasadena</option>
+                <option value="San Isidro">San Isidro</option>
+                <option value="Alfonso López">Alfonso López</option>
+                <option value="Chimila">Chimila</option>
+                <option value="Guatapurí">Guatapurí</option>
+                <option value="Las Delicias">Las Delicias</option>
+                <option value="Don Alberto">Don Alberto</option>
+                <option value="Villa Miriam">Villa Miriam</option>
+                <option value="La Nevada">La Nevada</option>
+                <option value="Divino Niño">Divino Niño</option>
+                <option value="Bello Horizonte">Bello Horizonte</option>
+                <option value="Ciudad Tayrona">Ciudad Tayrona</option>
+              </optgroup>
+              <optgroup label="Zona Centro y Tradicional">
+                <option value="Centro">Centro</option>
+                <option value="Loperena">Loperena</option>
+                <option value="Cañaguate">Cañaguate</option>
+                <option value="San Joaquín">San Joaquín</option>
+                <option value="Obrero">Obrero</option>
+                <option value="Sicarare">Sicarare</option>
+                <option value="San Jorge">San Jorge</option>
+                <option value="Santa Rita">Santa Rita</option>
+                <option value="El Carmen">El Carmen</option>
+                <option value="Gaitán">Gaitán</option>
+                <option value="La Granja">La Granja</option>
+                <option value="San Antonio">San Antonio</option>
+              </optgroup>
+              <optgroup label="Zona Occidental y Comercial">
+                <option value="Las Flores">Las Flores</option>
+                <option value="Los Músicos">Los Músicos</option>
+                <option value="Arizona">Arizona</option>
+                <option value="Garupal">Garupal (Etapas 1, 2, 3 y 4)</option>
+                <option value="Ichagua">Ichagua</option>
+                <option value="Iracal">Iracal</option>
+                <option value="Candelaria Norte">Candelaria Norte</option>
+                <option value="Villa Concha">Villa Concha</option>
+                <option value="La Popa">La Popa</option>
+                <option value="Álamos">Álamos (I, II y III)</option>
+                <option value="Villa Olga">Villa Olga</option>
+              </optgroup>
+              <optgroup label="Zona Sur y Suroriente">
+                <option value="Doce de Octubre">Doce de Octubre</option>
+                <option value="Fundadores">Fundadores</option>
+                <option value="Simón Bolívar">Simón Bolívar</option>
+                <option value="Dangond">Dangond</option>
+                <option value="Los Caciques">Los Caciques</option>
+                <option value="Primero de Mayo">Primero de Mayo</option>
+                <option value="Siete de Agosto">Siete de Agosto</option>
+                <option value="San Martín">San Martín</option>
+                <option value="Casimiro Maestre">Casimiro Maestre</option>
+                <option value="Manantial">Manantial</option>
+                <option value="Candelaria Sur">Candelaria Sur</option>
+                <option value="Sabanas del Valle">Sabanas del Valle</option>
+                <option value="Las Manuelitas">Las Manuelitas</option>
+                <option value="Panamá">Panamá</option>
+                <option value="Villa Castro">Villa Castro</option>
+                <option value="Mareigua">Mareigua</option>
+                <option value="Amaneceres del Valle">Amaneceres del Valle</option>
+                <option value="Los Milagros">Los Milagros</option>
+                <option value="Mayales">Mayales</option>
+                <option value="Villa Clara">Villa Clara</option>
+                <option value="Villa Dariana">Villa Dariana</option>
+                <option value="Lorenzo Morales">Lorenzo Morales</option>
+                <option value="Nando Marín">Nando Marín</option>
+              </optgroup>
             </select>
           </div>
-
-          <!-- Filtro 3: Recién Llegados -->
-          <button id="btn-age-new" onclick="setAgeFilter('nuevo')" class="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer">
-            <span class="text-sm">🆕</span>
-            <span>Recién Llegados</span>
-          </button>
-
-          <!-- Filtro 4: Con Trayectoria -->
-          <button id="btn-age-established" onclick="setAgeFilter('trayectoria')" class="px-3.5 py-2 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer">
-            <span class="text-sm">🏛️</span>
-            <span>Con Trayectoria</span>
-          </button>
 
         </div>
       </div>
 
-      <!-- 3. GRILLA COMPACTA DE NEGOCIOS (3 POR FILA PARA VER MUCHOS MÁS Y ENTRAR AL PERFIL) -->
+      <!-- 3. GRILLA COMPACTA DE NEGOCIOS (SIN VALORACIÓN PÚBLICA, CON MÁS ESPACIO) -->
       <div id="businessList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         <!-- Injected via JS -->
       </div>
@@ -311,7 +375,7 @@
     </section>
 
     <!-- ===================================================================== -->
-    <!-- TAB 2: VISTA PERFIL COMPLETO DE LA EMPRESA (CON TODOS LOS WIDGETS)    -->
+    <!-- TAB 2: VISTA PERFIL COMPLETO DE LA EMPRESA                            -->
     <!-- ===================================================================== -->
     <section id="tab-company-profile" class="hidden fade-in space-y-6">
       <div id="companyProfileContainer"></div>
@@ -398,14 +462,13 @@
             </span>
             <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Sticker y Código QR Directo al Perfil del Negocio</h2>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Cada restaurante o negocio recibe su <b>Sticker Oficial de Píllalo con Código QR único</b>. Cuando un cliente llega al local y escanea el QR con su celular, <b>se abre enseguida el Perfil Completo de ese negocio</b> con su WhatsApp, Instagram, TikTok, mapa y estrellas.
+              Cada restaurante o negocio recibe su <b>Sticker Oficial de Píllalo con Código QR único</b>. Cuando un cliente llega al local y escanea el QR con su celular, <b>se abre enseguida el Perfil Completo de ese negocio</b> con su WhatsApp, Instagram, TikTok y mapa.
             </p>
 
             <div class="space-y-3 bg-slate-50 p-5 rounded-3xl border border-slate-200">
               <div>
                 <label class="block text-xs font-extrabold text-emerald-800 mb-1">1. Selecciona un Negocio Registrado para generar su QR:</label>
                 <select id="certBizSelect" onchange="selectBizForSticker()" class="w-full px-3.5 py-2.5 bg-white border-2 border-emerald-500 rounded-xl text-sm font-black text-slate-900 cursor-pointer">
-                  <!-- Llenado automático con los negocios -->
                 </select>
               </div>
 
@@ -448,11 +511,9 @@
           <div class="lg:col-span-6 flex justify-center py-4">
             <div id="printableStickerArea" class="w-80 sm:w-96 bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900 text-white rounded-[40px] p-6 sticker-diecut relative overflow-hidden text-center space-y-4">
               
-              <!-- Círculos decorativos de fondo -->
               <div class="absolute -top-12 -right-12 w-36 h-36 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none"></div>
               <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-amber-400/20 rounded-full blur-2xl pointer-events-none"></div>
 
-              <!-- Encabezado del Sticker -->
               <div class="flex items-center justify-between border-b border-white/15 pb-3">
                 <div class="flex items-center gap-2">
                   <div class="w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 font-black text-base flex items-center justify-center shadow-md">P</div>
@@ -466,7 +527,6 @@
                 </span>
               </div>
 
-              <!-- Nombre y Logo del Restaurante / Negocio -->
               <div class="space-y-1.5 pt-1">
                 <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white text-slate-900 font-black text-xl shadow-xl border-4 border-emerald-400" id="cardInitial">
                   LA
@@ -477,18 +537,16 @@
                 </p>
               </div>
 
-              <!-- Caja Blanca Central con el Código QR Escaneable -->
               <div class="bg-white text-slate-900 rounded-3xl p-4 shadow-2xl mx-auto max-w-[230px] space-y-2 border-4 border-amber-400">
                 <p class="text-[10px] font-black uppercase tracking-wider text-emerald-700">📱 ¡ESCANÉAME CON TU CELULAR!</p>
                 <div class="flex justify-center">
                   <img id="stickerQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fjguao18.github.io%2Fpillalo-valledupar%2F%3Fnegocio%3D5" alt="Código QR del Negocio" class="w-36 h-36 rounded-xl">
                 </div>
                 <p class="text-[11px] font-extrabold text-slate-800 leading-tight">
-                  Mira nuestro WhatsApp, Redes, Ubicación y Califícanos con ⭐
+                  Mira nuestro WhatsApp, Redes, Ubicación y Califícanos en Píllalo
                 </p>
               </div>
 
-              <!-- Iconos de lo que encuentran al escanear -->
               <div class="flex items-center justify-center gap-3 pt-1">
                 <span class="px-2.5 py-1 rounded-xl bg-emerald-600/30 border border-emerald-400/30 text-[11px] font-bold flex items-center gap-1">
                   <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp
@@ -501,7 +559,6 @@
                 </span>
               </div>
 
-              <!-- Pie del Sticker -->
               <div class="pt-1 text-[11px] text-slate-300 font-semibold flex items-center justify-between border-t border-white/15">
                 <span id="cardLoc">📍 Los Cortijos · Valledupar</span>
                 <span id="cardInsta" class="text-emerald-300 font-bold">📸 @luxuryarepas_valle</span>
@@ -515,7 +572,32 @@
     </section>
 
     <!-- ===================================================================== -->
-    <!-- TAB 6: REGISTRAR NEGOCIO O SERVICIO (CON DESCRIPCIÓN Y 9 CATEGORÍAS)  -->
+    <!-- TAB 6: PORTAL PRIVADO "MI NEGOCIO" (SOLO PARA EL DUEÑO DEL REGISTRO)  -->
+    <!-- ===================================================================== -->
+    <section id="tab-my-biz" class="hidden fade-in space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-teal-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <span class="bg-teal-400/20 text-teal-200 border border-teal-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase">
+            🔒 Estadísticas y Valoraciones Privadas (Solo para Ti)
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">¿Qué sucede en el Perfil de mi Negocio?</h2>
+          <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl">
+            Aquí cada persona registrada mira en privado cuánta gente abrió su perfil, cuántos tocaron su WhatsApp o redes, y sus <b>5 categorías de valoración constructiva</b> para saber qué está haciendo excelente y qué puede mejorar (nadie del público ve tus estrellas).
+          </p>
+        </div>
+        <div class="bg-white/10 border border-white/20 rounded-2xl p-3.5 min-w-[250px]">
+          <label class="block text-[11px] font-extrabold text-teal-300 uppercase mb-1">Selecciona tu Negocio Registrado:</label>
+          <select id="myBizSelector" onchange="renderMyBusinessDashboard()" class="w-full px-3 py-2 bg-white text-slate-900 rounded-xl text-xs font-black cursor-pointer">
+          </select>
+        </div>
+      </div>
+
+      <!-- Contenedor Dinámico del Dashboard Privado del Negocio -->
+      <div id="myBizDashboardContent" class="space-y-6"></div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 7: REGISTRAR NEGOCIO O SERVICIO (CON LAS 10 CATEGORÍAS)           -->
     <!-- ===================================================================== -->
     <section id="tab-register" class="hidden fade-in">
       <div class="bento-white-card rounded-3xl p-6 sm:p-8 max-w-2xl mx-auto space-y-5">
@@ -524,7 +606,7 @@
             💳 Planes Parejos para Todos: 1 Mes $5.000 · 3 Meses $12.000 · 6 Meses $21.000 · 1 Año $36.000
           </span>
           <h2 class="text-2xl font-black text-slate-900">Registra tu Negocio, Comercio o Servicio</h2>
-          <p class="text-xs text-slate-500">Aparecerás esta semana en <b>Recién Llegados</b> y tendrás tu propio perfil completo con código QR para tu local.</p>
+          <p class="text-xs text-slate-500">Aparecerás esta semana en <b>Recién Llegados</b>, tendrás tu Sticker con QR y acceso a tus estadísticas privadas.</p>
         </div>
 
         <form onsubmit="submitNewBusiness(event)" class="space-y-4 text-xs">
@@ -543,13 +625,13 @@
                 <option value="perfumes">💎 Perfumes & Lociones</option>
                 <option value="belleza">💄 Belleza (Maquillaje y Productos)</option>
                 <option value="serv_belleza">💅 Servicios de Belleza (Uñas, Cejas, Barbería)</option>
+                <option value="mascotas">🐾 Mascotas (Veterinaria, Pet Shop, Spa Canino)</option>
                 <option value="tecnicos">🛠️ Servicios Técnicos & Mantenimiento (Aires, Arreglos)</option>
                 <option value="profesionales">👨‍💼 Profesionales Independientes</option>
               </select>
             </div>
           </div>
 
-          <!-- Pequeña Descripción del Negocio (Visible al entrar al Perfil Completo) -->
           <div>
             <label class="block font-bold text-slate-700 mb-1">Pequeña Descripción del Negocio o Servicio (Se verá dentro de tu Perfil) *</label>
             <textarea id="regBio" rows="2" required placeholder="Ej: Especialistas en arepas rellenas al carbón, patacones y jugos naturales con atención en mesa y pedidos por WhatsApp." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold"></textarea>
@@ -557,8 +639,8 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block font-bold text-emerald-700 mb-1">Rango de Precios del Producto/Servicio Principal *</label>
-              <input type="text" id="regRange" required placeholder="Ej: Rango en Platos: $12.000 – $28.000 COP" class="w-full px-3.5 py-2.5 bg-emerald-50/50 border border-emerald-300 rounded-xl font-semibold">
+              <label class="block font-bold text-emerald-700 mb-1">Rango de Precios (Solo el valor Mínimo a Máximo) *</label>
+              <input type="text" id="regRange" required placeholder="Ej: $15.000 – $45.000 COP" class="w-full px-3.5 py-2.5 bg-emerald-50/50 border border-emerald-300 rounded-xl font-semibold">
             </div>
             <div>
               <label class="block font-bold text-slate-700 mb-1">Dirección y Barrio en Valledupar *</label>
@@ -600,17 +682,17 @@
     </section>
 
     <!-- ===================================================================== -->
-    <!-- TAB 7: PANEL PRIVADO DE DUEÑOS (ANALÍTICA, CLICS, 5★ Y PUBLICIDAD)    -->
+    <!-- TAB 8: PANEL PRIVADO DE DUEÑOS DE PÍLLALO (CON CLAVE 2026)            -->
     <!-- ===================================================================== -->
     <section id="tab-analytics" class="hidden fade-in space-y-6">
       <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase">
-            🔐 Modo Privado Dueños (Oculto al Público)
+            🔐 Modo Privado Administradores Píllalo (Clave 2026)
           </span>
-          <h2 class="text-2xl sm:text-3xl font-black mt-2">Analítica de Visitas, Clics, 5 Estrellas y Publicidad</h2>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">Control General de Visitas, Clics y Banners Publicitarios</h2>
           <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl">
-            Solo tú y tu novia con su clave pueden ver quién entra, cuántos clics lleva cada negocio, impulsar en el Banner Grande a los que tienen pocos clics y enviar reportes por WhatsApp.
+            Panel exclusivo de ustedes dos para controlar toda la plataforma, subir negocios al Banner Grande Superior y enviar reportes por WhatsApp.
           </p>
         </div>
         <div class="flex flex-wrap gap-2">
@@ -618,7 +700,7 @@
             📢 Publicar Banner / Publicidad
           </button>
           <button onclick="lockOwnerMode()" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-bold cursor-pointer">
-            🔒 Cerrar Modo Dueño
+            🔒 Cerrar Modo Admin
           </button>
         </div>
       </div>
@@ -636,9 +718,9 @@
           <p class="text-xs font-bold text-emerald-600 mt-1" id="kpiWaSub">WhatsApp, IG, TikTok y Maps</p>
         </div>
         <div class="bento-white-card rounded-3xl p-5">
-          <p class="text-[11px] font-extrabold text-slate-400 uppercase">⭐ Valoraciones (1 a 5★)</p>
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase">⭐ Encuestas Privadas</p>
           <p class="text-3xl font-black text-slate-900 mt-1" id="kpiVotes">0</p>
-          <p class="text-xs font-bold text-amber-600 mt-1" id="kpiStarsAvg">Promedio General: 5.0 ★</p>
+          <p class="text-xs font-bold text-amber-600 mt-1">Visibles solo para cada dueño</p>
         </div>
         <div class="bento-white-card rounded-3xl p-5 bg-amber-50/60 border-amber-200">
           <p class="text-[11px] font-extrabold text-amber-800 uppercase">🚨 Con Pocos Clics (&lt;5)</p>
@@ -667,7 +749,7 @@
               <th class="p-3">🎵 TikTok</th>
               <th class="p-3">🗺️ Maps</th>
               <th class="p-3">👆 Total Clics</th>
-              <th class="p-3">⭐ Calificación</th>
+              <th class="p-3">⭐ Promedio Interno</th>
               <th class="p-3 rounded-tr-xl">Acciones Dueños</th>
             </tr>
           </thead>
@@ -683,38 +765,107 @@
     <div>
       <span class="font-extrabold text-slate-700">Píllalo Valledupar</span> · Directorio Visual Interactivo de Negocios y Servicios
     </div>
-    <div>
+    <div class="flex items-center gap-2">
+      <button onclick="switchTab('tab-my-biz')" class="px-3 py-1.5 rounded-full bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold transition cursor-pointer">
+        📊 Soy Dueño de un Negocio Registrado
+      </button>
       <button id="ownerLockBtn" onclick="openOwnerPinModal()" class="px-3 py-1.5 rounded-full bg-slate-200/80 hover:bg-slate-300 text-slate-700 font-bold transition cursor-pointer">
-        🔒 Acceso Dueños
+        🔒 Admin Píllalo
       </button>
     </div>
   </footer>
 
   <!-- ===================================================================== -->
-  <!-- NOTIFICACIÓN FLOTANTE DE VALORACIÓN DE 1 A 5 ESTRELLAS POST-CONTACTO  -->
+  <!-- MODAL DE VALORACIÓN PRIVADA EN 5 CATEGORÍAS CONSTRUCTIVAS (1 A 5★)    -->
   <!-- ===================================================================== -->
-  <div id="ratingToast" class="fixed bottom-5 right-5 z-50 hidden w-80 sm:w-96 bg-slate-900 text-white rounded-3xl p-5 shadow-2xl border-2 border-emerald-400">
-    <div class="flex items-center justify-between mb-1.5">
-      <span class="bg-emerald-400 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">⭐ Valoración Rápida en 1 Toque</span>
-      <button onclick="closeRatingToast()" class="text-slate-400 hover:text-white font-black text-sm cursor-pointer">✕</button>
-    </div>
-    <p id="ratingBizTitle" class="text-sm font-black text-white">¿Qué tal te pareció este negocio?</p>
-    <p id="ratingBizSub" class="text-[11px] text-slate-300 mt-0.5">Tocaste su canal de contacto. Califica de 1 a 5 estrellas:</p>
-    <div class="grid grid-cols-5 gap-2 mt-3">
-      <button onclick="submitStarRating(1)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">1 ⭐</button>
-      <button onclick="submitStarRating(2)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">2 ⭐</button>
-      <button onclick="submitStarRating(3)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">3 ⭐</button>
-      <button onclick="submitStarRating(4)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">4 ⭐</button>
-      <button onclick="submitStarRating(5)" class="py-2 bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-amber-400 rounded-xl text-xs font-black transition cursor-pointer">5 ⭐</button>
+  <div id="ratingToast" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border-2 border-emerald-500 space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="bg-emerald-100 text-emerald-900 text-[11px] font-black px-3 py-1 rounded-full uppercase">
+          🔒 Valoración Privada para Ayudar a Mejorar
+        </span>
+        <button onclick="closeRatingToast()" class="text-slate-400 hover:text-slate-800 font-black text-base cursor-pointer">✕</button>
+      </div>
+      <div>
+        <h3 id="ratingBizTitle" class="text-lg font-black text-slate-900">Evalúa a este negocio</h3>
+        <p id="ratingBizSub" class="text-xs text-slate-500 mt-0.5">
+          Tu calificación por estrellas <b>solo la verá el dueño del negocio en privado</b> para saber qué está haciendo bien y en qué puede mejorar:
+        </p>
+      </div>
+
+      <!-- Las 5 Categorías Constructivas -->
+      <div class="space-y-3 text-xs bg-slate-50 p-4 rounded-2xl border border-slate-200">
+        
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-bold text-slate-800">1. ⚡ Tiempo de Respuesta</span>
+          <select id="rateCat1" class="px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg font-black text-amber-600 cursor-pointer">
+            <option value="5">⭐⭐⭐⭐⭐ (5 - Excelente)</option>
+            <option value="4">⭐⭐⭐⭐ (4 - Muy bien)</option>
+            <option value="3">⭐⭐⭐ (3 - Por mejorar)</option>
+            <option value="2">⭐⭐ (2 - Lento)</option>
+            <option value="1">⭐ (1 - Demorado)</option>
+          </select>
+        </div>
+
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-bold text-slate-800">2. ⏱️ Tiempo de Entrega / Espera</span>
+          <select id="rateCat2" class="px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg font-black text-amber-600 cursor-pointer">
+            <option value="5">⭐⭐⭐⭐⭐ (5 - Muy puntual)</option>
+            <option value="4">⭐⭐⭐⭐ (4 - A tiempo)</option>
+            <option value="3">⭐⭐⭐ (3 - Por mejorar)</option>
+            <option value="2">⭐⭐ (2 - Tardó)</option>
+            <option value="1">⭐ (1 - Muy lento)</option>
+          </select>
+        </div>
+
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-bold text-slate-800">3. 🤝 Amabilidad y Atención</span>
+          <select id="rateCat3" class="px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg font-black text-amber-600 cursor-pointer">
+            <option value="5">⭐⭐⭐⭐⭐ (5 - Súper amables)</option>
+            <option value="4">⭐⭐⭐⭐ (4 - Buena atención)</option>
+            <option value="3">⭐⭐⭐ (3 - Por mejorar)</option>
+            <option value="2">⭐⭐ (2 - Regular)</option>
+            <option value="1">⭐ (1 - Debe mejorar)</option>
+          </select>
+        </div>
+
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-bold text-slate-800">4. ✨ Calidad y Presentación</span>
+          <select id="rateCat4" class="px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg font-black text-amber-600 cursor-pointer">
+            <option value="5">⭐⭐⭐⭐⭐ (5 - Impecable)</option>
+            <option value="4">⭐⭐⭐⭐ (4 - Muy buena)</option>
+            <option value="3">⭐⭐⭐ (3 - Por mejorar)</option>
+            <option value="2">⭐⭐ (2 - Regular)</option>
+            <option value="1">⭐ (1 - Debe mejorar)</option>
+          </select>
+        </div>
+
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-bold text-slate-800">5. 💰 Relación Calidad / Precio</span>
+          <select id="rateCat5" class="px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg font-black text-amber-600 cursor-pointer">
+            <option value="5">⭐⭐⭐⭐⭐ (5 - Súper justo)</option>
+            <option value="4">⭐⭐⭐⭐ (4 - Buen precio)</option>
+            <option value="3">⭐⭐⭐ (3 - Aceptable)</option>
+            <option value="2">⭐⭐ (2 - Algo costoso)</option>
+            <option value="1">⭐ (1 - Por revisar)</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="closeRatingToast()" class="flex-1 py-2.5 bg-slate-100 text-slate-700 rounded-xl text-xs font-bold cursor-pointer">Ahora no</button>
+        <button onclick="submitConstructiveRating()" class="flex-1 py-2.5 wa-widget-green text-white rounded-xl text-xs font-extrabold cursor-pointer">Enviar Valoración Privada</button>
+      </div>
     </div>
   </div>
 
-  <!-- MODAL DE CLAVE SECRETA PARA DUEÑOS -->
+  <!-- MODAL DE CLAVE SECRETA PARA DUEÑOS DE PÍLLALO -->
   <div id="ownerPinModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
       <div class="text-3xl">🔐</div>
-      <h3 class="text-lg font-black text-slate-900">Acceso Privado Dueños</h3>
-      <p class="text-xs text-slate-500">Ingresa tu clave para ver la Analítica y administrar los Banners Publicitarios (Clave: <b>2026</b>).</p>
+      <h3 class="text-lg font-black text-slate-900">Acceso Privado Administradores</h3>
+      <p class="text-xs text-slate-500">Ingresa tu clave para administrar toda la plataforma y los Banners Publicitarios (Clave: <b>2026</b>).</p>
       <form onsubmit="checkOwnerPin(event)" class="space-y-3">
         <input type="password" id="ownerPinInput" placeholder="Clave secreta" required class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-center font-black text-base">
         <div class="flex gap-2">
@@ -780,12 +931,14 @@
       perfumes: "💎 Perfumes & Lociones",
       belleza: "💄 Belleza & Maquillaje",
       serv_belleza: "💅 Servicios de Belleza",
+      mascotas: "🐾 Mascotas & Veterinaria",
       tecnicos: "🛠️ Servicios Técnicos & Mantenimiento",
       profesionales: "👨‍💼 Profesionales Independientes"
     };
 
     // =========================================================================
-    // BASE DE DATOS INICIAL CON LAS 9 CATEGORÍAS Y ROTACIÓN SEMANAL
+    // BASE DE DATOS INICIAL CON LAS 10 CATEGORÍAS (INCLUYENDO MASCOTAS)
+    // Y RANGO DE PRECIOS LIMPIO (SOLO EL VALOR SIN REPETIR LA CATEGORÍA)
     // =========================================================================
     let businesses = [
       {
@@ -798,10 +951,8 @@
         registeredThisWeek: false,
         registeredDaysAgo: 18,
         verified: true,
-        badgeText: "🏛️ Verificado",
-        badgeStyle: "bg-slate-100 text-slate-700 border-slate-200",
-        mainRangeIcon: "👖",
-        mainRangeText: "Rango en Jeans y Ropa: $50.000 – $85.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$50.000 – $85.000 COP",
         priceLevel: "mid",
         shortBio: "Tienda especializada en moda denim en Valledupar para dama, caballero, niñas y niños. Jeans levanta cola, conjuntos y básicos con horma perfecta.",
         address: "Cra 15 #13B-24 · Doce de Octubre",
@@ -816,6 +967,7 @@
         storeThumb: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=400&q=80",
         rating: 4.9,
         votes: 14,
+        metrics5: { respuesta: 5.0, espera: 4.7, amabilidad: 5.0, calidad: 4.9, precio: 4.8 },
         views: 42,
         waClicks: 18,
         igClicks: 6,
@@ -833,10 +985,8 @@
         registeredThisWeek: true,
         registeredDaysAgo: 1,
         verified: true,
-        badgeText: "🆕 Recién Llegado",
-        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
-        mainRangeIcon: "🍔",
-        mainRangeText: "Rango Arepas Rellenas y Platos: $10.000 – $24.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$10.000 – $24.000 COP",
         priceLevel: "low",
         shortBio: "Restaurante nocturno de arepas rellenas asadas al carbón con queso costeño, carne desmechada, chicharrón, pollo y salsas de la casa.",
         address: "Av. Simón Bolívar Calle 21 · Los Cortijos",
@@ -849,14 +999,49 @@
         schedule: "Abierto · 4:30 PM - 11:30 PM",
         coverImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
         storeThumb: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80",
-        rating: 5.0,
+        rating: 4.6,
         votes: 6,
+        metrics5: { respuesta: 4.9, espera: 3.4, amabilidad: 5.0, calidad: 4.9, precio: 5.0 },
         views: 14,
         waClicks: 2,
         igClicks: 1,
         tkClicks: 0,
         mapClicks: 0,
         totalClicks: 3
+      },
+      {
+        id: 10,
+        name: "Huellitas Pet Shop & Spa Canino",
+        logoTitle: "Huellitas",
+        logoSub: "Mascotas & Spa",
+        category: "mascotas",
+        ageType: "nuevo",
+        registeredThisWeek: true,
+        registeredDaysAgo: 1,
+        verified: true,
+        mainRangeIcon: "💰",
+        mainRangeText: "$20.000 – $85.000 COP",
+        priceLevel: "low",
+        shortBio: "Baño y peluquería canina y felina, concentrados, snacks, juguetes, collares, camas y consulta veterinaria en Valledupar.",
+        address: "Calle 11 #15-32 · Barrio San Vicente",
+        neighborhood: "San Vicente",
+        phoneDisplay: "316 999 8877",
+        whatsapp: "573169998877",
+        instagram: "@huellitas_petvup",
+        tiktok: "@huellitasmascotas.vup",
+        email: "citas@huellitasvup.co",
+        schedule: "Abierto · 8:00 AM - 6:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1000&q=80",
+        storeThumb: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=400&q=80",
+        rating: 5.0,
+        votes: 8,
+        metrics5: { respuesta: 5.0, espera: 4.8, amabilidad: 5.0, calidad: 5.0, precio: 4.9 },
+        views: 21,
+        waClicks: 4,
+        igClicks: 2,
+        tkClicks: 1,
+        mapClicks: 0,
+        totalClicks: 7
       },
       {
         id: 6,
@@ -868,10 +1053,8 @@
         registeredThisWeek: true,
         registeredDaysAgo: 2,
         verified: true,
-        badgeText: "🆕 Recién Llegado",
-        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
-        mainRangeIcon: "👟",
-        mainRangeText: "Rango en Calzado y Tenis: $55.000 – $140.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$55.000 – $140.000 COP",
         priceLevel: "mid",
         shortBio: "Tenis deportivos, sandalias para dama en cuero y calzado casual para toda la familia con tallas desde la 22 hasta la 43.",
         address: "Calle 16B #9-45 · Centro",
@@ -886,6 +1069,7 @@
         storeThumb: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=400&q=80",
         rating: 4.9,
         votes: 8,
+        metrics5: { respuesta: 4.8, espera: 4.9, amabilidad: 5.0, calidad: 4.9, precio: 4.8 },
         views: 19,
         waClicks: 2,
         igClicks: 1,
@@ -903,10 +1087,8 @@
         registeredThisWeek: true,
         registeredDaysAgo: 3,
         verified: true,
-        badgeText: "🆕 Recién Llegado",
-        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
-        mainRangeIcon: "👜",
-        mainRangeText: "Rango Cadenas y Bolsos: $18.000 – $95.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$18.000 – $95.000 COP",
         priceLevel: "low",
         shortBio: "Cadenas en acero y oro laminado, aretes, relojes, bolsos manos libres, carteras y gafas de sol para complementar tu outfit.",
         address: "Cra 11 #14-18 · Barrio San Joaquín",
@@ -921,6 +1103,7 @@
         storeThumb: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=400&q=80",
         rating: 5.0,
         votes: 9,
+        metrics5: { respuesta: 5.0, espera: 4.8, amabilidad: 5.0, calidad: 5.0, precio: 4.9 },
         views: 22,
         waClicks: 3,
         igClicks: 1,
@@ -938,10 +1121,8 @@
         registeredThisWeek: true,
         registeredDaysAgo: 4,
         verified: true,
-        badgeText: "🆕 Recién Llegado",
-        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
-        mainRangeIcon: "💎",
-        mainRangeText: "Rango en Perfumes: $45.000 – $190.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$45.000 – $190.000 COP",
         priceLevel: "mid",
         shortBio: "Perfumería árabe original, extractos importados de alta fijación y presentaciones personales ideales para regalar.",
         address: "Calle 9A #19-40 · Barrio Novalito",
@@ -956,6 +1137,7 @@
         storeThumb: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=400&q=80",
         rating: 5.0,
         votes: 7,
+        metrics5: { respuesta: 4.9, espera: 4.7, amabilidad: 5.0, calidad: 5.0, precio: 4.8 },
         views: 19,
         waClicks: 3,
         igClicks: 1,
@@ -973,10 +1155,8 @@
         registeredThisWeek: false,
         registeredDaysAgo: 15,
         verified: true,
-        badgeText: "🏛️ Verificado",
-        badgeStyle: "bg-slate-100 text-slate-700 border-slate-200",
-        mainRangeIcon: "💄",
-        mainRangeText: "Rango Maquillaje y Skincare: $15.000 – $80.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$15.000 – $80.000 COP",
         priceLevel: "low",
         shortBio: "Tienda de maquillaje original, rubores, bases, labiales, brochas, cuidado facial coreano y tratamientos capilares.",
         address: "Cra 12 #7C-30 · Las Flores",
@@ -991,6 +1171,7 @@
         storeThumb: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80",
         rating: 4.9,
         votes: 12,
+        metrics5: { respuesta: 4.9, espera: 4.8, amabilidad: 5.0, calidad: 4.9, precio: 4.8 },
         views: 29,
         waClicks: 9,
         igClicks: 4,
@@ -1008,10 +1189,8 @@
         registeredThisWeek: true,
         registeredDaysAgo: 2,
         verified: true,
-        badgeText: "🆕 Recién Llegado",
-        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
-        mainRangeIcon: "💅",
-        mainRangeText: "Rango Servicio Uñas y Cejas: $25.000 – $65.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$25.000 – $65.000 COP",
         priceLevel: "low",
         shortBio: "Especialistas en servicios de belleza: uñas acrílicas, polygel, semipermanente, cepillado y diseño de cejas y pestañas.",
         address: "Cra 19 #16-12 · Barrio San Joaquín",
@@ -1024,8 +1203,9 @@
         schedule: "Abierto · 8:00 AM - 7:00 PM",
         coverImage: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80",
         storeThumb: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=400&q=80",
-        rating: 5.0,
+        rating: 4.7,
         votes: 5,
+        metrics5: { respuesta: 5.0, espera: 3.6, amabilidad: 5.0, calidad: 5.0, precio: 4.9 },
         views: 11,
         waClicks: 2,
         igClicks: 0,
@@ -1043,13 +1223,11 @@
         registeredThisWeek: false,
         registeredDaysAgo: 20,
         verified: true,
-        badgeText: "🏛️ Verificado",
-        badgeStyle: "bg-slate-100 text-slate-700 border-slate-200",
-        mainRangeIcon: "🛠️",
-        mainRangeText: "Rango Mantenimiento y Arreglos: $60.000 – $110.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$60.000 – $110.000 COP",
         priceLevel: "mid",
         shortBio: "Servicio técnico y mantenimiento a domicilio de aires acondicionados, lavadoras, neveras e instalaciones eléctricas residenciales.",
-        address: "Calle 14 #18-20 · La Nevada (y a Domicilio)",
+        address: "Calle 14 #18-20 · La Nevada",
         neighborhood: "La Nevada",
         phoneDisplay: "300 123 4567",
         whatsapp: "573001234567",
@@ -1061,6 +1239,7 @@
         storeThumb: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=400&q=80",
         rating: 4.9,
         votes: 11,
+        metrics5: { respuesta: 4.9, espera: 4.6, amabilidad: 5.0, calidad: 4.9, precio: 4.8 },
         views: 34,
         waClicks: 12,
         igClicks: 3,
@@ -1078,13 +1257,11 @@
         registeredThisWeek: true,
         registeredDaysAgo: 1,
         verified: true,
-        badgeText: "🆕 Recién Llegado",
-        badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
-        mainRangeIcon: "👨‍💼",
-        mainRangeText: "Rango Asesorías y Trámites: $50.000 – $150.000 COP",
+        mainRangeIcon: "💰",
+        mainRangeText: "$50.000 – $150.000 COP",
         priceLevel: "mid",
         shortBio: "Profesional independiente en contaduría pública, declaración de renta, Cámara de Comercio, DIAN y certificados de ingresos.",
-        address: "Calle 16 #12-10 · Centro (y Atención Virtual)",
+        address: "Calle 16 #12-10 · Centro",
         neighborhood: "Centro",
         phoneDisplay: "304 555 1234",
         whatsapp: "573045551234",
@@ -1096,6 +1273,7 @@
         storeThumb: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=400&q=80",
         rating: 5.0,
         votes: 6,
+        metrics5: { respuesta: 5.0, espera: 5.0, amabilidad: 5.0, calidad: 5.0, precio: 4.9 },
         views: 15,
         waClicks: 2,
         igClicks: 0,
@@ -1129,7 +1307,6 @@
     ];
 
     let currentCategory = 'all';
-    let currentAgeFilter = 'all';
     let currentStickerBizId = 5;
 
     // =========================================================================
@@ -1170,22 +1347,22 @@
     }
 
     // =========================================================================
-    // 2. TARJETA COMPACTA EN EXPLORAR DIRECTORIO Y RECIÉN LLEGADOS
-    //    (SOLO PORTADA, LOGO, NOMBRE, VERIFICADO, VALORACIÓN, HORARIO ABIERTO Y CLIC PERFIL)
+    // 2. TARJETA COMPACTA SIN VALORACIÓN PÚBLICA (SOLO PORTADA, VERIFICADO, LOGO, NOMBRE, HORARIO ABIERTO Y CLIC PERFIL)
     // =========================================================================
     function createBusinessCardHTML(biz) {
       return `
         <article onclick="openCompanyProfile(${biz.id})" class="bento-white-card rounded-[26px] p-3.5 flex flex-col justify-between cursor-pointer group">
           
           <div>
-            <!-- 1. PORTADA DETRÁS + VALORACIÓN + CLIC PARA ABRIR COMPLETO -->
+            <!-- 1. PORTADA DETRÁS + SELLO VERIFICADO + CLIC PARA ABRIR COMPLETO -->
             <div class="h-36 sm:h-40 w-full rounded-2xl overflow-hidden relative">
               <img src="${biz.coverImage}" alt="${biz.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20"></div>
               
-              <!-- Valoración arriba a la izquierda -->
-              <span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-xs text-slate-900 text-[11px] font-extrabold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
-                <span class="text-amber-500">⭐</span> ${biz.rating.toFixed(1)} <span class="text-slate-400">(${biz.votes})</span>
+              <!-- Sello Verificado arriba a la izquierda (Sin mostrar estrellas públicas) -->
+              <span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-xs text-slate-900 text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+                <i class="fa-solid fa-circle-check text-sky-500"></i>
+                <span>Verificado</span>
               </span>
 
               <!-- Aviso Clic para abrir completo arriba a la derecha -->
@@ -1194,25 +1371,21 @@
               </span>
             </div>
 
-            <!-- 2. LOGO CIRCULAR + NOMBRE DEL RESTAURANTE/NEGOCIO + VERIFICADO -->
+            <!-- 2. LOGO CIRCULAR + NOMBRE DEL RESTAURANTE/NEGOCIO + CATEGORÍA -->
             <div class="flex items-center gap-3 px-1 pt-2 pb-3 relative">
-              <!-- Logo Circular Blanco Sobrepuesto -->
               <div class="-mt-9 w-16 h-16 rounded-full bg-white shadow-lg border-4 border-white flex flex-col items-center justify-center flex-shrink-0 z-10">
                 <span class="text-xs font-black text-slate-900 leading-none text-center px-1">${biz.logoTitle}</span>
                 <span class="text-[8px] font-bold text-slate-500 mt-0.5 text-center px-1">${biz.logoSub}</span>
               </div>
 
-              <!-- Nombre + Sello Verificado + Categoría -->
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-1.5">
                   <h3 class="text-base font-black text-slate-900 group-hover:text-emerald-600 transition truncate">
                     ${biz.name}
                   </h3>
-                  ${biz.verified ? `
-                    <span class="w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] flex-shrink-0 shadow-2xs" title="Negocio Verificado">
-                      <i class="fa-solid fa-check"></i>
-                    </span>
-                  ` : ''}
+                  <span class="w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] flex-shrink-0 shadow-2xs" title="Negocio Verificado">
+                    <i class="fa-solid fa-check"></i>
+                  </span>
                 </div>
                 <div class="flex items-center gap-1.5 mt-0.5">
                   <span class="text-[11px] font-bold text-slate-500 truncate">${categoryLabels[biz.category] || biz.category}</span>
@@ -1242,7 +1415,7 @@
         container.innerHTML = `
           <div class="col-span-full bento-white-card rounded-3xl p-10 text-center space-y-3">
             <span class="text-4xl">🔍</span>
-            <h3 class="text-lg font-black text-slate-900">No encontramos negocios con ese filtro</h3>
+            <h3 class="text-lg font-black text-slate-900">No encontramos negocios en ese barrio o categoría</h3>
             <p class="text-xs text-slate-500">Prueba cambiando la categoría, el barrio o presionando "Ver Todos".</p>
             <button onclick="resetAllFilters()" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-extrabold cursor-pointer">Mostrar Todos</button>
           </div>
@@ -1252,7 +1425,6 @@
       container.innerHTML = items.map(createBusinessCardHTML).join('');
     }
 
-    // ROTACIÓN SEMANAL DE RECIÉN LLEGADOS (ORDENADOS POR LOS REGISTRADOS ESTA SEMANA)
     function renderNuevosSection() {
       const recienLlegados = businesses
         .filter(b => b.registeredThisWeek || b.ageType === 'nuevo')
@@ -1264,7 +1436,8 @@
     }
 
     // =========================================================================
-    // 3. VISTA DE PERFIL COMPLETO DE LA EMPRESA (CON DESCRIPCIÓN, RANGO Y TODOS LOS WIDGETS)
+    // 3. VISTA DE PERFIL COMPLETO DE LA EMPRESA
+    //    (CATEGORÍA AL LADO DEL LOGO + RANGO SOLO CON EL VALOR EN PESOS + SIN NOTA PÚBLICA)
     // =========================================================================
     function openCompanyProfile(id) {
       const biz = businesses.find(b => b.id === Number(id));
@@ -1282,31 +1455,31 @@
             <i class="fa-solid fa-arrow-left text-emerald-600"></i>
             <span>Volver al Directorio</span>
           </button>
-          <div class="flex items-center gap-2">
+          <div class="flex flex-wrap items-center gap-2">
             <button onclick="openStickerForBiz(${biz.id})" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl text-xs font-extrabold flex items-center gap-1.5 cursor-pointer">
               <i class="fa-solid fa-qrcode text-amber-400"></i>
-              <span>Ver Sticker QR de este Negocio</span>
+              <span>Ver Sticker QR</span>
             </button>
-            <button onclick="triggerRatingToast(${biz.id}, 'Perfil Completo')" class="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-2xl text-xs font-black cursor-pointer">
-              ⭐ ${biz.rating.toFixed(1)} (${biz.votes} opiniones) · Calificar
+            <button onclick="triggerRatingToast(${biz.id}, 'Encuesta Privada')" class="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-950 rounded-2xl text-xs font-black cursor-pointer flex items-center gap-1.5">
+              <span>⭐ Calificar Atención (Privado para el Negocio)</span>
             </button>
           </div>
         </div>
 
-        <!-- 1. GRAN PORTADA SUPERIOR CON LOGO CENTRAL, DESCRIPCIÓN Y RANGO DE PRECIOS -->
+        <!-- 1. GRAN PORTADA SUPERIOR CON LOGO, CATEGORÍA, DESCRIPCIÓN Y RANGO DE VALOR LIMPIO -->
         <div class="relative rounded-[32px] overflow-hidden shadow-xl border-4 border-white min-h-[320px] sm:min-h-[360px] flex flex-col items-center justify-center text-center p-6">
           <img src="${biz.coverImage}" alt="${biz.name}" class="absolute inset-0 w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-b from-slate-950/65 via-slate-950/75 to-slate-950/90"></div>
 
           <div class="relative z-10 flex flex-col items-center max-w-2xl mx-auto space-y-3">
-            <!-- Logo Circular Central + Píldora Verde -->
-            <div class="relative flex items-center justify-center">
+            <!-- Logo Circular Central + Categoría Oficial al lado del Logo -->
+            <div class="relative flex flex-col sm:flex-row items-center justify-center gap-3">
               <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white shadow-2xl border-4 border-white flex flex-col items-center justify-center">
                 <span class="text-lg font-black text-slate-900 leading-none">${biz.logoTitle}</span>
                 <span class="text-[10px] font-bold text-slate-500 mt-1">${biz.logoSub}</span>
               </div>
-              <span class="hidden sm:inline-flex items-center gap-1.5 ml-4 px-4 py-1.5 rounded-full bg-emerald-600 text-white text-xs font-extrabold shadow-lg">
-                ${categoryLabels[biz.category] || biz.badgeText}
+              <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-600 text-white text-xs font-extrabold shadow-lg">
+                ${categoryLabels[biz.category] || biz.category}
               </span>
             </div>
 
@@ -1320,23 +1493,23 @@
 
             <!-- Pequeña Descripción del Negocio -->
             <div class="bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl px-4 py-3 max-w-xl">
-              <p class="text-xs font-extrabold uppercase tracking-wider text-emerald-300 mb-0.5">Sobre este negocio</p>
+              <p class="text-xs font-extrabold uppercase tracking-wider text-emerald-300 mb-0.5">Descripción del negocio</p>
               <p class="text-sm sm:text-base text-white font-medium leading-relaxed">
                 ${biz.shortBio}
               </p>
             </div>
 
-            <!-- Píldora Blanca Central del Rango de Precios -->
+            <!-- Píldora Blanca Central del Rango (SOLO EL VALOR SIN REPETIR LA CATEGORÍA) -->
             <div class="pt-1">
               <span class="inline-flex items-center gap-2 bg-white text-slate-900 px-5 py-2.5 rounded-full text-xs sm:text-sm font-black shadow-lg">
-                <span class="text-lg">${biz.mainRangeIcon}</span>
-                <span>${biz.mainRangeText}</span>
+                <span class="text-base">💰 Rango:</span>
+                <span class="text-emerald-700">${biz.mainRangeText}</span>
               </span>
             </div>
           </div>
         </div>
 
-        <!-- 2. TABLERO BENTO DE WIDGETS GRÁFICOS (MAPA + WHATSAPP + INSTAGRAM + TIKTOK + HORARIO + LLAMAR + CORREO) -->
+        <!-- 2. TABLERO BENTO DE WIDGETS GRÁFICOS -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 pt-2 items-stretch">
           
           <!-- WIDGET 1 (5 cols): MAPA ESTILO GOOGLE MAPS CON PIN ROJO Y DIRECCIÓN -->
@@ -1348,7 +1521,6 @@
               <span class="absolute top-5 left-6 bg-white/85 px-2 py-0.5 rounded text-[10px] font-bold text-slate-600 rotate-[-12deg]">Valledupar</span>
               <span class="absolute bottom-8 right-6 bg-white/85 px-2 py-0.5 rounded text-[10px] font-bold text-slate-600">${biz.neighborhood}</span>
 
-              <!-- Pin Rojo Central de Google Maps -->
               <div class="relative z-10 flex flex-col items-center">
                 <div class="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl border-3 border-white group-hover:scale-110 transition">
                   <i class="fa-solid fa-location-dot text-2xl"></i>
@@ -1358,7 +1530,6 @@
                 </span>
               </div>
 
-              <!-- Logo Google abajo a la izquierda -->
               <div class="absolute bottom-2.5 left-3 bg-white/95 px-2 py-0.5 rounded-md shadow-xs text-xs font-black">
                 <span class="text-blue-600">G</span><span class="text-red-500">o</span><span class="text-amber-500">o</span><span class="text-blue-600">g</span><span class="text-emerald-600">l</span><span class="text-red-500">e</span>
               </div>
@@ -1395,10 +1566,7 @@
           <!-- COLUMNA DERECHA (4 cols): INSTAGRAM + TIKTOK ARRIBA, HORARIO + LLAMADA/CORREO ABAJO -->
           <div class="md:col-span-4 flex flex-col justify-between gap-4">
             
-            <!-- Fila Superior: Instagram & TikTok -->
             <div class="grid grid-cols-2 gap-4 flex-1">
-              
-              <!-- Widget Instagram -->
               <a href="https://instagram.com/${(biz.instagram || '').replace('@','')}" target="_blank"
                  onclick="recordClick(${biz.id}, 'Instagram')"
                  class="ig-widget-gradient rounded-[26px] p-4 text-white flex flex-col items-center justify-center text-center min-h-[140px]">
@@ -1406,20 +1574,15 @@
                 <span class="text-xs font-extrabold truncate w-full">${biz.instagram}</span>
               </a>
 
-              <!-- Widget TikTok -->
               <a href="https://tiktok.com/@${(biz.tiktok || '').replace('@','')}" target="_blank"
                  onclick="recordClick(${biz.id}, 'TikTok')"
                  class="tiktok-widget-black rounded-[26px] p-4 text-white flex flex-col items-center justify-center text-center min-h-[140px]">
                 <i class="fa-brands fa-tiktok text-4xl tiktok-neon-icon mb-2"></i>
                 <span class="text-xs font-extrabold truncate w-full text-slate-200">${biz.tiktok}</span>
               </a>
-
             </div>
 
-            <!-- Fila Inferior: Horario en Vivo + Llamar + Correo -->
             <div class="grid grid-cols-12 gap-3">
-              
-              <!-- Widget Horario en Vivo -->
               <div class="col-span-8 bento-white-card rounded-[24px] p-4 flex flex-col justify-center">
                 <div class="flex items-center gap-1.5 text-xs font-extrabold text-slate-800">
                   <i class="fa-regular fa-calendar-check text-emerald-600"></i>
@@ -1432,7 +1595,6 @@
                 <p class="text-[11px] text-slate-500 mt-1 truncate">✉️ ${biz.email}</p>
               </div>
 
-              <!-- Widget Llamar / Correo -->
               <div class="col-span-4 flex flex-col gap-2">
                 <a href="tel:+${biz.whatsapp}" onclick="recordClick(${biz.id}, 'Llamada')" class="flex-1 bento-white-card rounded-2xl p-2 flex flex-col items-center justify-center text-slate-900 hover:bg-slate-50 transition">
                   <i class="fa-solid fa-phone text-lg text-emerald-600"></i>
@@ -1443,7 +1605,6 @@
                   <span class="text-[11px] font-black mt-0.5">Correo</span>
                 </a>
               </div>
-
             </div>
 
           </div>
@@ -1452,7 +1613,7 @@
       `;
 
       document.getElementById('companyProfileContainer').innerHTML = html;
-      ['tab-explore', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-register', 'tab-analytics'].forEach(t => {
+      ['tab-explore', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-my-biz', 'tab-register', 'tab-analytics'].forEach(t => {
         const el = document.getElementById(t);
         if (el) el.classList.add('hidden');
       });
@@ -1461,7 +1622,110 @@
     }
 
     // =========================================================================
-    // 4. FILTROS Y NAVEGACIÓN
+    // 4. PORTAL PRIVADO "MI NEGOCIO" (DONDE EL REGISTRADO VE SUS ESTADÍSTICAS Y 5 CATEGORÍAS DE VALORACIÓN)
+    // =========================================================================
+    function populateMyBizSelector() {
+      const sel = document.getElementById('myBizSelector');
+      if (!sel) return;
+      const currentVal = sel.value;
+      sel.innerHTML = businesses.map(b => `<option value="${b.id}">${b.name} (${b.neighborhood})</option>`).join('');
+      if (currentVal && businesses.some(b => String(b.id) === String(currentVal))) {
+        sel.value = currentVal;
+      }
+      renderMyBusinessDashboard();
+    }
+
+    function renderMyBusinessDashboard() {
+      const sel = document.getElementById('myBizSelector');
+      const id = sel ? Number(sel.value) : businesses[0].id;
+      const biz = businesses.find(b => b.id === id) || businesses[0];
+      const container = document.getElementById('myBizDashboardContent');
+      if (!container || !biz) return;
+
+      const m = biz.metrics5 || { respuesta: 5.0, espera: 4.5, amabilidad: 5.0, calidad: 5.0, precio: 4.8 };
+      const criteria = [
+        { key: 'respuesta', icon: '⚡', name: 'Tiempo de Respuesta (WhatsApp / Redes)', score: m.respuesta, tipGood: '¡Lo estás haciendo muy bien! Contestas rápido a tus clientes.', tipImprove: 'Oportunidad de mejora: intenta responder los mensajes de WhatsApp en menos minutos.' },
+        { key: 'espera', icon: '⏱️', name: 'Tiempo de Entrega o Espera', score: m.espera, tipGood: '¡Excelente puntualidad! La gente valora mucho tu cumplimiento.', tipImprove: 'Punto a mejorar: revisa los tiempos de preparación o entrega para que el cliente espere menos.' },
+        { key: 'amabilidad', icon: '🤝', name: 'Amabilidad y Atención al Cliente', score: m.amabilidad, tipGood: '¡Trato 5 estrellas! Tus clientes se sienten súper bien atendidos.', tipImprove: 'Punto a mejorar: un saludo cálido y asesoría paciente aumentan tus ventas.' },
+        { key: 'calidad', icon: '✨', name: 'Calidad y Presentación', score: m.calidad, tipGood: '¡Tu producto o servicio encanta por su calidad y presentación!', tipImprove: 'Punto a mejorar: cuida los detalles de empaque o acabado final.' },
+        { key: 'precio', icon: '💰', name: 'Relación Calidad / Precio', score: m.precio, tipGood: 'Tus clientes sienten que el precio es muy justo por lo que reciben.', tipImprove: 'Punto a mejorar: resalta mejor los beneficios que incluye tu precio.' }
+      ];
+
+      container.innerHTML = `
+        <!-- 1. Resumen de Interacciones en el Perfil -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          <div class="bento-white-card rounded-3xl p-4 text-center">
+            <span class="text-2xl">👀</span>
+            <p class="text-2xl font-black text-slate-900 mt-1">${biz.views}</p>
+            <p class="text-[11px] font-extrabold text-slate-500 uppercase">Personas vieron tu perfil</p>
+          </div>
+          <div class="bento-white-card rounded-3xl p-4 text-center border-2 border-emerald-200 bg-emerald-50/30">
+            <span class="text-2xl">🟢</span>
+            <p class="text-2xl font-black text-emerald-700 mt-1">${biz.waClicks}</p>
+            <p class="text-[11px] font-extrabold text-emerald-800 uppercase">Clics en tu WhatsApp</p>
+          </div>
+          <div class="bento-white-card rounded-3xl p-4 text-center">
+            <span class="text-2xl">📸</span>
+            <p class="text-2xl font-black text-pink-600 mt-1">${biz.igClicks}</p>
+            <p class="text-[11px] font-extrabold text-slate-500 uppercase">Clics en tu Instagram</p>
+          </div>
+          <div class="bento-white-card rounded-3xl p-4 text-center">
+            <span class="text-2xl">🎵</span>
+            <p class="text-2xl font-black text-slate-900 mt-1">${biz.tkClicks}</p>
+            <p class="text-[11px] font-extrabold text-slate-500 uppercase">Clics en tu TikTok</p>
+          </div>
+          <div class="bento-white-card rounded-3xl p-4 text-center col-span-2 sm:col-span-1">
+            <span class="text-2xl">🗺️</span>
+            <p class="text-2xl font-black text-blue-600 mt-1">${biz.mapClicks}</p>
+            <p class="text-[11px] font-extrabold text-slate-500 uppercase">Abrieron tu Ubicación</p>
+          </div>
+        </div>
+
+        <!-- 2. Valoración Privada en 5 Aspectos para Mejorar (Solo visible para el dueño del negocio) -->
+        <div class="bento-white-card rounded-3xl p-6 sm:p-8 space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+            <div>
+              <span class="bg-amber-100 text-amber-900 text-[11px] font-black px-3 py-1 rounded-full uppercase">
+                🔒 Solo visible para ${biz.name} (${biz.votes} valoraciones recibidas)
+              </span>
+              <h3 class="text-xl font-black text-slate-900 mt-2">Tus 5 Aspectos de Valoración (Para Crecer y Mejorar)</h3>
+              <p class="text-xs text-slate-500">Ningún visitante ve estas estrellas en tu perfil público. Úsalas como guía personal para fortalecer tu negocio:</p>
+            </div>
+            <button onclick="openCompanyProfile(${biz.id})" class="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-extrabold whitespace-nowrap cursor-pointer">
+              Ver mi Perfil Público →
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${criteria.map(c => {
+              const isHigh = c.score >= 4.2;
+              const badgeColor = isHigh ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900';
+              const barColor = isHigh ? 'bg-emerald-500' : 'bg-amber-500';
+              const statusText = isHigh ? '¡Lo estás haciendo muy bien!' : 'Oportunidad para mejorar';
+              return `
+                <div class="p-4 rounded-2xl border ${isHigh ? 'border-slate-200 bg-slate-50/60' : 'border-amber-300 bg-amber-50/40'} space-y-2">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="text-xs sm:text-sm font-black text-slate-900">${c.icon} ${c.name}</span>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-black ${badgeColor}">
+                      ⭐ ${c.score.toFixed(1)} / 5.0
+                    </span>
+                  </div>
+                  <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="${barColor} h-full rounded-full" style="width: ${(c.score / 5) * 100}%"></div>
+                  </div>
+                  <p class="text-[11px] font-bold ${isHigh ? 'text-emerald-700' : 'text-amber-800'}">
+                    <b>${statusText}:</b> ${isHigh ? c.tipGood : c.tipImprove}
+                  </p>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 5. FILTROS Y NAVEGACIÓN
     // =========================================================================
     function filterBusinesses() {
       const search = document.getElementById('searchInput').value.toLowerCase();
@@ -1471,15 +1735,14 @@
       const filtered = businesses.filter(item => {
         const matchesCat = (currentCategory === 'all' || item.category === currentCategory);
         const matchesPrice = (price === 'all' || item.priceLevel === price);
-        const matchesNeighborhood = (neighborhood === 'all' || item.neighborhood === neighborhood);
-        const matchesAge = (currentAgeFilter === 'all' || item.ageType === currentAgeFilter);
+        const matchesNeighborhood = (neighborhood === 'all' || item.neighborhood === neighborhood || item.address.toLowerCase().includes(neighborhood.toLowerCase()));
         const matchesSearch = !search ||
           item.name.toLowerCase().includes(search) ||
           item.shortBio.toLowerCase().includes(search) ||
           item.mainRangeText.toLowerCase().includes(search) ||
           item.address.toLowerCase().includes(search);
 
-        return matchesCat && matchesPrice && matchesNeighborhood && matchesAge && matchesSearch;
+        return matchesCat && matchesPrice && matchesNeighborhood && matchesSearch;
       });
 
       renderBusinesses(filtered);
@@ -1492,33 +1755,16 @@
       filterBusinesses();
     }
 
-    function setAgeFilter(age) {
-      currentAgeFilter = (currentAgeFilter === age) ? 'all' : age;
-      const btnNew = document.getElementById('btn-age-new');
-      const btnEst = document.getElementById('btn-age-established');
-
-      btnNew.className = currentAgeFilter === 'nuevo'
-        ? "px-3.5 py-2 rounded-xl bg-emerald-600 text-white font-extrabold shadow-xs flex items-center gap-1.5 transition cursor-pointer"
-        : "px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer";
-
-      btnEst.className = currentAgeFilter === 'trayectoria'
-        ? "px-3.5 py-2 rounded-xl bg-slate-900 text-white font-extrabold shadow-xs flex items-center gap-1.5 transition cursor-pointer"
-        : "px-3.5 py-2 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 font-extrabold shadow-2xs flex items-center gap-1.5 transition cursor-pointer";
-
-      filterBusinesses();
-    }
-
     function resetAllFilters() {
       document.getElementById('searchInput').value = '';
       document.getElementById('priceFilter').value = 'all';
       document.getElementById('neighborhoodFilter').value = 'all';
       currentCategory = 'all';
-      currentAgeFilter = 'all';
       document.querySelectorAll('#categoryDock .cat-3d-btn').forEach((b, idx) => {
         if (idx === 0) b.classList.add('active');
         else b.classList.remove('active');
       });
-      setAgeFilter('all');
+      filterBusinesses();
     }
 
     function switchTab(tabId) {
@@ -1526,7 +1772,7 @@
         openOwnerPinModal();
         return;
       }
-      ['tab-explore', 'tab-company-profile', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-register', 'tab-analytics'].forEach(t => {
+      ['tab-explore', 'tab-company-profile', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-my-biz', 'tab-register', 'tab-analytics'].forEach(t => {
         const el = document.getElementById(t);
         if (el) el.classList.add('hidden');
       });
@@ -1537,28 +1783,30 @@
         'tab-nuevos': 'nav-nuevos',
         'tab-jobs': 'nav-jobs',
         'tab-certificate': 'nav-certificate',
+        'tab-my-biz': 'nav-my-biz',
         'tab-analytics': 'nav-analytics'
       };
       Object.entries(navMap).forEach(([key, id]) => {
         const b = document.getElementById(id);
         if (!b) return;
         if (key === 'tab-analytics') {
-          b.className = (isOwnerUnlocked ? "" : "hidden ") + "px-3.5 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer";
+          b.className = (isOwnerUnlocked ? "" : "hidden ") + "px-3 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer";
         } else {
-          b.className = "px-3.5 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer";
+          b.className = "px-3 py-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-white/60 flex items-center gap-1.5 transition cursor-pointer";
         }
       });
       const activeBtn = document.getElementById(navMap[tabId]);
       if (activeBtn) {
-        activeBtn.className = "px-3.5 py-2 rounded-xl bg-slate-900 text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer";
+        activeBtn.className = "px-3 py-2 rounded-xl bg-slate-900 text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer";
       }
       if (tabId === 'tab-analytics') renderOwnerAnalytics();
       if (tabId === 'tab-certificate') populateStickerSelector();
+      if (tabId === 'tab-my-biz') populateMyBizSelector();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // =========================================================================
-    // 5. STICKER Y CÓDIGO QR REAL DIRECTO AL PERFIL DEL NEGOCIO
+    // 6. STICKER Y CÓDIGO QR REAL DIRECTO AL PERFIL DEL NEGOCIO
     // =========================================================================
     function populateStickerSelector() {
       const sel = document.getElementById('certBizSelect');
@@ -1575,7 +1823,7 @@
       currentStickerBizId = biz.id;
 
       document.getElementById('certBrandName').value = biz.name;
-      document.getElementById('certCategory').value = categoryLabels[biz.category] || biz.mainRangeText;
+      document.getElementById('certCategory').value = categoryLabels[biz.category] || biz.category;
       document.getElementById('certLocation').value = biz.address;
       document.getElementById('certIg').value = biz.instagram;
       updateCertPreview();
@@ -1610,7 +1858,7 @@
     }
 
     // =========================================================================
-    // 6. CLICS, VALORACIONES DE 1 A 5 ESTRELLAS Y ANALÍTICA EN SUPABASE
+    // 7. CLICS Y VALORACIÓN CONSTRUCTIVA PRIVADA EN 5 CATEGORÍAS
     // =========================================================================
     async function recordClick(bizId, channel) {
       const biz = businesses.find(b => b.id === bizId);
@@ -1641,31 +1889,47 @@
       const biz = businesses.find(b => b.id === bizId);
       if (!biz) return;
       lastContactedId = bizId;
-      document.getElementById('ratingBizTitle').innerText = `¿Qué tal te pareció ${biz.name}?`;
-      document.getElementById('ratingBizSub').innerText = `Canal: ${channel} · Califica de 1 a 5 estrellas:`;
+      document.getElementById('ratingBizTitle').innerText = `Evalúa a ${biz.name}`;
       document.getElementById('ratingToast').classList.remove('hidden');
+      document.getElementById('ratingToast').classList.add('flex');
     }
 
     function closeRatingToast() {
       document.getElementById('ratingToast').classList.add('hidden');
+      document.getElementById('ratingToast').classList.remove('flex');
     }
 
-    async function submitStarRating(stars) {
+    async function submitConstructiveRating() {
       const biz = businesses.find(b => b.id === lastContactedId);
+      const r1 = Number(document.getElementById('rateCat1').value);
+      const r2 = Number(document.getElementById('rateCat2').value);
+      const r3 = Number(document.getElementById('rateCat3').value);
+      const r4 = Number(document.getElementById('rateCat4').value);
+      const r5 = Number(document.getElementById('rateCat5').value);
+      const avgVote = (r1 + r2 + r3 + r4 + r5) / 5;
+
       if (biz) {
-        const sum = biz.rating * biz.votes + stars;
-        biz.votes += 1;
+        const prevVotes = biz.votes || 1;
+        if (!biz.metrics5) {
+          biz.metrics5 = { respuesta: 5, espera: 5, amabilidad: 5, calidad: 5, precio: 5 };
+        }
+        biz.metrics5.respuesta = (biz.metrics5.respuesta * prevVotes + r1) / (prevVotes + 1);
+        biz.metrics5.espera = (biz.metrics5.espera * prevVotes + r2) / (prevVotes + 1);
+        biz.metrics5.amabilidad = (biz.metrics5.amabilidad * prevVotes + r3) / (prevVotes + 1);
+        biz.metrics5.calidad = (biz.metrics5.calidad * prevVotes + r4) / (prevVotes + 1);
+        biz.metrics5.precio = (biz.metrics5.precio * prevVotes + r5) / (prevVotes + 1);
+
+        const sum = biz.rating * prevVotes + avgVote;
+        biz.votes = prevVotes + 1;
         biz.rating = sum / biz.votes;
-        filterBusinesses();
-        renderNuevosSection();
 
         if (supabaseClient) {
           try {
             await supabaseClient.from('valoraciones_rapidas').insert([{
               emprendimiento_id: biz.id,
               nombre_negocio: biz.name,
-              canal_tocado: 'Calificación Directa',
-              estrellas: stars
+              canal_tocado: '5 Categorías Constructivas',
+              estrellas: Math.round(avgVote)
             }]);
             await supabaseClient.from('emprendimientos').update({
               calificacion_promedio: biz.rating.toFixed(2),
@@ -1675,7 +1939,7 @@
         }
       }
       closeRatingToast();
-      alert(`⭐ ¡Gracias! Tu calificación de ${stars} estrellas fue guardada.`);
+      alert(`✅ ¡Gracias! Tu valoración fue enviada en privado al dueño del negocio para ayudarlo a mejorar.`);
     }
 
     // REGISTRO DE NUEVO NEGOCIO CONECTADO A SUPABASE
@@ -1693,10 +1957,6 @@
       const schedule = document.getElementById('regSchedule').value.trim() || 'Abierto · 8:00 AM - 7:00 PM';
       const email = document.getElementById('regEmail').value.trim() || 'contacto@negocio.co';
 
-      const iconMap = {
-        comida: '🍔', ropa: '👖', calzado: '👟', accesorios: '👜',
-        perfumes: '💎', belleza: '💄', serv_belleza: '💅', tecnicos: '🛠️', profesionales: '👨‍💼'
-      };
       const words = name.split(' ');
       const newBiz = {
         id: Date.now(),
@@ -1708,14 +1968,12 @@
         registeredThisWeek: true,
         registeredDaysAgo: 0,
         verified: true,
-        badgeText: '🆕 Recién Llegado',
-        badgeStyle: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-        mainRangeIcon: iconMap[category] || '✨',
+        mainRangeIcon: '💰',
         mainRangeText,
         priceLevel: 'low',
         shortBio,
         address,
-        neighborhood: 'Valledupar',
+        neighborhood: address,
         phoneDisplay,
         whatsapp,
         instagram,
@@ -1726,6 +1984,7 @@
         storeThumb: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=400&q=80',
         rating: 5.0,
         votes: 1,
+        metrics5: { respuesta: 5.0, espera: 5.0, amabilidad: 5.0, calidad: 5.0, precio: 5.0 },
         views: 1,
         waClicks: 0,
         igClicks: 0,
@@ -1751,7 +2010,7 @@
             descripcion: shortBio,
             foto_portada_url: newBiz.coverImage,
             logo_url: newBiz.storeThumb,
-            icono_emoji: newBiz.mainRangeIcon,
+            icono_emoji: '💰',
             etiqueta_rango_precio: mainRangeText,
             categoria_presupuesto: 'economico',
             barrio: address,
@@ -1772,18 +2031,18 @@
     }
 
     // =========================================================================
-    // 7. PANEL PRIVADO DE DUEÑOS (ACCESO CON CLAVE SECRETA)
+    // 8. PANEL PRIVADO DE ADMINISTRADORES DE PÍLLALO (ACCESO CON CLAVE 2026)
     // =========================================================================
     function syncOwnerUI() {
       const navAnalytics = document.getElementById('nav-analytics');
       const lockBtn = document.getElementById('ownerLockBtn');
       if (isOwnerUnlocked) {
         navAnalytics.classList.remove('hidden');
-        lockBtn.innerHTML = '🔓 Panel Dueños Activo (Ir a Analítica)';
+        lockBtn.innerHTML = '🔓 Admin Activo (Ir a Panel)';
         lockBtn.className = 'px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-900 font-extrabold transition cursor-pointer';
       } else {
         navAnalytics.classList.add('hidden');
-        lockBtn.innerHTML = '🔒 Acceso Dueños';
+        lockBtn.innerHTML = '🔒 Admin Píllalo';
         lockBtn.className = 'px-3 py-1.5 rounded-full bg-slate-200/80 hover:bg-slate-300 text-slate-700 font-bold transition cursor-pointer';
       }
     }
@@ -1849,7 +2108,7 @@
       `).join('');
 
       document.getElementById('analyticsRows').innerHTML = businesses.map(b => {
-        const msg = `¡Hola *${b.name}*! 👋 Te escribimos de *Píllalo Valledupar*.\n\nEste es el reporte de visibilidad de tu negocio:\n👀 *Aperturas de tu perfil:* ${b.views}\n🟢 *Clics a tu WhatsApp:* ${b.waClicks}\n📸 *Clics a Instagram:* ${b.igClicks}\n👆 *Total interacciones:* ${b.totalClicks}\n⭐ *Calificación:* ${b.rating.toFixed(1)}/5.0 (${b.votes} opiniones)`;
+        const msg = `¡Hola *${b.name}*! 👋 Te escribimos de *Píllalo Valledupar*.\n\nEste es el reporte de tu perfil:\n👀 *Personas que abrieron tu perfil:* ${b.views}\n🟢 *Clics a tu WhatsApp:* ${b.waClicks}\n📸 *Clics a Instagram:* ${b.igClicks}\n👆 *Total interacciones:* ${b.totalClicks}\n⭐ *Promedio en tus 5 aspectos privados:* ${b.rating.toFixed(1)}/5.0`;
         return `
           <tr class="hover:bg-slate-50">
             <td class="p-3 font-black text-slate-900">${b.name}</td>
@@ -1875,7 +2134,7 @@
       bannersList.unshift({
         bizId: b.id,
         badge: "🚀 IMPULSO DE LA SEMANA · DESTACADO",
-        title: `${b.mainRangeIcon} ${b.name}: ${b.mainRangeText}`,
+        title: `${b.name} (${b.neighborhood})`,
         desc: `${b.shortBio}`,
         bizName: b.name,
         schedule: b.schedule,
@@ -1919,7 +2178,7 @@
     }
 
     // =========================================================================
-    // 8. DETECTOR AUTOMÁTICO DE ESCANEO QR (?negocio=ID)
+    // 9. DETECTOR AUTOMÁTICO DE ESCANEO QR (?negocio=ID)
     // =========================================================================
     function checkUrlForQrRedirect() {
       const params = new URLSearchParams(window.location.search);
@@ -1938,6 +2197,7 @@
     renderBusinesses(businesses);
     renderNuevosSection();
     populateStickerSelector();
+    populateMyBizSelector();
     checkUrlForQrRedirect();
   </script>
 </body>
