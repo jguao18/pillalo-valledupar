@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Píllalo Valledupar — Vitrina Visual por Widgets (V3)</title>
   <link rel="stylesheet" href="./tailwind.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .hidden { display: none !important; }
@@ -149,7 +149,7 @@
         <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-amber-50/95 border-2 border-emerald-500/40 shadow-xs group-hover:scale-105 transition flex items-center justify-center p-1 overflow-hidden flex-shrink-0" aria-hidden="true">
           <img src="./pillalo/assets/pillalo-face-logo.png" alt="Píllalo" class="w-full h-full object-contain object-center">
         </div>
-        <div class="leading-tight hidden min-[350px]:block">
+        <div class="leading-tight">
           <h1 class="text-base sm:text-xl font-black tracking-tight text-slate-900 leading-none">Píllalo</h1>
           <span class="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-[#00AA9D] block mt-0.5">Valledupar</span>
         </div>
@@ -313,7 +313,7 @@
 
         <!-- Footer oficial de la landing -->
         <footer class="pt-6 sm:pt-8 mt-6 border-t border-[#01483B]/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[11px] sm:text-xs font-bold text-[#486a5c]">
-          <p class="m-0">Píllalo Valledupar · Valledupar, Cesar · <a href="mailto:contacto@pillalo.co" class="underline hover:text-[#01483B]">contacto@pillalo.co</a> · <a data-pillalo-official-wa="true" href="#" target="_blank" class="underline hover:text-emerald-700">WhatsApp Oficial 300 987 6543</a></p>
+          <p class="m-0">Píllalo Valledupar · Valledupar, Cesar · <a href="mailto:contacto@pillalo.co" class="underline hover:text-[#01483B]">contacto@pillalo.co</a> · <a href="https://wa.me/573009876543" target="_blank" class="underline hover:text-emerald-700">WhatsApp Oficial 300 987 6543</a></p>
           <div class="flex flex-wrap items-center justify-center gap-x-2 text-[10px]">
             <a href="legal/terminos-y-condiciones.html" target="_blank" class="hover:underline">Términos</a> ·
             <a href="legal/politica-de-datos.html" target="_blank" class="hover:underline">Datos</a> ·
@@ -601,7 +601,7 @@
           </div>
           <div class="flex items-center justify-between gap-2 pt-1">
             <div class="flex flex-1 gap-2">
-              <a href="https://wa.me/573019876543?text=Hola%20Oasis%20Denim,%20vi%20la%20vacante%20en%20Píllalo" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center">
+              <a href="https://wa.me/573009876543?text=Hola%20Oasis%20Denim,%20vi%20la%20vacante%20en%20Píllalo" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center">
                 <i class="fa-brands fa-whatsapp mr-1"></i> Postular
               </a>
               <button onclick="openCompanyProfile(1)" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">
@@ -1018,6 +1018,25 @@
             </div>
           </div>
 
+          <!-- CREAR CONTRASEÑA PARA ACCEDER A TU PERFIL (LOGIN SEGURO) -->
+          <div class="rounded-2xl bg-amber-50/80 border-2 border-amber-300 p-4 space-y-2.5">
+            <div class="flex items-center gap-2">
+              <span class="text-base">🔐</span>
+              <span class="font-black text-amber-950 text-xs">Crea tu Contraseña para Entrar a tu Perfil de Dueño</span>
+            </div>
+            <p class="text-[11px] text-amber-900 leading-relaxed">
+              Esta contraseña protegerá tu perfil. Nadie más podrá modificar tus datos ni ver tus estadísticas. Podrás entrar en <b>«Entrar a mi perfil»</b> usando tu correo o celular junto a esta contraseña.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1 text-[11px]">Contraseña de Acceso (Mínimo 6 caracteres) *</label>
+                <input type="password" id="regPassword" required minlength="6" placeholder="Crea tu clave segura" class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl font-bold text-slate-900 text-xs">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1 text-[11px]">Confirmar Contraseña *</label>
+                <input type="password" id="regConfirmPassword" required minlength="6" placeholder="Repite tu contraseña" class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl font-bold text-slate-900 text-xs">
+              </div>
+            </div>
           </div>
 
           <!-- PREGUNTA DE SOCIEDAD CONSTITUIDA (S.A.S., Ltda., S.A.) -->
@@ -1346,14 +1365,21 @@
                 </div>
               </div>
             </div>
-            <!-- Referencia de Transferencia Obligatoria (Instrucción 04) -->
+            <!-- Comprobante de Pago OBLIGATORIO (Foto/Captura) + Referencia OBLIGATORIA -->
             <div class="space-y-3 pt-1">
               <div>
                 <label class="block font-black text-slate-800 mb-1 text-xs">
-                  🔢 Número de Comprobante / Referencia de Transferencia (Obligatorio) *
+                  📎 Adjuntar Comprobante de Pago o Transferencia (Obligatorio) *
                 </label>
-                <input type="text" id="regPaymentRef" required placeholder="Ej: Transf. Nequi M123456 / Ref. Bancolombia 987654" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl font-semibold text-xs">
-                <p class="text-[10px] text-slate-500 mt-0.5">Escribe la referencia de tu pago. Al confirmar tu registro podrás adjuntar la foto o captura directamente por WhatsApp.</p>
+                <input type="file" id="regPaymentReceipt" accept="image/*,application/pdf" required class="w-full text-xs text-slate-700 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#01483B] file:text-white hover:file:bg-[#00AA9D] file:cursor-pointer cursor-pointer bg-white p-2 rounded-xl border border-slate-300">
+                <p class="text-[10px] text-slate-500 mt-0.5">Sube la captura de pantalla o foto de la transferencia desde tu Nequi, Daviplata o banco.</p>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1 text-xs">
+                  🔢 Número de Comprobante / Referencia de Transferencia (Opcional)
+                </label>
+                <input type="text" id="regPaymentRef" placeholder="Ej: Transf. Nequi M123456 / Ref. Bancolombia 987654 (Opcional si ya subiste la foto)" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl font-semibold text-xs">
               </div>
             </div>
           </div>
@@ -1484,6 +1510,25 @@
             <input type="email" id="regPersonEmail" required placeholder="carlos.mendoza@ejemplo.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
           </div>
 
+          <!-- Crear Contraseña para Dueño / Profesional -->
+          <div class="rounded-2xl bg-amber-50/80 border-2 border-amber-300 p-4 space-y-2.5">
+            <div class="flex items-center gap-2">
+              <span class="text-base">🔐</span>
+              <span class="font-black text-amber-950 text-xs">Crea tu Contraseña para Entrar a tu Perfil de Profesional</span>
+            </div>
+            <p class="text-[11px] text-amber-900 leading-relaxed">
+              Podrás entrar en <b>«Entrar a mi perfil»</b> usando tu WhatsApp o correo junto a esta clave.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1 text-[11px]">Contraseña (Mínimo 6 caracteres) *</label>
+                <input type="password" id="regPersonPassword" required minlength="6" placeholder="Clave segura" class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl font-bold text-slate-900 text-xs">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1 text-[11px]">Confirmar Contraseña *</label>
+                <input type="password" id="regPersonConfirmPassword" required minlength="6" placeholder="Repite tu clave" class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl font-bold text-slate-900 text-xs">
+              </div>
+            </div>
           </div>
 
           <!-- DATOS PRIVADOS DE VERIFICACIÓN DE PERSONA (NUNCA SE MUESTRAN EN LA PÁGINA) -->
@@ -1589,11 +1634,8 @@
             </div>
 
             <div>
-              <label class="block font-black text-slate-800 mb-1 text-[11px]">
-                🔢 Referencia de la transferencia o comprobante (Obligatorio) *
-              </label>
-              <input type="text" id="regPersonPaymentRef" required placeholder="Ej: Transf. Nequi M123456 / Ref. Bancolombia 987654" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
-              <p class="text-[10px] text-slate-500 mt-0.5">Escribe el número de referencia. Al completar podrás enviar la captura por WhatsApp.</p>
+              <label class="block font-bold text-slate-700 mb-1 text-[11px]">Foto o Captura del Comprobante de Pago *</label>
+              <input type="file" id="regPersonPaymentReceipt" accept="image/*,application/pdf" required class="w-full text-xs text-slate-600 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#01483B] file:text-white hover:file:bg-[#00AA9D] file:cursor-pointer cursor-pointer bg-white p-1.5 rounded-xl border border-slate-200">
             </div>
           </div>
 
@@ -1607,8 +1649,84 @@
       </div>
     </section>
 
-    <!-- Tab Analytics retirado para despliegue público (respaldado en admin-local.html) -->
-</main>
+    <!-- ===================================================================== -->
+    <!-- TAB 8: PANEL PRIVADO DE DUEÑOS DE PÍLLALO (CON CLAVE 2026)            -->
+    <!-- ===================================================================== -->
+    <section id="tab-analytics" class="hidden fade-in space-y-6">
+      <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase">
+            🔐 Modo Privado Administradores Píllalo (Clave 2026)
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2">Control General de Visitas, Clics y Banners Publicitarios</h2>
+          <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl">
+            Panel exclusivo de ustedes dos para controlar toda la plataforma, subir negocios al Banner Grande Superior y enviar reportes por WhatsApp.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="openNewBannerModal()" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-black cursor-pointer">
+            📢 Publicar Banner / Publicidad
+          </button>
+          <button onclick="lockOwnerMode()" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-bold cursor-pointer">
+            🔒 Cerrar Modo Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 KPIs -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bento-white-card rounded-3xl p-5">
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase">👀 Visitas a la Página</p>
+          <p class="text-3xl font-black text-slate-900 mt-1" id="kpiViews">315</p>
+          <p class="text-xs font-bold text-emerald-600 mt-1">🟢 Conectado a Supabase</p>
+        </div>
+        <div class="bento-white-card rounded-3xl p-5">
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase">👆 Clics Totales en Perfiles</p>
+          <p class="text-3xl font-black text-slate-900 mt-1" id="kpiClicks">0</p>
+          <p class="text-xs font-bold text-emerald-600 mt-1" id="kpiWaSub">WhatsApp, IG, TikTok y Maps</p>
+        </div>
+        <div class="bento-white-card rounded-3xl p-5">
+          <p class="text-[11px] font-extrabold text-slate-400 uppercase">⭐ Encuestas Privadas</p>
+          <p class="text-3xl font-black text-slate-900 mt-1" id="kpiVotes">0</p>
+          <p class="text-xs font-bold text-amber-600 mt-1">Visibles solo para cada dueño</p>
+        </div>
+        <div class="bento-white-card rounded-3xl p-5 bg-amber-50/60 border-amber-200">
+          <p class="text-[11px] font-extrabold text-amber-800 uppercase">🚨 Con Pocos Clics (&lt;5)</p>
+          <p class="text-3xl font-black text-amber-700 mt-1" id="kpiLowClicks">0</p>
+          <p class="text-xs font-bold text-amber-800 mt-1">Listos para subir al Banner</p>
+        </div>
+      </div>
+
+      <!-- RADAR DE NEGOCIOS CON POCOS CLICS -->
+      <div class="bento-white-card rounded-3xl p-6 border-2 border-amber-200 bg-amber-50/40 space-y-3">
+        <h3 class="text-base sm:text-lg font-black text-amber-950">🚨 Radar de Impulso: ¿A qué negocios casi NO han tocado todavía?</h3>
+        <p class="text-xs text-amber-900">Con un solo clic en <b>"🚀 Destacar en Banner Grande"</b> subes ese negocio a la parte superior de la página para ayudarlo a recibir visitas:</p>
+        <div id="lowClicksContainer" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+      </div>
+
+      <!-- TABLA DE MÉTRICAS POR NEGOCIO -->
+      <div class="bento-white-card rounded-3xl p-6 overflow-x-auto space-y-3">
+        <h3 class="text-base sm:text-lg font-black text-slate-900">📈 Métricas por Negocio + Botón para Enviar Reporte al Dueño</h3>
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-900 text-white">
+              <th class="p-3 rounded-tl-xl">Negocio / Servicio</th>
+              <th class="p-3">👀 Aperturas Perfil</th>
+              <th class="p-3">🟢 WhatsApp</th>
+              <th class="p-3">📸 Instagram</th>
+              <th class="p-3">🎵 TikTok</th>
+              <th class="p-3">🗺️ Maps</th>
+              <th class="p-3">👆 Total Clics</th>
+              <th class="p-3">⭐ Promedio Interno</th>
+              <th class="p-3 rounded-tr-xl">Acciones Dueños</th>
+            </tr>
+          </thead>
+          <tbody id="analyticsRows" class="divide-y divide-slate-200"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
 
   <!-- ===================================================================== -->
   <!-- SECCIÓN DE PREGUNTAS FRECUENTES (FAQ) PÍLLALO VALLEDUPAR              -->
@@ -1719,7 +1837,7 @@
         </h4>
         <ul class="space-y-2 text-xs">
           <li>
-            <a data-pillalo-official-wa="true" data-pillalo-msg="Hola Píllalo Valledupar, necesito información" href="#" target="_blank" class="flex items-center gap-2 text-slate-700 hover:text-emerald-700 font-bold transition">
+            <a href="https://wa.me/573009876543?text=Hola%20Píllalo%20Valledupar,%20necesito%20información" target="_blank" class="flex items-center gap-2 text-slate-700 hover:text-emerald-700 font-bold transition">
               <i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i>
               <span>WhatsApp Oficial: <b>300 987 6543</b></span>
             </a>
@@ -1994,7 +2112,7 @@
       <div class="space-y-2 pt-1">
         <a id="welcomeModalWaBtn" href="#" target="_blank" data-pillalo-direct="true" class="w-full py-3 bg-[#01483B] hover:bg-[#00AA9D] text-white rounded-2xl text-xs font-black flex items-center justify-center gap-2 transition shadow-md">
           <i class="fa-brands fa-whatsapp text-lg"></i>
-          <span>📲 Enviar mi comprobante por WhatsApp</span>
+          <span>📲 Recibir mi Kit de Bienvenida en WhatsApp</span>
         </a>
         <button onclick="closeWelcomeKitModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-2xl text-xs font-bold transition cursor-pointer">
           Entrar a mi Panel de Control
@@ -2377,10 +2495,112 @@
     </div>
   </div>
 
-  <!-- Modal login de contraseñas locales retirado (Instrucción 04) -->
-<!-- Modal PIN retirado (Instrucción 04) -->
-<!-- Modal newBannerModal retirado (Instrucción 04) -->
-<script>
+  <!-- MODAL DE INICIO DE SESIÓN CON CONTRASEÑA PARA DUEÑOS DE NEGOCIO -->
+  <div id="ownerLoginModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 sm:p-7 max-w-sm w-full space-y-4 shadow-2xl text-center animate-in fade-in zoom-in duration-200">
+      <div class="w-12 h-12 mx-auto rounded-2xl bg-[#01483B] text-[#FDAB01] flex items-center justify-center text-xl shadow-xs">
+        <i class="fa-solid fa-store"></i>
+      </div>
+      <div>
+        <h3 class="text-lg font-black text-slate-900">Entrar a mi Perfil de Negocio</h3>
+        <p class="text-xs text-slate-500 mt-1">Ingresa con tu correo o celular y la contraseña que creaste al registrarte.</p>
+      </div>
+
+      <form onsubmit="handleOwnerLogin(event)" class="space-y-3 text-left text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Correo Electrónico o Teléfono</label>
+          <input type="text" id="loginUser" required placeholder="tu-correo@ejemplo.com o celular" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Contraseña</label>
+          <input type="password" id="loginPass" required placeholder="Tu contraseña" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900">
+        </div>
+        
+        <div id="loginError" class="hidden p-2 rounded-xl bg-red-50 border border-red-200 text-red-700 font-bold text-[11px] text-center"></div>
+
+        <button type="submit" class="w-full py-3 bg-[#01483B] hover:bg-[#00AA9D] text-white rounded-xl font-black text-sm shadow-md transition cursor-pointer">
+          Iniciar Sesión y Entrar
+        </button>
+      </form>
+
+      <!-- Ayuda rápida para pruebas demo -->
+      <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 text-center space-y-2">
+        <p class="font-extrabold text-slate-800">🔑 Cuentas Demo de Prueba (Clave: 123456):</p>
+        <div class="grid grid-cols-2 gap-2">
+          <button type="button" onclick="loginDemoByBizId(1)" class="px-2.5 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-400 text-slate-800 font-black text-[11px] transition cursor-pointer shadow-2xs">
+            🏪 Entrar: Oasis Denim
+          </button>
+          <button type="button" onclick="loginDemoByBizId(5)" class="px-2.5 py-2 rounded-xl bg-white hover:bg-amber-50 border border-slate-200 hover:border-amber-400 text-slate-800 font-black text-[11px] transition cursor-pointer shadow-2xs">
+            🛵 Entrar: Luxury Arepas
+          </button>
+        </div>
+        <p class="text-[10px] text-slate-400">O escribe: <b>oasis@pillalo.co</b> / <b>luxury@pillalo.co</b> (Clave: 123456)</p>
+      </div>
+
+      <button type="button" onclick="closeOwnerLoginModal()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold cursor-pointer">
+        Cancelar
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL DE CLAVE SECRETA PARA DUEÑOS DE PÍLLALO -->
+  <div id="ownerPinModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
+      <div class="text-3xl">🔐</div>
+      <h3 class="text-lg font-black text-slate-900">Acceso Privado Administradores</h3>
+      <p class="text-xs text-slate-500">Ingresa tu clave para administrar toda la plataforma y los Banners Publicitarios (Clave: <b>2026</b>).</p>
+      <form onsubmit="checkOwnerPin(event)" class="space-y-3">
+        <input type="password" id="ownerPinInput" placeholder="Clave secreta" required class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-center font-black text-base">
+        <div class="flex gap-2">
+          <button type="button" onclick="closeOwnerPinModal()" class="flex-1 py-2.5 bg-slate-100 text-slate-700 rounded-xl text-xs font-bold cursor-pointer">Cancelar</button>
+          <button type="submit" class="flex-1 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-extrabold cursor-pointer">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL PARA CREAR / CAMBIAR BANNER PUBLICITARIO (SOLO DUEÑOS) -->
+  <div id="newBannerModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl text-xs">
+      <div class="flex justify-between items-center">
+        <span class="bg-amber-100 text-amber-900 font-black px-3 py-1 rounded-full">📢 Nuevo Banner Superior</span>
+        <button onclick="closeNewBannerModal()" class="text-slate-400 hover:text-slate-700 font-black text-base cursor-pointer">✕</button>
+      </div>
+      <h3 class="text-lg font-black text-slate-900">Destacar Negocio en el Banner Grande</h3>
+      <form onsubmit="saveCustomBanner(event)" class="space-y-3">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">¿En qué pestaña mostrar este Banner? (2 opciones arriba)</label>
+          <select id="bannerTabSelect" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold">
+            <option value="explore">🏢 Explorar Directorio</option>
+            <option value="nuevos">⚡ Recién Llegados</option>
+            <option value="jobs">💼 Vacantes de Empleo</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Tipo de Etiqueta</label>
+          <select id="bannerBadgeInput" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-bold">
+            <option value="🚀 DESTACADO DE LA SEMANA">🚀 Impulso por Pocos Clics</option>
+            <option value="💎 PUBLICIDAD VIP DESTACADA">💎 Publicidad VIP Pagada</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Seleccionar Negocio del Directorio</label>
+          <select id="bannerBizSelect" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-bold"></select>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Título Llamativo del Anuncio *</label>
+          <input type="text" id="bannerTitleInput" required placeholder="Ej: 🍔 ¡Las mejores arepas rellenas al carbón en Los Cortijos!" class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Subtítulo / Invitación *</label>
+          <input type="text" id="bannerDescInput" required placeholder="Ej: Abierto de 4:30 PM a 11:30 PM. Toca para ver nuestro perfil completo." class="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold">
+        </div>
+        <button type="submit" class="w-full py-3 wa-widget-green text-white rounded-xl font-extrabold cursor-pointer">Publicar en el Banner Grande</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
     // =========================================================================
     // CONEXIÓN EN VIVO A SUPABASE (PROYECTO: Pillalo_Valledupar)
     // =========================================================================
@@ -2388,9 +2608,8 @@
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVoY21taHhra2RuY3JzanR1amhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0OTgwNTUsImV4cCI6MjEwOTA3NDA1NX0.e97tZSN_LKraz9FZsB4oAUKkjxgdWN9NkMzXvnHElh0";
     const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-    const WHATSAPP_PILLALO = '573009876543';
-    const MODO_DEMO = false;
-    let isOwnerUnlocked = false;
+    const OWNER_PIN = "2026";
+    let isOwnerUnlocked = sessionStorage.getItem('pillalo_owner_ok') === 'true';
     let lastContactedId = null;
     let totalPageViews = parseInt(localStorage.getItem('pillalo_v3_views') || '315', 10) + 1;
     localStorage.setItem('pillalo_v3_views', totalPageViews);
@@ -2433,7 +2652,7 @@
     // BASE DE DATOS INICIAL CON LAS 10 CATEGORÍAS (INCLUYENDO MASCOTAS)
     // Y RANGO DE PRECIOS LIMPIO (SOLO EL VALOR SIN REPETIR LA CATEGORÍA)
     // =========================================================================
-    const sampleBusinesses = [
+    let businesses = [
       {
         id: 1,
         secondaryCategory: "arte_manualidades_personalizados",
@@ -2457,7 +2676,7 @@
         address: "Cra 15 #13B-24 · Doce de Octubre",
         neighborhood: "Doce de Octubre",
         phoneDisplay: "300 987 6543",
-        whatsapp: "573019876543",
+        whatsapp: "573009876543",
         instagram: "@oasis_denimvalle",
         tiktok: "@oasisdenim.vup",
         email: "ventas@oasisdenim.co",
@@ -2964,12 +3183,11 @@
         totalClicks: 2
       }
     ];
-    let businesses = MODO_DEMO ? sampleBusinesses.map(b => ({ ...b, isDemo: true, demoBadge: 'Ejemplo' })) : [];
 
     // Publicidad sin cupo máximo fijo pero garantizando siempre al menos 2 de Impulso Solidario
     const MIN_BANNERS_IMPULSO = 2; // Instrucción 02b
     let currentBannerRotationOffset = 0;
-    const sampleBannersList = [
+    let bannersList = [
       // 1. PESTAÑA EXPLORAR DIRECTORIO (8 POSIBILIDADES DE IMPULSO SOLIDARIO Y PUBLICIDAD)
       {
         id: 'ad-sol-1',
@@ -3131,7 +3349,6 @@
         logoTitle: "Técnicos"
       }
     ];
-    let bannersList = MODO_DEMO ? sampleBannersList : [];
 
     let currentCategory = 'all';
     let currentStickerBizId = 5;
@@ -3256,10 +3473,6 @@
         if (bottomContainer) {
           bottomContainer.innerHTML = bottomBanners.map(renderBannerCard).join('');
           bottomContainer.style.display = bottomBanners.length ? '' : 'none';
-        }
-      }
-        if (bottomContainer) {
-          bottomContainer.innerHTML = [selectedBanners[2], selectedBanners[3]].filter(Boolean).map(renderBannerCard).join('');
         }
       }
 
@@ -3469,7 +3682,7 @@
     // =========================================================================
     // VACANTES ACTIVAS Y PUBLICACIÓN DE VACANTES DESDE EL PERFIL DE NEGOCIO
     // =========================================================================
-    const sampleVacancies = [
+    let vacancies = window.vacancies = [
       {
         id: 1,
         bizId: 1,
@@ -3478,7 +3691,7 @@
         title: "Asesora de Ventas y Atención por WhatsApp",
         type: "Tiempo Completo / Medio Tiempo",
         desc: "Atención de clientes en punto físico y respuesta de chats de WhatsApp e Instagram.",
-        whatsapp: "573019876543"
+        whatsapp: "573009876543"
       },
       {
         id: 2,
@@ -3511,7 +3724,6 @@
         whatsapp: "573186543210"
       }
     ];
-    let vacancies = window.vacancies = MODO_DEMO ? sampleVacancies : [];
 
     function renderVacancies() {
       const container = document.getElementById('jobsGridContainer');
@@ -3678,17 +3890,16 @@
     // =========================================================================
     // MODAL DE BIENVENIDA & KIT POST-REGISTRO
     // =========================================================================
-    function openWelcomeKitModal(biz, plan, ref) {
+    function openWelcomeKitModal(biz) {
       if (!biz) return;
       const modal = document.getElementById('welcomeKitModal');
       const nameEl = document.getElementById('welcomeModalBizName');
       const btnEl = document.getElementById('welcomeModalWaBtn');
       if (nameEl) nameEl.textContent = `¡${biz.name} ya está Registrado!`;
       if (btnEl) {
-        const planText = plan || 'Semestral';
-        const refText = ref || document.getElementById('regPaymentRef')?.value.trim() || document.getElementById('regPersonPaymentRef')?.value.trim() || 'Sin referencia';
-        const waMsg = `Hola, envío el comprobante de pago de ${biz.name}. Plan: ${planText}. Referencia: ${refText}.`;
-        btnEl.href = `https://wa.me/${WHATSAPP_PILLALO}?text=${encodeURIComponent(waMsg)}`;
+        const profileLink = `https://jguao18.github.io/pillalo-valledupar/?negocio=${biz.id}`;
+        const waMsg = `Hola equipo Píllalo Valledupar 👋, acabo de registrar mi negocio "${biz.name}". Solicito mi Kit de Bienvenida (enlace directo, QR y confirmación de revisión en 1-3 días hábiles). Mi vitrina: ${profileLink}`;
+        btnEl.href = `https://wa.me/573009876543?text=${encodeURIComponent(waMsg)}`;
       }
       if (modal) {
         modal.classList.remove('hidden');
@@ -3770,7 +3981,7 @@
       settings[channelKey] = Boolean(isEnabled);
       biz.contactSettings = settings;
       saveBizCustomConfig(biz);
-      loadSupabaseDirectory();
+      filterBusinesses('silent');
       const labels = {
         whatsapp: 'WhatsApp Oficial',
         call: 'Llamada Directa',
@@ -4386,7 +4597,29 @@
       }
 
       // Barra exclusiva para el dueño cuando ha iniciado sesión en SU negocio
-      const ownerTopBannerHTML = '';
+      const ownerTopBannerHTML = isOwnerLoggedIn ? `
+        <div class="mb-3 p-3.5 rounded-2xl bg-gradient-to-r from-[#01483B] via-teal-900 to-slate-900 text-white flex flex-wrap items-center justify-between gap-3 shadow-md border border-emerald-400/40">
+          <div class="flex items-center gap-2 text-xs">
+            <span class="w-7 h-7 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black">
+              <i class="fa-solid fa-sliders"></i>
+            </span>
+            <div>
+              <p class="font-black text-amber-300 uppercase tracking-wider text-[10px]">Modo Dueño Activo · Vista Previa en Vivo</p>
+              <p class="font-bold text-white text-xs">Solo tú ves esta barra porque iniciaste sesión en tu negocio.</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="openEditBizChannelsModal(${biz.id})" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-black flex items-center gap-1.5 transition cursor-pointer shadow-xs">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Editar Canales & Modalidad</span>
+            </button>
+            <button onclick="switchTab('tab-my-biz')" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white border border-white/20 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer">
+              <i class="fa-solid fa-chart-Simple"></i>
+              <span>Volver a Mi Panel</span>
+            </button>
+          </div>
+        </div>
+      ` : '';
 
       const isPerson = biz.type === 'persona';
       let html = '';
@@ -4647,10 +4880,6 @@
     function populateMyBizSelector() {
       const sel = document.getElementById('myBizSelector');
       if (!sel) return;
-      if (!businesses || !businesses.length) {
-        sel.innerHTML = '<option value="">No hay comercios cargados</option>';
-        return;
-      }
       const currentVal = sel.value;
       sel.innerHTML = businesses.map(b => `<option value="${b.id}">${b.name} (${b.neighborhood})</option>`).join('');
       if (currentVal && businesses.some(b => String(b.id) === String(currentVal))) {
@@ -4660,7 +4889,7 @@
     }
 
     function openMyBizSelector() {
-      // tab-my-biz oculto en versión pública
+      switchTab('tab-my-biz');
       if (window.Pillalo) {
         window.Pillalo.speak('welcome', { text: '¡Bienvenido a la gestión de tu negocio! Mira tus métricas y descarga tu Sticker QR 📊🐾', motion: 'celebrate' });
       }
@@ -4672,7 +4901,7 @@
     updateFavoritesBadge();
       const sel = document.getElementById('myBizSelector');
       if (sel) sel.value = id;
-      // tab-my-biz oculto en versión pública
+      switchTab('tab-my-biz');
       renderMyBusinessDashboard();
       showAppToast('🏢 Has ingresado a la gestión privada de tu negocio');
       if (window.Pillalo) {
@@ -4681,20 +4910,9 @@
     }
 
     function renderMyBusinessDashboard() {
-      if (!businesses || !businesses.length) {
-        const container = document.getElementById('myBizDashboardContent');
-        if (container) {
-          container.innerHTML = `
-            <div class="bento-white-card rounded-3xl p-8 text-center space-y-2">
-              <p class="text-xs font-bold text-slate-500">Cargando directorio de comercios...</p>
-            </div>
-          `;
-        }
-        return;
-      }
       const sel = document.getElementById('myBizSelector');
-      const id = sel && sel.value ? Number(sel.value) : businesses[0].id;
-      const biz = businesses.find(b => b.id === id) || (businesses.length ? businesses[0] : null);
+      const id = sel ? Number(sel.value) : businesses[0].id;
+      const biz = businesses.find(b => b.id === id) || businesses[0];
       currentStickerBizId = biz.id;
       const container = document.getElementById('myBizDashboardContent');
       if (!container || !biz) return;
@@ -4963,7 +5181,7 @@
               
               <div class="my-4 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
                 <div class="relative w-28 h-28 bg-white p-2 rounded-xl shadow-md border-2 border-emerald-500 flex-shrink-0">
-                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent('https://jguao18.github.io/pillalo-valledupar/?negocio=' + biz.id)}" alt="QR" class="w-full h-full object-contain">
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent("https://jguao18.github.io/pillalo-valledupar/?negocio=" + biz.id) + "" alt="QR" class="w-full h-full object-contain">
                 </div>
                 <div class="space-y-1">
                   <p class="font-black text-slate-900 text-sm">${biz.name}</p>
@@ -5289,257 +5507,6 @@
 
     let searchPillaloTimer = null;
 
-    
-    // =========================================================================
-    
-    // =========================================================================
-    // ENLACE UNIFICADO DE WHATSAPP OFICIAL (Instrucción 04b, Punto 3)
-    // =========================================================================
-    function getPillaloWaUrl(message = '') {
-      const q = message ? `?text=${encodeURIComponent(message)}` : '';
-      return `https://wa.me/${WHATSAPP_PILLALO}${q}`;
-    }
-
-    function syncPillaloWhatsAppLinks() {
-      document.querySelectorAll('[data-pillalo-official-wa]').forEach(el => {
-        const msg = el.getAttribute('data-pillalo-msg') || '';
-        el.href = getPillaloWaUrl(msg);
-      });
-    }
-
-    function openPillaloWhatsApp(msg = '') {
-      window.open(getPillaloWaUrl(msg), '_blank');
-    }
-
-    // CARGA DE DIRECTORIO EN VIVO DESDE SUPABASE (Instrucción 04, Punto 5)
-    // =========================================================================
-    function mapSupabaseEmprendimiento(r, contacts30dMap) {
-      const isPerson = r.tipo_registro === 'persona';
-      const contacts = contacts30dMap[r.id] ?? (r.total_clics_recibidos || 0);
-
-      // Mapear categoría interna
-      const rawCat = (r.categoria || '').toLowerCase().trim();
-      const supaCatMap = {
-        'comida': 'alimentos_gastronomia',
-        'ropa': 'moda_ropa_accesorios',
-        'calzado': 'moda_ropa_accesorios',
-        'accesorios': 'moda_ropa_accesorios',
-        'belleza': 'belleza_cuidado_personal',
-        'perfumes': 'belleza_cuidado_personal',
-        'servicios': isPerson ? 'servicios_profesionales_empresariales' : 'servicios_personales_domesticos',
-        'tecnicos': 'servicios_personales_domesticos',
-        'profesionales': 'servicios_profesionales_empresariales',
-        'mascotas': 'mascotas_animales'
-      };
-      const mappedCategory = supaCatMap[rawCat] || r.categoria || 'moda_ropa_accesorios';
-
-      const cleanPhone = (r.whatsapp || r.telefono_llamada || '').replace(/\D/g, '');
-      const waNumber = cleanPhone.startsWith('57') ? cleanPhone : ('57' + cleanPhone);
-
-      return {
-        id: r.id,
-        type: r.tipo_registro || 'negocio',
-        name: r.nombre,
-        category: mappedCategory,
-        secondaryCategory: r.subcategoria || '',
-        hashtags: r.subcategoria ? [`#${r.subcategoria.replace(/\s+/g, '')}`, `#${r.nombre.replace(/\s+/g, '')}`, '#Valledupar'] : ['#Valledupar', '#ComercioLocal'],
-        lat: 10.4635,
-        lng: -73.2455,
-        shortBio: r.descripcion || r.eslogan || '',
-        address: r.direccion || (r.barrio ? `Barrio ${r.barrio}, Valledupar` : 'Valledupar'),
-        neighborhood: r.barrio || 'Valledupar',
-        phoneDisplay: r.telefono_llamada || r.whatsapp || '',
-        whatsapp: waNumber,
-        instagram: r.instagram_usuario || '',
-        tiktok: r.tiktok_usuario || '',
-        email: r.correo_electronico || '',
-        schedule: r.horario_texto || 'Lun a Sáb · Horario a convenir',
-        coverImage: r.foto_portada_url || 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=900&q=80',
-        avatarImage: r.logo_url || r.foto_portada_url,
-        storeThumb: r.logo_url || r.foto_portada_url,
-        logoTitle: (r.nombre || '').split(' ')[0] || 'Píllalo',
-        logoSub: (r.nombre || '').split(' ').slice(1, 3).join(' ') || '',
-        mainRangeText: r.etiqueta_rango_precio || (r.tarifa_rango ? `${r.tarifa_rango} (${r.tarifa_unidad || 'Servicio'})` : '$20.000 – $60.000 COP'),
-        priceLevel: r.categoria_presupuesto || 'mid',
-        verified: r.verificado ?? true,
-        isNew: r.es_nuevo ?? true,
-        createdAt: r.fecha_registro || new Date().toISOString(),
-        views: r.vistas_perfil || 0,
-        totalClicks: contacts,
-        contacts30d: contacts,
-        waClicks: r.clics_whatsapp || 0,
-        igClicks: r.clics_instagram || 0,
-        tkClicks: r.clics_tiktok || 0,
-        mapClicks: r.clics_maps || 0,
-        callClicks: r.clics_llamada || 0,
-        isSociedad: r.es_sociedad || false,
-        nit: r.nit || null,
-        profession: r.profesion || (isPerson ? (r.subcategoria || 'Profesional Independiente') : null),
-        modalidades: Array.isArray(r.modalidades) ? r.modalidades : (r.modalidades ? [r.modalidades] : (isPerson ? ['A domicilio'] : null)),
-        coverage: r.zonas_cobertura || r.barrio || 'Valledupar',
-        rate: r.tarifa_rango || '',
-        rateUnit: r.tarifa_unidad || '',
-        experienceYears: r.experiencia_anos || null,
-        studies: r.estudios_certificaciones || null,
-        membershipPlan: r.plan_actual || 'prueba_gratis',
-        locationType: isPerson ? 'servicio_virtual' : 'presencial',
-        focusChannel: 'whatsapp'
-      };
-    }
-
-    function showDirectoryLoadError() {
-      const bList = document.getElementById('businessList');
-      if (bList) {
-        bList.innerHTML = `
-          <div class="col-span-full bento-white-card rounded-3xl p-10 text-center space-y-3">
-            <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl shadow-xs">
-              ⚠️
-            </div>
-            <h3 class="text-lg font-black text-slate-900">No pudimos cargar el directorio. Intenta de nuevo en un momento.</h3>
-            <p class="text-xs text-slate-500">Estamos verificando la conexión con la base de datos de comercios de Valledupar.</p>
-            <button onclick="loadSupabaseDirectory()" class="px-5 py-2.5 bg-[#01483B] text-white rounded-xl text-xs font-black cursor-pointer shadow-sm">
-              Reintentar
-            </button>
-          </div>
-        `;
-      }
-      const rCount = document.getElementById('resultsCounterText');
-      if (rCount) rCount.textContent = 'No pudimos cargar el directorio. Intenta de nuevo en un momento.';
-    }
-
-    async function loadSupabaseDirectory() {
-      if (!supabaseClient) {
-        showDirectoryLoadError();
-        return;
-      }
-
-      try {
-        // 1. Cargar negocios activos
-        const { data: supaBiz, error: bizErr } = await supabaseClient
-          .from('emprendimientos')
-          .select('*')
-          .eq('activo', true);
-
-        if (bizErr || !supaBiz) {
-          console.error('Error al cargar emprendimientos desde Supabase:', bizErr);
-          if (!MODO_DEMO) showDirectoryLoadError();
-          return;
-        }
-
-        // 2. Cargar contactos_30d para algoritmo solidario
-        let contacts30dMap = {};
-        try {
-          const { data: c30Data } = await supabaseClient.rpc('contactos_30d');
-          if (Array.isArray(c30Data)) {
-            c30Data.forEach(row => {
-              contacts30dMap[row.emprendimiento_id] = Number(row.contactos) || 0;
-            });
-          }
-        } catch (e) {
-          console.warn('contactos_30d rpc warning:', e);
-        }
-
-        // Mapear los registros
-        businesses = supaBiz.map(r => mapSupabaseEmprendimiento(r, contacts30dMap));
-
-        // 3. Cargar banners de impulso solidario
-        bannersList = [];
-        try {
-          const { data: candData } = await supabaseClient.rpc('candidatos_impulso_solidario', { p_limite: 8 });
-          if (Array.isArray(candData)) {
-            candData.forEach(cand => {
-              const b = businesses.find(item => item.id === cand.emprendimiento_id);
-              if (b) {
-                bannersList.push({
-                  id: 'sol-' + b.id,
-                  tab: 'explore',
-                  type: 'impulso_solidario',
-                  bizId: b.id,
-                  badge: "Impulso solidario",
-                  title: `🌱 ${b.name}`,
-                  desc: b.shortBio,
-                  bizName: b.name,
-                  schedule: b.schedule,
-                  coverImage: b.coverImage,
-                  logoTitle: b.logoTitle
-                });
-              }
-            });
-          }
-        } catch (e) {
-          console.warn('candidatos_impulso_solidario warning:', e);
-        }
-
-        // Cargar banners de publicidad
-        try {
-          const { data: pubData } = await supabaseClient
-            .from('espacios_publicitarios')
-            .select('*')
-            .eq('tipo_espacio', 'publicidad')
-            .eq('activo', true);
-
-          if (Array.isArray(pubData)) {
-            pubData.forEach(pub => {
-              bannersList.push({
-                id: 'pub-' + pub.id,
-                tab: 'explore',
-                type: 'publicidad',
-                bizId: pub.emprendimiento_id || null,
-                externalUrl: pub.url_destino || (pub.whatsapp_destino ? `https://api.whatsapp.com/send?phone=${pub.whatsapp_destino}&text=Hola,%20vi%20su%20publicidad%20en%20Píllalo` : null),
-                badge: "Publicidad",
-                title: pub.titulo_campana,
-                desc: pub.descripcion_corta,
-                bizName: pub.anunciante,
-                schedule: "Anuncio Patrocinado",
-                coverImage: pub.imagen_url || 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80',
-                logoTitle: (pub.anunciante || 'Anuncio').split(' ')[0]
-              });
-            });
-          }
-        } catch (e) {
-          console.warn('espacios_publicitarios warning:', e);
-        }
-
-        // 4. Cargar vacantes activas
-        try {
-          const { data: vacData } = await supabaseClient
-            .from('vacantes')
-            .select('*')
-            .eq('activa', true);
-
-          if (Array.isArray(vacData)) {
-            vacancies = vacData.map(v => ({
-              id: v.id,
-              bizId: v.emprendimiento_id,
-              bizName: v.empresa_nombre,
-              neighborhood: v.barrio_ubicacion || 'Valledupar',
-              title: v.cargo_titulo,
-              type: v.modalidad_horario || 'Tiempo Completo',
-              desc: v.requisitos_etiquetas || '',
-              salario: v.salario_ofrecido || 'A convenir',
-              whatsapp: v.whatsapp_postulacion
-            }));
-          }
-        } catch (e) {
-          console.warn('vacantes warning:', e);
-        }
-
-        // Renderizado del directorio
-        renderSpotlightBanners();
-        renderVacancies();
-        filterBusinesses('silent');
-        renderNuevosSection();
-        populateStickerSelector();
-        populateMyBizSelector();
-        updateFavoritesBadge();
-        checkUrlForQrRedirect(); // Abre el negocio del Sticker QR una vez que los datos existen
-
-      } catch (err) {
-        console.error('Error cargando directorio de Supabase:', err);
-        if (!MODO_DEMO) showDirectoryLoadError();
-      }
-    }
-
     function filterBusinesses(triggerSource = '') {
       const rawSearch = (document.getElementById('searchInput')?.value || '').trim();
       const searchNorm = normText(rawSearch);
@@ -5792,39 +5759,47 @@
     }
 
     function switchTab(tabId) {
-      if (tabId === 'tab-my-biz' || tabId === 'tab-analytics') {
-        tabId = 'tab-explore';
+      if (tabId === 'tab-analytics' && !isOwnerUnlocked) {
+        openOwnerPinModal();
+        return;
       }
-      ['tab-welcome', 'tab-explore', 'tab-company-profile', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-my-biz', 'tab-register'].forEach(t => {
+      ['tab-welcome', 'tab-explore', 'tab-company-profile', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-my-biz', 'tab-register', 'tab-analytics'].forEach(t => {
         const el = document.getElementById(t);
         if (el) el.classList.add('hidden');
       });
-      const activeEl = document.getElementById(tabId);
-      if (activeEl) activeEl.classList.remove('hidden');
+      document.getElementById(tabId).classList.remove('hidden');
 
       const navMap = {
         'tab-welcome': 'nav-welcome',
         'tab-explore': 'nav-explore',
         'tab-nuevos': 'nav-nuevos',
         'tab-jobs': 'nav-jobs',
-        'tab-certificate': 'nav-certificate'
+        'tab-certificate': 'nav-certificate',
+        'tab-my-biz': 'nav-my-biz',
+        'tab-analytics': 'nav-analytics'
       };
       Object.entries(navMap).forEach(([key, id]) => {
         const b = document.getElementById(id);
         if (!b) return;
-        b.className = "px-3 py-2 rounded-xl text-[#01483B]/70 hover:text-[#01483B] hover:bg-white/80 flex items-center gap-1.5 transition cursor-pointer font-bold";
+        if (key === 'tab-analytics') {
+          b.className = (isOwnerUnlocked ? "" : "hidden ") + "px-3 py-2 rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 flex items-center gap-1.5 transition cursor-pointer font-bold";
+        } else {
+          b.className = "px-3 py-2 rounded-xl text-[#01483B]/70 hover:text-[#01483B] hover:bg-white/80 flex items-center gap-1.5 transition cursor-pointer font-bold";
+        }
       });
       const activeBtn = document.getElementById(navMap[tabId]);
       if (activeBtn) {
         activeBtn.className = "px-3.5 py-2 rounded-xl bg-[#01483B] text-white shadow-xs flex items-center gap-1.5 transition cursor-pointer font-black";
       }
 
+      // Sincronizar botones de la barra inferior móvil en celulares con colores corporativos
       const mobNavMap = {
         'tab-welcome': 'mob-nav-welcome',
         'tab-explore': 'mob-nav-explore',
         'tab-nuevos': 'mob-nav-nuevos',
         'tab-jobs': 'mob-nav-jobs',
-        'tab-certificate': 'mob-nav-certificate'
+        'tab-certificate': 'mob-nav-certificate',
+        'tab-my-biz': 'mob-nav-my-biz'
       };
       Object.entries(mobNavMap).forEach(([k, id]) => {
         const mobBtn = document.getElementById(id);
@@ -5835,6 +5810,7 @@
           mobBtn.className = "px-2 py-1 rounded-lg text-slate-600 hover:text-slate-900 font-semibold flex items-center gap-1 transition";
         }
       });
+      if (tabId === 'tab-analytics') renderOwnerAnalytics();
       if (tabId === 'tab-jobs') renderVacancies();
       if (tabId === 'tab-my-biz') {
         populateMyBizSelector();
@@ -5850,10 +5826,6 @@
     function populateStickerSelector() {
       const sel = document.getElementById('certBizSelect');
       if (!sel) return;
-      if (!businesses || !businesses.length) {
-        sel.innerHTML = '<option value="">Cargando comercios...</option>';
-        return;
-      }
       sel.innerHTML = businesses.map(b => `<option value="${b.id}" ${b.id === currentStickerBizId ? 'selected' : ''}>${b.name} (${categoryLabels[b.category] || b.category})</option>`).join('');
       selectBizForSticker(false);
     }
@@ -5861,7 +5833,7 @@
     function selectBizForSticker(announceQr = true) {
       const sel = document.getElementById('certBizSelect');
       const id = sel ? Number(sel.value) : currentStickerBizId;
-      const biz = businesses.find(b => b.id === id) || (businesses.length ? businesses[0] : null);
+      const biz = businesses.find(b => b.id === id) || businesses[0];
       if (!biz) return;
       currentStickerBizId = biz.id;
 
@@ -6027,16 +5999,142 @@
     // =========================================================================
     let loggedInBizId = null;
 
-    // Funciones de credenciales locales retiradas según Instrucción 04 (el acceso real será con Supabase Auth)
-    function handleEnterProfileClick() {
-      const waMsg = "Hola, quiero actualizar mi perfil en Píllalo: [nombre del negocio]";
-      window.open(`https://wa.me/${WHATSAPP_PILLALO}?text=${encodeURIComponent(waMsg)}`, '_blank');
+    function getRegisteredCredentials() {
+      try {
+        const raw = localStorage.getItem('pillalo_credentials');
+        return raw ? JSON.parse(raw) : {
+          'luxury@pillalo.co': { pass: '123456', bizId: 5 },
+          '3009876543': { pass: '123456', bizId: 5 },
+          'oasis@pillalo.co': { pass: '123456', bizId: 1 },
+          '3101234567': { pass: '123456', bizId: 1 }
+        };
+      } catch (_) {
+        return {};
+      }
     }
 
+    function saveUserCredentials(userIdentifier, password, bizId) {
+      const creds = getRegisteredCredentials();
+      const cleanIdent = normText(userIdentifier);
+      creds[cleanIdent] = { pass: password, bizId };
+      try {
+        localStorage.setItem('pillalo_credentials', JSON.stringify(creds));
+      } catch (_) {}
+    }
+
+    function handleEnterProfileClick() {
+      // Si ya inició sesión, abrir directamente su panel
+      const storedId = sessionStorage.getItem('pillalo_logged_biz_id');
+      if (storedId) {
+        loggedInBizId = Number(storedId);
+        currentStickerBizId = loggedInBizId;
+        const sel = document.getElementById('myBizSelector');
+        if (sel) sel.value = loggedInBizId;
+        renderMyBusinessDashboard();
+        switchTab('tab-my-biz');
+        return;
+      }
+      openOwnerLoginModal();
+    }
+
+    
     function updateTopProfileButtonState() {
-      const btn = document.getElementById('btnTopHelpUpdate');
-      if (btn) {
-        btn.href = `https://wa.me/${WHATSAPP_PILLALO}?text=${encodeURIComponent("Hola, quiero actualizar mi perfil en Píllalo: [nombre del negocio]")}`;
+      const btn = document.getElementById('btnTopEnterProfile');
+      if (!btn) return;
+      if (loggedInBizId !== null) {
+        const biz = businesses.find(b => b.id === Number(loggedInBizId));
+        const shortName = biz ? (biz.logoTitle || biz.name.split(' ')[0]) : 'Activo';
+        btn.className = 'px-2.5 sm:px-3 py-2 bg-emerald-100 hover:bg-emerald-200 text-[#01483B] border border-emerald-400 rounded-xl text-xs font-black transition flex items-center gap-1.5 cursor-pointer shadow-2xs';
+        btn.innerHTML = `<i class="fa-solid fa-user-check text-emerald-700"></i><span class="hidden sm:inline">Mi Negocio (${shortName})</span><span class="sm:hidden text-[11px]">${shortName}</span>`;
+      } else {
+        btn.className = 'px-2.5 sm:px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer';
+        btn.innerHTML = `<i class="fa-solid fa-store text-[#01483B]"></i><span class="hidden sm:inline">Entrar a mi perfil</span><span class="sm:hidden font-black text-[11px]">Mi Perfil</span>`;
+      }
+    }
+
+    function loginDemoByBizId(id) {
+      const targetBiz = businesses.find(b => b.id === Number(id)) || businesses[0];
+      loggedInBizId = targetBiz.id;
+      currentStickerBizId = targetBiz.id;
+      sessionStorage.setItem('pillalo_logged_biz_id', String(targetBiz.id));
+      closeOwnerLoginModal();
+      populateMyBizSelector();
+      const sel = document.getElementById('myBizSelector');
+      if (sel) sel.value = targetBiz.id;
+      updateTopProfileButtonState();
+      renderMyBusinessDashboard();
+      switchTab('tab-my-biz');
+      showAppToast(`✅ Has iniciado sesión como dueño de: ${targetBiz.name}`);
+    }
+
+    function loginDemoOwner() {
+      const demoBiz = businesses[0];
+      loggedInBizId = demoBiz.id;
+      currentStickerBizId = demoBiz.id;
+      sessionStorage.setItem('pillalo_logged_biz_id', String(demoBiz.id));
+      closeOwnerLoginModal();
+      populateMyBizSelector();
+      const sel = document.getElementById('myBizSelector');
+      if (sel) sel.value = demoBiz.id;
+      renderMyBusinessDashboard();
+      switchTab('tab-my-biz');
+      showAppToast('👋 ¡Entraste al panel de control en modo Demo!');
+    }
+
+    function openOwnerLoginModal() {
+      const errBox = document.getElementById('loginError');
+      if (errBox) errBox.classList.add('hidden');
+      document.getElementById('loginUser').value = '';
+      document.getElementById('loginPass').value = '';
+      document.getElementById('ownerLoginModal').classList.remove('hidden');
+      document.getElementById('ownerLoginModal').classList.add('flex');
+    }
+
+    function closeOwnerLoginModal() {
+      document.getElementById('ownerLoginModal').classList.add('hidden');
+      document.getElementById('ownerLoginModal').classList.remove('flex');
+    }
+
+    function handleOwnerLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('loginUser').value.trim();
+      const pass = document.getElementById('loginPass').value.trim();
+      const errBox = document.getElementById('loginError');
+      const creds = getRegisteredCredentials();
+
+      const cleanUser = normText(user);
+      const userDigits = user.replace(/\D/g, '');
+
+      // Comparar por correo O por número de teléfono / WhatsApp (con o sin +57)
+      const matchKey = Object.keys(creds).find(k => {
+        if (k === cleanUser) return true;
+        const kDigits = k.replace(/\D/g, '');
+        if (userDigits && kDigits) {
+          return kDigits === userDigits || kDigits.endsWith(userDigits) || userDigits.endsWith(kDigits);
+        }
+        return false;
+      });
+
+      if (matchKey && creds[matchKey].pass === pass) {
+        const bizId = creds[matchKey].bizId;
+        loggedInBizId = bizId;
+        sessionStorage.setItem('pillalo_logged_biz_id', String(bizId));
+        updateTopProfileButtonState();
+        closeOwnerLoginModal();
+        currentStickerBizId = bizId;
+        const sel = document.getElementById('myBizSelector');
+        if (sel) sel.value = bizId;
+        renderMyBusinessDashboard();
+        switchTab('tab-my-biz');
+        showAppToast('👋 ¡Bienvenido a tu panel de gestión!');
+        if (window.Pillalo) {
+          window.Pillalo.speak('welcome', { text: '¡Hola! Bienvenido a tu perfil privado en Píllalo Valledupar 🐾💼', motion: 'celebrate' });
+        }
+      } else {
+        if (errBox) {
+          errBox.textContent = '⚠️ Correo/celular o contraseña incorrectos. Revisa e intenta de nuevo.';
+          errBox.classList.remove('hidden');
+        }
       }
     }
 
@@ -6401,12 +6499,23 @@
       }
 
       const email = document.getElementById('regEmail').value.trim();
+      const receiptFiles = document.getElementById('regPaymentReceipt')?.files;
       const paymentRef = document.getElementById('regPaymentRef')?.value.trim() || '';
+      const password = document.getElementById('regPassword')?.value || '';
+      const confirmPass = document.getElementById('regConfirmPassword')?.value || '';
 
+      // Validación de Contraseña
+      if (!password || password.length < 6) {
+        validationMsg = 'Crea una contraseña de al menos 6 caracteres para entrar a tu perfil.';
+      } else if (password !== confirmPass) {
+        validationMsg = 'Las contraseñas no coinciden. Escríbelas iguales.';
+      }
+
+      // Validación de Correo Obligatorio
       if (!email || !email.includes('@') || !email.includes('.')) {
         validationMsg = 'Ingresa un correo electrónico válido para enviarte el comprobante y garantía de registro.';
-      } else if (!paymentRef) {
-        validationMsg = 'Es obligatorio ingresar el número de comprobante o referencia de la transferencia.';
+      } else if (!receiptFiles || receiptFiles.length === 0) {
+        validationMsg = 'Es obligatorio adjuntar la foto o captura del comprobante de transferencia o pago.';
       }
 
       if (validationMsg) {
@@ -6636,16 +6745,17 @@
         currentStickerBizId = newBiz.id;
         loggedInBizId = newBiz.id;
         sessionStorage.setItem('pillalo_logged_biz_id', String(newBiz.id));
-        // Credenciales locales retiradas (Instrucción 04)
+        saveUserCredentials(email, password, newBiz.id);
+        saveUserCredentials(phoneDisplay, password, newBiz.id);
         e.target.reset();
         populateMyBizSelector();
     updateFavoritesBadge();
         const myBizSel = document.getElementById('myBizSelector');
         if (myBizSel) myBizSel.value = newBiz.id;
         renderMyBusinessDashboard();
-        // tab-my-biz oculto en versión pública
+        switchTab('tab-my-biz');
         showAppToast('🚀 ¡Registro recibido! Tu negocio estará publicado en 5 a 10 minutos tras validar tu comprobante de pago.');
-        openWelcomeKitModal(newBiz, selectedPlanText, paymentRef);
+        openWelcomeKitModal(newBiz);
         if (window.Pillalo) {
           window.Pillalo.speak('welcome', {
             text: `¡Excelente! Tu comprobante fue recibido. En 5 a 10 minutos tu negocio estará publicado en Píllalo Valledupar 🐾✨`,
@@ -6683,14 +6793,86 @@
       }
     }
 
-    // Panel de administración local retirado de la versión pública (respaldado en admin-local.html)
-    function openOwnerPinModal() {}
-    function closeOwnerPinModal() {}
-    function checkOwnerPin() {}
-    function lockOwnerMode() {}
-    function renderOwnerAnalytics() {}
-    function openNewBannerModal() {}
-    function closeNewBannerModal() {}
+    function openOwnerPinModal() {
+      if (isOwnerUnlocked) {
+        switchTab('tab-analytics');
+        return;
+      }
+      document.getElementById('ownerPinInput').value = '';
+      document.getElementById('ownerPinModal').classList.remove('hidden');
+      document.getElementById('ownerPinModal').classList.add('flex');
+    }
+
+    function closeOwnerPinModal() {
+      document.getElementById('ownerPinModal').classList.add('hidden');
+      document.getElementById('ownerPinModal').classList.remove('flex');
+    }
+
+    function checkOwnerPin(e) {
+      e.preventDefault();
+      const val = document.getElementById('ownerPinInput').value.trim();
+      if (val === OWNER_PIN) {
+        isOwnerUnlocked = true;
+        sessionStorage.setItem('pillalo_owner_ok', 'true');
+        syncOwnerUI();
+        closeOwnerPinModal();
+        switchTab('tab-analytics');
+      } else {
+        alert('Clave incorrecta.');
+      }
+    }
+
+    function lockOwnerMode() {
+      isOwnerUnlocked = false;
+      sessionStorage.removeItem('pillalo_owner_ok');
+      syncOwnerUI();
+      switchTab('tab-explore');
+    }
+
+    function renderOwnerAnalytics() {
+      const totalClicks = businesses.reduce((a, b) => a + (b.totalClicks || 0), 0);
+      const totalWa = businesses.reduce((a, b) => a + (b.waClicks || 0), 0);
+      const totalVotes = businesses.reduce((a, b) => a + (b.votes || 0), 0);
+      const lowOnes = businesses.filter(b => (b.totalClicks || 0) < 5);
+
+      document.getElementById('kpiViews').innerText = totalPageViews;
+      document.getElementById('kpiClicks').innerText = totalClicks;
+      document.getElementById('kpiWaSub').innerText = `🟢 ${totalWa} clics directos a WhatsApp`;
+      document.getElementById('kpiVotes').innerText = totalVotes;
+      document.getElementById('kpiLowClicks').innerText = lowOnes.length;
+
+      document.getElementById('lowClicksContainer').innerHTML = lowOnes.map(b => `
+        <div class="bg-white rounded-2xl p-4 border border-amber-300 flex items-center justify-between gap-2">
+          <div>
+            <p class="font-black text-slate-900 text-xs">${b.name}</p>
+            <p class="text-[11px] font-bold text-amber-700">⚠️ Solo lleva ${b.totalClicks} clics</p>
+          </div>
+          <button onclick="boostToTopBanner(${b.id})" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[11px] font-extrabold whitespace-nowrap cursor-pointer">
+            🚀 Destacar en Banner
+          </button>
+        </div>
+      `).join('');
+
+      document.getElementById('analyticsRows').innerHTML = businesses.map(b => {
+        const msg = `¡Hola *${b.name}*! 👋 Te escribimos de *Píllalo Valledupar*.\n\nEste es el reporte de tu perfil:\n👀 *Personas que abrieron tu perfil:* ${b.views}\n🟢 *Clics a tu WhatsApp:* ${b.waClicks}\n📸 *Clics a Instagram:* ${b.igClicks}\n👆 *Total interacciones:* ${b.totalClicks}\n⭐ *Promedio en tus 5 aspectos privados:* ${b.rating.toFixed(1)}/5.0`;
+        return `
+          <tr class="hover:bg-slate-50">
+            <td class="p-3 font-black text-slate-900">${b.name}</td>
+            <td class="p-3 font-bold">${b.views}</td>
+            <td class="p-3 font-black text-emerald-600">${b.waClicks}</td>
+            <td class="p-3">${b.igClicks}</td>
+            <td class="p-3">${b.tkClicks}</td>
+            <td class="p-3">${b.mapClicks}</td>
+            <td class="p-3 font-black">${b.totalClicks}</td>
+            <td class="p-3 font-bold">⭐ ${b.rating.toFixed(1)} (${b.votes})</td>
+            <td class="p-3 flex flex-wrap gap-1.5">
+              <a href="https://wa.me/${b.whatsapp}?text=${encodeURIComponent(msg)}" target="_blank" class="px-2.5 py-1 bg-emerald-100 text-emerald-900 rounded-lg font-extrabold">📲 Enviar Reporte</a>
+              <button onclick="boostToTopBanner(${b.id})" class="px-2.5 py-1 bg-amber-100 text-amber-900 rounded-lg font-extrabold cursor-pointer">📢 Banner</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
 
     function boostToTopBanner(bizId) {
       const b = businesses.find(x => x.id === bizId);
@@ -6749,9 +6931,9 @@
     // =========================================================================
     function checkUrlForQrRedirect() {
       const params = new URLSearchParams(window.location.search);
-      const targetId = params.get('negocio') || params.get('biz') || params.get('id');
-      if (targetId && businesses && businesses.length) {
-        const found = businesses.find(b => String(b.id) === String(targetId));
+      const negocioId = params.get('negocio');
+      if (negocioId) {
+        const found = businesses.find(b => String(b.id) === String(negocioId));
         if (found) {
           openCompanyProfile(found.id);
         }
@@ -6806,7 +6988,7 @@
     // GENERADOR DE IMAGEN PARA HISTORIA DE INSTAGRAM (1080 × 1920 PNG)
     // =========================================================================
     async function downloadStoryBadge() {
-      const biz = businesses.find(b => b.id === currentStickerBizId) || (businesses.length ? businesses[0] : null);
+      const biz = businesses.find(b => b.id === currentStickerBizId) || businesses[0];
       showAppToast('🎨 Preparando imagen de historia 1080×1920 con el perrito Píllalo...');
       
       const canvas = document.createElement('canvas');
@@ -7089,7 +7271,8 @@
       const ig = document.getElementById('regPersonIg')?.value.trim() || '';
       const otherSocial = document.getElementById('regPersonOtherSocial')?.value.trim() || '';
       const email = document.getElementById('regPersonEmail').value.trim();
-      const paymentRef = document.getElementById('regPersonPaymentRef')?.value.trim() || '';
+      const password = document.getElementById('regPersonPassword').value;
+      const confirmPass = document.getElementById('regPersonConfirmPassword').value;
 
       // Legal data (privado)
       const legalName = document.getElementById('regPersonLegalName').value.trim();
@@ -7104,8 +7287,10 @@
       let error = '';
       if (!checkAge || !checkTerms || !checkTruth || !checkBg) {
         error = 'Debes marcar todas las casillas obligatorias de verificación y términos.';
-      } else if (!paymentRef) {
-        error = 'Es obligatorio ingresar el número de referencia o comprobante de la transferencia.';
+      } else if (!password || password.length < 6) {
+        error = 'Crea una contraseña de al menos 6 caracteres.';
+      } else if (password !== confirmPass) {
+        error = 'Las contraseñas no coinciden.';
       }
 
       if (error) {
@@ -7225,7 +7410,8 @@
       }
 
       // Guardar credenciales de acceso para el profesional
-      // Credenciales locales de persona retiradas (Instrucción 04)
+      saveUserCredentials(email, password, newPerson.id);
+      saveUserCredentials(phone, password, newPerson.id);
 
       businesses.unshift(newPerson);
       loggedInBizId = newPerson.id;
@@ -7244,7 +7430,7 @@
         });
       }
 
-      openWelcomeKitModal(newPerson, '1 Año', paymentRef);
+      switchTab('tab-my-biz');
     }
 
     // Modal de Reportar Perfil y Vacante (Secciones 3 y 8 textos-formularios.md)
@@ -7546,9 +7732,13 @@
     // Inicializar
     syncOwnerUI();
     renderSpotlightBanners();
-    syncPillaloWhatsAppLinks();
+    renderBusinesses(businesses);
+    renderNuevosSection();
+    renderVacancies();
+    populateStickerSelector();
+    populateMyBizSelector();
     updateFavoritesBadge();
-    loadSupabaseDirectory();
+    checkUrlForQrRedirect();
 
     // Iniciar directamente en Explorar Directorio (tab-explore)
     const urlParams = new URLSearchParams(window.location.search);
