@@ -2570,6 +2570,74 @@
     </div>
   </div>
 
+  <!-- MODAL PARA ELEGIR EN QUÉ BANNER DESTACAR UN NEGOCIO (EXPLORADOR, SINERGIA O VACANTES) -->
+  <div id="boostBannerSelectionModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl text-xs">
+      <div class="flex justify-between items-center">
+        <span class="bg-emerald-100 text-emerald-900 font-black px-3 py-1 rounded-full text-[11px] flex items-center gap-1">
+          <i class="fa-solid fa-bullhorn text-emerald-700"></i> Destacar en Banner
+        </span>
+        <button onclick="closeBoostBannerSelectionModal()" class="text-slate-400 hover:text-slate-700 font-black text-base cursor-pointer">✕</button>
+      </div>
+      <div>
+        <h3 class="text-lg font-black text-slate-900" id="boostBannerBizTitle">Destacar Negocio</h3>
+        <p class="text-slate-500 font-medium text-xs mt-1">
+          ¿En qué banner deseas destacar este negocio? Selecciona la sección donde quieres que aparezca:
+        </p>
+      </div>
+
+      <div class="space-y-2.5 pt-1">
+        <!-- OPCIÓN 1: EXPLORADOR DE DIRECTORIO -->
+        <button type="button" id="boostOptionExplore" onclick="confirmBoostBannerSection('explore')" class="w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/50 transition flex items-center justify-between group cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg font-black shrink-0">
+              🏢
+            </div>
+            <div>
+              <p class="font-black text-slate-900 text-sm group-hover:text-emerald-800 transition">Explorador de Directorios</p>
+              <p class="text-slate-500 text-[11px]">Banner superior de la vitrina principal del directorio</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-1 transition text-xs"></i>
+        </button>
+
+        <!-- OPCIÓN 2: SINERGIA (RECIÉN LLEGADOS) -->
+        <button type="button" id="boostOptionNuevos" onclick="confirmBoostBannerSection('nuevos')" class="w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-500 hover:bg-amber-50/50 transition flex items-center justify-between group cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg font-black shrink-0">
+              ⚡
+            </div>
+            <div>
+              <p class="font-black text-slate-900 text-sm group-hover:text-amber-800 transition">Sinergia (Recién Llegados)</p>
+              <p class="text-slate-500 text-[11px]">Banner en la sección de nuevos emprendimientos semanales</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-700 group-hover:translate-x-1 transition text-xs"></i>
+        </button>
+
+        <!-- OPCIÓN 3: VACANTES DE EMPLEO -->
+        <button type="button" id="boostOptionJobs" onclick="confirmBoostBannerSection('jobs')" class="w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 hover:border-teal-600 hover:bg-teal-50/50 transition flex items-center justify-between group cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center text-lg font-black shrink-0">
+              💼
+            </div>
+            <div>
+              <p class="font-black text-slate-900 text-sm group-hover:text-teal-800 transition">Vacantes de Empleo</p>
+              <p class="text-slate-500 text-[11px]">Banner en la bolsa y oportunidades laborales locales</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-teal-700 group-hover:translate-x-1 transition text-xs"></i>
+        </button>
+      </div>
+
+      <div class="pt-2 flex justify-end">
+        <button type="button" onclick="closeBoostBannerSelectionModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs cursor-pointer">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL PARA CREAR / CAMBIAR BANNER PUBLICITARIO (SOLO DUEÑOS) -->
   <div id="newBannerModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl text-xs">
@@ -2580,10 +2648,10 @@
       <h3 class="text-lg font-black text-slate-900">Destacar Negocio en el Banner Grande</h3>
       <form onsubmit="saveCustomBanner(event)" class="space-y-3">
         <div>
-          <label class="block font-bold text-slate-700 mb-1">¿En qué pestaña mostrar este Banner? (2 opciones arriba)</label>
+          <label class="block font-bold text-slate-700 mb-1">¿En qué banner mostrar este anuncio?</label>
           <select id="bannerTabSelect" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold">
-            <option value="explore">🏢 Explorar Directorio</option>
-            <option value="nuevos">⚡ Recién Llegados</option>
+            <option value="explore">🏢 Explorador de Directorios</option>
+            <option value="nuevos">⚡ Sinergia (Recién Llegados)</option>
             <option value="jobs">💼 Vacantes de Empleo</option>
           </select>
         </div>
@@ -6874,12 +6942,56 @@
       }).join('');
     }
 
+    let pendingBoostBizId = null;
+
     function boostToTopBanner(bizId) {
       const b = businesses.find(x => x.id === bizId);
       if (!b) return;
+      pendingBoostBizId = bizId;
+      const titleElem = document.getElementById('boostBannerBizTitle');
+      if (titleElem) {
+        titleElem.textContent = `Destacar "${b.name}"`;
+      }
+      const modal = document.getElementById('boostBannerSelectionModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeBoostBannerSelectionModal() {
+      pendingBoostBizId = null;
+      const modal = document.getElementById('boostBannerSelectionModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function confirmBoostBannerSection(targetTab) {
+      if (!pendingBoostBizId) return;
+      const b = businesses.find(x => x.id === pendingBoostBizId);
+      if (!b) return;
+
+      const sectionNames = {
+        explore: 'Explorador de Directorios',
+        nuevos: 'Sinergia (Recién Llegados)',
+        jobs: 'Vacantes de Empleo'
+      };
+
+      const sectionBadges = {
+        explore: '🚀 IMPULSO DE LA SEMANA · DESTACADO',
+        nuevos: '⚡ RECIÉN LLEGADO DESTACADO',
+        jobs: '💼 CONVOCATORIA DESTACADA'
+      };
+
+      currentBannerRotationOffset = 0;
       bannersList.unshift({
+        id: Date.now(),
+        tab: targetTab,
+        type: 'impulso_solidario',
         bizId: b.id,
-        badge: "🚀 IMPULSO DE LA SEMANA · DESTACADO",
+        badge: sectionBadges[targetTab] || "🚀 IMPULSO DE LA SEMANA · DESTACADO",
         title: `${b.name} (${b.neighborhood})`,
         desc: `${b.shortBio}`,
         bizName: b.name,
@@ -6887,9 +6999,13 @@
         coverImage: b.coverImage,
         logoTitle: b.logoTitle
       });
+
       renderSpotlightBanners();
-      switchTab('tab-explore');
-      alert(`🚀 ¡Listo! "${b.name}" ya está en el Banner Superior Grande del Directorio.`);
+      closeBoostBannerSelectionModal();
+
+      const tabTargetId = targetTab === 'explore' ? 'tab-explore' : (targetTab === 'nuevos' ? 'tab-nuevos' : 'tab-jobs');
+      switchTab(tabTargetId);
+      alert(`🚀 ¡Listo! "${b.name}" ya está destacado en el banner de: ${sectionNames[targetTab] || 'Directorio'}.`);
     }
 
     function openNewBannerModal() {
@@ -6909,6 +7025,7 @@
       const bizId = Number(document.getElementById('bannerBizSelect').value);
       const b = businesses.find(x => x.id === bizId) || businesses[0];
       const targetTab = document.getElementById('bannerTabSelect') ? document.getElementById('bannerTabSelect').value : 'explore';
+      currentBannerRotationOffset = 0;
       bannersList.unshift({
         id: Date.now(),
         tab: targetTab,
@@ -6923,7 +7040,14 @@
       });
       renderSpotlightBanners();
       closeNewBannerModal();
-      switchTab('tab-explore');
+      const tabTargetId = targetTab === 'explore' ? 'tab-explore' : (targetTab === 'nuevos' ? 'tab-nuevos' : 'tab-jobs');
+      switchTab(tabTargetId);
+      const sectionNames = {
+        explore: 'Explorador de Directorios',
+        nuevos: 'Sinergia (Recién Llegados)',
+        jobs: 'Vacantes de Empleo'
+      };
+      alert(`📢 ¡Listo! Anuncio publicado en el banner de: ${sectionNames[targetTab] || 'Directorio'}.`);
     }
 
     // =========================================================================
