@@ -93,6 +93,19 @@
       box-shadow: 0 22px 45px -12px rgba(15, 23, 42, 0.16);
     }
 
+    /* Banner Publicitario Destacado con marco amarillo dorado permanente */
+    .banner-bento-gold {
+      background: #FFFFFF;
+      border: 2.5px solid #FDAB01 !important; /* Amarillo Píllalo / Amber dorado permanente */
+      box-shadow: 0 4px 18px -2px rgba(253, 171, 1, 0.28), 0 10px 30px -8px rgba(15, 23, 42, 0.08) !important;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .banner-bento-gold:hover {
+      border-color: #F59E0B !important;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 26px -2px rgba(245, 158, 11, 0.40), 0 16px 35px -8px rgba(15, 23, 42, 0.14) !important;
+    }
+
     /* Sticker / Die-cut Effect for QR Badge */
     .sticker-diecut {
       box-shadow: 0 24px 50px -12px rgba(15, 23, 42, 0.35), 0 0 0 6px #FFFFFF, 0 0 0 8px #10B981;
@@ -177,9 +190,9 @@
 
       <!-- Right Buttons: Acceso Dueño de Negocio + Registrar Negocio (Garantiza visibilidad en móvil) -->
       <div class="flex items-center space-x-1.5 sm:space-x-2 flex-shrink-0">
-        <button onclick="openWelcomeLanding()" class="px-1.5 py-1.5 sm:px-3 sm:py-2 bg-[#FDF1E1] hover:bg-white text-[#01483B] border border-[#01483B]/20 rounded-xl text-xs font-black transition flex items-center gap-1 cursor-pointer shadow-2xs" title="Conoce qué es Píllalo Valledupar">
+        <button onclick="openWelcomeLanding()" class="px-2 sm:px-3 py-2 bg-[#FDF1E1] hover:bg-white text-[#01483B] border border-[#01483B]/20 rounded-xl text-[11px] sm:text-xs font-black transition flex items-center gap-1 cursor-pointer shadow-2xs whitespace-nowrap" title="Conoce qué somos - Píllalo Valledupar">
           <span class="text-sm">🐾</span>
-          <span class="hidden sm:inline">¿Qué es?</span>
+          <span>Qué somos</span>
         </button>
         <button id="btnTopEnterProfile" onclick="handleEnterProfileClick()" class="px-2 py-1.5 sm:px-3 sm:py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 rounded-xl text-[11px] sm:text-xs font-bold transition flex items-center gap-1 sm:gap-1.5 cursor-pointer" title="Entrar a mi perfil de negocio para ver estadísticas y editar datos">
           <i class="fa-solid fa-store text-[#01483B]"></i>
@@ -3445,7 +3458,7 @@
           : `openCompanyProfile(${b.bizId || 1})`;
 
         return `
-        <div onclick="${clickAction}" class="bento-white-card rounded-[26px] p-3.5 flex flex-col justify-between cursor-pointer group border-2 border-amber-400 hover:border-amber-500 shadow-md hover:shadow-xl transition-all">
+        <div onclick="${clickAction}" class="banner-bento-gold rounded-[26px] p-3.5 flex flex-col justify-between cursor-pointer group shadow-md hover:shadow-xl transition-all">
           <div>
             <!-- Portada nítida 100% visible (sin filtro verde) -->
             <div class="h-44 sm:h-52 w-full rounded-2xl overflow-hidden relative bg-slate-100">
@@ -5517,6 +5530,24 @@
     }
 
     // Activar / Alternar GPS del celular
+        function showAppToast(msg, duration = 3500) {
+      let toast = document.getElementById('pillaloGlobalToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'pillaloGlobalToast';
+        toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[9999] bg-slate-900/95 text-white px-4 py-2.5 rounded-2xl shadow-2xl text-xs font-bold border border-slate-700/80 transition-all duration-300 pointer-events-none opacity-0 translate-y-3 flex items-center gap-2';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = msg;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(window._pillaloToastTimer);
+      window._pillaloToastTimer = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-3');
+      }, duration);
+    }
+
     function toggleUserGps() {
       const btn = document.getElementById('btnGpsToggle');
       const label = document.getElementById('gpsBtnLabel');
@@ -5538,7 +5569,7 @@
         return;
       }
 
-      showAppToast('🛰️ Obteniendo tu ubicación en Valledupar...');
+      showAppToast('🛰️ Solicitando permiso de ubicación...');
       if (label) label.textContent = 'Localizando...';
 
       navigator.geolocation.getCurrentPosition(
@@ -5548,31 +5579,36 @@
             lng: position.coords.longitude
           };
           isGpsActive = true;
-          if (label) label.textContent = 'GPS Activo';
+          if (label) label.textContent = '📍 Cerca de mí';
           if (btn) btn.className = 'flex items-center gap-1.5 px-3.5 py-2.5 bg-emerald-600 text-white border border-emerald-700 rounded-xl font-extrabold transition cursor-pointer shadow-sm';
           if (icon) icon.className = 'fa-solid fa-circle-dot text-amber-300';
-          showAppToast('📍 ¡Ubicación GPS fijada! Midiendo cuadras en tiempo real.');
+          showAppToast('📍 ¡Ubicación fijada! Mostrando los locales más cercanos a ti.');
 
-          const proxSelect = document.getElementById('proximityFilter');
-          if (proxSelect && proxSelect.value === 'all') {
-            proxSelect.value = '5';
-          }
           filterBusinesses('proximity');
           if (window.Pillalo) {
             window.Pillalo.speak('welcome', {
-              text: '¡Ubicación activada! Te pillé los emprendimientos más cercanos a tu posición 📍🐾',
+              text: '¡Ubicación activada! Te ordené los negocios más cercanos a tu posición 📍🐾',
               motion: 'celebrate'
             });
           }
         },
         err => {
           console.warn('Geolocation error:', err);
-          if (label) label.textContent = 'Usar mi GPS';
-          showAppToast('💡 Activa la ubicación de tu móvil o selecciona tu barrio en el filtro para medir cuadras.');
-          userCoords = { lat: 10.4764, lng: -73.2482 }; // Plaza Alfonso López
-          filterBusinesses('proximity');
+          if (err && err.code === 1) { // PERMISSION_DENIED
+            if (label) label.textContent = 'Usar mi GPS';
+            showAppToast('⚠️ Permiso de ubicación denegado en tu navegador. Puedes activarlo en los ajustes del sitio o elegir tu barrio en el filtro.');
+          } else {
+            // TIMEOUT o POSITION_UNAVAILABLE: usar referencia central de Valledupar
+            userCoords = { lat: 10.4764, lng: -73.2482 }; // Plaza Alfonso López
+            isGpsActive = true;
+            if (label) label.textContent = '📍 Valledupar Centro';
+            if (btn) btn.className = 'flex items-center gap-1.5 px-3.5 py-2.5 bg-emerald-600 text-white border border-emerald-700 rounded-xl font-extrabold transition cursor-pointer shadow-sm';
+            if (icon) icon.className = 'fa-solid fa-circle-dot text-amber-300';
+            showAppToast('📍 Usando referencia de Valledupar Centro para ordenar los locales más cercanos.');
+            filterBusinesses('proximity');
+          }
         },
-        { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+        { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 }
       );
     }
 
