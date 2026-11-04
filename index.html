@@ -564,24 +564,35 @@
     <!-- TAB 3: RECIÉN LLEGADOS (ROTACIÓN SEMANAL DE REGISTRADOS ESTA SEMANA)  -->
     <!-- ===================================================================== -->
     <section id="tab-nuevos" class="hidden fade-in space-y-5">
-      <!-- BANNER PUBLICITARIO / DESTACADOS EN RECIÉN LLEGADOS (2 OPCIONES) -->
-      <div id="adNuevosBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-3"></div>
-      <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <div class="flex items-center gap-2 mb-2">
-            <span class="bg-emerald-400/20 text-emerald-200 border border-emerald-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-              🆕 Rotación Semanal Automática · Presentado por Píllalo
-            </span>
+      <!-- 2 BANNERS SUPERIORES EN RECIÉN LLEGADOS -->
+      <div id="adNuevosBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+
+      <!-- FILA 2: TARJETA DE RECIÉN LLEGADOS (REDUCIDA A LA MITAD) + 3ER BANNER AL LADO -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
+        <!-- Tarjeta Rotación Semanal (Compacta a la mitad, sin perder estilo) -->
+        <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-slate-900 rounded-[26px] p-6 text-white shadow-md flex flex-col justify-between h-full space-y-4">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-emerald-400/20 text-emerald-200 border border-emerald-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                🆕 Rotación Semanal · Píllalo
+              </span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black mt-2 leading-snug">Recién Llegados a Píllalo Esta Semana</h2>
+            <p class="text-emerald-50 text-xs sm:text-sm mt-2 leading-relaxed">
+              Esta ventana cambia semanalmente: los restaurantes, negocios y servicios que se registran durante la semana aparecen aquí de primeros. ¡Toca cualquiera para abrir su perfil completo!
+            </p>
           </div>
-          <h2 class="text-2xl sm:text-3xl font-black mt-2">Recién Llegados a Píllalo Esta Semana</h2>
-          <p class="text-emerald-50 text-sm mt-1 max-w-2xl">
-            Esta ventana cambia semanalmente: los restaurantes, negocios y servicios que se registran durante la semana aparecen aquí de primeros. ¡Toca cualquiera para abrir su perfil completo!
-          </p>
+          <div class="pt-2">
+            <button onclick="switchTab('tab-register')" class="w-full sm:w-auto px-5 py-3 bg-white text-slate-900 hover:bg-emerald-50 rounded-2xl text-xs font-black shadow-md whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5 transition">
+              <i class="fa-solid fa-plus text-emerald-600"></i> Sumar mi Negocio esta Semana
+            </button>
+          </div>
         </div>
-        <button onclick="switchTab('tab-register')" class="px-5 py-3 bg-white text-slate-900 hover:bg-emerald-50 rounded-2xl text-xs font-black shadow-md whitespace-nowrap cursor-pointer">
-          <i class="fa-solid fa-plus text-emerald-600 mr-1"></i> Sumar mi Negocio esta Semana
-        </button>
+
+        <!-- 3ER BANNER PUBLICITARIO / DESTACADO EN RECIÉN LLEGADOS -->
+        <div id="adNuevosBanner3"></div>
       </div>
+
       <div id="nuevosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
     </section>
 
@@ -589,66 +600,33 @@
     <!-- TAB 4: VACANTES Y EMPLEO LOCAL                                        -->
     <!-- ===================================================================== -->
     <section id="tab-jobs" class="hidden fade-in space-y-5">
-      <!-- BANNER PUBLICITARIO / CONVOCATORIAS DESTACADAS EN VACANTES (2 OPCIONES) -->
-      <div id="adJobsBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-3"></div>
-      <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md space-y-3">
-        <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-          💼 Oportunidades Laborales
-        </span>
-        <h2 class="text-2xl sm:text-3xl font-black">Vacantes en Negocios de Valledupar</h2>
-        <p class="text-slate-300 text-sm max-w-xl">
-          Conecta con establecimientos y comercios locales que están buscando apoyo o talento.
-        </p>
-        <div class="p-3.5 bg-amber-500/15 border border-amber-400/40 rounded-2xl text-amber-200 text-xs font-medium leading-relaxed">
-          📢 <b>Píllalo publica estas ofertas como anuncios.</b> No recibimos hojas de vida ni cobramos nada a quien busca empleo. Nunca pagues por conseguir un trabajo. <a href="legal/vacantes.html" target="_blank" class="underline text-amber-300 font-bold hover:text-white">Reglas de vacantes</a>
-        </div>
-      </div>
-      <div id="jobsGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div class="bento-white-card rounded-3xl p-6 space-y-3">
-          <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full">Tiempo Completo / Medio Tiempo</span>
-          <h3 class="text-lg font-black text-slate-900">Asesora de Ventas y Atención por WhatsApp</h3>
-          <p class="text-xs font-bold text-slate-600">📍 Oasis Denim Valle · Barrio Doce de Octubre</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Atención de clientes en punto físico y respuesta de chats de WhatsApp e Instagram.</p>
-          <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-800">
-            💰 Salario: $1.423.500 SMLV + Prestaciones
+      <!-- 2 BANNERS SUPERIORES EN VACANTES -->
+      <div id="adJobsBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+
+      <!-- FILA 2: TARJETA DE VACANTES (REDUCIDA A LA MITAD) + 3ER BANNER AL LADO DERECHO -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
+        <!-- Tarjeta Vacantes en Negocios (Reducida y compacta, colores idénticos bg-slate-900) -->
+        <div class="bg-slate-900 rounded-[26px] p-6 text-white shadow-md flex flex-col justify-between h-full space-y-4">
+          <div>
+            <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+              💼 Oportunidades Laborales
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black mt-2 leading-snug">Vacantes en Negocios de Valledupar</h2>
+            <p class="text-slate-300 text-xs sm:text-sm mt-1.5 leading-relaxed">
+              Conecta directamente con establecimientos y comercios locales que están buscando apoyo o talento en la ciudad.
+            </p>
           </div>
-          <div class="flex items-center justify-between gap-2 pt-1">
-            <div class="flex flex-1 gap-2">
-              <a href="https://wa.me/573009876543?text=Hola%20Oasis%20Denim,%20vi%20la%20vacante%20en%20Píllalo" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center">
-                <i class="fa-brands fa-whatsapp mr-1"></i> Postular
-              </a>
-              <button onclick="openCompanyProfile(1)" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">
-                Ver Perfil
-              </button>
-            </div>
-            <button onclick="openReportProfileModal(1, 'Asesora de Ventas (Oasis Denim)', 'vacante', 101)" class="text-[11px] text-slate-400 hover:text-red-600 font-bold transition cursor-pointer px-2" title="Reportar vacante">
-              ⚑ Reportar vacante
-            </button>
+          <div class="p-3 bg-amber-500/15 border border-amber-400/40 rounded-2xl text-amber-200 text-xs font-medium leading-relaxed">
+            📢 <b>Píllalo publica estas ofertas como anuncios.</b> No recibimos hojas de vida ni cobramos nada a quien busca empleo. Nunca pagues por conseguir un trabajo. <a href="legal/vacantes.html" target="_blank" class="underline text-amber-300 font-bold hover:text-white">Reglas de vacantes</a>
           </div>
         </div>
 
-        <div class="bento-white-card rounded-3xl p-6 space-y-3">
-          <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-3 py-1 rounded-full">Pago por Servicio / Turnos</span>
-          <h3 class="text-lg font-black text-slate-900">Auxiliar Técnico de Aires Acondicionados</h3>
-          <p class="text-xs font-bold text-slate-600">📍 TecniAires FríoValle · Servicio a Domicilio</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Apoyo en mantenimiento preventivo y limpieza de aires mini-split en Valledupar.</p>
-          <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-800">
-            💰 Salario: $60.000 por turno / servicio
-          </div>
-          <div class="flex items-center justify-between gap-2 pt-1">
-            <div class="flex flex-1 gap-2">
-              <a href="https://wa.me/573001234567?text=Hola%20FríoValle,%20me%20interesa%20la%20vacante" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center">
-                <i class="fa-brands fa-whatsapp mr-1"></i> Postular
-              </a>
-              <button onclick="openCompanyProfile(3)" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">
-                Ver Perfil
-              </button>
-            </div>
-            <button onclick="openReportProfileModal(3, 'Auxiliar Técnico (TecniAires)', 'vacante', 102)" class="text-[11px] text-slate-400 hover:text-red-600 font-bold transition cursor-pointer px-2" title="Reportar vacante">
-              ⚑ Reportar vacante
-            </button>
-          </div>
-        </div>
+        <!-- 3ER BANNER DEBAJO DEL BANNER DERECHO (AL LADO DE LA TARJETA) -->
+        <div id="adJobsBanner3"></div>
+      </div>
+
+      <!-- GRILLA DE VACANTES COMPACTA (3 COLUMNAS EN DESKTOP, COMPACTA COMO EN EXPLORAR DIRECTORIO) -->
+      <div id="jobsGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       </div>
     </section>
 
@@ -3392,7 +3370,7 @@
         logoTitle: "Envíos"
       },
 
-      // 2. PESTAÑA RECIÉN LLEGADOS (2 Banners de Novedades)
+      // 2. PESTAÑA RECIÉN LLEGADOS (3 Banners de Novedades)
       {
         id: 3,
         tab: 'nuevos',
@@ -3417,8 +3395,20 @@
         coverImage: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=80",
         logoTitle: "Guatapurí"
       },
+      {
+        id: 7,
+        tab: 'nuevos',
+        bizId: 5,
+        badge: "🍔 RECIÉN ABIERTO EN LOS CORTIJOS",
+        title: "✨ Luxury Arepas & Antojos: ¡Nueva sede abierta en Valledupar!",
+        desc: "Arepas rellenas gourmet, picadas y comida rápida tradicional con servicio hasta las 11:30 PM.",
+        bizName: "Luxury Arepas & Antojos",
+        schedule: "Abierto Hoy · 4:30 PM - 11:30 PM",
+        coverImage: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1000&q=80",
+        logoTitle: "Arepas"
+      },
 
-      // 3. PESTAÑA VACANTES DE EMPLEO (2 Banners de Convocatorias)
+      // 3. PESTAÑA VACANTES DE EMPLEO (3 Banners de Convocatorias)
       {
         id: 5,
         tab: 'jobs',
@@ -3442,6 +3432,18 @@
         schedule: "Ingreso Inmediato",
         coverImage: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1000&q=80",
         logoTitle: "Técnicos"
+      },
+      {
+        id: 8,
+        tab: 'jobs',
+        bizId: 12,
+        badge: "🔥 CONTRATACIÓN INMEDIATA",
+        title: "🥩 Fogón Vallenato: Buscamos Parrillero y Personal de Servicio",
+        desc: "Excelente remuneración, propinas diarias y ambiente de trabajo familiar en Los Cortijos. ¡Postúlate hoy!",
+        bizName: "Restaurante Fogón Vallenato",
+        schedule: "Vacantes Disponibles",
+        coverImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+        logoTitle: "Fogón"
       }
     ];
 
@@ -3560,8 +3562,29 @@
         }
       }
 
-      renderContainer('adNuevosBanner', 'nuevos');
-      renderContainer('adJobsBanner', 'jobs');
+      // Pestaña Recién Llegados: 2 banners arriba + 1 banner al lado de la tarjeta
+      const nuevosItems = bannersList.filter(b => (b.tab || 'explore') === 'nuevos');
+      const topNuevos = document.getElementById('adNuevosBanner');
+      const extraNuevos = document.getElementById('adNuevosBanner3');
+      if (topNuevos) {
+        topNuevos.innerHTML = nuevosItems.slice(0, 2).map(renderBannerCard).join('');
+      }
+      if (extraNuevos) {
+        const b3 = nuevosItems[2] || nuevosItems[0];
+        extraNuevos.innerHTML = b3 ? renderBannerCard(b3) : '';
+      }
+
+      // Pestaña Vacantes de Empleo: 2 banners arriba + 1 banner debajo del derecho (al lado de la tarjeta)
+      const jobsItems = bannersList.filter(b => (b.tab || 'explore') === 'jobs');
+      const topJobs = document.getElementById('adJobsBanner');
+      const extraJobs = document.getElementById('adJobsBanner3');
+      if (topJobs) {
+        topJobs.innerHTML = jobsItems.slice(0, 2).map(renderBannerCard).join('');
+      }
+      if (extraJobs) {
+        const b3 = jobsItems[2] || jobsItems[0];
+        extraJobs.innerHTML = b3 ? renderBannerCard(b3) : '';
+      }
     }
 
     // Rotación automática de banners de publicidad e impulso solidario cada 5 segundos
@@ -3774,6 +3797,7 @@
         neighborhood: "Doce de Octubre",
         title: "Asesora de Ventas y Atención por WhatsApp",
         type: "Tiempo Completo / Medio Tiempo",
+        salario: "$1.423.500 SMLV + Prestaciones",
         desc: "Atención de clientes en punto físico y respuesta de chats de WhatsApp e Instagram.",
         whatsapp: "573009876543"
       },
@@ -3781,12 +3805,13 @@
         id: 2,
         bizId: 3,
         bizName: "TecniAires FríoValle",
-        neighborhood: "La Nevada / Servicio a Domicilio",
+        neighborhood: "La Nevada / A Domicilio",
         title: "Auxiliar Técnico de Aires Acondicionados",
         type: "Pago por Servicio / Turnos",
+        salario: "$60.000 - $90.000 / día según servicio",
         desc: "Apoyo en mantenimiento preventivo y limpieza de aires mini-split en Valledupar.",
         whatsapp: "573001234567"
-      }      ,
+      },
       {
         id: 3,
         bizId: 10,
@@ -3794,18 +3819,42 @@
         neighborhood: "Novalito",
         title: "Auxiliar de Odontología y Atención a Pacientes",
         type: "Tiempo Completo · Nivel Técnico",
-        desc: "Apoyo clínico en consultorio, esterilización y agendamiento de citas. Convenio de selección con Cultulab.",
+        salario: "$1.550.000 + Prestaciones de Ley",
+        desc: "Apoyo clínico en consultorio, esterilización y agendamiento de citas.",
         whatsapp: "573012345678"
       },
       {
         id: 4,
         bizId: 12,
-        bizName: "Restaurante & Parrilla Fogón Vallenato S.A.S.",
+        bizName: "Restaurante & Parrilla Fogón Vallenato",
         neighborhood: "Los Cortijos",
         title: "Parrillero Experto en Cortes Madurados",
         type: "Turnos Rotativos · Con Experiencia",
-        desc: "Manejo de parrilla al carbón y términos de carne. Salario competitivo más propinas y prestaciones.",
+        salario: "$1.600.000 + Propinas diarias",
+        desc: "Manejo de parrilla al carbón y términos de carne. Salario competitivo más propinas.",
         whatsapp: "573186543210"
+      },
+      {
+        id: 5,
+        bizId: 2,
+        bizName: "Confecciones Guatapurí",
+        neighborhood: "Doce de Octubre",
+        title: "Operaria de Costura y Fileteadora",
+        type: "Tiempo Completo / A Destajo",
+        salario: "$1.423.500 SMLV o por prenda terminada",
+        desc: "Manejo de máquina plana y fileteadora industrial para confección de uniformes.",
+        whatsapp: "573019876543"
+      },
+      {
+        id: 6,
+        bizId: 4,
+        bizName: "Studio Glow Uñas & Cejas",
+        neighborhood: "San Joaquín",
+        title: "Manicurista y Diseñadora de Cejas",
+        type: "Porcentaje / Medio Tiempo",
+        salario: "50% comisión neta + Propinas",
+        desc: "Especialista en semipermanente, acrílico y depilación con hilo o cera.",
+        whatsapp: "573159876543"
       }
     ];
 
@@ -3813,32 +3862,52 @@
       const container = document.getElementById('jobsGridContainer');
       if (!container) return;
       container.innerHTML = vacancies.map(v => `
-        <div class="bento-white-card rounded-3xl p-6 space-y-3">
-          <div class="flex items-center justify-between gap-2">
-            <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full">${v.type}</span>
-            <span class="text-[11px] font-bold text-slate-400">Píllalo Empleos</span>
+        <article class="bento-white-card rounded-2xl p-4 flex flex-col justify-between space-y-2.5 border border-slate-200/90 hover:border-emerald-500/60 transition shadow-2xs hover:shadow-md">
+          <div>
+            <!-- Tipo de jornada y sello -->
+            <div class="flex items-center justify-between gap-1.5 mb-1.5">
+              <span class="bg-emerald-50 text-emerald-800 border border-emerald-200/80 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider truncate">
+                ${v.type}
+              </span>
+              <span class="text-[10px] font-extrabold text-slate-400 shrink-0">Píllalo Empleos</span>
+            </div>
+
+            <!-- Título de la vacante -->
+            <h3 class="text-sm sm:text-base font-black text-slate-900 leading-snug line-clamp-2">${v.title}</h3>
+
+            <!-- Negocio y Barrio -->
+            <p class="text-xs font-bold text-slate-600 truncate mt-1 flex items-center gap-1">
+              <i class="fa-solid fa-store text-emerald-700 text-[10px]"></i>
+              <span>${v.bizName} · ${v.neighborhood}</span>
+            </p>
+
+            <!-- Descripción compacta -->
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mt-1 font-medium">${v.desc}</p>
+
+            <!-- Salario compacto -->
+            <div class="bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-200/80 text-[11px] font-extrabold text-slate-800 mt-2 flex items-center gap-1.5">
+              <span class="text-emerald-600">💰</span>
+              <span>${v.salario || '$1.423.500 SMLV + Prestaciones'}</span>
+            </div>
+
+            ${v.email ? `<p class="text-[10px] text-slate-500 truncate mt-1"><b>✉️ Correo:</b> <a href="mailto:${v.email}" class="text-emerald-700 underline font-bold">${v.email}</a></p>` : ''}
           </div>
-          <h3 class="text-lg font-black text-slate-900">${v.title}</h3>
-          <p class="text-xs font-bold text-slate-600">📍 ${v.bizName} · ${v.neighborhood}</p>
-          <p class="text-xs text-slate-500 leading-relaxed">${v.desc}</p>
-          <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-800">
-            💰 Salario: ${v.salario || '$1.423.500 SMLV + Prestaciones'}
-          </div>
-          ${v.email ? `<p class="text-[11px] text-slate-600"><b>✉️ Correo:</b> <a href="mailto:${v.email}" class="text-emerald-700 underline font-bold">${v.email}</a></p>` : ''}
-          <div class="flex items-center justify-between gap-2 pt-2">
-            <div class="flex flex-1 gap-2">
-              <a href="https://wa.me/${v.whatsapp}?text=${encodeURIComponent('Hola ' + v.bizName + ', vi su vacante de ' + v.title + ' en Píllalo')}" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold text-center flex items-center justify-center gap-1.5 shadow-xs">
-                <i class="fa-brands fa-whatsapp text-sm"></i> Postular
+
+          <!-- Botones de Acción compactos -->
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-1.5 mt-2">
+            <div class="flex flex-1 gap-1.5">
+              <a href="https://wa.me/${v.whatsapp}?text=${encodeURIComponent('Hola ' + v.bizName + ', vi su vacante de ' + v.title + ' en Píllalo')}" target="_blank" class="flex-1 py-1.5 px-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-black text-center flex items-center justify-center gap-1 shadow-2xs transition">
+                <i class="fa-brands fa-whatsapp text-xs"></i> Postular
               </a>
-              <button onclick="openCompanyProfile(${v.bizId})" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer">
+              <button onclick="openCompanyProfile(${v.bizId})" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer transition">
                 Ver Perfil
               </button>
             </div>
-            <button onclick="openReportProfileModal(${v.bizId}, '${v.title.replace(/'/g, "\'")}', 'vacante', ${v.id})" class="text-[11px] text-slate-400 hover:text-red-600 font-bold transition cursor-pointer px-2" title="Reportar vacante">
-              ⚑ Reportar vacante
+            <button onclick="openReportProfileModal(${v.bizId}, '${v.title.replace(/'/g, "\'")}', 'vacante', ${v.id})" class="text-[10px] text-slate-400 hover:text-red-600 font-bold transition cursor-pointer p-1" title="Reportar vacante">
+              ⚑
             </button>
           </div>
-        </div>
+        </article>
       `).join('');
     }
 
