@@ -564,20 +564,20 @@
     <!-- TAB 3: RECIÉN LLEGADOS (ROTACIÓN SEMANAL DE REGISTRADOS ESTA SEMANA)  -->
     <!-- ===================================================================== -->
     <section id="tab-nuevos" class="hidden fade-in space-y-4">
-      <!-- BARRA HORIZONTAL COMPACTA DE RECIÉN LLEGADOS (ANCHO COMPLETO) -->
-      <div class="bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 rounded-2xl px-5 py-3 sm:px-6 sm:py-3.5 text-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-base shrink-0">
-            🆕
+      <!-- BARRA HORIZONTAL COMPACTA DE RECIÉN LLEGADOS (VERDE PÍLLALO OFICIAL #01483B DE ALTO CONTRASTE) -->
+      <div style="background-color: #01483B;" class="rounded-2xl px-5 py-3 sm:px-6 sm:py-3 text-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3 border border-[#00AA9D]/30">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-9 h-9 rounded-xl bg-[#FDAB01]/20 border border-[#FDAB01]/40 flex items-center justify-center text-base shrink-0">
+            ⚡
           </div>
-          <div>
-            <span class="text-[10px] font-black uppercase tracking-wider text-emerald-300 block">Rotación Semanal · Presentado por Píllalo</span>
-            <h2 class="text-base sm:text-lg font-black text-white leading-tight">Recién Llegados a Píllalo Esta Semana</h2>
-            <p class="text-[11px] sm:text-xs text-emerald-100/90 leading-tight mt-0.5">Los restaurantes, tiendas y servicios que se registran durante la semana aparecen aquí de primeros.</p>
+          <div class="min-w-0">
+            <span class="text-[10px] font-black uppercase tracking-wider text-[#FDAB01] block">Rotación Semanal · Presentado por Píllalo</span>
+            <h2 class="text-base sm:text-lg font-black text-white leading-tight truncate">Recién Llegados a Píllalo Esta Semana</h2>
+            <p class="text-[11px] sm:text-xs text-emerald-100 leading-tight mt-0.5">Los restaurantes, tiendas y servicios que se registran durante la semana aparecen aquí de primeros.</p>
           </div>
         </div>
-        <button onclick="switchTab('tab-register')" class="w-full sm:w-auto px-4 py-2 bg-white text-slate-900 hover:bg-emerald-50 rounded-xl text-xs font-black shadow-xs whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5 transition shrink-0">
-          <i class="fa-solid fa-plus text-emerald-600 text-xs"></i> Sumar mi Negocio esta Semana
+        <button onclick="switchTab('tab-register')" style="background-color: #FDAB01; color: #01483B;" class="w-full sm:w-auto px-4 py-2 hover:bg-amber-400 rounded-xl text-xs font-black shadow-xs whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5 transition shrink-0">
+          <i class="fa-solid fa-plus text-[#01483B] text-xs"></i> <span>Sumar mi Negocio esta Semana</span>
         </button>
       </div>
 
@@ -592,20 +592,20 @@
     <!-- TAB 4: VACANTES Y EMPLEO LOCAL                                        -->
     <!-- ===================================================================== -->
     <section id="tab-jobs" class="hidden fade-in space-y-4">
-      <!-- BARRA HORIZONTAL COMPACTA DE VACANTES (ANCHO COMPLETO) -->
-      <div class="bg-slate-900 rounded-2xl px-5 py-3 sm:px-6 sm:py-3.5 text-white shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-3 mb-2 border border-slate-800">
-        <div class="flex items-center gap-3">
+      <!-- BARRA HORIZONTAL COMPACTA DE VACANTES (AVISO AL LADO PARA REDUCIR ESPACIO VERTICAL) -->
+      <div style="background-color: #0F172A;" class="rounded-2xl px-5 py-3 sm:px-6 sm:py-3 text-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3 border border-slate-800">
+        <div class="flex items-center gap-3 min-w-0">
           <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-base shrink-0">
             💼
           </div>
-          <div>
-            <span class="text-[10px] font-black uppercase tracking-wider text-emerald-300 block">Oportunidades Laborales Locales</span>
-            <h2 class="text-base sm:text-lg font-black text-white leading-tight">Vacantes en Negocios de Valledupar</h2>
-            <p class="text-[11px] sm:text-xs text-slate-300 leading-tight mt-0.5">Conecta directamente con establecimientos y comercios que buscan talento o apoyo.</p>
+          <div class="min-w-0">
+            <span class="text-[10px] font-black uppercase tracking-wider text-emerald-400 block">Oportunidades Laborales Locales</span>
+            <h2 class="text-base sm:text-lg font-black text-white leading-tight truncate">Vacantes en Negocios de Valledupar</h2>
+            <p class="text-[11px] sm:text-xs text-slate-300 leading-tight mt-0.5">Conecta directamente con comercios que buscan talento o apoyo.</p>
           </div>
         </div>
-        <div class="px-3 py-1.5 bg-amber-500/15 border border-amber-400/30 rounded-xl text-amber-200 text-[11px] font-medium leading-snug shrink-0 max-w-md">
-          📢 <b>Aviso:</b> Píllalo publica estas ofertas como anuncios. No cobramos ni recibimos hojas de vida. <a href="legal/vacantes.html" target="_blank" class="underline text-amber-300 font-bold hover:text-white">Reglas</a>
+        <div class="px-3 py-1.5 bg-amber-500/15 border border-amber-400/30 rounded-xl text-amber-200 text-[11px] font-medium leading-tight shrink-0 max-w-full sm:max-w-xs md:max-w-sm">
+          📢 <b>Aviso:</b> Ofertas como anuncios. No cobramos ni recibimos hojas de vida. <a href="legal/vacantes.html" target="_blank" class="underline text-amber-300 font-bold hover:text-white">Reglas</a>
         </div>
       </div>
 
