@@ -2679,6 +2679,7 @@
     </div>
   </div>
 
+  <script src="./pillalo/negocios-muestra.js"></script>
   <script>
     // =========================================================================
     // CONEXIÓN EN VIVO A SUPABASE (PROYECTO: Pillalo_Valledupar)
@@ -3262,6 +3263,8 @@
         totalClicks: 2
       }
     ];
+
+    if (Array.isArray(window.PILLALO_NEGOCIOS_MUESTRA)) businesses = businesses.concat(window.PILLALO_NEGOCIOS_MUESTRA);
 
     // Publicidad sin cupo máximo fijo pero garantizando siempre al menos 2 de Impulso Solidario
     const MIN_BANNERS_IMPULSO = 2; // Instrucción 02b
