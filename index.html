@@ -563,69 +563,56 @@
     <!-- ===================================================================== -->
     <!-- TAB 3: RECIÉN LLEGADOS (ROTACIÓN SEMANAL DE REGISTRADOS ESTA SEMANA)  -->
     <!-- ===================================================================== -->
-    <section id="tab-nuevos" class="hidden fade-in space-y-5">
-      <!-- 2 BANNERS SUPERIORES EN RECIÉN LLEGADOS -->
-      <div id="adNuevosBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
-
-      <!-- FILA 2: TARJETA DE RECIÉN LLEGADOS (REDUCIDA A LA MITAD) + 3ER BANNER AL LADO -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
-        <!-- Tarjeta Rotación Semanal (Compacta a la mitad, sin perder estilo) -->
-        <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-slate-900 rounded-[26px] p-6 text-white shadow-md flex flex-col justify-between h-full space-y-4">
-          <div>
-            <div class="flex items-center gap-2 mb-2">
-              <span class="bg-emerald-400/20 text-emerald-200 border border-emerald-400/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-                🆕 Rotación Semanal · Píllalo
-              </span>
-            </div>
-            <h2 class="text-xl sm:text-2xl font-black mt-2 leading-snug">Recién Llegados a Píllalo Esta Semana</h2>
-            <p class="text-emerald-50 text-xs sm:text-sm mt-2 leading-relaxed">
-              Esta ventana cambia semanalmente: los restaurantes, negocios y servicios que se registran durante la semana aparecen aquí de primeros. ¡Toca cualquiera para abrir su perfil completo!
-            </p>
+    <section id="tab-nuevos" class="hidden fade-in space-y-4">
+      <!-- BARRA HORIZONTAL COMPACTA DE RECIÉN LLEGADOS (ANCHO COMPLETO) -->
+      <div class="bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 rounded-2xl px-5 py-3 sm:px-6 sm:py-3.5 text-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-base shrink-0">
+            🆕
           </div>
-          <div class="pt-2">
-            <button onclick="switchTab('tab-register')" class="w-full sm:w-auto px-5 py-3 bg-white text-slate-900 hover:bg-emerald-50 rounded-2xl text-xs font-black shadow-md whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5 transition">
-              <i class="fa-solid fa-plus text-emerald-600"></i> Sumar mi Negocio esta Semana
-            </button>
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-emerald-300 block">Rotación Semanal · Presentado por Píllalo</span>
+            <h2 class="text-base sm:text-lg font-black text-white leading-tight">Recién Llegados a Píllalo Esta Semana</h2>
+            <p class="text-[11px] sm:text-xs text-emerald-100/90 leading-tight mt-0.5">Los restaurantes, tiendas y servicios que se registran durante la semana aparecen aquí de primeros.</p>
           </div>
         </div>
-
-        <!-- 3ER BANNER PUBLICITARIO / DESTACADO EN RECIÉN LLEGADOS -->
-        <div id="adNuevosBanner3"></div>
+        <button onclick="switchTab('tab-register')" class="w-full sm:w-auto px-4 py-2 bg-white text-slate-900 hover:bg-emerald-50 rounded-xl text-xs font-black shadow-xs whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5 transition shrink-0">
+          <i class="fa-solid fa-plus text-emerald-600 text-xs"></i> Sumar mi Negocio esta Semana
+        </button>
       </div>
 
-      <div id="nuevosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <!-- 4 BANNERS PUBLICITARIOS EN RECIÉN LLEGADOS (2 ARRIBA Y 2 ABAJO) -->
+      <div id="adNuevosBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4"></div>
+
+      <!-- GRILLA DE COMERCIOS RECIÉN LLEGADOS -->
+      id="nuevosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
     </section>
 
     <!-- ===================================================================== -->
     <!-- TAB 4: VACANTES Y EMPLEO LOCAL                                        -->
     <!-- ===================================================================== -->
-    <section id="tab-jobs" class="hidden fade-in space-y-5">
-      <!-- 2 BANNERS SUPERIORES EN VACANTES -->
-      <div id="adJobsBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
-
-      <!-- FILA 2: TARJETA DE VACANTES (REDUCIDA A LA MITAD) + 3ER BANNER AL LADO DERECHO -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
-        <!-- Tarjeta Vacantes en Negocios (Reducida y compacta, colores idénticos bg-slate-900) -->
-        <div class="bg-slate-900 rounded-[26px] p-6 text-white shadow-md flex flex-col justify-between h-full space-y-4">
-          <div>
-            <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider inline-block">
-              💼 Oportunidades Laborales
-            </span>
-            <h2 class="text-xl sm:text-2xl font-black mt-2 leading-snug">Vacantes en Negocios de Valledupar</h2>
-            <p class="text-slate-300 text-xs sm:text-sm mt-1.5 leading-relaxed">
-              Conecta directamente con establecimientos y comercios locales que están buscando apoyo o talento en la ciudad.
-            </p>
+    <section id="tab-jobs" class="hidden fade-in space-y-4">
+      <!-- BARRA HORIZONTAL COMPACTA DE VACANTES (ANCHO COMPLETO) -->
+      <div class="bg-slate-900 rounded-2xl px-5 py-3 sm:px-6 sm:py-3.5 text-white shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-3 mb-2 border border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-base shrink-0">
+            💼
           </div>
-          <div class="p-3 bg-amber-500/15 border border-amber-400/40 rounded-2xl text-amber-200 text-xs font-medium leading-relaxed">
-            📢 <b>Píllalo publica estas ofertas como anuncios.</b> No recibimos hojas de vida ni cobramos nada a quien busca empleo. Nunca pagues por conseguir un trabajo. <a href="legal/vacantes.html" target="_blank" class="underline text-amber-300 font-bold hover:text-white">Reglas de vacantes</a>
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-emerald-300 block">Oportunidades Laborales Locales</span>
+            <h2 class="text-base sm:text-lg font-black text-white leading-tight">Vacantes en Negocios de Valledupar</h2>
+            <p class="text-[11px] sm:text-xs text-slate-300 leading-tight mt-0.5">Conecta directamente con establecimientos y comercios que buscan talento o apoyo.</p>
           </div>
         </div>
-
-        <!-- 3ER BANNER DEBAJO DEL BANNER DERECHO (AL LADO DE LA TARJETA) -->
-        <div id="adJobsBanner3"></div>
+        <div class="px-3 py-1.5 bg-amber-500/15 border border-amber-400/30 rounded-xl text-amber-200 text-[11px] font-medium leading-snug shrink-0 max-w-md">
+          📢 <b>Aviso:</b> Píllalo publica estas ofertas como anuncios. No cobramos ni recibimos hojas de vida. <a href="legal/vacantes.html" target="_blank" class="underline text-amber-300 font-bold hover:text-white">Reglas</a>
+        </div>
       </div>
 
-      <!-- GRILLA DE VACANTES COMPACTA (3 COLUMNAS EN DESKTOP, COMPACTA COMO EN EXPLORAR DIRECTORIO) -->
+      <!-- 4 BANNERS PUBLICITARIOS EN VACANTES (2 ARRIBA Y 2 ABAJO) -->
+      <div id="adJobsBanner" class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4"></div>
+
+      <!-- GRILLA DE VACANTES COMPACTA (3 COLUMNAS EN DESKTOP) -->
       <div id="jobsGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       </div>
     </section>
@@ -3370,7 +3357,7 @@
         logoTitle: "Envíos"
       },
 
-      // 2. PESTAÑA RECIÉN LLEGADOS (3 Banners de Novedades)
+      // 2. PESTAÑA RECIÉN LLEGADOS (4 Banners de Novedades)
       {
         id: 3,
         tab: 'nuevos',
@@ -3407,8 +3394,20 @@
         coverImage: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1000&q=80",
         logoTitle: "Arepas"
       },
+      {
+        id: 9,
+        tab: 'nuevos',
+        bizId: 102,
+        badge: "🌟 NUEVO PROFESIONAL LOCAL",
+        title: "❄️ José David Romero: Técnico Certificado en Climatización",
+        desc: "Mantenimiento preventivo e instalación de aires acondicionados con garantía en toda la ciudad.",
+        bizName: "José David Romero",
+        schedule: "Atención Inmediata",
+        coverImage: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1000&q=80",
+        logoTitle: "JR"
+      },
 
-      // 3. PESTAÑA VACANTES DE EMPLEO (3 Banners de Convocatorias)
+      // 3. PESTAÑA VACANTES DE EMPLEO (4 Banners de Convocatorias)
       {
         id: 5,
         tab: 'jobs',
@@ -3444,6 +3443,18 @@
         schedule: "Vacantes Disponibles",
         coverImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
         logoTitle: "Fogón"
+      },
+      {
+        id: 10,
+        tab: 'jobs',
+        bizId: 10,
+        badge: "🦷 VACANTE EN SALUD ORAL",
+        title: "✨ Sonrisas del Cesar: Auxiliar Dental y Atención a Pacientes",
+        desc: "Clínica odontológica busca asistente con experiencia en esterilización y apoyo en consultorio.",
+        bizName: "Clínica Dental Sonrisas",
+        schedule: "Turno Completo",
+        coverImage: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
+        logoTitle: "Sonrisas"
       }
     ];
 
@@ -3562,28 +3573,18 @@
         }
       }
 
-      // Pestaña Recién Llegados: 2 banners arriba + 1 banner al lado de la tarjeta
-      const nuevosItems = bannersList.filter(b => (b.tab || 'explore') === 'nuevos');
-      const topNuevos = document.getElementById('adNuevosBanner');
-      const extraNuevos = document.getElementById('adNuevosBanner3');
-      if (topNuevos) {
-        topNuevos.innerHTML = nuevosItems.slice(0, 2).map(renderBannerCard).join('');
-      }
-      if (extraNuevos) {
-        const b3 = nuevosItems[2] || nuevosItems[0];
-        extraNuevos.innerHTML = b3 ? renderBannerCard(b3) : '';
+      // Pestaña Recién Llegados: 4 banners destacados (2 arriba y 2 abajo en cuadrícula 2x2)
+      const nuevosContainer = document.getElementById('adNuevosBanner');
+      if (nuevosContainer) {
+        const nuevosItems = bannersList.filter(b => (b.tab || 'explore') === 'nuevos').slice(0, 4);
+        nuevosContainer.innerHTML = nuevosItems.map(renderBannerCard).join('');
       }
 
-      // Pestaña Vacantes de Empleo: 2 banners arriba + 1 banner debajo del derecho (al lado de la tarjeta)
-      const jobsItems = bannersList.filter(b => (b.tab || 'explore') === 'jobs');
-      const topJobs = document.getElementById('adJobsBanner');
-      const extraJobs = document.getElementById('adJobsBanner3');
-      if (topJobs) {
-        topJobs.innerHTML = jobsItems.slice(0, 2).map(renderBannerCard).join('');
-      }
-      if (extraJobs) {
-        const b3 = jobsItems[2] || jobsItems[0];
-        extraJobs.innerHTML = b3 ? renderBannerCard(b3) : '';
+      // Pestaña Vacantes de Empleo: 4 banners destacados (2 arriba y 2 abajo en cuadrícula 2x2)
+      const jobsContainer = document.getElementById('adJobsBanner');
+      if (jobsContainer) {
+        const jobsItems = bannersList.filter(b => (b.tab || 'explore') === 'jobs').slice(0, 4);
+        jobsContainer.innerHTML = jobsItems.map(renderBannerCard).join('');
       }
     }
 
