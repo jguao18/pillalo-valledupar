@@ -1177,32 +1177,73 @@
             </div>
           </div>
 
-          <!-- Horario de Atención Flexible (Especial para Restaurantes y Negocios con descanso) -->
-          <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-2.5">
+                    <!-- Horario de Atención Flexible (Doble Jornada o Jornada Continua) -->
+          <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl border border-slate-200 space-y-3">
             <div class="flex items-center justify-between">
-              <label class="block font-bold text-slate-800 text-xs">⏰ Horario y Días de Atención *</label>
-              <span class="text-[10px] text-[#00AA9D] font-bold">Flexibilidad para descansos (Lunes/Martes)</span>
+              <label class="block font-black text-slate-800 text-xs">⏰ Horario y Días de Atención *</label>
+              <span class="text-[10px] text-[#00AA9D] font-black">Jornada continua o 2 turnos</span>
             </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <div class="sm:col-span-1">
-                <label class="block text-[11px] font-bold text-slate-600 mb-1">Patrón de Días:</label>
-                <select id="regScheduleDays" onchange="syncScheduleDayPills(this.value)" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
-                  <option value="Todos los días">Todos los días (Lunes a Domingo)</option>
-                  <option value="Martes a Domingo (Descansa Lunes)">Martes a Domingo (Descansa Lunes) 🍔</option>
-                  <option value="Miércoles a Lunes (Descansa Martes)">Miércoles a Lunes (Descansa Martes) 🍔</option>
-                  <option value="Lunes a Sábado">Lunes a Sábado (Descansa Domingo)</option>
-                  <option value="Lunes a Viernes">Lunes a Viernes</option>
-                  <option value="Fines de Semana">Fines de Semana (Viernes a Domingo)</option>
-                </select>
+
+            <!-- Patrón de Días -->
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Patrón de Días:</label>
+              <select id="regScheduleDays" onchange="syncScheduleDayPills(this.value)" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
+                <option value="Todos los días">Todos los días (Lunes a Domingo)</option>
+                <option value="Lunes a Sábado">Lunes a Sábado (Descansa Domingo)</option>
+                <option value="Lunes a Viernes">Lunes a Viernes</option>
+                <option value="Martes a Domingo (Descansa Lunes)">Martes a Domingo (Descansa Lunes) 🍔</option>
+                <option value="Miércoles a Lunes (Descansa Martes)">Miércoles a Lunes (Descansa Martes) 🍔</option>
+                <option value="Fines de Semana">Fines de Semana (Viernes a Domingo)</option>
+              </select>
+            </div>
+
+            <!-- Interruptor para Activar Doble Jornada -->
+            <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-200 shadow-2xs">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center text-xs font-bold">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                </span>
+                <div>
+                  <span class="block text-xs font-black text-slate-800">¿Atiendes en dos jornadas?</span>
+                  <span class="block text-[10px] text-slate-500">Ej: abres en la mañana, cierras al mediodía y reabres en la tarde/noche</span>
+                </div>
               </div>
+              <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+                <input type="checkbox" id="regTwoShiftsToggle" onchange="toggleRegTwoShifts(this.checked)" class="sr-only peer">
+                <div class="w-10 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#00AA9D]"></div>
+              </label>
+            </div>
+
+            <!-- Horarios: Jornada 1 y Jornada 2 (si está activa) -->
+            <div class="space-y-2.5">
+              <!-- Bloque Jornada 1 -->
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1">Hora de Apertura:</label>
-                <input type="time" id="regOpenTime" value="11:30" required class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
+                <span id="regShift1Label" class="block text-[11px] font-black text-slate-700 mb-1">Horario de Atención:</span>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Hora de Apertura:</label>
+                    <input type="time" id="regOpenTime" value="08:00" required onchange="updateSchedulePillsUI()" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Hora de Cierre:</label>
+                    <input type="time" id="regCloseTime" value="18:00" required onchange="updateSchedulePillsUI()" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
+                  </div>
+                </div>
               </div>
-              <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1">Hora de Cierre:</label>
-                <input type="time" id="regCloseTime" value="23:00" required class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
+
+              <!-- Bloque Jornada 2 (Oculto por defecto, visible cuando activa dos jornadas) -->
+              <div id="regSecondShiftContainer" class="hidden pt-1 border-t border-slate-200/80">
+                <span class="block text-[11px] font-black text-slate-700 mb-1">Jornada 2 (Tarde / Noche):</span>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Reapertura:</label>
+                    <input type="time" id="regOpenTime2" value="14:00" onchange="updateSchedulePillsUI()" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Cierre Final:</label>
+                    <input type="time" id="regCloseTime2" value="18:30" onchange="updateSchedulePillsUI()" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-semibold text-xs">
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1218,7 +1259,9 @@
                 <button type="button" onclick="toggleSchedulePill(this, 'Sáb')" class="day-toggle-pill px-2.5 py-1 rounded-lg text-xs font-bold border border-[#01483B] bg-[#01483B] text-white transition cursor-pointer" data-day="Sáb">Sáb</button>
                 <button type="button" onclick="toggleSchedulePill(this, 'Dom')" class="day-toggle-pill px-2.5 py-1 rounded-lg text-xs font-bold border border-[#01483B] bg-[#01483B] text-white transition cursor-pointer" data-day="Dom">Dom</button>
               </div>
-              <p id="regScheduleSummary" class="text-[10px] text-emerald-800 font-bold mt-1">✓ Abierto: Todos los días (Lunes a Domingo)</p>
+              <p id="regScheduleSummary" class="text-[11px] text-emerald-800 font-bold mt-2 bg-emerald-50/80 border border-emerald-200/60 rounded-xl px-3 py-1.5">
+                ✓ <strong>Horario resultante:</strong> Todos los días · 8:00 AM - 6:00 PM
+              </p>
             </div>
           </div>
 
@@ -8308,6 +8351,42 @@
       updateSchedulePillsUI();
     }
 
+    // Horario simplificado con formato AM/PM (disponible globalmente)
+    function formatTimeAMPM(time24) {
+      if (!time24) return '';
+      const parts = time24.split(':');
+      const h = parseInt(parts[0], 10);
+      const m = parts[1] || '00';
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 || 12;
+      return `${h12}:${m} ${ampm}`;
+    }
+
+    function toggleRegTwoShifts(enabled) {
+      const container2 = document.getElementById('regSecondShiftContainer');
+      const label1 = document.getElementById('regShift1Label');
+      if (container2) {
+        if (enabled) {
+          container2.classList.remove('hidden');
+          if (label1) label1.textContent = 'Jornada 1 (Mañana):';
+          const o1 = document.getElementById('regOpenTime');
+          const c1 = document.getElementById('regCloseTime');
+          const o2 = document.getElementById('regOpenTime2');
+          const c2 = document.getElementById('regCloseTime2');
+          if (o1 && c1 && o1.value === '11:30' && c1.value === '23:00') {
+            o1.value = '08:00';
+            c1.value = '12:00';
+          }
+          if (o2 && !o2.value) o2.value = '14:00';
+          if (c2 && !c2.value) c2.value = '18:30';
+        } else {
+          container2.classList.add('hidden');
+          if (label1) label1.textContent = 'Horario de Atención:';
+        }
+      }
+      updateSchedulePillsUI();
+    }
+
     function updateSchedulePillsUI() {
       const allDays = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
       document.querySelectorAll('#regScheduleDayPills .day-toggle-pill').forEach(btn => {
@@ -8319,17 +8398,39 @@
         }
       });
       const closedDays = allDays.filter(d => !activeScheduleDays.includes(d));
+      let daysLabel = '';
+      if (closedDays.length === 0) {
+        daysLabel = 'Todos los días';
+      } else if (closedDays.length === 1 && closedDays[0] === 'Lun') {
+        daysLabel = 'Martes a Domingo (Descansa Lunes)';
+      } else if (closedDays.length === 1 && closedDays[0] === 'Mar') {
+        daysLabel = 'Miércoles a Lunes (Descansa Martes)';
+      } else if (closedDays.length === 1 && closedDays[0] === 'Dom') {
+        daysLabel = 'Lunes a Sábado (Descansa Domingo)';
+      } else {
+        daysLabel = activeScheduleDays.join(', ');
+      }
+
+      const isTwoShifts = Boolean(document.getElementById('regTwoShiftsToggle')?.checked);
+      const open1 = formatTimeAMPM(document.getElementById('regOpenTime')?.value || '08:00');
+      const close1 = formatTimeAMPM(document.getElementById('regCloseTime')?.value || '18:00');
+      
+      let hoursLabel = '';
+      if (isTwoShifts) {
+        const open2 = formatTimeAMPM(document.getElementById('regOpenTime2')?.value || '14:00');
+        const close2 = formatTimeAMPM(document.getElementById('regCloseTime2')?.value || '18:30');
+        hoursLabel = `${open1} - ${close1} y ${open2} - ${close2}`;
+      } else {
+        hoursLabel = `${open1} - ${close1}`;
+      }
+
       const summary = document.getElementById('regScheduleSummary');
       if (summary) {
-        if (closedDays.length === 0) {
-          summary.textContent = '✓ Abierto: Todos los días (Lunes a Domingo)';
-        } else {
-          summary.textContent = `✓ Abierto: ${activeScheduleDays.join(', ')} (Cerrado: ${closedDays.join(', ')})`;
-        }
+        summary.innerHTML = `✓ <strong>Horario resultante:</strong> ${daysLabel} · ${hoursLabel}`;
       }
     }
 
-    // REGISTRO DE NUEVO NEGOCIO CONECTADO A SUPABASE Y VALIDADO CON PÍLLALO
+        // REGISTRO DE NUEVO NEGOCIO CONECTADO A SUPABASE Y VALIDADO CON PÍLLALO
     
 
     // =========================================================================
@@ -8683,9 +8784,17 @@
         scheduleDaysLabel = activeScheduleDays.join(', ');
       }
 
-      const openTime = document.getElementById('regOpenTime')?.value || '11:30';
-      const closeTime = document.getElementById('regCloseTime')?.value || '23:00';
-      const schedule = `${scheduleDaysLabel} · ${formatTimeAMPM(openTime)} - ${formatTimeAMPM(closeTime)}`;
+      const isTwoShifts = Boolean(document.getElementById('regTwoShiftsToggle')?.checked);
+      const openTime = document.getElementById('regOpenTime')?.value || '08:00';
+      const closeTime = document.getElementById('regCloseTime')?.value || '12:00';
+      let schedule = '';
+      if (isTwoShifts) {
+        const openTime2 = document.getElementById('regOpenTime2')?.value || '14:00';
+        const closeTime2 = document.getElementById('regCloseTime2')?.value || '18:30';
+        schedule = `${scheduleDaysLabel} · ${formatTimeAMPM(openTime)} - ${formatTimeAMPM(closeTime)} y ${formatTimeAMPM(openTime2)} - ${formatTimeAMPM(closeTime2)}`;
+      } else {
+        schedule = `${scheduleDaysLabel} · ${formatTimeAMPM(openTime)} - ${formatTimeAMPM(closeTime)}`;
+      }
 
       const words = name.split(' ');
       const subCategory = document.getElementById('regSubCategory')?.value || document.getElementById('regSecondaryCategory')?.value || '';
