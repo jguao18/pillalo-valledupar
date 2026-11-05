@@ -1,0 +1,13 @@
+Recurso visual creado con la herramienta integrada de generación de imágenes de OpenAI, usando propuesta-2.png como referencia de identidad. No se utilizó CLI ni una clave API externa.
+
+Prompt utilizado para el atlas de animación:
+
+Use case: identity-preserve. Asset: production animation sprite atlas for website mascot. EXACTLY preserve approved reference option 2 Píllalo puppy: fluffy cream-white fur, brown floppy ears, single brown patch around its anatomical LEFT eye (viewer right in front), cream tuft, pink cheeks, dark brown outline, teal baseball cap with white location pin, yellow backpack and teal straps. Same adorable puppy, no redesign, no text.
+Generate a LARGE SQUARE 2048x2048 PNG with truly transparent empty background. STRICT 4 columns x 4 rows of equal square cells. Exactly sixteen full-body puppies, one per cell. All cells identical camera frontal 3/4 view facing viewer, same scale, same floor baseline and same center, generous transparent margins (each dog within central 70% width and 85% height), no cropping. This is ANIMATION FRAMES, not sixteen different emotions. Each row is one cyclic action, columns are consecutive frames:
+Row 1, idle breathing: neutral happy; slight inhale and blink half closed; fully blink eyes closed; return to neutral eyes open. Keep body fixed.
+Row 2, greeting: puppy raises its anatomical RIGHT front paw (viewer left); waves paw slightly outward; waves slightly inward; waves outward. Other paw stays down, happy open eyes.
+Row 3, sniffing search: both front paws down, lean head downward to sniff toward left; nose low toward center; nose low toward right; nose returns center. Eyes curious, mouth closed. Keep cap attached to head.
+Row 4, celebrating: both front paws raised low; both paws raised high with joyful eyes closed; both paws mid-height smiling; both paws high smiling. Subtle bounce only.
+Crucial animation consistency: identical head, fur markings, proportions, cap, backpack, outline thickness and colors across all 16 cells. No extra limbs, no effects outside dog, no props, no ground shadows, no floor, no text, no decorative shapes. Clean flat vector-like artwork. Transparent background including gutters, no gradients in background.
+
+Resultado real entregado por el generador: PNG RGBA 1254 × 1254, 16 cuadros. La solicitud de 2048 × 2048 no fue respetada por la herramienta; no se ha ampliado artificialmente. Uso previsto: mascota web de aproximadamente 104–260px.

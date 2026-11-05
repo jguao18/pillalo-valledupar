@@ -5634,6 +5634,8 @@
               parsed.contactSettings
             );
           }
+          if (Array.isArray(parsed.galleryImages)) biz.galleryImages = parsed.galleryImages;
+          if (typeof parsed.galleryEnabled === 'boolean') biz.galleryEnabled = parsed.galleryEnabled;
         }
       } catch (_) {}
 
@@ -5653,7 +5655,9 @@
           locationType: biz.locationType || 'presencial',
           focusChannel: biz.focusChannel || 'whatsapp',
           address: biz.address,
-          contactSettings: biz.contactSettings
+          contactSettings: biz.contactSettings,
+          galleryImages: biz.galleryImages || [],
+          galleryEnabled: biz.galleryEnabled !== false
         }));
       } catch (_) {}
     }
@@ -6334,10 +6338,238 @@
       }
     }
 
+    // =========================================================================
+    // GESTIÓN Y EDICIÓN DE FOTOS DE VITRINA POR EL DUEÑO DEL NEGOCIO
+    // =========================================================================
+    let currentEditingGalleryBizId = null;
+    let currentTempGalleryImages = [];
+    let currentTempGalleryEnabled = true;
+
+    function openBizGalleryEditorModal(bizId) {
+      const biz = businesses.find(b => b.id === Number(bizId));
+      if (!biz) return;
+      if (typeof loggedInBizId !== 'undefined' && (loggedInBizId === null || Number(loggedInBizId) !== Number(biz.id))) {
+        showAppToast('🔒 Debes iniciar sesión como dueño para gestionar las fotos.');
+        openOwnerLoginModal();
+        return;
+      }
+
+      currentEditingGalleryBizId = biz.id;
+      currentTempGalleryImages = (biz.galleryImages && Array.isArray(biz.galleryImages)) ? [...biz.galleryImages] : [];
+      currentTempGalleryEnabled = biz.galleryEnabled !== false;
+
+      const title = document.getElementById('galleryEditorBizTitle');
+      if (title) title.textContent = `Gestionar Fotos: ${biz.name}`;
+      
+      const toggle = document.getElementById('galleryEditorToggleActive');
+      if (toggle) toggle.checked = currentTempGalleryEnabled;
+
+      renderGalleryEditorItems();
+
+      const modal = document.getElementById('modalEditBizGallery');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeBizGalleryEditorModal() {
+      const modal = document.getElementById('modalEditBizGallery');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function renderGalleryEditorItems() {
+      const container = document.getElementById('galleryEditorItemsGrid');
+      const countBadge = document.getElementById('galleryEditorCountBadge');
+      const uploadArea = document.getElementById('galleryEditorUploadArea');
+      
+      if (countBadge) {
+        countBadge.textContent = `${currentTempGalleryImages.length}/4 fotos`;
+      }
+
+      if (uploadArea) {
+        if (currentTempGalleryImages.length >= 4) {
+          uploadArea.classList.add('opacity-40', 'pointer-events-none');
+        } else {
+          uploadArea.classList.remove('opacity-40', 'pointer-events-none');
+        }
+      }
+
+      if (!container) return;
+      if (currentTempGalleryImages.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-6 px-4 text-center text-slate-400 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
+            <i class="fa-solid fa-images text-2xl text-slate-300 mb-1.5"></i>
+            <p class="text-xs font-bold text-slate-700">Aún no hay fotos en tu vitrina.</p>
+            <p class="text-[11px] text-slate-500 mt-0.5">Usa el botón de abajo para subir hasta 4 fotos de tus platos, productos o local.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = currentTempGalleryImages.map((img, idx) => `
+        <div class="relative bg-white rounded-2xl border border-slate-200 p-2 shadow-xs flex flex-col justify-between group">
+          <div class="relative h-20 sm:h-24 w-full rounded-xl overflow-hidden bg-slate-100">
+            <img src="${img}" class="w-full h-full object-cover">
+            <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-full ${idx === 0 ? 'bg-[#01483B] text-white' : 'bg-slate-900/80 text-white'} text-[10px] font-black shadow-xs">
+              ${idx === 0 ? '★ Principal' : '#' + (idx + 1)}
+            </span>
+          </div>
+          <div class="flex items-center justify-between gap-1 mt-2 pt-2 border-t border-slate-100">
+            <div class="flex items-center gap-1">
+              <button type="button" onclick="moveGalleryImage(${idx}, -1)" ${idx === 0 ? 'disabled class="w-7 h-7 rounded-lg bg-slate-100 text-slate-300 text-xs flex items-center justify-center cursor-not-allowed"' : 'class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-teal-50 hover:text-teal-700 text-slate-700 text-xs flex items-center justify-center cursor-pointer transition" title="Mover a la izquierda"'} >
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+              <button type="button" onclick="moveGalleryImage(${idx}, 1)" ${idx === currentTempGalleryImages.length - 1 ? 'disabled class="w-7 h-7 rounded-lg bg-slate-100 text-slate-300 text-xs flex items-center justify-center cursor-not-allowed"' : 'class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-teal-50 hover:text-teal-700 text-slate-700 text-xs flex items-center justify-center cursor-pointer transition" title="Mover a la derecha"'} >
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <button type="button" onclick="removeGalleryImage(${idx})" class="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 text-xs flex items-center justify-center cursor-pointer transition" title="Eliminar foto">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function moveGalleryImage(index, direction) {
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= currentTempGalleryImages.length) return;
+      const item = currentTempGalleryImages.splice(index, 1)[0];
+      currentTempGalleryImages.splice(newIndex, 0, item);
+      renderGalleryEditorItems();
+    }
+
+    function removeGalleryImage(index) {
+      if (index < 0 || index >= currentTempGalleryImages.length) return;
+      currentTempGalleryImages.splice(index, 1);
+      renderGalleryEditorItems();
+    }
+
+    function handleGalleryEditorFiles(event) {
+      const files = Array.from(event.target.files || []);
+      if (files.length === 0) return;
+      const availableSlots = 4 - currentTempGalleryImages.length;
+      if (availableSlots <= 0) {
+        showAppToast('⚠️ Ya alcanzaste el límite máximo de 4 fotos.');
+        return;
+      }
+      const toProcess = files.slice(0, availableSlots);
+      let processed = 0;
+      toProcess.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const maxDim = 1200;
+            let w = img.width;
+            let h = img.height;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+            currentTempGalleryImages.push(compressedDataUrl);
+            processed++;
+            if (processed === toProcess.length) {
+              renderGalleryEditorItems();
+              event.target.value = '';
+            }
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function saveBizGalleryChanges() {
+      if (!currentEditingGalleryBizId) return;
+      const biz = businesses.find(b => b.id === currentEditingGalleryBizId);
+      if (!biz) return;
+
+      const toggle = document.getElementById('galleryEditorToggleActive');
+      const isEnabled = toggle ? toggle.checked : true;
+
+      biz.galleryImages = [...currentTempGalleryImages];
+      biz.galleryEnabled = isEnabled;
+
+      saveBizCustomConfig(biz);
+
+      try {
+        const customBizs = JSON.parse(localStorage.getItem('pillalo_v3_custom_biz') || '[]');
+        const idx = customBizs.findIndex(b => b.id === biz.id);
+        if (idx !== -1) {
+          customBizs[idx].galleryImages = biz.galleryImages;
+          customBizs[idx].galleryEnabled = biz.galleryEnabled;
+          localStorage.setItem('pillalo_v3_custom_biz', JSON.stringify(customBizs));
+        }
+      } catch (_) {}
+
+      closeBizGalleryEditorModal();
+      showAppToast('✅ ¡Vitrina de fotos actualizada exitosamente!');
+
+      const profileSec = document.getElementById('tab-company-profile');
+      if (profileSec && !profileSec.classList.contains('hidden')) {
+        openCompanyProfile(biz.id);
+      } else {
+        renderMyBusinessDashboard();
+      }
+    }
+
+
     function renderCompanyGalleryWidget(biz) {
-      if (!biz || biz.galleryEnabled === false) return '';
+      if (!biz) return '';
+      const isOwnerLoggedIn = (typeof loggedInBizId !== 'undefined' && loggedInBizId !== null && Number(loggedInBizId) === Number(biz.id));
       const images = (biz.galleryImages && Array.isArray(biz.galleryImages)) ? biz.galleryImages.filter(Boolean) : [];
-      if (images.length === 0) return '';
+
+      if (biz.galleryEnabled === false) {
+        if (!isOwnerLoggedIn) return '';
+        return `
+          <div class="mt-6 bento-white-card rounded-[28px] p-5 sm:p-6 border-2 border-dashed border-amber-300 bg-amber-50/40 text-center space-y-2">
+            <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center mx-auto text-base">
+              <i class="fa-solid fa-eye-slash"></i>
+            </div>
+            <p class="text-xs font-black text-amber-900">Tu Vitrina Visual de Fotos está actualmente <span class="underline">desactivada (oculta al público)</span>.</p>
+            <p class="text-[11px] text-slate-500">Solo tú ves este aviso. Actívala cuando desees mostrar tus fotos a los visitantes.</p>
+            <button onclick="openBizGalleryEditorModal(${biz.id})" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow-xs inline-flex items-center gap-1.5 transition cursor-pointer mt-1">
+              <i class="fa-solid fa-images"></i>
+              <span>Activar y Gestionar Fotos</span>
+            </button>
+          </div>
+        `;
+      }
+
+      if (images.length === 0) {
+        if (!isOwnerLoggedIn) return '';
+        return `
+          <div class="mt-6 bento-white-card rounded-[28px] p-5 sm:p-6 border-2 border-dashed border-teal-300 bg-teal-50/40 text-center space-y-2">
+            <div class="w-10 h-10 rounded-2xl bg-teal-100 text-[#01483B] flex items-center justify-center mx-auto text-base">
+              <i class="fa-solid fa-images"></i>
+            </div>
+            <p class="text-xs font-black text-slate-800">Aún no has agregado fotos a tu Vitrina Visual.</p>
+            <p class="text-[11px] text-slate-500">Sube hasta 4 fotos atractivas de tus platos, productos o local para conquistar más clientes.</p>
+            <button onclick="openBizGalleryEditorModal(${biz.id})" class="px-4 py-2 bg-[#01483B] hover:bg-[#00AA9D] text-white font-black text-xs rounded-xl shadow-xs inline-flex items-center gap-1.5 transition cursor-pointer mt-1">
+              <i class="fa-solid fa-plus"></i>
+              <span>Subir Fotos de mi Negocio</span>
+            </button>
+          </div>
+        `;
+      }
 
       let gridClass = 'grid-cols-1';
       if (images.length === 2) gridClass = 'grid-cols-1 sm:grid-cols-2';
@@ -6355,6 +6587,13 @@
         </div>
       `).join('');
 
+      const ownerEditBtn = isOwnerLoggedIn ? `
+        <button onclick="openBizGalleryEditorModal(${biz.id})" class="px-3 py-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow-xs inline-flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>Editar Fotos</span>
+        </button>
+      ` : '';
+
       return `
         <div class="mt-6 bento-white-card rounded-[28px] p-5 sm:p-6 space-y-3.5 border border-slate-200/80 shadow-xs">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
@@ -6367,9 +6606,12 @@
                 <p class="text-[11px] text-slate-500">Conoce nuestras instalaciones, platos y productos destacados</p>
               </div>
             </div>
-            <span class="text-[11px] font-bold text-[#01483B] bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-full">
-              📸 ${images.length} ${images.length === 1 ? 'Foto' : 'Fotos'}
-            </span>
+            <div class="flex items-center gap-2">
+              ${ownerEditBtn}
+              <span class="text-[11px] font-bold text-[#01483B] bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-full">
+                📸 ${images.length} ${images.length === 1 ? 'Foto' : 'Fotos'}
+              </span>
+            </div>
           </div>
           <div class="grid ${gridClass} gap-3 pt-1">
             ${imagesHtml}
@@ -6415,6 +6657,10 @@
             </div>
           </div>
           <div class="flex flex-wrap items-center gap-2">
+            <button onclick="openBizGalleryEditorModal(${biz.id})" class="px-3.5 py-2 bg-emerald-500 hover:bg-emerald-400 text-white rounded-xl text-xs font-black flex items-center gap-1.5 transition cursor-pointer shadow-xs">
+              <i class="fa-solid fa-images"></i>
+              <span>Editar Fotos (${(biz.galleryImages || []).length}/4)</span>
+            </button>
             <button onclick="openEditBizChannelsModal(${biz.id})" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-black flex items-center gap-1.5 transition cursor-pointer shadow-xs">
               <i class="fa-solid fa-sliders"></i>
               <span>Editar Canales & Modalidad</span>
@@ -6491,14 +6737,14 @@
           </div>
         </div>
 
-        <!-- Tablero Bento Reactivo de Modalidad y Canales -->
+        <!-- Vitrina Visual de Fotos debajo de la descripción -->
+        ${renderCompanyGalleryWidget(biz)}
+
+        <!-- Tablero Bento Reactivo de Modalidad y Canales de Contacto por último -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 pt-3 items-stretch">
           ${renderCompanyLocationOrServiceWidget(biz)}
           ${renderCompanyContactsBento(biz)}
         </div>
-
-        
-        ${renderCompanyGalleryWidget(biz)}
 
         <!-- Botón discreto de reporte -->
         <div class="pt-8 pb-4 text-center">
@@ -6529,7 +6775,8 @@
         <!-- 1. GRAN PORTADA SUPERIOR CON LOGO, CATEGORÍA, DESCRIPCIÓN Y RANGO DE VALOR LIMPIO -->
         <div class="relative rounded-[32px] overflow-hidden shadow-xl border-4 border-white min-h-[320px] sm:min-h-[360px] flex flex-col items-center justify-center text-center p-6">
           <img src="${biz.coverImage}" alt="${biz.name}" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-b from-slate-950/65 via-slate-950/75 to-slate-950/90"></div>
+          <!-- Overlay luminoso y vibrante: resalta la foto del restaurante/local sin oscurecerla -->
+          <div class="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/35 to-slate-950/65"></div>
 
           <div class="relative z-10 flex flex-col items-center max-w-2xl mx-auto space-y-3">
             <!-- Logo Circular Central + Categoría Oficial al lado del Logo -->
@@ -6551,7 +6798,7 @@
 
             <!-- Nombre + Sello Verificado -->
             <div class="flex items-center justify-center gap-2 pt-1">
-              <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">${biz.name}</h1>
+              <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight drop-shadow-md">${biz.name}</h1>
               <span class="w-7 h-7 rounded-full ${biz.isSociedad || biz.nit || biz.membershipPlan?.startsWith('empresa') ? 'bg-blue-600' : 'bg-emerald-600'} text-white flex items-center justify-center text-xs shadow-md" title="Identidad Verificada">
                 <i class="fa-solid fa-check"></i>
               </span>
@@ -6586,9 +6833,9 @@
             </div>` : ''}
 
             <!-- Pequeña Descripción del Negocio + Hashtags de Búsqueda -->
-            <div class="bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl px-4 py-3 max-w-xl space-y-2">
+            <div class="bg-slate-950/50 backdrop-blur-md border border-white/25 rounded-2xl px-5 py-3.5 max-w-xl space-y-2 shadow-lg">
               <p class="text-xs font-extrabold uppercase tracking-wider text-emerald-300 mb-0.5">Descripción del negocio</p>
-              <p class="text-sm sm:text-base text-white font-medium leading-relaxed">
+              <p class="text-sm sm:text-base text-white font-medium leading-relaxed drop-shadow-xs">
                 ${biz.shortBio}
               </p>
               ${biz.hashtags && biz.hashtags.length ? `
@@ -6607,14 +6854,14 @@
           </div>
         </div>
 
-        <!-- 2. TABLERO BENTO REACTIVO DE MODALIDAD (5 COLS) Y CANALES (7 COLS) -->
+        <!-- 2. VITRINA VISUAL: FOTOS DEBAJO DE LA PORTADA Y DESCRIPCIÓN -->
+        ${renderCompanyGalleryWidget(biz)}
+
+        <!-- 3. TABLERO BENTO REACTIVO DE MODALIDAD (5 COLS) Y CANALES DE CONTACTO (7 COLS) POR ÚLTIMO -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 pt-2 items-stretch">
           ${renderCompanyLocationOrServiceWidget(biz)}
           ${renderCompanyContactsBento(biz)}
         </div>
-
-        
-        ${renderCompanyGalleryWidget(biz)}
 
         <!-- Botón discreto de reporte -->
         <div class="pt-8 pb-4 text-center">
@@ -6626,7 +6873,7 @@
       }
 
       document.getElementById('companyProfileContainer').innerHTML = html;
-      ['tab-explore', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-my-biz', 'tab-register', 'tab-analytics'].forEach(t => {
+      ['tab-welcome', 'tab-explore', 'tab-nuevos', 'tab-jobs', 'tab-certificate', 'tab-my-biz', 'tab-register', 'tab-analytics'].forEach(t => {
         const el = document.getElementById(t);
         if (el) el.classList.add('hidden');
       });
@@ -6835,6 +7082,10 @@
               </p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
+              <button onclick="openBizGalleryEditorModal(${biz.id})" class="px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 rounded-xl text-xs font-black flex items-center gap-1.5 transition cursor-pointer">
+                <i class="fa-solid fa-images text-[#00AA9D]"></i>
+                <span>Gestionar Fotos (${(biz.galleryImages || []).length}/4)</span>
+              </button>
               <button onclick="openEditBizChannelsModal(${biz.id})" class="px-3.5 py-2.5 bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 rounded-xl text-xs font-black flex items-center gap-1.5 transition cursor-pointer">
                 <i class="fa-solid fa-sliders text-amber-600"></i>
                 <span>Abrir Editor Rápido</span>
@@ -9725,6 +9976,73 @@
   </script>
   <script src="./pillalo/pillalo.js" defer></script>
   <script src="./pillalo/adaptador-sitio.js" defer></script>
+  <!-- ========================================================================= -->
+  <!-- MODAL: GESTIONAR FOTOS DE VITRINA (SUBIR, MOVER, ELIMINAR, ACTIVAR/DESACTIVAR) -->
+  <!-- ========================================================================= -->
+  <div id="modalEditBizGallery" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-[2000] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-xl w-full space-y-5 shadow-2xl text-left border-2 border-[#00AA9D] max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-[#01483B] flex items-center justify-center text-lg font-black">
+            <i class="fa-solid fa-images"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-slate-900" id="galleryEditorBizTitle">Gestionar Fotos de Vitrina</h3>
+            <p class="text-xs text-slate-500">Sube, organiza, reordena o apaga las fotos de tu perfil</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeBizGalleryEditorModal()" class="text-slate-400 hover:text-slate-700 font-black cursor-pointer text-base">✕</button>
+      </div>
+
+      <!-- Control On/Off de la Galería -->
+      <div class="flex items-center justify-between bg-slate-50 p-4 rounded-2xl border border-slate-200">
+        <div>
+          <span class="block text-xs font-black text-slate-900">Mostrar Vitrina de Fotos en mi Perfil</span>
+          <span class="block text-[11px] text-slate-500">Si la apagas, la sección de fotos no se mostrará a tus clientes</span>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input type="checkbox" id="galleryEditorToggleActive" class="sr-only peer" checked>
+          <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#00AA9D]"></div>
+        </label>
+      </div>
+
+      <!-- Cuadrícula interactiva de fotos actuales -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black text-slate-800">Fotos actuales de la Vitrina:</span>
+          <span id="galleryEditorCountBadge" class="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">0/4 fotos</span>
+        </div>
+        <div id="galleryEditorItemsGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <!-- Renderizado dinámico vía JavaScript -->
+        </div>
+      </div>
+
+      <!-- Subir nuevas fotos (Área de carga) -->
+      <div id="galleryEditorUploadArea" class="space-y-2">
+        <span class="text-xs font-black text-slate-800">Agregar nuevas fotos (hasta 4 en total):</span>
+        <label class="flex flex-col items-center justify-center p-4 border-2 border-dashed border-teal-300 hover:border-teal-500 bg-teal-50/40 rounded-2xl cursor-pointer transition text-center group">
+          <input type="file" id="galleryEditorFileInput" accept="image/*" multiple onchange="handleGalleryEditorFiles(event)" class="hidden">
+          <span class="w-10 h-10 rounded-full bg-white shadow-xs flex items-center justify-center text-teal-600 mb-2 group-hover:scale-110 transition">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </span>
+          <span class="text-xs font-black text-slate-800">Seleccionar fotos desde tu dispositivo</span>
+          <span class="text-[10px] text-slate-500 mt-0.5">JPG, PNG o WebP · Máximo 4 fotos por negocio</span>
+        </label>
+      </div>
+
+      <!-- Acciones de guardar o cancelar -->
+      <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+        <button type="button" onclick="closeBizGalleryEditorModal()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition cursor-pointer">
+          Cancelar
+        </button>
+        <button type="button" onclick="saveBizGalleryChanges()" class="px-5 py-2.5 bg-[#01483B] hover:bg-[#00AA9D] text-white font-black text-xs rounded-xl shadow-md transition cursor-pointer flex items-center gap-2">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>Guardar Cambios</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ===================================================================== -->
   <!-- MODAL LIGHTBOX: VISOR DE FOTOS EN GRANDE DE LA VITRINA                   -->
   <!-- ===================================================================== -->

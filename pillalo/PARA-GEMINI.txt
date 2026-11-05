@@ -1,0 +1,48 @@
+Quiero que integres en mi proyecto de Píllalo Valledupar la mascota animada adjunta. El sitio actual es https://jguao18.github.io/pillalo-valledupar/ y estoy trabajando contigo en Antigravity.
+
+USA LOS ARCHIVOS ENTREGADOS
+La carpeta pillalo-animado contiene pillalo.js, pillalo.css, adaptador-sitio.js y assets/pillalo-sprites.png. index.html es una demostración de referencia, NO es un reemplazo de mi sitio. Abre primero esa demostración y lee LEEME.md.
+
+IDENTIDAD
+Conserva el mismo Píllalo aprobado: perrito blanco con orejas café y manchita alrededor de su ojo izquierdo, gorra verde con pin blanco de ubicación y mochila amarilla. No cambies su raza, cara, colores ni accesorios. Conserva el nombre escrito Píllalo, con tilde. No sustituyas los dibujos por emojis ni por otro perro.
+
+INTEGRA EN EL SITIO EXISTENTE
+1. Inspecciona primero la estructura real del proyecto y sus funciones de navegación, filtros, registro, perfiles, vacantes y QR.
+2. Conserva la página, sus datos y sus funciones. Añade la mascota sin reconstruir ni reemplazar el sitio.
+3. Copia los recursos a una carpeta pública y carga pillalo.js como script clásico, no como módulo ES. Usa rutas compatibles con la base /pillalo-valledupar/ de GitHub Pages. El JS resuelve la imagen y CSS desde su propia ubicación.
+4. Revisa adaptador-sitio.js antes de activarlo; sus selectores parten de controles observados en la web publicada. Adapta lo necesario a los nombres reales. Evita duplicar manejadores o montar dos mascotas.
+
+CUATRO ANIMACIONES YA PREPARADAS
+idle: atento, respira y parpadea.
+wave: saluda con su patita.
+sniff: olfatea al buscar.
+celebrate: celebra con sus patitas.
+Se reproducen desde el PNG transparente de 16 cuadros; NO hace falta regenerarlas ni contratar servicios externos.
+
+CONEXIONES NECESARIAS
+Usa window.Pillalo.speak(clave) o eventos pillalo:event según LEEME.md.
+- Primera visita de la sesión: welcome.
+- Directorio: directory.
+- Búsqueda en curso si existe una consulta real: search.
+- Búsqueda ya resuelta: results o empty según la lista REAL filtrada. En filtros locales inmediatos, evita fingir tiempos de espera: muestra directamente el resultado.
+- Categorías: food, clothing, beauty, technical, professional o category.
+- Barrio: neighborhood. Presupuesto: budget.
+- Recién Llegados: new. Con Trayectoria: established.
+- Perfil abierto de verdad: profile.
+- Contacto: contact. Ubicación: map. Negocio cerrado: closed solo si el estado del horario es real.
+- Registro de NEGOCIOS: register, businessName, description, address, whatsapp, schedule.
+- Validación fallida: formError. Guardado confirmado: registered. Fallo de operación: error.
+- Vacantes: jobs. Contacto para postular: apply.
+- Sticker QR: qr. Antes de imprimir: qrPrint. Prueba del QR: qrTest.
+- Compartir perfil: share, únicamente si existe ese control.
+
+MUY IMPORTANTE
+No muestres éxito de registro al pulsar el botón: espera la confirmación real de persistencia. No inventes resultados, distancias, disponibilidad, verificación comercial, GPS, registro gratuito ni funciones que aún no tenga el proyecto. La bienvenida no debe afirmar que hay registro de usuarios consumidores si solo existe registro de negocios. No simules un chat inteligente: esta versión es una mascota animada con mensajes contextuales. No envíes formularios ni contactes negocios durante las pruebas.
+
+EXPERIENCIA
+Respeta el botón de cerrar, pausa, minimización, navegación con teclado y prefers-reduced-motion. Mantén el mensaje hasta que pueda leerse con calma. Evita una intervención por cada tecla o campo. En móvil no tapes el contenido ni los botones principales; adapta la posición si hay barra inferior o teclado abierto. Oculta la mascota durante la impresión del sticker. Mantén los estilos aislados. No reproduzcas voz automáticamente.
+
+VALIDA ANTES DE ENTREGAR
+Comprueba bienvenida una vez por sesión, las cuatro animaciones, filtros y búsqueda con/sin resultados, registro válido e inválido sin crear datos reales, vacantes, QR, cierre, pausa, minimizar/restaurar, teclado, movimiento reducido, pantalla móvil de 390px, escritorio y rutas bajo GitHub Pages. Verifica que la mascota no rompa el resto del sitio. Entrega primero una vista previa local; no publiques hasta que yo revise el resultado.
+
+Empieza por inspeccionar mi proyecto e integrar los archivos. No vuelvas a limitarte a explicarme cómo hacerlo.
