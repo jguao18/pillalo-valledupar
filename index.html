@@ -377,26 +377,250 @@
             <select id="categoryFilterSelect" onchange="setCategoryFromSelect(this.value)" class="font-extrabold text-[#01483B] bg-transparent focus:outline-none cursor-pointer max-w-[210px] truncate">
               <option value="all">✨ Todas las categorías</option>
               <option value="favoritos">❤️ Mis Favoritos</option>
-              <option value="moda_ropa_accesorios">👗 Moda, ropa y accesorios</option>
-              <option value="belleza_cuidado_personal">💄 Belleza y cuidado personal</option>
-              <option value="salud_bienestar">🩺 Salud y bienestar</option>
-              <option value="alimentos_gastronomia">🍔 Alimentos y gastronomía</option>
-              <option value="hogar_decoracion_muebles">🛋️ Hogar, decoración y muebles</option>
-              <option value="tecnologia_electronica">📱 Tecnología y electrónica</option>
-              <option value="servicios_profesionales_empresariales">💼 Servicios profesionales y empresariales</option>
-              <option value="educacion_formacion">📚 Educación y formación</option>
-              <option value="eventos_entretenimiento">🎉 Eventos y entretenimiento</option>
-              <option value="transporte_mensajeria_movilidad">🛵 Transporte, mensajería y movilidad</option>
-              <option value="inmobiliarias_construccion">🏗️ Inmobiliarias y construcción</option>
-              <option value="mascotas_animales">🐾 Mascotas y animales</option>
-              <option value="bebes_ninos_maternidad">👶 Bebés, niños y maternidad</option>
-              <option value="turismo_viajes">✈️ Turismo y viajes</option>
-              <option value="arte_manualidades_personalizados">🎨 Arte, manualidades y personalizados</option>
-              <option value="servicios_personales_domesticos">🛠️ Servicios personales y domésticos</option>
-              <option value="finanzas_seguros_tramites">💳 Finanzas, seguros y trámites</option>
-              <option value="deportes_recreacion">⚽ Deportes y recreación</option>
-              <option value="servicios_digitales_internet">💻 Servicios digitales y negocios por internet</option>
-              <option value="agricultura_campo_produccion">🌾 Agricultura, campo y producción</option>
+              <option value="alimentos_gastronomia">🍽️ Alimentos y Gastronomía</option>
+              <option value="moda_ropa_accesorios">👗 Moda, Ropa y Accesorios</option>
+              <option value="belleza_cuidado_personal">💅 Belleza y Cuidado Personal</option>
+              <option value="servicios_tecnicos_reparaciones">🔧 Servicios Técnicos, Reparaciones y Oficios</option>
+              <option value="servicios_profesionales_empresariales">💼 Servicios Profesionales, Jurídicos y Asesorías</option>
+              <option value="deportes_recreacion">🏋️‍♂️ Gimnasio, Deportes y Actividades Recreativas</option>
+              <option value="salud_bienestar">🩺 Salud, Medicina y Bienestar</option>
+              <option value="mascotas_animales">🐾 Mascotas y Cuidado Animal</option>
+              <option value="eventos_entretenimiento">🎉 Eventos, Fiestas y Entretenimiento</option>
+              <option value="educacion_formacion">🎓 Educación, Cursos y Formación</option>
+              <option value="hogar_decoracion_muebles">🏠 Hogar, Decoración y Muebles</option>
+              <option value="tecnologia_electronica">💻 Tecnología, Celulares y Accesorios</option>
+              <option value="automotriz_vehiculos">🚗 Mundo Automotriz: Carros, Motos, Repuestos y CDA</option>
+              <option value="transporte_mensajeria_movilidad">🛵 Transporte, Mensajería y Logística</option>
+              <option value="inmobiliarias_construccion">🏢 Inmobiliaria, Arriendos y Construcción</option>
+              <option value="turismo_viajes">✈️ Turismo, Hoteles y Experiencias</option>
+              <option value="bebes_ninos_maternidad">👶 Bebés, Niños y Maternidad</option>
+              <option value="arte_manualidades_personalizados">🎨 Arte, Manualidades, Regalos y Personalizados</option>
+              <option value="agricultura_campo_produccion">🌾 Agro, Ganadería y Campo</option>
+              <option value="supermercados_abarrotes_alimentos">🛒 Supermercados, Minimarkets, Carnicerías y Graneros</option>
+              <option value="litografia_publicidad_impresion">🖨️ Litografía, Impresión, Avisos y Publicidad Exterior</option>
+              <option value="finanzas_seguros_tramites">💳 Finanzas, Seguros, Créditos y Trámites</option>
+              <option value="servicios_digitales_internet">🌐 Negocios Digitales, Software y Comercio Online</option>
+            </select>
+          </div>
+
+          <!-- Filtro Dinámico: Subcategoría (Aparece al elegir una categoría) -->
+          <div id="subCategoryFilterContainer" class="flex items-center bg-white border border-[#00AA9D]/40 rounded-xl px-3.5 py-2.5 shadow-2xs transition">
+            <span class="mr-1.5 text-sm">🎯</span>
+            <span class="font-bold text-slate-700 mr-1.5">Especialidad:</span>
+            <select id="subCategoryFilterSelect" onchange="setSubCategoryFromSelect(this.value)" class="font-extrabold text-[#01483B] bg-transparent focus:outline-none cursor-pointer max-w-[210px] truncate">
+              <option value="all">🎯 Todas las especialidades</option>
+              <optgroup label="🍽️ Alimentos y Gastronomía">
+                <option value="comida_rapida">🍔 Comida Rápida y Callejera</option>
+                <option value="comida_saludable">🥗 Comida Saludable / Fit / Vegetariana</option>
+                <option value="asados_parrilla">🥩 Asados, Parrilla y Carnes</option>
+                <option value="reposteria_panaderia">🎂 Repostería, Panadería y Postres</option>
+                <option value="cafeteria_brunch">☕ Cafetería, Desayunos y Brunch</option>
+                <option value="pizzeria_pastas">🍕 Pizzería y Pastas</option>
+                <option value="bebidas_heladeria">🍹 Bebidas, Cocteles y Helados</option>
+                <option value="almuerzos_ejecutivos">🍱 Almuerzos Caseros y Ejecutivos</option>
+                <option value="otra_gastronomia">✨ Otra especialidad gastronómica</option>
+              </optgroup>
+              <optgroup label="👗 Moda, Ropa y Accesorios">
+                <option value="confeccion_modisteria">🧵 Confección a Medida y Modistería</option>
+                <option value="ropa_femenina">👚 Ropa Femenina (Casual y Elegante)</option>
+                <option value="ropa_masculina">👔 Ropa Masculina</option>
+                <option value="ropa_infantil">👶 Ropa Infantil y Juvenil</option>
+                <option value="calzado_marroquineria">🥾 Calzado, Zapatos y Bolsos</option>
+                <option value="joyeria_accesorios">💍 Joyería, Relojes y Accesorios</option>
+                <option value="uniformes">🦺 Uniformes Empresariales y Escolares</option>
+                <option value="otra_moda">✨ Otra especialidad en moda</option>
+              </optgroup>
+              <optgroup label="💅 Belleza y Cuidado Personal">
+                <option value="unas_manicure">💅 Uñas, Manicure y Pedicure</option>
+                <option value="cejas_pestanas">👁️ Cejas, Pestañas y Micropigmentación</option>
+                <option value="peluqueria_capilar">💇‍♀️ Peluquería, Cortes y Colorimetría</option>
+                <option value="barberia">💈 Barbería Masculina</option>
+                <option value="spa_estetica">🧖‍♀️ Spa, Masajes y Limpieza Facial</option>
+                <option value="maquillaje_profesional">💄 Maquillaje Profesional para Eventos</option>
+                <option value="otra_belleza">✨ Otra especialidad de belleza</option>
+              </optgroup>
+              <optgroup label="🔧 Servicios Técnicos, Reparaciones y Oficios">
+                <option value="aires_refrigeracion">❄️ Aires Acondicionados y Refrigeración</option>
+                <option value="electricidad">⚡ Electricidad Residencial y Comercial</option>
+                <option value="plomeria_gas">🚰 Plomería y Redes de Gas</option>
+                <option value="reparacion_celulares_pc">📱 Reparación de Celulares y Computadores</option>
+                <option value="cerrajeria">🔑 Cerrajería 24 Horas y Residencial</option>
+                <option value="carpinteria_drywall">🪚 Carpintería, Ebanistería y Drywall</option>
+                <option value="pintura_mantenimiento">🎨 Pintura y Mantenimiento de Inmuebles</option>
+                <option value="otro_tecnico">✨ Otro servicio técnico u oficio</option>
+              </optgroup>
+              <optgroup label="💼 Servicios Profesionales, Jurídicos y Asesorías">
+                <option value="abogados_juridico">⚖️ Abogados y Asesoría Jurídica</option>
+                <option value="contaduria_tributaria">📊 Contaduría Pública y Asesoría Tributaria</option>
+                <option value="arquitectura_interiores">📐 Arquitectura, Planos y Diseño de Interiores</option>
+                <option value="marketing_redes">💻 Marketing Digital y Manejo de Redes</option>
+                <option value="consultoria_empresarial">📈 Consultoría de Negocios y Finanzas</option>
+                <option value="seguridad_sst">📋 Seguridad y Salud en el Trabajo (SST)</option>
+                <option value="tramites_notaria">✍️ Trámites Notariales, Gestoría y Traducciones</option>
+                <option value="otro_profesional">✨ Otro servicio profesional</option>
+              </optgroup>
+              <optgroup label="🏋️‍♂️ Gimnasio, Deportes y Actividades Recreativas">
+                <option value="gimnasios_fitness">🏋️‍♂️ Gimnasios, Fitness y Crossfit</option>
+                <option value="canchas_alquiler">⚽ Canchas Sintéticas y Alquiler Deportivo</option>
+                <option value="entrenadores_personal">🏃‍♂️ Entrenadores Personales (Personal Trainer)</option>
+                <option value="escuelas_deportivas">🏊‍♂️ Escuelas Deportivas (Fútbol, Patinaje, Natación)</option>
+                <option value="artes_marciales">🥋 Artes Marciales, Boxeo y Defensa Personal</option>
+                <option value="yoga_pilates">🧘‍♀️ Yoga, Pilates y Clases Grupales</option>
+                <option value="ciclismo_talleres">🚴‍♂️ Ciclismo: Tiendas y Talleres de Bicis</option>
+                <option value="recreacion_familiar">🎳 Recreación Familiar, Bolos y Juegos</option>
+                <option value="otro_deporte">✨ Otra actividad deportiva o recreativa</option>
+              </optgroup>
+              <optgroup label="🩺 Salud, Medicina y Bienestar">
+                <option value="odontologia">🦷 Odontología y Diseño de Sonrisa</option>
+                <option value="medicos_especialistas">🩺 Consultorios Médicos Especializados</option>
+                <option value="opticas">👓 Ópticas y Exámenes Visuales</option>
+                <option value="psicologia">🧠 Psicología y Salud Mental</option>
+                <option value="fisioterapia">🦴 Fisioterapia y Rehabilitación</option>
+                <option value="laboratorios_clinicos">🧪 Laboratorios Clínicos y Toma de Muestras</option>
+                <option value="farmacias_droguerias">💊 Farmacias, Droguerías y Suplementos</option>
+                <option value="nutricion">🥗 Nutrición Clínica y Asesoría Dietética</option>
+                <option value="otra_salud">✨ Otro servicio de salud o bienestar</option>
+              </optgroup>
+              <optgroup label="🐾 Mascotas y Cuidado Animal">
+                <option value="veterinarias">🩺 Clínicas Veterinarias y Consultas</option>
+                <option value="peluqueria_canina">✂️ Peluquería Canina, Baño y Estética</option>
+                <option value="alimentos_mascotas">🥩 Alimentos, Concentrados y Snacks</option>
+                <option value="guarderias_paseadores">🦮 Guarderías, Hoteles Caninos y Paseadores</option>
+                <option value="accesorios_mascotas">🎾 Accesorios, Ropa y Juguetes</option>
+                <option value="otra_mascota">✨ Otro servicio para mascotas</option>
+              </optgroup>
+              <optgroup label="🎉 Eventos, Fiestas y Entretenimiento">
+                <option value="musica_vallenata_mariachis">🪗 Conjuntos Vallenatos, Mariachis y Orquestas</option>
+                <option value="decoracion_globos">🎈 Decoración de Fiestas y Ambientación</option>
+                <option value="sonido_luces">🔊 Alquiler de Sonido, Luces y Tarimas</option>
+                <option value="fotografia_video">📸 Fotografía y Video para Eventos</option>
+                <option value="salones_fincas">🏰 Salones de Eventos, Kioskos y Fincas</option>
+                <option value="alquiler_sillas_menaje">🪑 Alquiler de Sillas, Mesas y Vajillas</option>
+                <option value="animacion_infantil">🤡 Animación Infantil e Inflables</option>
+                <option value="catering_pasabocas">🍹 Pasabocas, Catering y Barras Móviles</option>
+                <option value="otro_evento">✨ Otro servicio para eventos</option>
+              </optgroup>
+              <optgroup label="🎓 Educación, Cursos y Formación">
+                <option value="academias_musica">🪗 Academias de Música (Acordeón, Canto, Instrumentos)</option>
+                <option value="idiomas_ingles">🗣️ Institutos de Idiomas e Inglés</option>
+                <option value="preicfes_tareas">📚 Pre-Icfes, Nivelación Escolar y Tareas Dirigidas</option>
+                <option value="cursos_sistemas_digitales">💻 Cursos de Computación y Habilidades Digitales</option>
+                <option value="escuelas_conduccion">🚗 Escuelas de Conducción (Carro y Moto)</option>
+                <option value="cursos_tecnicos_certificaciones">👷 Cursos Técnicos (Alturas, Manipulación de Alimentos)</option>
+                <option value="otra_educacion">✨ Otro curso o formación académica</option>
+              </optgroup>
+              <optgroup label="🏠 Hogar, Decoración y Muebles">
+                <option value="mueblerias">🛋️ Mueblerías, Salas, Comedores y Alcobas</option>
+                <option value="cortinas_persianas">🪟 Cortinas, Persianas y Persianería</option>
+                <option value="colchones_lenceria">🛏️ Colchones y Lencería para Cama</option>
+                <option value="cuadros_espejos">🖼️ Cuadros, Espejos y Adornos</option>
+                <option value="iluminacion_led">💡 Iluminación LED y Lámparas Modernas</option>
+                <option value="viveros_plantas">🪴 Viveros y Plantas Ornamentales</option>
+                <option value="acabados_remodelacion">🚿 Acabados para Baño, Cocina y Pisos</option>
+                <option value="otro_hogar">✨ Otro producto o servicio para el hogar</option>
+              </optgroup>
+              <optgroup label="💻 Tecnología, Celulares y Accesorios">
+                <option value="venta_celulares">📱 Venta de Celulares Nuevos y Garantizados</option>
+                <option value="accesorios_celular">🎧 Accesorios para Celular (Fundas, Audífonos, Cargadores)</option>
+                <option value="computadores_laptops">💻 Computadores, Portátiles y Periféricos</option>
+                <option value="camaras_seguridad">📹 Cámaras de Seguridad y Alarmas (CCTV)</option>
+                <option value="videojuegos_gamer">🎮 Consolas de Videojuegos y Zona Gamer</option>
+                <option value="impresoras_suministros">🖨️ Impresoras, Tintas y Suministros</option>
+                <option value="otra_tecnologia">✨ Otro producto tecnológico</option>
+              </optgroup>
+              <optgroup label="🚗 Mundo Automotriz: Carros, Motos, Repuestos y CDA">
+                <option value="venta_motos">🏍️ Venta de Motos Nuevas y Usadas</option>
+                <option value="venta_carros">🚗 Compra y Venta de Carros Usados y Concesionarios</option>
+                <option value="repuestos_autopartes">⚙️ Almacenes de Repuestos para Carro y Moto</option>
+                <option value="cda_tecnomecanica">🔍 Centros de Diagnóstico Automotor (CDA)</option>
+                <option value="autolavado_detailing">✨ Autolavados, Detailing y Polichado</option>
+                <option value="taller_mecanica_automotriz">🔧 Talleres Mecánicos y Sincronización</option>
+                <option value="llantas_montallantas">🛞 Llantas, Alineación, Balanceo y Montallantas</option>
+                <option value="lujos_sonido_polarizado">🔊 Lujos, Polarizados y Sonido Automotriz</option>
+                <option value="otro_automotriz">✨ Otro servicio automotriz</option>
+              </optgroup>
+              <optgroup label="🛵 Transporte, Mensajería y Logística">
+                <option value="mensajeria_domicilios">🛵 Mensajería Express y Domicilios Locales</option>
+                <option value="acarreos_mudanzas">🚚 Acarreos, Fletes y Mudanzas Locales y Nacionales</option>
+                <option value="transporte_pasajeros">🚐 Transporte Turístico, Especial y Empresarial</option>
+                <option value="encomiendas_envios">📦 Encomiendas y Envíos Nacionales</option>
+                <option value="alquiler_vehiculos">🚗 Alquiler de Carros (Rent a Car)</option>
+                <option value="otro_transporte">✨ Otro servicio de transporte o logística</option>
+              </optgroup>
+              <optgroup label="🏢 Inmobiliaria, Arriendos y Construcción">
+                <option value="inmobiliaria_arriendos_ventas">🔑 Arriendo y Venta de Casas y Apartamentos</option>
+                <option value="lotes_fincas_campestre">🌴 Venta de Lotes, Parcelas y Fincas</option>
+                <option value="ferreterias_materiales">🧱 Ferreterías y Materiales de Construcción</option>
+                <option value="vidrierias_aluminios">🪟 Vidrierías, Fachadas y Ventanería en Aluminio</option>
+                <option value="contratistas_obra_civil">🏗️ Obras Civiles, Albañilería y Reformas</option>
+                <option value="avaluos_tramites">⚖️ Avalúos Comerciales y Trámites Catastrales</option>
+                <option value="otra_inmobiliaria">✨ Otro servicio inmobiliario o de construcción</option>
+              </optgroup>
+              <optgroup label="✈️ Turismo, Hoteles y Experiencias">
+                <option value="hoteles_hostales">🏨 Hoteles y Alojamientos Urbanos</option>
+                <option value="glamping_cabanas">🏕️ Glamping, Cabañas y Fincas Ecoturísticas</option>
+                <option value="guias_paseos_ecologicos">🌊 Guías Turísticos (Río Guatapurí, Badillo, Sierra)</option>
+                <option value="agencias_viajes">🎫 Agencias de Viajes y Venta de Tiquetes</option>
+                <option value="tours_culturales">🚌 Tours Culturales y Ruta Vallenata</option>
+                <option value="otro_turismo">✨ Otra experiencia turística o de hospedaje</option>
+              </optgroup>
+              <optgroup label="👶 Bebés, Niños y Maternidad">
+                <option value="tiendas_bebes">🍼 Ropa y Artículos para Bebés y Recién Nacidos</option>
+                <option value="coches_cunas">🚼 Coches, Cunas, Corrales y Sillas para Carro</option>
+                <option value="jugueterias_didacticos">🧸 Jugueterías y Juegos Didácticos</option>
+                <option value="ropa_materna">👗 Ropa Materna y Lactancia</option>
+                <option value="disfraces_fiestas_ninos">🎂 Ropa de Fiesta y Disfraces Infantiles</option>
+                <option value="otro_infantil">✨ Otro producto infantil o maternal</option>
+              </optgroup>
+              <optgroup label="🎨 Arte, Manualidades, Regalos y Personalizados">
+                <option value="regalos_anchetas">🎁 Desayunos Sorpresa, Anchetas y Detalles</option>
+                <option value="artesanias_vallenatas">🪗 Artesanías Típicas y Souvenirs de Valledupar</option>
+                <option value="estampados_sublimacion">👕 Estampados, Camisetas, Mugs y Personalizados</option>
+                <option value="papeleria_creativa">🧵 Papelería Creativa, Empaques y Scrapbook</option>
+                <option value="floristerias">💐 Floristerías y Arreglos Florales</option>
+                <option value="arte_pintura">🖌️ Cuadros y Pinturas Hechas a Mano</option>
+                <option value="otro_personalizado">✨ Otro regalo o producto personalizado</option>
+              </optgroup>
+              <optgroup label="🌾 Agro, Ganadería y Campo">
+                <option value="insumos_ganaderos">🐄 Insumos Ganaderos, Sales, Concentrados y Melazas</option>
+                <option value="maquinaria_agricola">🚜 Maquinaria Agrícola, Motobombas y Repuestos</option>
+                <option value="semillas_fertilizantes">🌾 Semillas, Abonos y Fertilizantes</option>
+                <option value="medicamentos_veterinarios_campo">💉 Medicamentos Veterinarios para Ganado y Equinos</option>
+                <option value="talabarteria_aperos">🐎 Talabartería, Sillas de Montar y Aperos</option>
+                <option value="energia_solar_fincas">☀️ Paneles Solares y Cercas Eléctricas para Fincas</option>
+                <option value="otro_agro">✨ Otro producto o insumo para el campo</option>
+              </optgroup>
+              <optgroup label="🛒 Supermercados, Minimarkets, Carnicerías y Graneros">
+                <option value="carnicerias_famas">🥩 Carnicerías, Famas y Cortes Especiales</option>
+                <option value="fruterias_verdulerias">🥦 Fruterías, Verdulerías y Plazas de Mercado</option>
+                <option value="lacteos_queseras">🧀 Queseras y Lácteos Típicos</option>
+                <option value="minimarkets_autoservicios">🛒 Minimarkets y Autoservicios de Barrio</option>
+                <option value="distribuidoras_abarrotes">📦 Distribuidoras de Abarrotes al por Mayor</option>
+                <option value="otro_abastecimiento">✨ Otro abastecimiento de alimentos</option>
+              </optgroup>
+              <optgroup label="🖨️ Litografía, Impresión, Avisos y Publicidad Exterior">
+                <option value="avisos_luminosos_letras3d">🪧 Avisos Luminosos, Letras 3D y Fachadas Comerciales</option>
+                <option value="litografia_talonarios_tarjetas">📄 Litografía, Talonarios, Volantes y Tarjetas</option>
+                <option value="stickers_etiquetas">🏷️ Stickers, Etiquetas Adhesivas y Sellos</option>
+                <option value="gran_formato_pendones">🖼️ Impresión Gran Formato, Pendones y Pasacalles</option>
+                <option value="otra_litografia">✨ Otro servicio de litografía o avisos</option>
+              </optgroup>
+              <optgroup label="💳 Finanzas, Seguros, Créditos y Trámites">
+                <option value="soat_seguros">📄 Expedición de SOAT y Seguros Todo Riesgo</option>
+                <option value="creditos_libranzas">💵 Créditos Rápidos, Libranzas y Finanzas</option>
+                <option value="casas_cambio">💱 Casas de Cambio y Compraventa de Divisas</option>
+                <option value="corresponsales_giros">🏛️ Corresponsales Bancarios, Giros y Recaudos</option>
+                <option value="tramites_transito">📋 Trámites de Tránsito y Licencias de Conducción</option>
+                <option value="otro_financiero">✨ Otro trámite financiero o de seguros</option>
+              </optgroup>
+              <optgroup label="🌐 Negocios Digitales, Software y Comercio Online">
+                <option value="desarrollo_web_apps">💻 Desarrollo de Páginas Web y Tiendas Virtuales</option>
+                <option value="community_manager_redes">📱 Manejo de Redes y Creación de Contenido</option>
+                <option value="creadores_medios_digitales">🎙️ Podcasts y Medios Digitales de Valledupar</option>
+                <option value="tiendas_virtuales_ecommerce">🛒 Tiendas 100% Online (E-commerce y Dropshipping)</option>
+                <option value="facturacion_software">🖥️ Facturación Electrónica y Sistemas de Punto de Venta</option>
+                <option value="otro_digital">✨ Otro servicio digital o software</option>
+              </optgroup>
             </select>
           </div>
 
@@ -517,6 +741,11 @@
             </select>
           </div>
 
+        </div>
+
+                <!-- Píldoras Rápidas de Subcategoría / Especialidad con 1 Toque -->
+        <div id="subCategoryPillsBar" class="hidden flex flex-wrap items-center justify-center gap-1.5 pt-2 border-t border-slate-100 transition">
+          <!-- Inyectado dinámicamente según la categoría activa -->
         </div>
 
         <!-- Píldoras de Filtro Rápido con un solo toque (Se combinan con categoría, texto y precio) -->
@@ -806,71 +1035,83 @@
             </div>
           </div>
 
-          <!-- Categoría Principal y Segunda Categoría Opcional -->
+                    <!-- Categoría Principal y Subcategoría Dinámica -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block font-bold text-slate-700 mb-1">Categoría Principal *</label>
-              <select id="regCategory" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
-                <option value="moda_ropa_accesorios">👗 Moda, ropa y accesorios</option>
-                <option value="belleza_cuidado_personal">💄 Belleza y cuidado personal</option>
-                <option value="salud_bienestar">🩺 Salud y bienestar</option>
-                <option value="alimentos_gastronomia">🍔 Alimentos y gastronomía</option>
-                <option value="hogar_decoracion_muebles">🛋️ Hogar, decoración y muebles</option>
-                <option value="tecnologia_electronica">📱 Tecnología y electrónica</option>
-                <option value="servicios_profesionales_empresariales">💼 Servicios profesionales y empresariales</option>
-                <option value="educacion_formacion">📚 Educación y formación</option>
-                <option value="eventos_entretenimiento">🎉 Eventos y entretenimiento</option>
-                <option value="transporte_mensajeria_movilidad">🛵 Transporte, mensajería y movilidad</option>
-                <option value="inmobiliarias_construccion">🏗️ Inmobiliarias y construcción</option>
-                <option value="mascotas_animales">🐾 Mascotas y animales</option>
-                <option value="bebes_ninos_maternidad">👶 Bebés, niños y maternidad</option>
-                <option value="turismo_viajes">✈️ Turismo y viajes</option>
-                <option value="arte_manualidades_personalizados">🎨 Arte, manualidades y personalizados</option>
-                <option value="servicios_personales_domesticos">🛠️ Servicios personales y domésticos</option>
-                <option value="finanzas_seguros_tramites">💳 Finanzas, seguros y trámites</option>
-                <option value="deportes_recreacion">⚽ Deportes y actividades recreativas</option>
-                <option value="servicios_digitales_internet">💻 Servicios digitales y negocios por internet</option>
-                <option value="agricultura_campo_produccion">🌾 Agricultura, campo y producción</option>
+              <select id="regCategory" onchange="onCategoryChange(this.value)" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+                <option value="alimentos_gastronomia">🍽️ Alimentos y Gastronomía</option>
+                <option value="moda_ropa_accesorios">👗 Moda, Ropa y Accesorios</option>
+                <option value="belleza_cuidado_personal">💅 Belleza y Cuidado Personal</option>
+                <option value="servicios_tecnicos_reparaciones">🔧 Servicios Técnicos, Reparaciones y Oficios</option>
+                <option value="servicios_profesionales_empresariales">💼 Servicios Profesionales, Jurídicos y Asesorías</option>
+                <option value="deportes_recreacion">🏋️‍♂️ Gimnasio, Deportes y Actividades Recreativas</option>
+                <option value="salud_bienestar">🩺 Salud, Medicina y Bienestar</option>
+                <option value="mascotas_animales">🐾 Mascotas y Cuidado Animal</option>
+                <option value="eventos_entretenimiento">🎉 Eventos, Fiestas y Entretenimiento</option>
+                <option value="educacion_formacion">🎓 Educación, Cursos y Formación</option>
+                <option value="hogar_decoracion_muebles">🏠 Hogar, Decoración y Muebles</option>
+                <option value="tecnologia_electronica">💻 Tecnología, Celulares y Accesorios</option>
+                <option value="automotriz_vehiculos">🚗 Mundo Automotriz: Carros, Motos, Repuestos y CDA</option>
+                <option value="transporte_mensajeria_movilidad">🛵 Transporte, Mensajería y Logística</option>
+                <option value="inmobiliarias_construccion">🏢 Inmobiliaria, Arriendos y Construcción</option>
+                <option value="turismo_viajes">✈️ Turismo, Hoteles y Experiencias</option>
+                <option value="bebes_ninos_maternidad">👶 Bebés, Niños y Maternidad</option>
+                <option value="arte_manualidades_personalizados">🎨 Arte, Manualidades, Regalos y Personalizados</option>
+                <option value="agricultura_campo_produccion">🌾 Agro, Ganadería y Campo</option>
+                <option value="supermercados_abarrotes_alimentos">🛒 Supermercados, Minimarkets, Carnicerías y Graneros</option>
+                <option value="litografia_publicidad_impresion">🖨️ Litografía, Impresión, Avisos y Publicidad Exterior</option>
+                <option value="finanzas_seguros_tramites">💳 Finanzas, Seguros, Créditos y Trámites</option>
+                <option value="servicios_digitales_internet">🌐 Negocios Digitales, Software y Comercio Online</option>
               </select>
             </div>
             <div>
-              <label class="block font-bold text-slate-700 mb-1">Segunda Categoría (Opcional)</label>
-              <select id="regSecondaryCategory" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
-                <option value="">-- Ninguna (Solo una categoría) --</option>
-                <option value="moda_ropa_accesorios">👗 Moda, ropa y accesorios</option>
-                <option value="belleza_cuidado_personal">💄 Belleza y cuidado personal</option>
-                <option value="salud_bienestar">🩺 Salud y bienestar</option>
-                <option value="alimentos_gastronomia">🍔 Alimentos y gastronomía</option>
-                <option value="hogar_decoracion_muebles">🛋️ Hogar, decoración y muebles</option>
-                <option value="tecnologia_electronica">📱 Tecnología y electrónica</option>
-                <option value="servicios_profesionales_empresariales">💼 Servicios profesionales y empresariales</option>
-                <option value="educacion_formacion">📚 Educación y formación</option>
-                <option value="eventos_entretenimiento">🎉 Eventos y entretenimiento</option>
-                <option value="transporte_mensajeria_movilidad">🛵 Transporte, mensajería y movilidad</option>
-                <option value="inmobiliarias_construccion">🏗️ Inmobiliarias y construcción</option>
-                <option value="mascotas_animales">🐾 Mascotas y animales</option>
-                <option value="bebes_ninos_maternidad">👶 Bebés, niños y maternidad</option>
-                <option value="turismo_viajes">✈️ Turismo y viajes</option>
-                <option value="arte_manualidades_personalizados">🎨 Arte, manualidades y personalizados</option>
-                <option value="servicios_personales_domesticos">🛠️ Servicios personales y domésticos</option>
-                <option value="finanzas_seguros_tramites">💳 Finanzas, seguros y trámites</option>
-                <option value="deportes_recreacion">⚽ Deportes y actividades recreativas</option>
-                <option value="servicios_digitales_internet">💻 Servicios digitales y negocios por internet</option>
-                <option value="agricultura_campo_produccion">🌾 Agricultura, campo y producción</option>
+              <label class="block font-bold text-slate-700 mb-1">Subcategoría *</label>
+              <select id="regSubCategory" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
+                <!-- Se llenará dinámicamente según la Categoría Principal -->
               </select>
+              <input type="hidden" id="regSecondaryCategory" value="">
             </div>
           </div>
 
-          <!-- Hashtags o Palabras Clave de Búsqueda -->
+          <!-- Hashtags o Palabras Clave con Selección Rápida en Chips -->
           <div>
-            <label class="block font-bold text-slate-700 mb-1">Hashtags o Palabras Clave de Búsqueda (Hasta 4 etiquetas) *</label>
-            <input type="text" id="regHashtags" placeholder="Ej: #Zapatos, #Vestidos, #Accesorios, #DomiciliosValledupar" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold">
-            <p class="text-[10px] text-slate-500 mt-0.5">Ayudan a que los clientes te encuentren en el buscador aunque busquen productos específicos.</p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
+              <label class="block font-bold text-slate-700">Hashtags y Características Destacadas *</label>
+              <span class="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 self-start sm:self-auto">Toca hasta 4 etiquetas sugeridas</span>
+            </div>
+            <div id="predefinedHashtagsContainer" class="flex flex-wrap gap-1.5 mb-2 p-2.5 bg-slate-50/80 rounded-xl border border-dashed border-slate-200">
+              <!-- Chips sugeridos para tocar con un clic -->
+            </div>
+            <input type="text" id="regHashtags" placeholder="Ej: #DomicilioGratis, #MenuDelDia, #ComidaFit" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-xs text-slate-800">
+            <p class="text-[10px] text-slate-500 mt-1">Toca las etiquetas de arriba para añadirlas con un clic o escribe tus propios hashtags separados por comas o espacios.</p>
           </div>
 
           <div>
             <label class="block font-bold text-slate-700 mb-1">Pequeña Descripción del Negocio o Servicio (Se verá dentro de tu Perfil) *</label>
             <textarea id="regBio" rows="2" required placeholder="Ej: Especialistas en arepas rellenas al carbón, patacones y jugos naturales con atención en mesa y pedidos por WhatsApp." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold"></textarea>
+          </div>
+
+          <!-- Fotos de Portada y Vitrina Visual (Opcional, hasta 4 fotos) -->
+          <div class="bg-gradient-to-br from-slate-50 to-emerald-50/30 p-4 rounded-2xl border border-slate-200 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <label class="block font-bold text-slate-800 text-sm">📸 Fotos de Portada & Vitrina Visual (Opcional)</label>
+                <p class="text-[11px] text-slate-500">Muestra hasta 4 fotos reales de tus platos, productos, fachada o instalaciones.</p>
+              </div>
+              <label class="inline-flex items-center gap-2 cursor-pointer bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs self-start sm:self-auto">
+                <input type="checkbox" id="regGalleryEnabled" checked class="w-4 h-4 accent-[#01483B] rounded cursor-pointer" onchange="toggleRegGallerySection(this.checked)">
+                <span class="text-xs font-bold text-slate-700">Habilitar Galería</span>
+              </label>
+            </div>
+
+            <div id="regGalleryUploadArea" class="space-y-2">
+              <input type="file" id="regGalleryFiles" accept="image/*" multiple onchange="handleRegGalleryFiles(event)" class="w-full text-xs text-slate-600 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-[#01483B] file:text-white hover:file:bg-[#00AA9D] file:cursor-pointer cursor-pointer bg-white p-2 rounded-xl border border-slate-200">
+              <div id="regGalleryPreviewGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                <!-- Miniaturas de fotos seleccionadas -->
+              </div>
+              <p class="text-[10px] text-slate-500">Puedes seleccionar hasta 4 imágenes (PNG, JPG o WebP). Si no subes fotos o desmarcas la casilla, la vitrina no mostrará esta sección.</p>
+            </div>
           </div>
 
           <div class="space-y-4">
@@ -2672,39 +2913,1323 @@
     let totalPageViews = parseInt(localStorage.getItem('pillalo_v3_views') || '315', 10) + 1;
     localStorage.setItem('pillalo_v3_views', totalPageViews);
 
+        // =========================================================================
+    // TAXONOMÍA OFICIAL PILLALO VALLEDUPAR (23 MACRO CATEGORÍAS + SUBCATEGORÍAS DINÁMICAS)
+    // =========================================================================
+    const macroCategoriesData = {
+      "alimentos_gastronomia": {
+            "label": "🍽️ Alimentos y Gastronomía",
+            "subcategories": [
+                  {
+                        "value": "comida_rapida",
+                        "label": "🍔 Comida Rápida y Callejera"
+                  },
+                  {
+                        "value": "comida_saludable",
+                        "label": "🥗 Comida Saludable / Fit / Vegetariana"
+                  },
+                  {
+                        "value": "asados_parrilla",
+                        "label": "🥩 Asados, Parrilla y Carnes"
+                  },
+                  {
+                        "value": "reposteria_panaderia",
+                        "label": "🎂 Repostería, Panadería y Postres"
+                  },
+                  {
+                        "value": "cafeteria_brunch",
+                        "label": "☕ Cafetería, Desayunos y Brunch"
+                  },
+                  {
+                        "value": "pizzeria_pastas",
+                        "label": "🍕 Pizzería y Pastas"
+                  },
+                  {
+                        "value": "bebidas_heladeria",
+                        "label": "🍹 Bebidas, Cocteles y Helados"
+                  },
+                  {
+                        "value": "almuerzos_ejecutivos",
+                        "label": "🍱 Almuerzos Caseros y Ejecutivos"
+                  },
+                  {
+                        "value": "otra_gastronomia",
+                        "label": "✨ Otra especialidad gastronómica"
+                  }
+            ],
+            "hashtags": [
+                  "#DomicilioGratis",
+                  "#MenuDelDia",
+                  "#ComidaFit",
+                  "#AbiertoHastaTarde",
+                  "#AtencionEventos",
+                  "#ParaCompartir"
+            ]
+      },
+      "moda_ropa_accesorios": {
+            "label": "👗 Moda, Ropa y Accesorios",
+            "subcategories": [
+                  {
+                        "value": "confeccion_modisteria",
+                        "label": "🧵 Confección a Medida y Modistería"
+                  },
+                  {
+                        "value": "ropa_femenina",
+                        "label": "👚 Ropa Femenina (Casual y Elegante)"
+                  },
+                  {
+                        "value": "ropa_masculina",
+                        "label": "👔 Ropa Masculina"
+                  },
+                  {
+                        "value": "ropa_infantil",
+                        "label": "👶 Ropa Infantil y Juvenil"
+                  },
+                  {
+                        "value": "calzado_marroquineria",
+                        "label": "🥾 Calzado, Zapatos y Bolsos"
+                  },
+                  {
+                        "value": "joyeria_accesorios",
+                        "label": "💍 Joyería, Relojes y Accesorios"
+                  },
+                  {
+                        "value": "uniformes",
+                        "label": "🦺 Uniformes Empresariales y Escolares"
+                  },
+                  {
+                        "value": "otra_moda",
+                        "label": "✨ Otra especialidad en moda"
+                  }
+            ],
+            "hashtags": [
+                  "#SobreMedida",
+                  "#ArreglosExpress",
+                  "#EnviosNacionales",
+                  "#TallasGrandes",
+                  "#ModaPlaya",
+                  "#PreciosMayoristas"
+            ]
+      },
+      "belleza_cuidado_personal": {
+            "label": "💅 Belleza y Cuidado Personal",
+            "subcategories": [
+                  {
+                        "value": "unas_manicure",
+                        "label": "💅 Uñas, Manicure y Pedicure"
+                  },
+                  {
+                        "value": "cejas_pestanas",
+                        "label": "👁️ Cejas, Pestañas y Micropigmentación"
+                  },
+                  {
+                        "value": "peluqueria_capilar",
+                        "label": "💇‍♀️ Peluquería, Cortes y Colorimetría"
+                  },
+                  {
+                        "value": "barberia",
+                        "label": "💈 Barbería Masculina"
+                  },
+                  {
+                        "value": "spa_estetica",
+                        "label": "🧖‍♀️ Spa, Masajes y Limpieza Facial"
+                  },
+                  {
+                        "value": "maquillaje_profesional",
+                        "label": "💄 Maquillaje Profesional para Eventos"
+                  },
+                  {
+                        "value": "otra_belleza",
+                        "label": "✨ Otra especialidad de belleza"
+                  }
+            ],
+            "hashtags": [
+                  "#AtencionADomicilio",
+                  "#PreviaCita",
+                  "#AtencionSinCita",
+                  "#CuidadoCapilar",
+                  "#PromocionesSemana"
+            ]
+      },
+      "servicios_tecnicos_reparaciones": {
+            "label": "🔧 Servicios Técnicos, Reparaciones y Oficios",
+            "subcategories": [
+                  {
+                        "value": "aires_refrigeracion",
+                        "label": "❄️ Aires Acondicionados y Refrigeración"
+                  },
+                  {
+                        "value": "electricidad",
+                        "label": "⚡ Electricidad Residencial y Comercial"
+                  },
+                  {
+                        "value": "plomeria_gas",
+                        "label": "🚰 Plomería y Redes de Gas"
+                  },
+                  {
+                        "value": "reparacion_celulares_pc",
+                        "label": "📱 Reparación de Celulares y Computadores"
+                  },
+                  {
+                        "value": "cerrajeria",
+                        "label": "🔑 Cerrajería 24 Horas y Residencial"
+                  },
+                  {
+                        "value": "carpinteria_drywall",
+                        "label": "🪚 Carpintería, Ebanistería y Drywall"
+                  },
+                  {
+                        "value": "pintura_mantenimiento",
+                        "label": "🎨 Pintura y Mantenimiento de Inmuebles"
+                  },
+                  {
+                        "value": "otro_tecnico",
+                        "label": "✨ Otro servicio técnico u oficio"
+                  }
+            ],
+            "hashtags": [
+                  "#ServicioADomicilio",
+                  "#Emergencias24Horas",
+                  "#GarantiaPorEscrito",
+                  "#TecnicoCertificado",
+                  "#CotizacionGratis"
+            ]
+      },
+      "servicios_profesionales_empresariales": {
+            "label": "💼 Servicios Profesionales, Jurídicos y Asesorías",
+            "subcategories": [
+                  {
+                        "value": "abogados_juridico",
+                        "label": "⚖️ Abogados y Asesoría Jurídica"
+                  },
+                  {
+                        "value": "contaduria_tributaria",
+                        "label": "📊 Contaduría Pública y Asesoría Tributaria"
+                  },
+                  {
+                        "value": "arquitectura_interiores",
+                        "label": "📐 Arquitectura, Planos y Diseño de Interiores"
+                  },
+                  {
+                        "value": "marketing_redes",
+                        "label": "💻 Marketing Digital y Manejo de Redes"
+                  },
+                  {
+                        "value": "consultoria_empresarial",
+                        "label": "📈 Consultoría de Negocios y Finanzas"
+                  },
+                  {
+                        "value": "seguridad_sst",
+                        "label": "📋 Seguridad y Salud en el Trabajo (SST)"
+                  },
+                  {
+                        "value": "tramites_notaria",
+                        "label": "✍️ Trámites Notariales, Gestoría y Traducciones"
+                  },
+                  {
+                        "value": "otro_profesional",
+                        "label": "✨ Otro servicio profesional"
+                  }
+            ],
+            "hashtags": [
+                  "#ProfesionalTitulado",
+                  "#ConsultaVirtual",
+                  "#FacturacionElectronica",
+                  "#ConvenioEmpresas",
+                  "#PrimeraAsesoriaGratis"
+            ]
+      },
+      "deportes_recreacion": {
+            "label": "🏋️‍♂️ Gimnasio, Deportes y Actividades Recreativas",
+            "subcategories": [
+                  {
+                        "value": "gimnasios_fitness",
+                        "label": "🏋️‍♂️ Gimnasios, Fitness y Crossfit"
+                  },
+                  {
+                        "value": "canchas_alquiler",
+                        "label": "⚽ Canchas Sintéticas y Alquiler Deportivo"
+                  },
+                  {
+                        "value": "entrenadores_personal",
+                        "label": "🏃‍♂️ Entrenadores Personales (Personal Trainer)"
+                  },
+                  {
+                        "value": "escuelas_deportivas",
+                        "label": "🏊‍♂️ Escuelas Deportivas (Fútbol, Patinaje, Natación)"
+                  },
+                  {
+                        "value": "artes_marciales",
+                        "label": "🥋 Artes Marciales, Boxeo y Defensa Personal"
+                  },
+                  {
+                        "value": "yoga_pilates",
+                        "label": "🧘‍♀️ Yoga, Pilates y Clases Grupales"
+                  },
+                  {
+                        "value": "ciclismo_talleres",
+                        "label": "🚴‍♂️ Ciclismo: Tiendas y Talleres de Bicis"
+                  },
+                  {
+                        "value": "recreacion_familiar",
+                        "label": "🎳 Recreación Familiar, Bolos y Juegos"
+                  },
+                  {
+                        "value": "otro_deporte",
+                        "label": "✨ Otra actividad deportiva o recreativa"
+                  }
+            ],
+            "hashtags": [
+                  "#ClaseDeCortesia",
+                  "#SinClausulaDePermanencia",
+                  "#EntrenadorPersonalizado",
+                  "#AbiertoDesdeLas5AM",
+                  "#ParaNiños",
+                  "#ParqueaderoGratis"
+            ]
+      },
+      "salud_bienestar": {
+            "label": "🩺 Salud, Medicina y Bienestar",
+            "subcategories": [
+                  {
+                        "value": "odontologia",
+                        "label": "🦷 Odontología y Diseño de Sonrisa"
+                  },
+                  {
+                        "value": "medicos_especialistas",
+                        "label": "🩺 Consultorios Médicos Especializados"
+                  },
+                  {
+                        "value": "opticas",
+                        "label": "👓 Ópticas y Exámenes Visuales"
+                  },
+                  {
+                        "value": "psicologia",
+                        "label": "🧠 Psicología y Salud Mental"
+                  },
+                  {
+                        "value": "fisioterapia",
+                        "label": "🦴 Fisioterapia y Rehabilitación"
+                  },
+                  {
+                        "value": "laboratorios_clinicos",
+                        "label": "🧪 Laboratorios Clínicos y Toma de Muestras"
+                  },
+                  {
+                        "value": "farmacias_droguerias",
+                        "label": "💊 Farmacias, Droguerías y Suplementos"
+                  },
+                  {
+                        "value": "nutricion",
+                        "label": "🥗 Nutrición Clínica y Asesoría Dietética"
+                  },
+                  {
+                        "value": "otra_salud",
+                        "label": "✨ Otro servicio de salud o bienestar"
+                  }
+            ],
+            "hashtags": [
+                  "#ConvenioPrepagada",
+                  "#AtencionConCita",
+                  "#Emergencias",
+                  "#TomaMuestrasADomicilio",
+                  "#EspecialistaCertificado"
+            ]
+      },
+      "mascotas_animales": {
+            "label": "🐾 Mascotas y Cuidado Animal",
+            "subcategories": [
+                  {
+                        "value": "veterinarias",
+                        "label": "🩺 Clínicas Veterinarias y Consultas"
+                  },
+                  {
+                        "value": "peluqueria_canina",
+                        "label": "✂️ Peluquería Canina, Baño y Estética"
+                  },
+                  {
+                        "value": "alimentos_mascotas",
+                        "label": "🥩 Alimentos, Concentrados y Snacks"
+                  },
+                  {
+                        "value": "guarderias_paseadores",
+                        "label": "🦮 Guarderías, Hoteles Caninos y Paseadores"
+                  },
+                  {
+                        "value": "accesorios_mascotas",
+                        "label": "🎾 Accesorios, Ropa y Juguetes"
+                  },
+                  {
+                        "value": "otra_mascota",
+                        "label": "✨ Otro servicio para mascotas"
+                  }
+            ],
+            "hashtags": [
+                  "#UrgenciasVeterinarias24H",
+                  "#BanoADomicilio",
+                  "#RutaDeRecogida",
+                  "#VeterinarioTitulado",
+                  "#VacunacionAlDia"
+            ]
+      },
+      "eventos_entretenimiento": {
+            "label": "🎉 Eventos, Fiestas y Entretenimiento",
+            "subcategories": [
+                  {
+                        "value": "musica_vallenata_mariachis",
+                        "label": "🪗 Conjuntos Vallenatos, Mariachis y Orquestas"
+                  },
+                  {
+                        "value": "decoracion_globos",
+                        "label": "🎈 Decoración de Fiestas y Ambientación"
+                  },
+                  {
+                        "value": "sonido_luces",
+                        "label": "🔊 Alquiler de Sonido, Luces y Tarimas"
+                  },
+                  {
+                        "value": "fotografia_video",
+                        "label": "📸 Fotografía y Video para Eventos"
+                  },
+                  {
+                        "value": "salones_fincas",
+                        "label": "🏰 Salones de Eventos, Kioskos y Fincas"
+                  },
+                  {
+                        "value": "alquiler_sillas_menaje",
+                        "label": "🪑 Alquiler de Sillas, Mesas y Vajillas"
+                  },
+                  {
+                        "value": "animacion_infantil",
+                        "label": "🤡 Animación Infantil e Inflables"
+                  },
+                  {
+                        "value": "catering_pasabocas",
+                        "label": "🍹 Pasabocas, Catering y Barras Móviles"
+                  },
+                  {
+                        "value": "otro_evento",
+                        "label": "✨ Otro servicio para eventos"
+                  }
+            ],
+            "hashtags": [
+                  "#MusicaEnVivo",
+                  "#MontajeCompleto",
+                  "#CotizacionSinCompromiso",
+                  "#ParrandaVallenata",
+                  "#EventosEmpresariales"
+            ]
+      },
+      "educacion_formacion": {
+            "label": "🎓 Educación, Cursos y Formación",
+            "subcategories": [
+                  {
+                        "value": "academias_musica",
+                        "label": "🪗 Academias de Música (Acordeón, Canto, Instrumentos)"
+                  },
+                  {
+                        "value": "idiomas_ingles",
+                        "label": "🗣️ Institutos de Idiomas e Inglés"
+                  },
+                  {
+                        "value": "preicfes_tareas",
+                        "label": "📚 Pre-Icfes, Nivelación Escolar y Tareas Dirigidas"
+                  },
+                  {
+                        "value": "cursos_sistemas_digitales",
+                        "label": "💻 Cursos de Computación y Habilidades Digitales"
+                  },
+                  {
+                        "value": "escuelas_conduccion",
+                        "label": "🚗 Escuelas de Conducción (Carro y Moto)"
+                  },
+                  {
+                        "value": "cursos_tecnicos_certificaciones",
+                        "label": "👷 Cursos Técnicos (Alturas, Manipulación de Alimentos)"
+                  },
+                  {
+                        "value": "otra_educacion",
+                        "label": "✨ Otro curso o formación académica"
+                  }
+            ],
+            "hashtags": [
+                  "#ClasesVirtuales",
+                  "#ClasesPresenciales",
+                  "#CertificadoAprobado",
+                  "#HorariosFlexibles",
+                  "#ParaTodasLasEdades"
+            ]
+      },
+      "hogar_decoracion_muebles": {
+            "label": "🏠 Hogar, Decoración y Muebles",
+            "subcategories": [
+                  {
+                        "value": "mueblerias",
+                        "label": "🛋️ Mueblerías, Salas, Comedores y Alcobas"
+                  },
+                  {
+                        "value": "cortinas_persianas",
+                        "label": "🪟 Cortinas, Persianas y Persianería"
+                  },
+                  {
+                        "value": "colchones_lenceria",
+                        "label": "🛏️ Colchones y Lencería para Cama"
+                  },
+                  {
+                        "value": "cuadros_espejos",
+                        "label": "🖼️ Cuadros, Espejos y Adornos"
+                  },
+                  {
+                        "value": "iluminacion_led",
+                        "label": "💡 Iluminación LED y Lámparas Modernas"
+                  },
+                  {
+                        "value": "viveros_plantas",
+                        "label": "🪴 Viveros y Plantas Ornamentales"
+                  },
+                  {
+                        "value": "acabados_remodelacion",
+                        "label": "🚿 Acabados para Baño, Cocina y Pisos"
+                  },
+                  {
+                        "value": "otro_hogar",
+                        "label": "✨ Otro producto o servicio para el hogar"
+                  }
+            ],
+            "hashtags": [
+                  "#EnvioADomicilio",
+                  "#InstalacionGratis",
+                  "#GarantiaFabrica",
+                  "#MueblesAMedida",
+                  "#CreditoFacil"
+            ]
+      },
+      "tecnologia_electronica": {
+            "label": "💻 Tecnología, Celulares y Accesorios",
+            "subcategories": [
+                  {
+                        "value": "venta_celulares",
+                        "label": "📱 Venta de Celulares Nuevos y Garantizados"
+                  },
+                  {
+                        "value": "accesorios_celular",
+                        "label": "🎧 Accesorios para Celular (Fundas, Audífonos, Cargadores)"
+                  },
+                  {
+                        "value": "computadores_laptops",
+                        "label": "💻 Computadores, Portátiles y Periféricos"
+                  },
+                  {
+                        "value": "camaras_seguridad",
+                        "label": "📹 Cámaras de Seguridad y Alarmas (CCTV)"
+                  },
+                  {
+                        "value": "videojuegos_gamer",
+                        "label": "🎮 Consolas de Videojuegos y Zona Gamer"
+                  },
+                  {
+                        "value": "impresoras_suministros",
+                        "label": "🖨️ Impresoras, Tintas y Suministros"
+                  },
+                  {
+                        "value": "otra_tecnologia",
+                        "label": "✨ Otro producto tecnológico"
+                  }
+            ],
+            "hashtags": [
+                  "#GarantiaDeFabrica",
+                  "#EquiposHomologados",
+                  "#EnviosInmediatos",
+                  "#RecibimosTuUsado",
+                  "#ServicioPostventa"
+            ]
+      },
+      "automotriz_vehiculos": {
+            "label": "🚗 Mundo Automotriz: Carros, Motos, Repuestos y CDA",
+            "subcategories": [
+                  {
+                        "value": "venta_motos",
+                        "label": "🏍️ Venta de Motos Nuevas y Usadas"
+                  },
+                  {
+                        "value": "venta_carros",
+                        "label": "🚗 Compra y Venta de Carros Usados y Concesionarios"
+                  },
+                  {
+                        "value": "repuestos_autopartes",
+                        "label": "⚙️ Almacenes de Repuestos para Carro y Moto"
+                  },
+                  {
+                        "value": "cda_tecnomecanica",
+                        "label": "🔍 Centros de Diagnóstico Automotor (CDA)"
+                  },
+                  {
+                        "value": "autolavado_detailing",
+                        "label": "✨ Autolavados, Detailing y Polichado"
+                  },
+                  {
+                        "value": "taller_mecanica_automotriz",
+                        "label": "🔧 Talleres Mecánicos y Sincronización"
+                  },
+                  {
+                        "value": "llantas_montallantas",
+                        "label": "🛞 Llantas, Alineación, Balanceo y Montallantas"
+                  },
+                  {
+                        "value": "lujos_sonido_polarizado",
+                        "label": "🔊 Lujos, Polarizados y Sonido Automotriz"
+                  },
+                  {
+                        "value": "otro_automotriz",
+                        "label": "✨ Otro servicio automotriz"
+                  }
+            ],
+            "hashtags": [
+                  "#GarantiaMecanica",
+                  "#PeritajeAprobado",
+                  "#InstalacionInmediata",
+                  "#DescuentoEfectivo",
+                  "#AtencionRapida"
+            ]
+      },
+      "transporte_mensajeria_movilidad": {
+            "label": "🛵 Transporte, Mensajería y Logística",
+            "subcategories": [
+                  {
+                        "value": "mensajeria_domicilios",
+                        "label": "🛵 Mensajería Express y Domicilios Locales"
+                  },
+                  {
+                        "value": "acarreos_mudanzas",
+                        "label": "🚚 Acarreos, Fletes y Mudanzas Locales y Nacionales"
+                  },
+                  {
+                        "value": "transporte_pasajeros",
+                        "label": "🚐 Transporte Turístico, Especial y Empresarial"
+                  },
+                  {
+                        "value": "encomiendas_envios",
+                        "label": "📦 Encomiendas y Envíos Nacionales"
+                  },
+                  {
+                        "value": "alquiler_vehiculos",
+                        "label": "🚗 Alquiler de Carros (Rent a Car)"
+                  },
+                  {
+                        "value": "otro_transporte",
+                        "label": "✨ Otro servicio de transporte o logística"
+                  }
+            ],
+            "hashtags": [
+                  "#ServicioInmediato",
+                  "#SeguridadGarantizada",
+                  "#CuidadoDeMuebles",
+                  "#Disponibilidad24Horas",
+                  "#FacturaElectronica"
+            ]
+      },
+      "inmobiliarias_construccion": {
+            "label": "🏢 Inmobiliaria, Arriendos y Construcción",
+            "subcategories": [
+                  {
+                        "value": "inmobiliaria_arriendos_ventas",
+                        "label": "🔑 Arriendo y Venta de Casas y Apartamentos"
+                  },
+                  {
+                        "value": "lotes_fincas_campestre",
+                        "label": "🌴 Venta de Lotes, Parcelas y Fincas"
+                  },
+                  {
+                        "value": "ferreterias_materiales",
+                        "label": "🧱 Ferreterías y Materiales de Construcción"
+                  },
+                  {
+                        "value": "vidrierias_aluminios",
+                        "label": "🪟 Vidrierías, Fachadas y Ventanería en Aluminio"
+                  },
+                  {
+                        "value": "contratistas_obra_civil",
+                        "label": "🏗️ Obras Civiles, Albañilería y Reformas"
+                  },
+                  {
+                        "value": "avaluos_tramites",
+                        "label": "⚖️ Avalúos Comerciales y Trámites Catastrales"
+                  },
+                  {
+                        "value": "otra_inmobiliaria",
+                        "label": "✨ Otro servicio inmobiliario o de construcción"
+                  }
+            ],
+            "hashtags": [
+                  "#SinIntermediarios",
+                  "#AsesoriaCreditoHipotecario",
+                  "#InmuebleCertificado",
+                  "#VisitaGuiada",
+                  "#PlanSepare"
+            ]
+      },
+      "turismo_viajes": {
+            "label": "✈️ Turismo, Hoteles y Experiencias",
+            "subcategories": [
+                  {
+                        "value": "hoteles_hostales",
+                        "label": "🏨 Hoteles y Alojamientos Urbanos"
+                  },
+                  {
+                        "value": "glamping_cabanas",
+                        "label": "🏕️ Glamping, Cabañas y Fincas Ecoturísticas"
+                  },
+                  {
+                        "value": "guias_paseos_ecologicos",
+                        "label": "🌊 Guías Turísticos (Río Guatapurí, Badillo, Sierra)"
+                  },
+                  {
+                        "value": "agencias_viajes",
+                        "label": "🎫 Agencias de Viajes y Venta de Tiquetes"
+                  },
+                  {
+                        "value": "tours_culturales",
+                        "label": "🚌 Tours Culturales y Ruta Vallenata"
+                  },
+                  {
+                        "value": "otro_turismo",
+                        "label": "✨ Otra experiencia turística o de hospedaje"
+                  }
+            ],
+            "hashtags": [
+                  "#PiscinaIncluida",
+                  "#ConAireAcondicionado",
+                  "#PetFriendly",
+                  "#DesayunoIncluido",
+                  "#GuiaLocalCertificado"
+            ]
+      },
+      "bebes_ninos_maternidad": {
+            "label": "👶 Bebés, Niños y Maternidad",
+            "subcategories": [
+                  {
+                        "value": "tiendas_bebes",
+                        "label": "🍼 Ropa y Artículos para Bebés y Recién Nacidos"
+                  },
+                  {
+                        "value": "coches_cunas",
+                        "label": "🚼 Coches, Cunas, Corrales y Sillas para Carro"
+                  },
+                  {
+                        "value": "jugueterias_didacticos",
+                        "label": "🧸 Jugueterías y Juegos Didácticos"
+                  },
+                  {
+                        "value": "ropa_materna",
+                        "label": "👗 Ropa Materna y Lactancia"
+                  },
+                  {
+                        "value": "disfraces_fiestas_ninos",
+                        "label": "🎂 Ropa de Fiesta y Disfraces Infantiles"
+                  },
+                  {
+                        "value": "otro_infantil",
+                        "label": "✨ Otro producto infantil o maternal"
+                  }
+            ],
+            "hashtags": [
+                  "#MaterialAntialergico",
+                  "#ListaDeBabyShower",
+                  "#EnvioADomicilio",
+                  "#AsesoriaLactancia"
+            ]
+      },
+      "arte_manualidades_personalizados": {
+            "label": "🎨 Arte, Manualidades, Regalos y Personalizados",
+            "subcategories": [
+                  {
+                        "value": "regalos_anchetas",
+                        "label": "🎁 Desayunos Sorpresa, Anchetas y Detalles"
+                  },
+                  {
+                        "value": "artesanias_vallenatas",
+                        "label": "🪗 Artesanías Típicas y Souvenirs de Valledupar"
+                  },
+                  {
+                        "value": "estampados_sublimacion",
+                        "label": "👕 Estampados, Camisetas, Mugs y Personalizados"
+                  },
+                  {
+                        "value": "papeleria_creativa",
+                        "label": "🧵 Papelería Creativa, Empaques y Scrapbook"
+                  },
+                  {
+                        "value": "floristerias",
+                        "label": "💐 Floristerías y Arreglos Florales"
+                  },
+                  {
+                        "value": "arte_pintura",
+                        "label": "🖌️ Cuadros y Pinturas Hechas a Mano"
+                  },
+                  {
+                        "value": "otro_personalizado",
+                        "label": "✨ Otro regalo o producto personalizado"
+                  }
+            ],
+            "hashtags": [
+                  "#EntregaMismoDia",
+                  "#PersonalizadoConNombre",
+                  "#HechoAMano",
+                  "#HechoEnValledupar",
+                  "#TarjetaDeRegaloIncluida"
+            ]
+      },
+      "agricultura_campo_produccion": {
+            "label": "🌾 Agro, Ganadería y Campo",
+            "subcategories": [
+                  {
+                        "value": "insumos_ganaderos",
+                        "label": "🐄 Insumos Ganaderos, Sales, Concentrados y Melazas"
+                  },
+                  {
+                        "value": "maquinaria_agricola",
+                        "label": "🚜 Maquinaria Agrícola, Motobombas y Repuestos"
+                  },
+                  {
+                        "value": "semillas_fertilizantes",
+                        "label": "🌾 Semillas, Abonos y Fertilizantes"
+                  },
+                  {
+                        "value": "medicamentos_veterinarios_campo",
+                        "label": "💉 Medicamentos Veterinarios para Ganado y Equinos"
+                  },
+                  {
+                        "value": "talabarteria_aperos",
+                        "label": "🐎 Talabartería, Sillas de Montar y Aperos"
+                  },
+                  {
+                        "value": "energia_solar_fincas",
+                        "label": "☀️ Paneles Solares y Cercas Eléctricas para Fincas"
+                  },
+                  {
+                        "value": "otro_agro",
+                        "label": "✨ Otro producto o insumo para el campo"
+                  }
+            ],
+            "hashtags": [
+                  "#VentaAlPorMayor",
+                  "#DespachoAFinca",
+                  "#AsesoriaTecnicaAgronoma",
+                  "#GarantiaDeFabrica",
+                  "#PreciosDeDistribuidor"
+            ]
+      },
+      "supermercados_abarrotes_alimentos": {
+            "label": "🛒 Supermercados, Minimarkets, Carnicerías y Graneros",
+            "subcategories": [
+                  {
+                        "value": "carnicerias_famas",
+                        "label": "🥩 Carnicerías, Famas y Cortes Especiales"
+                  },
+                  {
+                        "value": "fruterias_verdulerias",
+                        "label": "🥦 Fruterías, Verdulerías y Plazas de Mercado"
+                  },
+                  {
+                        "value": "lacteos_queseras",
+                        "label": "🧀 Queseras y Lácteos Típicos"
+                  },
+                  {
+                        "value": "minimarkets_autoservicios",
+                        "label": "🛒 Minimarkets y Autoservicios de Barrio"
+                  },
+                  {
+                        "value": "distribuidoras_abarrotes",
+                        "label": "📦 Distribuidoras de Abarrotes al por Mayor"
+                  },
+                  {
+                        "value": "otro_abastecimiento",
+                        "label": "✨ Otro abastecimiento de alimentos"
+                  }
+            ],
+            "hashtags": [
+                  "#DomicilioGratis",
+                  "#CarneFrescaDelDia",
+                  "#QuesoCostenoFresco",
+                  "#PreciosMayoristas",
+                  "#PidePorWhatsApp"
+            ]
+      },
+      "litografia_publicidad_impresion": {
+            "label": "🖨️ Litografía, Impresión, Avisos y Publicidad Exterior",
+            "subcategories": [
+                  {
+                        "value": "avisos_luminosos_letras3d",
+                        "label": "🪧 Avisos Luminosos, Letras 3D y Fachadas Comerciales"
+                  },
+                  {
+                        "value": "litografia_talonarios_tarjetas",
+                        "label": "📄 Litografía, Talonarios, Volantes y Tarjetas"
+                  },
+                  {
+                        "value": "stickers_etiquetas",
+                        "label": "🏷️ Stickers, Etiquetas Adhesivas y Sellos"
+                  },
+                  {
+                        "value": "gran_formato_pendones",
+                        "label": "🖼️ Impresión Gran Formato, Pendones y Pasacalles"
+                  },
+                  {
+                        "value": "otra_litografia",
+                        "label": "✨ Otro servicio de litografía o avisos"
+                  }
+            ],
+            "hashtags": [
+                  "#EntregaExpress",
+                  "#DisenoGratis",
+                  "#InstalacionEnSitio",
+                  "#PreciosAlPorMayor"
+            ]
+      },
+      "finanzas_seguros_tramites": {
+            "label": "💳 Finanzas, Seguros, Créditos y Trámites",
+            "subcategories": [
+                  {
+                        "value": "soat_seguros",
+                        "label": "📄 Expedición de SOAT y Seguros Todo Riesgo"
+                  },
+                  {
+                        "value": "creditos_libranzas",
+                        "label": "💵 Créditos Rápidos, Libranzas y Finanzas"
+                  },
+                  {
+                        "value": "casas_cambio",
+                        "label": "💱 Casas de Cambio y Compraventa de Divisas"
+                  },
+                  {
+                        "value": "corresponsales_giros",
+                        "label": "🏛️ Corresponsales Bancarios, Giros y Recaudos"
+                  },
+                  {
+                        "value": "tramites_transito",
+                        "label": "📋 Trámites de Tránsito y Licencias de Conducción"
+                  },
+                  {
+                        "value": "otro_financiero",
+                        "label": "✨ Otro trámite financiero o de seguros"
+                  }
+            ],
+            "hashtags": [
+                  "#AprobacionInmediata",
+                  "#SinFiador",
+                  "#EntregaInmediata",
+                  "#SoatAlInstante",
+                  "#TramiteVirtual"
+            ]
+      },
+      "servicios_digitales_internet": {
+            "label": "🌐 Negocios Digitales, Software y Comercio Online",
+            "subcategories": [
+                  {
+                        "value": "desarrollo_web_apps",
+                        "label": "💻 Desarrollo de Páginas Web y Tiendas Virtuales"
+                  },
+                  {
+                        "value": "community_manager_redes",
+                        "label": "📱 Manejo de Redes y Creación de Contenido"
+                  },
+                  {
+                        "value": "creadores_medios_digitales",
+                        "label": "🎙️ Podcasts y Medios Digitales de Valledupar"
+                  },
+                  {
+                        "value": "tiendas_virtuales_ecommerce",
+                        "label": "🛒 Tiendas 100% Online (E-commerce y Dropshipping)"
+                  },
+                  {
+                        "value": "facturacion_software",
+                        "label": "🖥️ Facturación Electrónica y Sistemas de Punto de Venta"
+                  },
+                  {
+                        "value": "otro_digital",
+                        "label": "✨ Otro servicio digital o software"
+                  }
+            ],
+            "hashtags": [
+                  "#AtencionNacional",
+                  "#PortafolioDisponible",
+                  "#PaquetesMensuales",
+                  "#SoporteRemoto"
+            ]
+      }
+};
+
     const categoryLabels = {
-      moda_ropa_accesorios: "👗 Moda, ropa y accesorios",
-      belleza_cuidado_personal: "💄 Belleza y cuidado personal",
-      salud_bienestar: "🩺 Salud y bienestar",
-      alimentos_gastronomia: "🍔 Alimentos y gastronomía",
-      hogar_decoracion_muebles: "🛋️ Hogar, decoración y muebles",
-      tecnologia_electronica: "📱 Tecnología y electrónica",
-      servicios_profesionales_empresariales: "💼 Servicios profesionales y empresariales",
-      educacion_formacion: "📚 Educación y formación",
-      eventos_entretenimiento: "🎉 Eventos y entretenimiento",
-      transporte_mensajeria_movilidad: "🛵 Transporte, mensajería y movilidad",
-      inmobiliarias_construccion: "🏗️ Inmobiliarias y construcción",
-      mascotas_animales: "🐾 Mascotas y animales",
-      bebes_ninos_maternidad: "👶 Bebés, niños y maternidad",
-      turismo_viajes: "✈️ Turismo y viajes",
-      arte_manualidades_personalizados: "🎨 Arte, manualidades y productos personalizados",
-      servicios_personales_domesticos: "🛠️ Servicios personales y domésticos",
-      finanzas_seguros_tramites: "💳 Finanzas, seguros y trámites",
-      deportes_recreacion: "⚽ Deportes y actividades recreativas",
-      servicios_digitales_internet: "💻 Servicios digitales y negocios por internet",
-      agricultura_campo_produccion: "🌾 Agricultura, campo y producción",
-      // retrocompatibilidad con registros previos:
-      ropa: "👗 Moda, ropa y accesorios",
-      comida: "🍔 Alimentos y gastronomía",
-      calzado: "👗 Moda, ropa y accesorios",
-      accesorios: "👗 Moda, ropa y accesorios",
-      perfumes: "💄 Belleza y cuidado personal",
-      belleza: "💄 Belleza y cuidado personal",
-      serv_belleza: "💄 Belleza y cuidado personal",
-      mascotas: "🐾 Mascotas y animales",
-      tecnicos: "🛠️ Servicios personales y domésticos",
-      profesionales: "💼 Servicios profesionales y empresariales"
-    };
+      "alimentos_gastronomia": "🍽️ Alimentos y Gastronomía",
+      "comida_rapida": "🍔 Comida Rápida y Callejera",
+      "comida_saludable": "🥗 Comida Saludable / Fit / Vegetariana",
+      "asados_parrilla": "🥩 Asados, Parrilla y Carnes",
+      "reposteria_panaderia": "🎂 Repostería, Panadería y Postres",
+      "cafeteria_brunch": "☕ Cafetería, Desayunos y Brunch",
+      "pizzeria_pastas": "🍕 Pizzería y Pastas",
+      "bebidas_heladeria": "🍹 Bebidas, Cocteles y Helados",
+      "almuerzos_ejecutivos": "🍱 Almuerzos Caseros y Ejecutivos",
+      "otra_gastronomia": "✨ Otra especialidad gastronómica",
+      "moda_ropa_accesorios": "👗 Moda, Ropa y Accesorios",
+      "confeccion_modisteria": "🧵 Confección a Medida y Modistería",
+      "ropa_femenina": "👚 Ropa Femenina (Casual y Elegante)",
+      "ropa_masculina": "👔 Ropa Masculina",
+      "ropa_infantil": "👶 Ropa Infantil y Juvenil",
+      "calzado_marroquineria": "🥾 Calzado, Zapatos y Bolsos",
+      "joyeria_accesorios": "💍 Joyería, Relojes y Accesorios",
+      "uniformes": "🦺 Uniformes Empresariales y Escolares",
+      "otra_moda": "✨ Otra especialidad en moda",
+      "belleza_cuidado_personal": "💅 Belleza y Cuidado Personal",
+      "unas_manicure": "💅 Uñas, Manicure y Pedicure",
+      "cejas_pestanas": "👁️ Cejas, Pestañas y Micropigmentación",
+      "peluqueria_capilar": "💇‍♀️ Peluquería, Cortes y Colorimetría",
+      "barberia": "💈 Barbería Masculina",
+      "spa_estetica": "🧖‍♀️ Spa, Masajes y Limpieza Facial",
+      "maquillaje_profesional": "💄 Maquillaje Profesional para Eventos",
+      "otra_belleza": "✨ Otra especialidad de belleza",
+      "servicios_tecnicos_reparaciones": "🔧 Servicios Técnicos, Reparaciones y Oficios",
+      "aires_refrigeracion": "❄️ Aires Acondicionados y Refrigeración",
+      "electricidad": "⚡ Electricidad Residencial y Comercial",
+      "plomeria_gas": "🚰 Plomería y Redes de Gas",
+      "reparacion_celulares_pc": "📱 Reparación de Celulares y Computadores",
+      "cerrajeria": "🔑 Cerrajería 24 Horas y Residencial",
+      "carpinteria_drywall": "🪚 Carpintería, Ebanistería y Drywall",
+      "pintura_mantenimiento": "🎨 Pintura y Mantenimiento de Inmuebles",
+      "otro_tecnico": "✨ Otro servicio técnico u oficio",
+      "servicios_profesionales_empresariales": "💼 Servicios Profesionales, Jurídicos y Asesorías",
+      "abogados_juridico": "⚖️ Abogados y Asesoría Jurídica",
+      "contaduria_tributaria": "📊 Contaduría Pública y Asesoría Tributaria",
+      "arquitectura_interiores": "📐 Arquitectura, Planos y Diseño de Interiores",
+      "marketing_redes": "💻 Marketing Digital y Manejo de Redes",
+      "consultoria_empresarial": "📈 Consultoría de Negocios y Finanzas",
+      "seguridad_sst": "📋 Seguridad y Salud en el Trabajo (SST)",
+      "tramites_notaria": "✍️ Trámites Notariales, Gestoría y Traducciones",
+      "otro_profesional": "✨ Otro servicio profesional",
+      "deportes_recreacion": "🏋️‍♂️ Gimnasio, Deportes y Actividades Recreativas",
+      "gimnasios_fitness": "🏋️‍♂️ Gimnasios, Fitness y Crossfit",
+      "canchas_alquiler": "⚽ Canchas Sintéticas y Alquiler Deportivo",
+      "entrenadores_personal": "🏃‍♂️ Entrenadores Personales (Personal Trainer)",
+      "escuelas_deportivas": "🏊‍♂️ Escuelas Deportivas (Fútbol, Patinaje, Natación)",
+      "artes_marciales": "🥋 Artes Marciales, Boxeo y Defensa Personal",
+      "yoga_pilates": "🧘‍♀️ Yoga, Pilates y Clases Grupales",
+      "ciclismo_talleres": "🚴‍♂️ Ciclismo: Tiendas y Talleres de Bicis",
+      "recreacion_familiar": "🎳 Recreación Familiar, Bolos y Juegos",
+      "otro_deporte": "✨ Otra actividad deportiva o recreativa",
+      "salud_bienestar": "🩺 Salud, Medicina y Bienestar",
+      "odontologia": "🦷 Odontología y Diseño de Sonrisa",
+      "medicos_especialistas": "🩺 Consultorios Médicos Especializados",
+      "opticas": "👓 Ópticas y Exámenes Visuales",
+      "psicologia": "🧠 Psicología y Salud Mental",
+      "fisioterapia": "🦴 Fisioterapia y Rehabilitación",
+      "laboratorios_clinicos": "🧪 Laboratorios Clínicos y Toma de Muestras",
+      "farmacias_droguerias": "💊 Farmacias, Droguerías y Suplementos",
+      "nutricion": "🥗 Nutrición Clínica y Asesoría Dietética",
+      "otra_salud": "✨ Otro servicio de salud o bienestar",
+      "mascotas_animales": "🐾 Mascotas y Cuidado Animal",
+      "veterinarias": "🩺 Clínicas Veterinarias y Consultas",
+      "peluqueria_canina": "✂️ Peluquería Canina, Baño y Estética",
+      "alimentos_mascotas": "🥩 Alimentos, Concentrados y Snacks",
+      "guarderias_paseadores": "🦮 Guarderías, Hoteles Caninos y Paseadores",
+      "accesorios_mascotas": "🎾 Accesorios, Ropa y Juguetes",
+      "otra_mascota": "✨ Otro servicio para mascotas",
+      "eventos_entretenimiento": "🎉 Eventos, Fiestas y Entretenimiento",
+      "musica_vallenata_mariachis": "🪗 Conjuntos Vallenatos, Mariachis y Orquestas",
+      "decoracion_globos": "🎈 Decoración de Fiestas y Ambientación",
+      "sonido_luces": "🔊 Alquiler de Sonido, Luces y Tarimas",
+      "fotografia_video": "📸 Fotografía y Video para Eventos",
+      "salones_fincas": "🏰 Salones de Eventos, Kioskos y Fincas",
+      "alquiler_sillas_menaje": "🪑 Alquiler de Sillas, Mesas y Vajillas",
+      "animacion_infantil": "🤡 Animación Infantil e Inflables",
+      "catering_pasabocas": "🍹 Pasabocas, Catering y Barras Móviles",
+      "otro_evento": "✨ Otro servicio para eventos",
+      "educacion_formacion": "🎓 Educación, Cursos y Formación",
+      "academias_musica": "🪗 Academias de Música (Acordeón, Canto, Instrumentos)",
+      "idiomas_ingles": "🗣️ Institutos de Idiomas e Inglés",
+      "preicfes_tareas": "📚 Pre-Icfes, Nivelación Escolar y Tareas Dirigidas",
+      "cursos_sistemas_digitales": "💻 Cursos de Computación y Habilidades Digitales",
+      "escuelas_conduccion": "🚗 Escuelas de Conducción (Carro y Moto)",
+      "cursos_tecnicos_certificaciones": "👷 Cursos Técnicos (Alturas, Manipulación de Alimentos)",
+      "otra_educacion": "✨ Otro curso o formación académica",
+      "hogar_decoracion_muebles": "🏠 Hogar, Decoración y Muebles",
+      "mueblerias": "🛋️ Mueblerías, Salas, Comedores y Alcobas",
+      "cortinas_persianas": "🪟 Cortinas, Persianas y Persianería",
+      "colchones_lenceria": "🛏️ Colchones y Lencería para Cama",
+      "cuadros_espejos": "🖼️ Cuadros, Espejos y Adornos",
+      "iluminacion_led": "💡 Iluminación LED y Lámparas Modernas",
+      "viveros_plantas": "🪴 Viveros y Plantas Ornamentales",
+      "acabados_remodelacion": "🚿 Acabados para Baño, Cocina y Pisos",
+      "otro_hogar": "✨ Otro producto o servicio para el hogar",
+      "tecnologia_electronica": "💻 Tecnología, Celulares y Accesorios",
+      "venta_celulares": "📱 Venta de Celulares Nuevos y Garantizados",
+      "accesorios_celular": "🎧 Accesorios para Celular (Fundas, Audífonos, Cargadores)",
+      "computadores_laptops": "💻 Computadores, Portátiles y Periféricos",
+      "camaras_seguridad": "📹 Cámaras de Seguridad y Alarmas (CCTV)",
+      "videojuegos_gamer": "🎮 Consolas de Videojuegos y Zona Gamer",
+      "impresoras_suministros": "🖨️ Impresoras, Tintas y Suministros",
+      "otra_tecnologia": "✨ Otro producto tecnológico",
+      "automotriz_vehiculos": "🚗 Mundo Automotriz: Carros, Motos, Repuestos y CDA",
+      "venta_motos": "🏍️ Venta de Motos Nuevas y Usadas",
+      "venta_carros": "🚗 Compra y Venta de Carros Usados y Concesionarios",
+      "repuestos_autopartes": "⚙️ Almacenes de Repuestos para Carro y Moto",
+      "cda_tecnomecanica": "🔍 Centros de Diagnóstico Automotor (CDA)",
+      "autolavado_detailing": "✨ Autolavados, Detailing y Polichado",
+      "taller_mecanica_automotriz": "🔧 Talleres Mecánicos y Sincronización",
+      "llantas_montallantas": "🛞 Llantas, Alineación, Balanceo y Montallantas",
+      "lujos_sonido_polarizado": "🔊 Lujos, Polarizados y Sonido Automotriz",
+      "otro_automotriz": "✨ Otro servicio automotriz",
+      "transporte_mensajeria_movilidad": "🛵 Transporte, Mensajería y Logística",
+      "mensajeria_domicilios": "🛵 Mensajería Express y Domicilios Locales",
+      "acarreos_mudanzas": "🚚 Acarreos, Fletes y Mudanzas Locales y Nacionales",
+      "transporte_pasajeros": "🚐 Transporte Turístico, Especial y Empresarial",
+      "encomiendas_envios": "📦 Encomiendas y Envíos Nacionales",
+      "alquiler_vehiculos": "🚗 Alquiler de Carros (Rent a Car)",
+      "otro_transporte": "✨ Otro servicio de transporte o logística",
+      "inmobiliarias_construccion": "🏢 Inmobiliaria, Arriendos y Construcción",
+      "inmobiliaria_arriendos_ventas": "🔑 Arriendo y Venta de Casas y Apartamentos",
+      "lotes_fincas_campestre": "🌴 Venta de Lotes, Parcelas y Fincas",
+      "ferreterias_materiales": "🧱 Ferreterías y Materiales de Construcción",
+      "vidrierias_aluminios": "🪟 Vidrierías, Fachadas y Ventanería en Aluminio",
+      "contratistas_obra_civil": "🏗️ Obras Civiles, Albañilería y Reformas",
+      "avaluos_tramites": "⚖️ Avalúos Comerciales y Trámites Catastrales",
+      "otra_inmobiliaria": "✨ Otro servicio inmobiliario o de construcción",
+      "turismo_viajes": "✈️ Turismo, Hoteles y Experiencias",
+      "hoteles_hostales": "🏨 Hoteles y Alojamientos Urbanos",
+      "glamping_cabanas": "🏕️ Glamping, Cabañas y Fincas Ecoturísticas",
+      "guias_paseos_ecologicos": "🌊 Guías Turísticos (Río Guatapurí, Badillo, Sierra)",
+      "agencias_viajes": "🎫 Agencias de Viajes y Venta de Tiquetes",
+      "tours_culturales": "🚌 Tours Culturales y Ruta Vallenata",
+      "otro_turismo": "✨ Otra experiencia turística o de hospedaje",
+      "bebes_ninos_maternidad": "👶 Bebés, Niños y Maternidad",
+      "tiendas_bebes": "🍼 Ropa y Artículos para Bebés y Recién Nacidos",
+      "coches_cunas": "🚼 Coches, Cunas, Corrales y Sillas para Carro",
+      "jugueterias_didacticos": "🧸 Jugueterías y Juegos Didácticos",
+      "ropa_materna": "👗 Ropa Materna y Lactancia",
+      "disfraces_fiestas_ninos": "🎂 Ropa de Fiesta y Disfraces Infantiles",
+      "otro_infantil": "✨ Otro producto infantil o maternal",
+      "arte_manualidades_personalizados": "🎨 Arte, Manualidades, Regalos y Personalizados",
+      "regalos_anchetas": "🎁 Desayunos Sorpresa, Anchetas y Detalles",
+      "artesanias_vallenatas": "🪗 Artesanías Típicas y Souvenirs de Valledupar",
+      "estampados_sublimacion": "👕 Estampados, Camisetas, Mugs y Personalizados",
+      "papeleria_creativa": "🧵 Papelería Creativa, Empaques y Scrapbook",
+      "floristerias": "💐 Floristerías y Arreglos Florales",
+      "arte_pintura": "🖌️ Cuadros y Pinturas Hechas a Mano",
+      "otro_personalizado": "✨ Otro regalo o producto personalizado",
+      "agricultura_campo_produccion": "🌾 Agro, Ganadería y Campo",
+      "insumos_ganaderos": "🐄 Insumos Ganaderos, Sales, Concentrados y Melazas",
+      "maquinaria_agricola": "🚜 Maquinaria Agrícola, Motobombas y Repuestos",
+      "semillas_fertilizantes": "🌾 Semillas, Abonos y Fertilizantes",
+      "medicamentos_veterinarios_campo": "💉 Medicamentos Veterinarios para Ganado y Equinos",
+      "talabarteria_aperos": "🐎 Talabartería, Sillas de Montar y Aperos",
+      "energia_solar_fincas": "☀️ Paneles Solares y Cercas Eléctricas para Fincas",
+      "otro_agro": "✨ Otro producto o insumo para el campo",
+      "supermercados_abarrotes_alimentos": "🛒 Supermercados, Minimarkets, Carnicerías y Graneros",
+      "carnicerias_famas": "🥩 Carnicerías, Famas y Cortes Especiales",
+      "fruterias_verdulerias": "🥦 Fruterías, Verdulerías y Plazas de Mercado",
+      "lacteos_queseras": "🧀 Queseras y Lácteos Típicos",
+      "minimarkets_autoservicios": "🛒 Minimarkets y Autoservicios de Barrio",
+      "distribuidoras_abarrotes": "📦 Distribuidoras de Abarrotes al por Mayor",
+      "otro_abastecimiento": "✨ Otro abastecimiento de alimentos",
+      "litografia_publicidad_impresion": "🖨️ Litografía, Impresión, Avisos y Publicidad Exterior",
+      "avisos_luminosos_letras3d": "🪧 Avisos Luminosos, Letras 3D y Fachadas Comerciales",
+      "litografia_talonarios_tarjetas": "📄 Litografía, Talonarios, Volantes y Tarjetas",
+      "stickers_etiquetas": "🏷️ Stickers, Etiquetas Adhesivas y Sellos",
+      "gran_formato_pendones": "🖼️ Impresión Gran Formato, Pendones y Pasacalles",
+      "otra_litografia": "✨ Otro servicio de litografía o avisos",
+      "finanzas_seguros_tramites": "💳 Finanzas, Seguros, Créditos y Trámites",
+      "soat_seguros": "📄 Expedición de SOAT y Seguros Todo Riesgo",
+      "creditos_libranzas": "💵 Créditos Rápidos, Libranzas y Finanzas",
+      "casas_cambio": "💱 Casas de Cambio y Compraventa de Divisas",
+      "corresponsales_giros": "🏛️ Corresponsales Bancarios, Giros y Recaudos",
+      "tramites_transito": "📋 Trámites de Tránsito y Licencias de Conducción",
+      "otro_financiero": "✨ Otro trámite financiero o de seguros",
+      "servicios_digitales_internet": "🌐 Negocios Digitales, Software y Comercio Online",
+      "desarrollo_web_apps": "💻 Desarrollo de Páginas Web y Tiendas Virtuales",
+      "community_manager_redes": "📱 Manejo de Redes y Creación de Contenido",
+      "creadores_medios_digitales": "🎙️ Podcasts y Medios Digitales de Valledupar",
+      "tiendas_virtuales_ecommerce": "🛒 Tiendas 100% Online (E-commerce y Dropshipping)",
+      "facturacion_software": "🖥️ Facturación Electrónica y Sistemas de Punto de Venta",
+      "otro_digital": "✨ Otro servicio digital o software",
+      "ropa": "👗 Moda, Ropa y Accesorios",
+      "comida": "🍽️ Alimentos y Gastronomía",
+      "calzado": "👗 Moda, Ropa y Accesorios",
+      "accesorios": "👗 Moda, Ropa y Accesorios",
+      "perfumes": "💅 Belleza y Cuidado Personal",
+      "belleza": "💅 Belleza y Cuidado Personal",
+      "serv_belleza": "💅 Belleza y Cuidado Personal",
+      "mascotas": "🐾 Mascotas y Cuidado Animal",
+      "tecnicos": "🔧 Servicios Técnicos, Reparaciones y Oficios",
+      "servicios_personales_domesticos": "🔧 Servicios Técnicos, Reparaciones y Oficios",
+      "profesionales": "💼 Servicios Profesionales, Jurídicos y Asesorías",
+      "automotriz": "🚗 Mundo Automotriz: Carros, Motos, Repuestos y CDA",
+      "supermercados": "🛒 Supermercados, Minimarkets, Carnicerías y Graneros",
+      "litografia": "🖨️ Litografía, Impresión, Avisos y Publicidad Exterior"
+};
+
+    function onCategoryChange(catKey, selectedSub = '') {
+      const catData = macroCategoriesData[catKey];
+      const subSelect = document.getElementById('regSubCategory');
+      const secInput = document.getElementById('regSecondaryCategory');
+      if (subSelect && catData) {
+        let opts = `<option value="">-- Selecciona una especialidad / subcategoría --</option>`;
+        catData.subcategories.forEach(sub => {
+          const isSel = (sub.value === selectedSub || sub.label === selectedSub) ? 'selected' : '';
+          opts += `<option value="${sub.value}" ${isSel}>${sub.label}</option>`;
+        });
+        subSelect.innerHTML = opts;
+        if (secInput) secInput.value = subSelect.value;
+        subSelect.onchange = function() {
+          if (secInput) secInput.value = this.value;
+        };
+      }
+      renderHashtagChips(catKey);
+    }
+
+    let currentSubCategory = 'all';
+
+    function setSubCategoryFromSelect(subVal) {
+      setSubCategory(subVal);
+    }
+
+    function setSubCategory(subVal) {
+      currentSubCategory = subVal;
+      const sel = document.getElementById('subCategoryFilterSelect');
+      if (sel && sel.value !== subVal) sel.value = subVal;
+
+      // Si el usuario eligió una especialidad puntual estando en 'all', sincronizar la macro categoría
+      if (subVal !== 'all' && (currentCategory === 'all' || !currentCategory)) {
+        for (const catKey of Object.keys(macroCategoriesData)) {
+          const found = (macroCategoriesData[catKey].subcategories || []).some(s => s.value === subVal);
+          if (found) {
+            currentCategory = catKey;
+            const catSelect = document.getElementById('categoryFilterSelect');
+            if (catSelect) catSelect.value = catKey;
+            updateDirectorySubcategories(catKey);
+            currentSubCategory = subVal;
+            if (sel) sel.value = subVal;
+            break;
+          }
+        }
+      }
+      
+      // Actualizar estilo visual de las píldoras de subcategoría
+      document.querySelectorAll('#subCategoryPillsBar .subcat-pill').forEach(btn => {
+        const val = btn.getAttribute('data-subcat');
+        if (val === subVal) {
+          btn.className = 'subcat-pill active px-3 py-1 rounded-full text-xs font-black transition border cursor-pointer bg-[#01483B] text-white border-[#01483B] shadow-2xs';
+        } else {
+          btn.className = 'subcat-pill px-3 py-1 rounded-full text-xs font-bold transition border cursor-pointer bg-white text-slate-700 border-slate-200 hover:border-[#00AA9D] hover:text-[#01483B]';
+        }
+      });
+
+      filterBusinesses('subcategory');
+    }
+
+    function updateDirectorySubcategories(catKey) {
+      const container = document.getElementById('subCategoryFilterContainer');
+      const pillsBar = document.getElementById('subCategoryPillsBar');
+      const select = document.getElementById('subCategoryFilterSelect');
+      currentSubCategory = 'all';
+
+      // El contenedor de Especialidad se mantiene SIEMPRE habilitado y visible
+      if (container) container.classList.remove('hidden');
+
+      // Si la categoría es 'all', 'favoritos' o no tiene filtro macro:
+      if (!catKey || catKey === 'all' || catKey === 'favoritos' || !macroCategoriesData[catKey]) {
+        if (pillsBar) {
+          pillsBar.classList.add('hidden');
+          pillsBar.innerHTML = '';
+        }
+        if (select) {
+          let allOpts = '<option value="all">🎯 Todas las especialidades</option>';
+          Object.keys(macroCategoriesData).forEach(k => {
+            const mCat = macroCategoriesData[k];
+            if (mCat && mCat.subcategories && mCat.subcategories.length) {
+              allOpts += `<optgroup label="${mCat.label}">`;
+              mCat.subcategories.forEach(s => {
+                allOpts += `<option value="${s.value}">${s.label}</option>`;
+              });
+              allOpts += `</optgroup>`;
+            }
+          });
+          select.innerHTML = allOpts;
+        }
+        return;
+      }
+
+      const catData = macroCategoriesData[catKey];
+      const subs = catData.subcategories || [];
+
+      // Llenar el select con las especialidades específicas de la categoría seleccionada
+      let selectOpts = `<option value="all">🎯 Todas las especialidades</option>`;
+      subs.forEach(s => {
+        selectOpts += `<option value="${s.value}">${s.label}</option>`;
+      });
+      if (select) select.innerHTML = selectOpts;
+
+      // Llenar la barra de píldoras rápidas con 1 toque
+      let pillsHtml = `
+        <button type="button" onclick="setSubCategory('all')" data-subcat="all" class="subcat-pill active px-3 py-1 rounded-full text-xs font-black transition border cursor-pointer bg-[#01483B] text-white border-[#01483B] shadow-2xs">
+          ✨ Todas
+        </button>
+      `;
+      subs.forEach(s => {
+        pillsHtml += `
+          <button type="button" onclick="setSubCategory('${s.value}')" data-subcat="${s.value}" class="subcat-pill px-3 py-1 rounded-full text-xs font-bold transition border cursor-pointer bg-white text-slate-700 border-slate-200 hover:border-[#00AA9D] hover:text-[#01483B]">
+            ${s.label}
+          </button>
+        `;
+      });
+      if (pillsBar) {
+        pillsBar.innerHTML = pillsHtml;
+        pillsBar.classList.remove('hidden');
+      }
+    }
+
+    function renderHashtagChips(catKey) {
+      const container = document.getElementById('predefinedHashtagsContainer');
+      if (!container) return;
+      const catData = macroCategoriesData[catKey];
+      if (!catData || !catData.hashtags || !catData.hashtags.length) {
+        container.innerHTML = '<span class="text-[11px] text-slate-400">Selecciona una categoría para ver sugerencias</span>';
+        return;
+      }
+      const rawCurrent = (document.getElementById('regHashtags')?.value || '').toLowerCase();
+      let html = '';
+      catData.hashtags.forEach(tag => {
+        const cleanTag = tag.trim();
+        const isActive = rawCurrent.includes(cleanTag.toLowerCase());
+        const activeClass = isActive 
+          ? 'bg-[#01483B] text-white border-[#01483B] shadow-2xs' 
+          : 'bg-white text-slate-700 border-slate-200 hover:border-[#01483B] hover:text-[#01483B]';
+        const icon = isActive ? '<i class="fa-solid fa-check text-[10px] mr-1"></i>' : '<i class="fa-solid fa-plus text-[9px] mr-1 opacity-60"></i>';
+        html += `<button type="button" onclick="toggleHashtagChip('${cleanTag}')" class="hashtag-chip px-2.5 py-1 rounded-full text-[11px] font-bold transition border cursor-pointer ${activeClass}">${icon}${cleanTag}</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function toggleHashtagChip(tag) {
+      const input = document.getElementById('regHashtags');
+      if (!input) return;
+      let tags = input.value.split(/[\s,]+/).filter(Boolean).map(t => t.startsWith('#') ? t : '#' + t);
+      const tagLower = tag.toLowerCase();
+      const existingIdx = tags.findIndex(t => t.toLowerCase() === tagLower);
+      if (existingIdx >= 0) {
+        tags.splice(existingIdx, 1);
+      } else {
+        if (tags.length >= 4) {
+          if (typeof showAppToast === 'function') {
+            showAppToast('⚠️ Máximo 4 hashtags principales para tu negocio');
+          } else {
+            alert('Máximo 4 hashtags principales para tu negocio');
+          }
+          return;
+        }
+        tags.push(tag);
+      }
+      input.value = tags.join(' ');
+      const curCat = document.getElementById('regCategory')?.value || 'alimentos_gastronomia';
+      renderHashtagChips(curCat);
+    }
 
     // =========================================================================
     // BASE DE DATOS INICIAL CON LAS 10 CATEGORÍAS (INCLUYENDO MASCOTAS)
@@ -3243,6 +4768,36 @@
     ];
 
     if (Array.isArray(window.PILLALO_NEGOCIOS_MUESTRA)) businesses = businesses.concat(window.PILLALO_NEGOCIOS_MUESTRA);
+
+    // Asignar fotos de muestra para vitrina visual
+    try {
+      if (businesses && businesses.length > 0) {
+        businesses[0].galleryEnabled = true;
+        businesses[0].galleryImages = [
+          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop"
+        ];
+        if (businesses.length > 1) {
+          businesses[1].galleryEnabled = true;
+          businesses[1].galleryImages = [
+            "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=800&auto=format&fit=crop"
+          ];
+        }
+        if (businesses.length > 2) {
+          businesses[2].galleryEnabled = true;
+          businesses[2].galleryImages = [
+            "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=800&auto=format&fit=crop"
+          ];
+        }
+      }
+    } catch(e) { console.error("Error setting sample gallery:", e); }
 
     // Publicidad sin cupo máximo fijo pero garantizando siempre al menos 2 de Impulso Solidario
     const MIN_BANNERS_IMPULSO = 2; // Instrucción 02b
@@ -4726,6 +6281,111 @@
       openCompanyProfile(biz.id);
     }
 
+    
+    // =========================================================================
+    // VITRINA VISUAL: FOTOS DE PORTADA Y GALERÍA (HASTA 4 FOTOS OPCIONALES)
+    // =========================================================================
+    window._regSelectedGalleryImages = [];
+
+    function toggleRegGallerySection(enabled) {
+      const area = document.getElementById('regGalleryUploadArea');
+      if (area) {
+        if (enabled) area.classList.remove('opacity-40', 'pointer-events-none');
+        else area.classList.add('opacity-40', 'pointer-events-none');
+      }
+    }
+
+    function handleRegGalleryFiles(event) {
+      const files = Array.from(event.target.files || []).slice(0, 4);
+      if (files.length === 0) return;
+      
+      window._regSelectedGalleryImages = [];
+      const previewGrid = document.getElementById('regGalleryPreviewGrid');
+      if (previewGrid) previewGrid.innerHTML = '';
+
+      files.forEach((file, idx) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const dataUrl = e.target.result;
+          window._regSelectedGalleryImages.push(dataUrl);
+          if (previewGrid) {
+            const thumb = document.createElement('div');
+            thumb.className = 'relative aspect-4/3 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs group';
+            thumb.innerHTML = `
+              <img src="${dataUrl}" class="w-full h-full object-cover">
+              <span class="absolute bottom-1 right-1 bg-black/60 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md">Foto ${idx + 1}</span>
+            `;
+            previewGrid.appendChild(thumb);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function openImageLightbox(src, caption = '') {
+      const modal = document.getElementById('imageLightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const cap = document.getElementById('lightboxCaption');
+      if (modal && img) {
+        img.src = src;
+        if (cap) cap.textContent = caption;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeImageLightbox() {
+      const modal = document.getElementById('imageLightboxModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function renderCompanyGalleryWidget(biz) {
+      if (!biz || biz.galleryEnabled === false) return '';
+      const images = (biz.galleryImages && Array.isArray(biz.galleryImages)) ? biz.galleryImages.filter(Boolean) : [];
+      if (images.length === 0) return '';
+
+      let gridClass = 'grid-cols-1';
+      if (images.length === 2) gridClass = 'grid-cols-1 sm:grid-cols-2';
+      else if (images.length === 3) gridClass = 'grid-cols-1 sm:grid-cols-3';
+      else if (images.length >= 4) gridClass = 'grid-cols-2 sm:grid-cols-4';
+
+      const imagesHtml = images.map((img, idx) => `
+        <div onclick="openImageLightbox('${img}', '${(biz.name || 'Foto').replace(/'/g, "\\'")}')" class="group relative rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 shadow-xs cursor-pointer aspect-4/3 transition hover:shadow-md hover:border-[#00AA9D]">
+          <img src="${img}" alt="${biz.name} foto ${idx + 1}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition duration-300 flex items-center justify-center">
+            <span class="opacity-0 group-hover:opacity-100 transition duration-300 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center text-xs shadow-md">
+              <i class="fa-solid fa-expand"></i>
+            </span>
+          </div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="mt-6 bento-white-card rounded-[28px] p-5 sm:p-6 space-y-3.5 border border-slate-200/80 shadow-xs">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-sm font-black">
+                <i class="fa-solid fa-images text-[#01483B]"></i>
+              </span>
+              <div>
+                <h3 class="text-sm sm:text-base font-black text-slate-900 leading-tight">Vitrina Visual & Fotos</h3>
+                <p class="text-[11px] text-slate-500">Conoce nuestras instalaciones, platos y productos destacados</p>
+              </div>
+            </div>
+            <span class="text-[11px] font-bold text-[#01483B] bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-full">
+              📸 ${images.length} ${images.length === 1 ? 'Foto' : 'Fotos'}
+            </span>
+          </div>
+          <div class="grid ${gridClass} gap-3 pt-1">
+            ${imagesHtml}
+          </div>
+        </div>
+      `;
+    }
+
     function openCompanyProfile(id, options = {}) {
       const biz = businesses.find(b => b.id === Number(id));
       if (!biz) return;
@@ -4845,6 +6505,9 @@
           ${renderCompanyContactsBento(biz)}
         </div>
 
+        
+        ${renderCompanyGalleryWidget(biz)}
+
         <!-- Botón discreto de reporte -->
         <div class="pt-8 pb-4 text-center">
           <button onclick="openReportProfileModal(${biz.id}, '${biz.name.replace(/'/g, "\'")}')" class="text-xs text-slate-400 hover:text-red-600 font-semibold transition cursor-pointer">
@@ -4958,6 +6621,9 @@
           ${renderCompanyContactsBento(biz)}
         </div>
 
+        
+        ${renderCompanyGalleryWidget(biz)}
+
         <!-- Botón discreto de reporte -->
         <div class="pt-8 pb-4 text-center">
           <button onclick="openReportProfileModal(${biz.id}, '${biz.name.replace(/'/g, "\'")}')" class="text-xs text-slate-400 hover:text-red-600 font-semibold transition cursor-pointer">
@@ -4977,10 +6643,8 @@
 
       if (options.fromQrTest) {
         window.Pillalo?.speak('qrTest');
-      } else if (/cerrado/i.test(biz.schedule || '')) {
-        window.Pillalo?.speak('closed');
       } else {
-        window.Pillalo?.speak('profile');
+        window.Pillalo?.setMotion?.('sit');
       }
     }
 
@@ -5053,6 +6717,9 @@
       currentStickerBizId = Number(id);
       populateMyBizSelector();
     updateFavoritesBadge();
+    try {
+      if (typeof updateDirectorySubcategories === 'function') updateDirectorySubcategories('all');
+    } catch(e) { console.error('Error init subcat directory:', e); }
       const sel = document.getElementById('myBizSelector');
       if (sel) sel.value = id;
       switchTab('tab-my-biz');
@@ -5744,24 +7411,24 @@
           serv_belleza: 'belleza_cuidado_personal',
           perfumes: 'belleza_cuidado_personal',
           mascotas: 'mascotas_animales',
-          tecnicos: 'servicios_personales_domesticos',
-          profesionales: 'servicios_profesionales_empresariales'
+          tecnicos: 'servicios_tecnicos_reparaciones',
+          servicios_personales_domesticos: 'servicios_tecnicos_reparaciones',
+          profesionales: 'servicios_profesionales_empresariales',
+          automotriz: 'automotriz_vehiculos',
+          supermercados: 'supermercados_abarrotes_alimentos',
+          litografia: 'litografia_publicidad_impresion'
         };
         const activeCat = catSynonyms[currentCategory] || currentCategory;
         const itemCat = catSynonyms[item.category] || item.category;
         const itemSecCat = catSynonyms[item.secondaryCategory] || item.secondaryCategory || '';
-        const matchesCat = (currentCategory === 'all' || (currentCategory === 'favoritos' && isFavorite(item.id)) || itemCat === activeCat || itemSecCat === activeCat);
-        const matchesPrice = (price === 'all' || item.priceLevel === price);
-        const matchesNeighborhood = (
-          neighborhood === 'all' ||
-          normText(item.neighborhood) === normText(neighborhood) ||
-          normText(item.address).includes(normText(neighborhood))
+        const itemSubCat = catSynonyms[item.subCategory] || item.subCategory || '';
+        const matchesCat = (
+          currentCategory === 'all' || 
+          (currentCategory === 'favoritos' && isFavorite(item.id)) || 
+          itemCat === activeCat || 
+          itemSecCat === activeCat ||
+          itemSubCat === activeCat
         );
-
-        if (!tokens.length) {
-          return matchesEntityType && matchesCat && matchesPrice && matchesNeighborhood && matchesProximity;
-        }
-
         const haystack = normText([
           item.name,
           item.profession || '',
@@ -5772,15 +7439,41 @@
           item.coverage || '',
           categoryLabels[item.category] || item.category,
           categoryLabels[item.secondaryCategory] || item.secondaryCategory || '',
+          categoryLabels[item.subCategory] || item.subCategory || '',
+          item.subCategory || '',
           (item.hashtags || []).join(' ')
         ].join(' '));
+
+        const subCatObj = (macroCategoriesData[currentCategory]?.subcategories || []).find(s => s.value === currentSubCategory);
+        let matchesSubCatKeywords = false;
+        if (subCatObj) {
+          const cleanLabel = normText(subCatObj.label.replace(/^[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+/, ''));
+          const subWords = cleanLabel.split(/\s+/).filter(w => w.length >= 4 && !['otra', 'otro', 'para', 'este', 'esta', 'unos', 'unas'].includes(w));
+          matchesSubCatKeywords = subWords.some(w => haystack.includes(w)) || haystack.includes(normText(currentSubCategory.replace(/_/g, ' ')));
+        }
+        const matchesSubCat = (
+          currentSubCategory === 'all' ||
+          item.subCategory === currentSubCategory ||
+          item.secondaryCategory === currentSubCategory ||
+          matchesSubCatKeywords
+        );
+        const matchesPrice = (price === 'all' || item.priceLevel === price);
+        const matchesNeighborhood = (
+          neighborhood === 'all' ||
+          normText(item.neighborhood) === normText(neighborhood) ||
+          normText(item.address).includes(normText(neighborhood))
+        );
+
+        if (!tokens.length) {
+          return matchesEntityType && matchesCat && matchesSubCat && matchesPrice && matchesNeighborhood && matchesProximity;
+        }
 
         const matchesSearch = tokens.every(tok => {
           const group = localSynonyms.find(g => g.some(word => word.includes(tok) || tok.includes(word)));
           return group ? group.some(word => haystack.includes(word)) : haystack.includes(tok);
         });
 
-        return matchesEntityType && matchesCat && matchesPrice && matchesNeighborhood && matchesProximity && matchesSearch;
+        return matchesEntityType && matchesCat && matchesSubCat && matchesPrice && matchesNeighborhood && matchesProximity && matchesSearch;
       });
 
       // ORDEN DEL DIRECTORIO: ALGORITMO SOLIDARIO (Instrucciones 01 Parte B)
@@ -5846,21 +7539,13 @@
         }
       } else if (triggerSource === 'neighborhood') {
         if (filtered.length === 0) window.Pillalo?.speak('empty');
-        else if (neighborhood === 'all') window.Pillalo?.speak('results');
-        else window.Pillalo?.speak('neighborhood');
+        else window.Pillalo?.setMotion?.('sniff');
       } else if (triggerSource === 'price') {
-        if (filtered.length === 0) window.Pillalo?.speak('empty');
-        else if (price === 'all') window.Pillalo?.speak('results');
-        else window.Pillalo?.speak('budget');
+        window.Pillalo?.setMotion?.('sniff');
       } else if (triggerSource === 'search') {
         clearTimeout(searchPillaloTimer);
         searchPillaloTimer = setTimeout(() => {
-          const latestCount = (window.lastFilteredBusinesses || []).length;
-          if (!rawSearch) {
-            window.Pillalo?.speak(latestCount > 0 ? 'directory' : 'empty');
-          } else {
-            window.Pillalo?.speak(latestCount > 0 ? 'results' : 'empty');
-          }
+          window.Pillalo?.setMotion?.('sniff');
         }, 380);
       }
 
@@ -5873,6 +7558,7 @@
 
     function setCategory(cat, btnEl) {
       currentCategory = cat;
+      if (typeof updateDirectorySubcategories === "function") updateDirectorySubcategories(cat);
       const catSelect = document.getElementById('categoryFilterSelect');
       if (catSelect && catSelect.value !== cat) catSelect.value = cat;
       document.querySelectorAll('#categoryDock .cat-3d-btn').forEach(b => b.classList.remove('active'));
@@ -5916,7 +7602,7 @@
         servicios_digitales_internet: 'technical',
         agricultura_campo_produccion: 'category'
       };
-      window.Pillalo?.speak(catKeyMap[cat] || 'category');
+      window.Pillalo?.setMotion?.('sniff'); // Animación sutil sin abrir bocadillo
     }
 
     function resetAllFilters() {
@@ -5927,6 +7613,8 @@
       const catSelect = document.getElementById('categoryFilterSelect');
       if (catSelect) catSelect.value = 'all';
       currentCategory = 'all';
+      currentSubCategory = "all";
+      if (typeof updateDirectorySubcategories === "function") updateDirectorySubcategories("all");
       document.querySelectorAll('#categoryDock .cat-3d-btn').forEach((b, idx) => {
         if (idx === 0) b.classList.add('active');
         else b.classList.remove('active');
@@ -5945,6 +7633,17 @@
         if (el) el.classList.add('hidden');
       });
       document.getElementById(tabId).classList.remove('hidden');
+
+      // Ocultar mascota flotante en "¿Qué es?" (tab-welcome) para no duplicarla con la ilustración
+      const pillaloHost = document.getElementById('pillalo-companion');
+      if (pillaloHost) {
+        if (tabId === 'tab-welcome') {
+          pillaloHost.style.setProperty('display', 'none', 'important');
+          if (window.Pillalo) window.Pillalo.hide();
+        } else {
+          pillaloHost.style.removeProperty('display');
+        }
+      }
 
       const navMap = {
         'tab-welcome': 'nav-welcome',
@@ -6739,7 +8438,8 @@
       const schedule = `${scheduleDaysLabel} · ${formatTimeAMPM(openTime)} - ${formatTimeAMPM(closeTime)}`;
 
       const words = name.split(' ');
-      const secondaryCategory = document.getElementById('regSecondaryCategory')?.value || '';
+      const subCategory = document.getElementById('regSubCategory')?.value || document.getElementById('regSecondaryCategory')?.value || '';
+      const secondaryCategory = subCategory;
       const rawHashtags = (document.getElementById('regHashtags')?.value || '').trim();
       const hashtags = rawHashtags
         ? rawHashtags.split(/[\s,]+/).filter(Boolean).map(h => h.startsWith('#') ? h : '#' + h).slice(0, 4)
@@ -6764,8 +8464,11 @@
         logoTitle: words[0] || 'Local',
         logoSub: words.slice(1, 3).join(' ') || 'Valledupar',
         category,
+        subCategory,
         secondaryCategory,
         hashtags,
+        galleryEnabled,
+        galleryImages,
         ageType: 'nuevo',
         registeredThisWeek: true,
         registeredDaysAgo: 0,
@@ -6991,7 +8694,23 @@
       if (val === OWNER_PIN) {
         isOwnerUnlocked = true;
         sessionStorage.setItem('pillalo_owner_ok', 'true');
-        syncOwnerUI();
+            // Asignar fotos de muestra para vitrina visual
+    try {
+      if (businesses && businesses.length > 0) {
+        businesses[0].galleryEnabled = true;
+        businesses[0].galleryImages = ['https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop'];
+        if (businesses.length > 1) {
+          businesses[1].galleryEnabled = true;
+          businesses[1].galleryImages = ['https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=800&auto=format&fit=crop'];
+        }
+        if (businesses.length > 2) {
+          businesses[2].galleryEnabled = true;
+          businesses[2].galleryImages = ['https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=800&auto=format&fit=crop'];
+        }
+      }
+    } catch(e) { console.error("Error setting sample gallery:", e); }
+
+    syncOwnerUI();
         closeOwnerPinModal();
         switchTab('tab-analytics');
       } else {
@@ -7963,6 +9682,14 @@
     }
 
     // Inicializar
+    try {
+      const initCat = document.getElementById('regCategory')?.value || 'alimentos_gastronomia';
+      if (typeof onCategoryChange === 'function') onCategoryChange(initCat);
+      document.getElementById('regHashtags')?.addEventListener('input', () => {
+        const curCat = document.getElementById('regCategory')?.value || 'alimentos_gastronomia';
+        renderHashtagChips(curCat);
+      });
+    } catch(e) { console.error('Error init taxonomy:', e); }
     syncOwnerUI();
     renderSpotlightBanners();
     renderBusinesses(businesses);
@@ -7972,6 +9699,14 @@
     populateMyBizSelector();
     updateFavoritesBadge();
     checkUrlForQrRedirect();
+    // Si inicia en "¿Qué es?" (tab-welcome), asegurar que la mascota flotante esté oculta
+    setTimeout(() => {
+      const activeTabEl = document.querySelector('section:not(.hidden)');
+      const hostEl = document.getElementById('pillalo-companion');
+      if (hostEl && activeTabEl && activeTabEl.id === 'tab-welcome') {
+        hostEl.style.setProperty('display', 'none', 'important');
+      }
+    }, 150);
 
     // Iniciar: si el usuario entra por primera vez, mostrar "¿Qué es?" (tab-welcome)
     const urlParams = new URLSearchParams(window.location.search);
@@ -7991,5 +9726,17 @@
   </script>
   <script src="./pillalo/pillalo.js" defer></script>
   <script src="./pillalo/adaptador-sitio.js" defer></script>
+  <!-- ===================================================================== -->
+  <!-- MODAL LIGHTBOX: VISOR DE FOTOS EN GRANDE DE LA VITRINA                   -->
+  <!-- ===================================================================== -->
+  <div id="imageLightboxModal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 transition" onclick="closeImageLightbox()">
+    <button type="button" onclick="closeImageLightbox()" class="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/20 hover:bg-white/40 text-white text-lg flex items-center justify-center transition cursor-pointer">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="max-w-4xl max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" alt="Foto ampliada" class="max-w-full max-h-[80vh] rounded-2xl object-contain shadow-2xl border border-white/20">
+      <p id="lightboxCaption" class="text-white/80 text-xs sm:text-sm font-semibold mt-3 text-center"></p>
+    </div>
+  </div>
 </body>
 </html>

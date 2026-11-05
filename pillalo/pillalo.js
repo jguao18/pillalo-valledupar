@@ -132,7 +132,7 @@
     if (widget) return api;
     const host = document.createElement('div');
     host.id = 'pillalo-companion';
-    host.style.cssText = 'position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom, 0px));z-index:1000;pointer-events:none;';
+    host.style.cssText = 'position:fixed;right:12px;bottom:calc(72px + env(safe-area-inset-bottom, 0px));z-index:1000;pointer-events:none;';
     const shadow = host.attachShadow({ mode:'open' });
     const link = document.createElement('link'); link.rel='stylesheet'; link.href = new URL('pillalo.css',base).href;
     shadow.append(link);
@@ -143,7 +143,28 @@
     const bubble = dock.querySelector('.bubble'), character = dock.querySelector('.character');
     widget = {host, dock, bubble, character, text:dock.querySelector('.message'), action:dock.querySelector('.action'), status:dock.querySelector('.asset-status'), player:new Player(dock.querySelector('canvas')), minimized:false};
     dock.querySelector('.close').addEventListener('click', () => { hide(); character.focus(); });
-    character.addEventListener('click', () => bubble.hidden ? speak('help') : hide());
+    character.addEventListener('click', () => {
+      if (bubble.hidden) {
+        let helpData = null;
+        if (typeof window.getPillaloContextualHelp === 'function') {
+          try { helpData = window.getPillaloContextualHelp(); } catch (err) { console.warn('Pillalo context error:', err); }
+        }
+        if (!helpData) {
+          helpData = {
+            text: '¡Hola! 🐾 ¿Buscas algo en Valledupar? Toca aquí para ver opciones o registrar tu negocio.',
+            motion: 'wave',
+            action: '🔍 Explorar directorio',
+            actionId: 'focus-search'
+          };
+        }
+        speak('help', helpData);
+        // Auto-cierre suave a los 9 segundos si el usuario no interactúa
+        clearTimeout(window.__pillaloAutoCloseTimer);
+        window.__pillaloAutoCloseTimer = setTimeout(() => hide(), 9000);
+      } else {
+        hide();
+      }
+    });
     dock.querySelector('.minimize').addEventListener('click', () => {
       hide(); widget.minimized=true; dock.classList.add('minimized'); dock.querySelector('.restore').hidden=false;
       widget.player.destroy(); dock.querySelector('.restore').focus();
@@ -165,7 +186,7 @@
         widget.minimized=true; dock.classList.add('minimized'); dock.querySelector('.restore').hidden=false; widget.player.destroy();
       }
     } catch (_) {}
-    if (options.welcome !== false) {
+    if (false && options.welcome !== false) { // Desactivado popup automático para no invadir la pantalla
       let seen=false; try { seen=sessionStorage.getItem('pillalo-welcome')==='1'; } catch (_) {}
       if(!seen && !widget.minimized) {
         lastWelcomeTimer=setTimeout(() => {
@@ -193,8 +214,17 @@
     const duration = {jump:1440,stand:2640,wave:2280,celebrate:2280,point:2760,tilt:3240,wag:2400,sitDown:1040}[motion];
     if(duration) settleTimer=setTimeout(() => { if(widget && !widget.minimized) widget.player.set('sit'); },duration);
     widget.bubble.hidden=false; widget.character.setAttribute('aria-expanded','true');
-    widget.action.hidden=!item[2]; widget.action.textContent=item[2] || '';
-    widget.action.onclick=() => document.dispatchEvent(new CustomEvent('pillalo:action',{detail:{action:item[3]}}));
+    const actionLabel = details.action !== undefined ? details.action : (item[2] || '');
+    const actionId = details.actionId || item[3] || '';
+    widget.action.hidden = !actionLabel;
+    widget.action.textContent = actionLabel;
+    widget.action.onclick = () => {
+      if (typeof details.onAction === 'function') {
+        details.onAction();
+      } else {
+        document.dispatchEvent(new CustomEvent('pillalo:action', { detail: { action: actionId, details } }));
+      }
+    };
     // El mensaje permanece hasta cerrarlo para que se pueda leer con calma.
     document.dispatchEvent(new CustomEvent('pillalo:shown',{detail:{event,motion}}));
     return true;
@@ -204,6 +234,7 @@
     players.forEach(p => p.last=''); schedule();
   }
   const api = {
+    setMotion(motion) { if(widget && widget.player) widget.player.set(motion); },
     mount, speak, hide, pause, Player, messages, labels,
     animate(canvas,motion='idle') { return new Player(canvas,motion); },
     destroy() {
