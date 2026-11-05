@@ -154,11 +154,11 @@
   <!-- BARRA SUPERIOR (BASADA EN VERSION_1_V3_ORIGINAL_NOVIA.html)           -->
   <!-- ===================================================================== -->
   <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-xs">
-    <div class="max-w-6xl mx-auto px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-1 sm:gap-3">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
       
       <!-- Logo Oficial: Cara de Píllalo + Nombre (Optimizado para móvil: Valledupar abajo para liberar espacio) -->
       <div onclick="openWelcomeLanding(); window.Pillalo?.speak('welcome');" class="flex items-center space-x-2 sm:space-x-2.5 cursor-pointer group flex-shrink-0">
-        <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-amber-50/95 border-2 border-emerald-500/40 shadow-xs group-hover:scale-105 transition flex items-center justify-center p-1 overflow-hidden flex-shrink-0" aria-hidden="true">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-amber-50/95 border-2 border-emerald-500/40 shadow-xs group-hover:scale-105 transition flex items-center justify-center p-1 overflow-hidden flex-shrink-0" aria-hidden="true">
           <img src="./pillalo/assets/pillalo-face-logo.png" alt="Píllalo" class="w-full h-full object-contain object-center">
         </div>
         <div class="leading-tight flex flex-col justify-center">
@@ -194,12 +194,12 @@
           <span class="text-sm">🐾</span>
           <span>Qué somos</span>
         </button>
-        <button id="btnTopEnterProfile" onclick="handleEnterProfileClick()" class="px-2 py-1.5 sm:px-3 sm:py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 rounded-xl text-[11px] sm:text-xs font-bold transition flex items-center gap-1 sm:gap-1.5 cursor-pointer" title="Entrar a mi perfil de negocio para ver estadísticas y editar datos">
+        <button id="btnTopEnterProfile" onclick="handleEnterProfileClick()" class="px-2.5 sm:px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer" title="Entrar a mi perfil de negocio para ver estadísticas y editar datos">
           <i class="fa-solid fa-store text-[#01483B]"></i>
           <span class="hidden sm:inline">Entrar a mi perfil</span>
           <span class="sm:hidden font-black text-[11px]">Mi Perfil</span>
         </button>
-        <button onclick="switchTab('tab-register')" class="px-2 sm:px-4 py-1.5 sm:py-2 bg-[#01483B] hover:bg-[#00AA9D] text-white rounded-xl text-[11px] sm:text-xs font-black shadow-sm transition flex items-center space-x-1 sm:space-x-1.5 cursor-pointer flex-shrink-0">
+        <button onclick="switchTab('tab-register')" class="px-3 sm:px-4 py-2 bg-[#01483B] hover:bg-[#00AA9D] text-white rounded-xl text-xs font-black shadow-sm transition flex items-center space-x-1.5 cursor-pointer flex-shrink-0">
           <i class="fa-solid fa-plus text-xs"></i>
           <span class="hidden sm:inline">Registrar Negocio</span>
           <span class="sm:hidden font-extrabold">Registrar</span>
@@ -2898,6 +2898,7 @@
     </div>
   </div>
 
+  <script src="./pillalo/hash.js"></script>
   <script src="./pillalo/negocios-muestra.js"></script>
   <script>
     // =========================================================================
@@ -2907,7 +2908,7 @@
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVoY21taHhra2RuY3JzanR1amhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0OTgwNTUsImV4cCI6MjEwOTA3NDA1NX0.e97tZSN_LKraz9FZsB4oAUKkjxgdWN9NkMzXvnHElh0";
     const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-    const OWNER_PIN = "2026";
+    const OWNER_PIN_HASH = "158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab";
     let isOwnerUnlocked = sessionStorage.getItem('pillalo_owner_ok') === 'true';
     let lastContactedId = null;
     let totalPageViews = parseInt(localStorage.getItem('pillalo_v3_views') || '315', 10) + 1;
@@ -4258,8 +4259,8 @@
         shortBio: "Tienda especializada en moda denim en Valledupar para dama, caballero, niñas y niños. Jeans levanta cola, conjuntos y básicos con horma perfecta.",
         address: "Cra 15 #13B-24 · Doce de Octubre",
         neighborhood: "Doce de Octubre",
-        phoneDisplay: "300 987 6543",
-        whatsapp: "573009876543",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@oasis_denimvalle",
         tiktok: "@oasisdenim.vup",
         email: "ventas@oasisdenim.co",
@@ -4299,8 +4300,8 @@
         shortBio: "Restaurante nocturno de arepas rellenas asadas al carbón con queso costeño, carne desmechada, chicharrón, pollo y salsas de la casa.",
         address: "Cocina Oculta (Solo Domicilios) · Sector Los Cortijos",
         neighborhood: "Los Cortijos",
-        phoneDisplay: "320 888 9900",
-        whatsapp: "573208889900",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@luxuryarepas_valle",
         tiktok: "@luxuryarepas.vup",
         email: "pedidos@luxuryarepas.co",
@@ -4337,8 +4338,8 @@
         shortBio: "Baño y peluquería canina y felina, concentrados, snacks, juguetes, collares, camas y consulta veterinaria en Valledupar.",
         address: "Calle 11 #15-32 · Barrio San Vicente",
         neighborhood: "San Vicente",
-        phoneDisplay: "316 999 8877",
-        whatsapp: "573169998877",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@huellitas_petvup",
         tiktok: "@huellitasmascotas.vup",
         email: "citas@huellitasvup.co",
@@ -4375,8 +4376,8 @@
         shortBio: "Tenis deportivos, sandalias para dama en cuero y calzado casual para toda la familia con tallas desde la 22 hasta la 43.",
         address: "Calle 16B #9-45 · Centro",
         neighborhood: "Centro",
-        phoneDisplay: "312 654 7890",
-        whatsapp: "573126547890",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@pasofirme_calzadovup",
         tiktok: "@pasofirme.vup",
         email: "ventas@pasofirme.co",
@@ -4413,8 +4414,8 @@
         shortBio: "Cadenas en acero y oro laminado, aretes, relojes, bolsos manos libres, carteras y gafas de sol para complementar tu outfit.",
         address: "Cra 11 #14-18 · Barrio San Joaquín",
         neighborhood: "San Joaquín",
-        phoneDisplay: "318 222 4455",
-        whatsapp: "573182224455",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@aura_accesoriosvup",
         tiktok: "@auraaccesorios.vup",
         email: "hola@auraaccesorios.co",
@@ -4451,8 +4452,8 @@
         shortBio: "Perfumería árabe original, extractos importados de alta fijación y presentaciones personales ideales para regalar.",
         address: "Calle 9A #19-40 · Barrio Novalito",
         neighborhood: "Novalito",
-        phoneDisplay: "315 444 3322",
-        whatsapp: "573154443322",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@distriperfumes_vup",
         tiktok: "@perfumesroyale.vup",
         email: "contacto@distriperfumes.co",
@@ -4489,8 +4490,8 @@
         shortBio: "Tienda de maquillaje original, rubores, bases, labiales, brochas, cuidado facial coreano y tratamientos capilares.",
         address: "Cra 12 #7C-30 · Las Flores",
         neighborhood: "Las Flores",
-        phoneDisplay: "301 777 8899",
-        whatsapp: "573017778899",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@velvetmakeup_vup",
         tiktok: "@velvetmakeup.vup",
         email: "ventas@velvetmakeup.co",
@@ -4529,8 +4530,8 @@
         shortBio: "Especialistas en servicios de belleza: uñas acrílicas, polygel, semipermanente, cepillado y diseño de cejas y pestañas.",
         address: "Cra 19 #16-12 · Barrio San Joaquín",
         neighborhood: "San Joaquín",
-        phoneDisplay: "310 555 6677",
-        whatsapp: "573105556677",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@glownails_valledupar",
         tiktok: "@glownails.vup",
         email: "citas@studioglow.co",
@@ -4572,8 +4573,8 @@
         shortBio: "IPS odontológica habilitada en Valledupar. Especialistas en diseño de sonrisa, ortodoncia invisible, implantes y odontopediatría con tecnología digital.",
         address: "Cra 9 #13C-45 · Novalito",
         neighborhood: "Novalito",
-        phoneDisplay: "301 234 5678",
-        whatsapp: "573012345678",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         b2bWhatsapp: "573012345678",
         brochureUrl: "https://pillalo.com/brochures/sonrisas-del-cesar-servicios.pdf",
         hrContact: "talento@sonrisasdelcesar.com",
@@ -4620,8 +4621,8 @@
         shortBio: "Distribuidora mayorista de aceros, cementos, pinturas y ferretería pesada para constructores, contratistas y hogares en el Cesar y La Guajira.",
         address: "Calle 17 #14-38 · Centro (Sede Principal) y Av. Salguero (Sede Sur)",
         neighborhood: "Centro",
-        phoneDisplay: "310 987 1122",
-        whatsapp: "573109871122",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         b2bWhatsapp: "573109871122",
         brochureUrl: "https://pillalo.com/catalogos/ferrocesar-lista-precios-2026.pdf",
         hrContact: "seleccion@ferrocesar.com.co",
@@ -4666,8 +4667,8 @@
         shortBio: "Cortes de carne madurados, asados al carbón, cocina típica costeña y salones climatizados para eventos corporativos y celebraciones familiares.",
         address: "Cra 19 #9B-12 · Los Cortijos",
         neighborhood: "Los Cortijos",
-        phoneDisplay: "318 654 3210",
-        whatsapp: "573186543210",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         b2bWhatsapp: "573186543210",
         brochureUrl: "https://pillalo.com/menus/fogon-vallenato-eventos.pdf",
         hrContact: "administracion@fogonvallenato.com",
@@ -4708,8 +4709,8 @@
         shortBio: "Servicio técnico y mantenimiento a domicilio de aires acondicionados, lavadoras, neveras e instalaciones eléctricas residenciales.",
         address: "Servicio a Domicilio · Cobertura en todo Valledupar",
         neighborhood: "La Nevada",
-        phoneDisplay: "300 123 4567",
-        whatsapp: "573001234567",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@friovalle_aires",
         tiktok: "@tecniaires.valle",
         email: "soporte@friovalle.co",
@@ -4747,8 +4748,8 @@
         shortBio: "Profesional independiente en contaduría pública, declaración de renta, Cámara de Comercio, DIAN y certificados de ingresos.",
         address: "Atención 100% Virtual / Remota · Valledupar y Colombia",
         neighborhood: "Centro",
-        phoneDisplay: "304 555 1234",
-        whatsapp: "573045551234",
+        phoneDisplay: "301 269 9885",
+        whatsapp: "573012699885",
         instagram: "@asesoriascotes_vup",
         tiktok: "@contadorcotes.vup",
         email: "consultas@asesoriascotes.co",
@@ -5085,46 +5086,38 @@
       const bottomContainer = document.getElementById('adSpotlightBannerBottom');
       const expBanners = bannersList.filter(b => (b.tab || 'explore') === 'explore');
 
-            if (expBanners.length) {
-        // Seleccionar 4 banners garantizando que pertenezcan a negocios totalmente distintos
-        const selectedBanners = [];
-        const usedBizKeys = new Set();
-        const total = expBanners.length;
+      if (expBanners.length) {
+        const impulsoPool = expBanners.filter(b => b.type === 'impulso_solidario');
+        const otherPool = expBanners.filter(b => b.type !== 'impulso_solidario');
 
-        for (let i = 0; i < total && selectedBanners.length < 4; i++) {
-          const idx = (currentBannerRotationOffset + i) % total;
-          const b = expBanners[idx];
-          if (!b) continue;
+        let selectedBanners = [];
 
-          const bizKey = (b.bizId !== undefined && b.bizId !== null)
-            ? 'biz_' + b.bizId
-            : 'pub_' + (b.bizName || b.title || b.id);
+        if (impulsoPool.length >= MIN_BANNERS_IMPULSO) {
+          // Garantizar siempre al menos MIN_BANNERS_IMPULSO (2) de Impulso solidario en el carrusel
+          const impIdx1 = currentBannerRotationOffset % impulsoPool.length;
+          const impIdx2 = (currentBannerRotationOffset + 1) % impulsoPool.length;
+          const imp1 = impulsoPool[impIdx1];
+          const imp2 = impulsoPool[impIdx2];
 
-          if (!usedBizKeys.has(bizKey)) {
-            usedBizKeys.add(bizKey);
-            selectedBanners.push(b);
-          }
+          // Los otros 2 espacios se rotan del resto (publicidad externa u otros de impulso)
+          const remPool = otherPool.length ? otherPool : impulsoPool;
+          const remIdx1 = currentBannerRotationOffset % remPool.length;
+          const remIdx2 = (currentBannerRotationOffset + 1) % remPool.length;
+          const rem1 = remPool[remIdx1];
+          const rem2 = remPool[(remIdx2 === remIdx1 && remPool.length > 1) ? (remIdx1 + 1) % remPool.length : remIdx2];
+
+          // Distribuir equitativamente: 1 de impulso arriba y 1 de impulso abajo
+          selectedBanners = [imp1, rem1, imp2, rem2];
+        } else {
+          // Fallback seguro si la lista tiene menos de 2 de impulso
+          selectedBanners = expBanners.slice(0, 4);
         }
-
-        if (selectedBanners.length < 4 && total > selectedBanners.length) {
-          for (let i = 0; i < total && selectedBanners.length < 4; i++) {
-            const idx = (currentBannerRotationOffset + i) % total;
-            const b = expBanners[idx];
-            if (b && !selectedBanners.includes(b)) {
-              selectedBanners.push(b);
-            }
-          }
-        }
-
-        const topBanners = selectedBanners.slice(0, 2);
-        const bottomBanners = selectedBanners.slice(2, 4);
 
         if (topContainer) {
-          topContainer.innerHTML = topBanners.map(renderBannerCard).join('');
+          topContainer.innerHTML = [selectedBanners[0], selectedBanners[1]].filter(Boolean).map(renderBannerCard).join('');
         }
         if (bottomContainer) {
-          bottomContainer.innerHTML = bottomBanners.map(renderBannerCard).join('');
-          bottomContainer.style.display = bottomBanners.length ? '' : 'none';
+          bottomContainer.innerHTML = [selectedBanners[2], selectedBanners[3]].filter(Boolean).map(renderBannerCard).join('');
         }
       }
 
@@ -7879,10 +7872,10 @@
       try {
         const raw = localStorage.getItem('pillalo_credentials');
         return raw ? JSON.parse(raw) : {
-          'luxury@pillalo.co': { pass: '123456', bizId: 5 },
-          '3009876543': { pass: '123456', bizId: 5 },
-          'oasis@pillalo.co': { pass: '123456', bizId: 1 },
-          '3101234567': { pass: '123456', bizId: 1 }
+          'luxury@pillalo.co': { passHash: '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', bizId: 5 },
+          '3009876543':        { passHash: '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', bizId: 5 },
+          'oasis@pillalo.co':  { passHash: '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', bizId: 1 },
+          '3101234567':        { passHash: '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', bizId: 1 }
         };
       } catch (_) {
         return {};
@@ -7892,7 +7885,7 @@
     function saveUserCredentials(userIdentifier, password, bizId) {
       const creds = getRegisteredCredentials();
       const cleanIdent = normText(userIdentifier);
-      creds[cleanIdent] = { pass: password, bizId };
+      creds[cleanIdent] = { passHash: pillaloHash(password), bizId };
       try {
         localStorage.setItem('pillalo_credentials', JSON.stringify(creds));
       } catch (_) {}
@@ -7986,12 +7979,19 @@
         if (k === cleanUser) return true;
         const kDigits = k.replace(/\D/g, '');
         if (userDigits && kDigits) {
-          return kDigits === userDigits || kDigits.endsWith(userDigits) || userDigits.endsWith(kDigits);
+          return userDigits.length >= 10 && kDigits.slice(-10) === userDigits.slice(-10);
         }
         return false;
       });
 
-      if (matchKey && creds[matchKey].pass === pass) {
+      const isPassMatch = matchKey && (creds[matchKey].passHash ? creds[matchKey].passHash === pillaloHash(pass) : creds[matchKey].pass === pass);
+      if (isPassMatch) {
+        // Si ingresó con formato viejo (pass plano), migrar a passHash y guardar
+        if (!creds[matchKey].passHash && creds[matchKey].pass) {
+          creds[matchKey].passHash = pillaloHash(pass);
+          delete creds[matchKey].pass;
+          try { localStorage.setItem('pillalo_credentials', JSON.stringify(creds)); } catch (_) {}
+        }
         const bizId = creds[matchKey].bizId;
         loggedInBizId = bizId;
         sessionStorage.setItem('pillalo_logged_biz_id', String(bizId));
@@ -8691,7 +8691,7 @@
     function checkOwnerPin(e) {
       e.preventDefault();
       const val = document.getElementById('ownerPinInput').value.trim();
-      if (val === OWNER_PIN) {
+      if (pillaloHash(val) === OWNER_PIN_HASH) {
         isOwnerUnlocked = true;
         sessionStorage.setItem('pillalo_owner_ok', 'true');
             // Asignar fotos de muestra para vitrina visual
